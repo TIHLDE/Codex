@@ -2,7 +2,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export function TopNav({ children }) {
+interface TopNavProps {
+  children?: React.ReactNode;
+}
+
+export function TopNav({ children }: TopNavProps) {
   return (
     <nav>
       <Link
@@ -12,19 +16,15 @@ export function TopNav({ children }) {
           justifyContent: "center",
           display: "flex",
         }}
-        // style={{
-        //   alignItems: "center",
-        //   display: "flex",
-        // }}
       >
         <Image
           alt={"FoodManager logo"}
           src={"/assets/food_manager_logo.svg"}
           width={233 / 2}
-          height={50 / 3}
+          height={50 / 2}
         />
       </Link>
-      <section>{children}</section>
+      {children && <section>{children}</section>}
       <style jsx>
         {`
           nav {
