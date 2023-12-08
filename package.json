@@ -12,7 +12,9 @@
     "prettier": "^3.1.0",
     "prismjs": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-animate-height": "^3.2.3",
+    "react-dom": "latest",
+    "react-iframe": "^1.8.5"
   },
   "devDependencies": {
     "@types/node": "latest",

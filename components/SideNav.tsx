@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import AnimateHeight from "react-animate-height";
 
 interface NavItemData {
   title: string;
@@ -11,37 +12,33 @@ interface NavItemData {
 const items: NavItemData[] = [
   {
     title: "Get started",
-    href: "/docs",
+    href: "",
   },
   {
     title: "Frontend",
-    href: "/docs/frontend/index.md",
+    href: "/frontend",
     children: [
       {
         title: "Components",
-        href: "/docs/frontend/components.md",
+        href: "/frontend/components",
       },
       {
         title: "Style guide",
-        href: "/docs/frontend/style_guide.md",
+        href: "/frontend/style_guide",
       },
     ],
   },
   {
     title: "Backend",
-    href: "/docs/backend/index.md",
+    href: "/backend",
     children: [
       {
-        title: "Overview",
-        href: "/docs/backend/overview.md",
-      },
-      {
         title: "Database",
-        href: "/docs/backend/database.md",
+        href: "/backend/database",
       },
       {
         title: "API Reference",
-        href: "/docs/backend/api.md",
+        href: "/backend/api",
       },
     ],
   },
@@ -54,26 +51,49 @@ interface NavItemProps {
 }
 
 function NavItem({ indent, itemData: parentData, currentRoute }: NavItemProps) {
+  const isActive =
+    parentData.href !== ""
+      ? currentRoute.includes(parentData.href)
+      : currentRoute === "/docs";
+  const [isCollapsed, setIsCollapsed] = useState(true);
+
   return (
-    <div key={parentData.href}>
-      <Link href={parentData.href}>
-        <span>{parentData.title}</span>
+    <div key={parentData.href} style={{ marginTop: "0.4rem" }}>
+      <span
+        className={
+          "material-symbols-outlined icon chevron" +
+          (isCollapsed ? "" : " chevron-open")
+        }
+        style={{
+          cursor: "pointer",
+          color: parentData.children ? undefined : "transparent",
+        }}
+        onClick={() => setIsCollapsed(!isCollapsed)}
+      >
+        chevron_right
+      </span>
+      <Link href={`/docs${parentData.href}`}>
+        <span style={{ fontWeight: isActive ? "bold" : undefined }}>
+          {parentData.title}
+        </span>
       </Link>
-      {parentData.children?.length && (
-        <ul className="flex column">
-          {parentData.children.map((child) => {
-            const active = currentRoute === child.href;
-            return (
-              <li key={child.href} className={active ? "active" : ""}>
-                <NavItem
-                  itemData={child}
-                  indent={indent + 1}
-                  currentRoute={currentRoute}
-                />
-              </li>
-            );
-          })}
-        </ul>
+      {parentData.children && (
+        <AnimateHeight height={isCollapsed ? 0 : "auto"} duration={200}>
+          <div
+            className="nav-parent"
+            style={{
+              paddingLeft: (indent + 1) * 0.8 + "rem",
+            }}
+          >
+            {parentData.children.map((child) => (
+              <NavItem
+                itemData={child}
+                indent={indent + 1}
+                currentRoute={currentRoute}
+              />
+            ))}
+          </div>
+        </AnimateHeight>
       )}
     </div>
   );
@@ -93,6 +113,7 @@ export function SideNav() {
             top: var(--top-nav-height);
             height: calc(100vh - var(--top-nav-height));
             flex: 0 0 auto;
+            width: 15rem;
             overflow-y: auto;
             padding: 2.5rem 2rem 2rem;
             border-right: 1px solid var(--border-color);

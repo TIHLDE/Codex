@@ -1,6 +1,6 @@
 ---
-title: Get started with Markdoc
-description: How to get started with Markdoc
+title: FoodManager Documentation
+description: Get started working with the FoodManager project
 ---
 
 # Full Next.js example

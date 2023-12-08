@@ -1,11 +1,28 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
-export function TopNav({children}) {
+export function TopNav({ children }) {
   return (
     <nav>
-      <Link href="/" className="flex">
-        Home
+      <Link
+        href="/"
+        style={{
+          height: "fit-content",
+          justifyContent: "center",
+          display: "flex",
+        }}
+        // style={{
+        //   alignItems: "center",
+        //   display: "flex",
+        // }}
+      >
+        <Image
+          alt={"FoodManager logo"}
+          src={"/assets/food_manager_logo.svg"}
+          width={233 / 2}
+          height={50 / 3}
+        />
       </Link>
       <section>{children}</section>
       <style jsx>

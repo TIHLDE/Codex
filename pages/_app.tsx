@@ -1,31 +1,31 @@
-import React from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
+import React from "react";
+import Head from "next/head";
+import Link from "next/link";
 
-import { SideNav, TableOfContents, TopNav } from '../components';
+import { SideNav, TableOfContents, TopNav } from "../components";
 
-import 'prismjs';
+import "prismjs";
 // Import other Prism themes here
-import 'prismjs/components/prism-bash.min';
-import 'prismjs/themes/prism.css';
+import "prismjs/components/prism-bash.min";
+import "prismjs/themes/prism.css";
 
-import '../public/globals.css'
+import "../public/globals.css";
 
-import type { AppProps } from 'next/app'
-import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
+import type { AppProps } from "next/app";
+import type { MarkdocNextJsPageProps } from "@markdoc/next.js";
 
-const TITLE = 'FoodManager Documentation';
-const DESCRIPTION = 'Documentation for FoodManager';
+export const TITLE = "FoodManager Documentation";
+export const DESCRIPTION = "Documentation for FoodManager";
 
 function collectHeadings(node, sections = []) {
   if (node) {
-    if (node.name === 'Heading') {
+    if (node.name === "Heading") {
       const title = node.children[0];
 
-      if (typeof title === 'string') {
+      if (typeof title === "string") {
         sections.push({
           ...node.attributes,
-          title
+          title,
         });
       }
     }
@@ -40,7 +40,7 @@ function collectHeadings(node, sections = []) {
   return sections;
 }
 
-export type MyAppProps = MarkdocNextJsPageProps
+export type MyAppProps = MarkdocNextJsPageProps;
 
 export default function MyApp({ Component, pageProps }: AppProps<MyAppProps>) {
   const { markdoc } = pageProps;
@@ -84,7 +84,7 @@ export default function MyApp({ Component, pageProps }: AppProps<MyAppProps>) {
       <style jsx>
         {`
           .page {
-            position: fixed; 
+            position: fixed;
             top: var(--top-nav-height);
             display: flex;
             width: 100vw;

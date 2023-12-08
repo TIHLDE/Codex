@@ -1,5 +1,5 @@
 ---
-title: API
+title: "API Reference"
 ---
 
 # {% $markdoc.frontmatter.title %}
