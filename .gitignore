@@ -4,3 +4,8 @@ node_modules/
 .vercel
 package-lock.json
 yarn.lock
+/.idea/food-manager-docs.iml
+/.idea/modules.xml
+/.idea/prettier.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
