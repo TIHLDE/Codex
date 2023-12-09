@@ -31,6 +31,7 @@ export function SideNav() {
             font-size: larger;
             font-weight: 500;
             padding: 0.5rem 0 0.5rem;
+            color: var(--text-color);
           }
           ul {
             padding: 0;

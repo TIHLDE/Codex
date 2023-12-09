@@ -9,6 +9,7 @@ import "prismjs/components/prism-bash.min";
 import "prismjs/themes/prism.css";
 
 import "../public/globals.css";
+import "../public/codeStyle.css";
 
 import type { AppProps } from "next/app";
 import type { MarkdocNextJsPageProps } from "@markdoc/next.js";

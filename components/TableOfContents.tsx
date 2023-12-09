@@ -1,9 +1,9 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
-export function TableOfContents({toc}) {
+export function TableOfContents({ toc }) {
   const items = toc.filter(
-    (item) => item.id && (item.level === 2 || item.level === 3)
+    (item) => item.id && (item.level === 2 || item.level === 3),
   );
 
   if (items.length <= 1) {
@@ -12,24 +12,23 @@ export function TableOfContents({toc}) {
 
   return (
     <nav className="toc">
+      <div className="heading">Content</div>
       <ul className="flex column">
         {items.map((item) => {
           const href = `#${item.id}`;
           const active =
-            typeof window !== 'undefined' && window.location.hash === href;
+            typeof window !== "undefined" && window.location.hash === href;
           return (
             <li
               key={item.title}
               className={[
-                active ? 'active' : undefined,
-                item.level === 3 ? 'padded' : undefined,
+                active ? "active" : undefined,
+                item.level === 3 ? "padded" : undefined,
               ]
                 .filter(Boolean)
-                .join(' ')}
+                .join(" ")}
             >
-              <Link href={href}>
-                {item.title}
-              </Link>
+              <Link href={href}>{item.title}</Link>
             </li>
           );
         })}
@@ -56,13 +55,21 @@ export function TableOfContents({toc}) {
           }
           li :global(a) {
             text-decoration: none;
+            color: var(--text-color);
           }
           li :global(a:hover),
           li.active :global(a) {
-            text-decoration: underline;
+            text-decoration: none;
           }
           li.padded {
             padding-left: 1rem;
+          }
+
+          .heading {
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
           }
         `}
       </style>

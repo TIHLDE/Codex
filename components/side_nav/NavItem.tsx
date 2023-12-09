@@ -29,19 +29,24 @@ export function NavItem({
     <div key={parentData.href} style={{ marginTop: "0.4rem" }}>
       <span
         className={
-          "material-symbols-outlined icon chevron" +
+          "material-symbols-outlined icon chevron not-selectable" +
           (isCollapsed ? "" : " chevron-open")
         }
         style={{
           cursor: "pointer",
-          color: parentData.children ? undefined : "transparent",
+          color: parentData.children ? "var(--text-color)" : "transparent",
         }}
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
         chevron_right
       </span>
-      <Link href={`/docs${parentData.href}`}>
-        <span style={{ fontWeight: isActive ? "bold" : undefined }}>
+      <Link href={`/docs${parentData.href}`} className={"side-link"}>
+        <span
+          style={{
+            fontWeight: isActive ? "bold" : undefined,
+            color: "var(--text-color)",
+          }}
+        >
           {parentData.title}
         </span>
       </Link>
