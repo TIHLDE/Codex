@@ -24,7 +24,6 @@ body.dark {
     --name-color: #52796F;
     --function-color: #729f7b;
     --punctuation-color: #ABC4B0;
-
 }
 
 /**
@@ -53,6 +52,8 @@ pre[class*="language-"] {
     -moz-hyphens: none;
     -ms-hyphens: none;
     hyphens: none;
+
+    transition-duration: 500ms;
 }
 
 @media print {
