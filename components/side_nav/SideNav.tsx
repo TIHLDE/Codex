@@ -1,48 +1,19 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { NavItem, NavItemData } from "./NavItem";
-
-const items: NavItemData[] = [
-  {
-    title: "Get started",
-    href: "",
-  },
-  {
-    title: "Frontend",
-    href: "/frontend",
-    children: [
-      {
-        title: "Components",
-        href: "/frontend/components",
-      },
-      {
-        title: "Style guide",
-        href: "/frontend/style_guide",
-      },
-    ],
-  },
-  {
-    title: "Backend",
-    href: "/backend",
-    children: [
-      {
-        title: "Database",
-        href: "/backend/database",
-      },
-      {
-        title: "API Reference",
-        href: "/backend/api",
-      },
-    ],
-  },
-];
+import { NavItem } from "./NavItem";
+import { navItems } from "../../constants/navItems";
 
 export function SideNav() {
   const route = useRouter();
   return (
     <nav className="sidenav">
-      {items.map((item) => (
-        <NavItem itemData={item} indent={0} currentRoute={route.pathname} />
+      {navItems.map((item) => (
+        <NavItem
+          itemData={item}
+          indent={0}
+          currentRoute={route.pathname}
+          key={item.href}
+        />
       ))}
       <style jsx>
         {`

@@ -6,3 +6,4 @@ export * from "./TableOfContents";
 export * from "./TopNav";
 export * from "./DbSchema";
 export { NavItem, NavItemProps, NavItemData } from "./side_nav/NavItem";
+export { navItems } from "../constants/navItems";
