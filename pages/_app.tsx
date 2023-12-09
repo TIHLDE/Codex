@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import Link from "next/link";
 
 import { SideNav, TableOfContents, TopNav } from "../components";
 
@@ -40,25 +39,16 @@ function collectHeadings(node, sections = []) {
   return sections;
 }
 
-export type MyAppProps = MarkdocNextJsPageProps;
-
-export default function MyApp({ Component, pageProps }: AppProps<MyAppProps>) {
+export default function DocumentationApp({
+  Component,
+  pageProps,
+}: AppProps<MarkdocNextJsPageProps>) {
   const { markdoc } = pageProps;
 
-  let title = TITLE;
-  let description = DESCRIPTION;
-  if (markdoc) {
-    if (markdoc.frontmatter.title) {
-      title = markdoc.frontmatter.title;
-    }
-    if (markdoc.frontmatter.description) {
-      description = markdoc.frontmatter.description;
-    }
-  }
+  const title = markdoc?.frontmatter.title ?? TITLE;
+  const description = markdoc?.frontmatter.description ?? DESCRIPTION;
 
-  const toc = pageProps.markdoc?.content
-    ? collectHeadings(pageProps.markdoc.content)
-    : [];
+  const toc = markdoc?.content ? collectHeadings(markdoc.content) : [];
 
   return (
     <>
