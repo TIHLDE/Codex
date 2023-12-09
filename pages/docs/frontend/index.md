@@ -1,5 +1,5 @@
 ---
-title: "Fontend: Overview"
+title: "Get Started With the Frontend"
 ---
 
 # {% $markdoc.frontmatter.title %}
