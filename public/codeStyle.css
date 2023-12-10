@@ -7,7 +7,7 @@ body {
     --operator-color: #110B11;
     --deleted-color: #A63D40;
     --important-color: #FF715B;
-    --literal-color: #D67AB1;
+    --literal-color: #498070;
     --name-color: #52796F;
     --function-color: #52796F;
     --punctuation-color: #110B11;
@@ -26,12 +26,6 @@ body.dark {
     --punctuation-color: #ABC4B0;
 }
 
-/**
- * prism.js Dark theme for JavaScript, CSS and HTML
- * Based on the slides of the talk “/Reg(exp){2}lained/”
- * @author Lea Verou
- */
-
 code[class*="language-"],
 pre[class*="language-"] {
     color: var(--text-color);
@@ -45,10 +39,8 @@ pre[class*="language-"] {
     line-height: 1.5;
 
     -moz-tab-size: 4;
-    -o-tab-size: 4;
     tab-size: 4;
 
-    -webkit-hyphens: none;
     -moz-hyphens: none;
     -ms-hyphens: none;
     hyphens: none;
@@ -63,26 +55,20 @@ pre[class*="language-"] {
     }
 }
 
-/*pre[class*="language-"],*/
-/*:not(pre) > code[class*="language-"] {*/
-/*    background: hsl(30, 20%, 25%);*/
-/*}*/
-
 /* Code blocks */
 pre[class*="language-"] {
     padding: 1em;
     margin: .5em 0;
     overflow: auto;
-    border: var(--border-color) solid .5em;
+    border: var(--border-color) solid 1px;
     border-radius: 4px;
+    text-shadow: none;
+    background-color: var(--code-background-color);
 }
 
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-    padding: .15em .2em .05em;
-    border-radius: .3em;
-    border: var(--border-color) solid .5em;
-    white-space: normal;
+pre[class*="language-"] > code {
+    position: relative;
+    display: block;
 }
 
 .token.comment,
@@ -107,12 +93,16 @@ pre[class*="language-"] {
 
 .token.property,
 .token.tag,
-.token.boolean,
-.token.number,
 .token.constant,
 .token.symbol {
     color: var(--token-color);
 }
+
+.token.boolean,
+.token.number {
+    color: var(--literal-color);
+}
+
 
 .token.selector,
 .token.attr-name,
@@ -147,6 +137,7 @@ pre[class*="language-"] {
 .token.bold {
     font-weight: bold;
 }
+
 .token.italic {
     font-style: italic;
 }
@@ -161,4 +152,46 @@ pre[class*="language-"] {
 
 .token.function {
     color: var(--function-color);
+}
+
+/* Line numbers */
+
+pre[class*=language-].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber
+}
+
+pre[class*=language-].line-numbers > span.token {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em;
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.line-numbers-rows > span {
+    display: block;
+    counter-increment: linenumber;
+    position: relative;
+}
+
+.line-numbers-rows > span:before {
+    content: counter(linenumber);
+    color: var(--text-color);
+    display: block;
+    padding-right: .8em;
+    text-align: right
 }

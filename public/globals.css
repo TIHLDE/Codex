@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 
 :root {
-  --top-nav-height: 51px;
+  --top-nav-height: 3rem;
   --border-color: #dce6e9;
 }
 
@@ -23,6 +23,10 @@ body {
     --border-color: #52796f;
     --code-background-color: #dae3d6;
     --link-color: #52796f;
+    --grey-bg-color: #dedede;
+    --grey-color: #464646;
+    --bad-color: #853f3f;
+    --bad-background-color: #f3bfbf;
 
     color: var(--text-color);
     background-color: var(--background-color);
@@ -34,6 +38,10 @@ body.dark {
     --card-color: #354f52;
     --code-background-color: #3e4c59;
     --link-color: #52796f;
+    --grey-color: #dedede;
+    --grey-bg-color: #464646;
+    --bad-background-color: #853f3f;
+    --bad-color: #f3bfbf;
 }
 
 p {

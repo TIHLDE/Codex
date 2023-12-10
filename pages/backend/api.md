@@ -1,5 +1,7 @@
 ---
-title: "Get started"
+title: "API Reference"
 ---
 
 # {% $markdoc.frontmatter.title %}
+
+## Introduction

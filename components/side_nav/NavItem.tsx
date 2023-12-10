@@ -23,7 +23,7 @@ export function NavItem({
     parentData.href !== ""
       ? currentRoute.includes(parentData.href)
       : currentRoute === "/docs";
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(!isActive);
 
   return (
     <div key={parentData.href} style={{ marginTop: "0.4rem" }}>
@@ -40,11 +40,14 @@ export function NavItem({
       >
         chevron_right
       </span>
-      <Link href={`/docs${parentData.href}`} className={"side-link"}>
+      <Link href={parentData.href} className={"side-link"}>
         <span
           style={{
             fontWeight: isActive ? "bold" : undefined,
             color: "var(--text-color)",
+            textDecoration: currentRoute.endsWith(parentData.href)
+              ? "underline"
+              : "none",
           }}
         >
           {parentData.title}
@@ -55,11 +58,12 @@ export function NavItem({
           <div
             className="nav-parent"
             style={{
-              paddingLeft: (indent + 1) * 0.8 + "rem",
+              paddingLeft: /*(indent + 1) **/ 0.8 + "rem",
             }}
           >
-            {parentData.children.map((child) => (
+            {parentData.children.map((child, index) => (
               <NavItem
+                key={`${parentData.href}child${index.toString()}`}
                 itemData={child}
                 indent={indent + 1}
                 currentRoute={currentRoute}

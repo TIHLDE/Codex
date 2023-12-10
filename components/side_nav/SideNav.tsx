@@ -12,7 +12,7 @@ export function SideNav() {
           itemData={item}
           indent={0}
           currentRoute={route.pathname}
-          key={item.href}
+          key={item.href + "parent"}
         />
       ))}
       <style jsx>

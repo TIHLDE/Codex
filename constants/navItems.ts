@@ -30,6 +30,26 @@ export const navItems: NavItemData[] = [
       {
         title: "API Reference",
         href: "/backend/api",
+        children: [
+          {
+            title: "Users",
+            href: "/backend/api/users",
+            children: [
+              {
+                title: "Get by id",
+                href: "/backend/api/users/get_user_by_id",
+              },
+              {
+                title: "Get current",
+                href: "/backend/api/users/get_current_user",
+              },
+              {
+                title: "Create",
+                href: "/backend/api/users/create_user",
+              },
+            ],
+          },
+        ],
       },
     ],
   },

@@ -6,6 +6,9 @@ import { SideNav, TableOfContents, TopNav } from "../components";
 import "prismjs";
 // Import other Prism themes here
 import "prismjs/components/prism-bash.min";
+import "prismjs/components/prism-javascript.min";
+import "prismjs/components/prism-json.min";
+import "prismjs/components/prism-yaml.min";
 // import "prismjs/themes/prism.css";
 
 import "../public/globals.css";
@@ -19,7 +22,7 @@ export const DESCRIPTION = "Documentation for FoodManager";
 
 function collectHeadings(node, sections = []) {
   if (node) {
-    if (node.name === "Heading") {
+    if (node.name?.toLowerCase() === "heading") {
       const title = node.children[0];
 
       if (typeof title === "string") {

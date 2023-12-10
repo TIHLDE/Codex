@@ -32,11 +32,11 @@ export function TopNav({ children }: TopNavProps) {
             top: 0;
             position: fixed;
             width: 100%;
+            max-height: var(--top-nav-height);
             z-index: 100;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 1rem;
             padding: 1rem 2rem;
             background: var(--card-color);
             border-bottom: 1px solid var(--border-color);
