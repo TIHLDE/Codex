@@ -6,9 +6,9 @@ export function TableOfContents({ toc }) {
     (item) => item.id && (item.level === 2 || item.level === 3),
   );
 
-  if (items.length <= 1) {
-    return null;
-  }
+  // if (items.length <= 1) {
+  //   return null;
+  // }
 
   return (
     <nav className="toc">
@@ -70,6 +70,7 @@ export function TableOfContents({ toc }) {
             font-weight: 500;
             padding-left: 1.5rem;
             margin-bottom: 1rem;
+            min-width: 10rem;
           }
         `}
       </style>

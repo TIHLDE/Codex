@@ -2,10 +2,6 @@ import { NavItemData } from "../components";
 
 export const navItems: NavItemData[] = [
   {
-    title: "Get started",
-    href: "",
-  },
-  {
     title: "Frontend",
     href: "/frontend",
     children: [
@@ -23,6 +19,10 @@ export const navItems: NavItemData[] = [
     title: "Backend",
     href: "/backend",
     children: [
+      {
+        title: "Server",
+        href: "/backend/server",
+      },
       {
         title: "Database",
         href: "/backend/database",
