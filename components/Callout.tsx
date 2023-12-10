@@ -1,9 +1,28 @@
 import * as React from "react";
 
-export function Callout({ title, children }) {
+export function Callout({ title, children, type }) {
   return (
     <div className="callout">
-      <strong>{title}</strong>
+      <div>
+        {type && (
+          <span
+            className="material-symbols-outlined"
+            style={{
+              marginRight: "0.5rem",
+              verticalAlign: "sub",
+              fontSize: 20,
+              fontWeight: "bolder",
+            }}
+          >
+            {type}
+          </span>
+        )}
+        <span
+          style={{ fontSize: 18, fontWeight: "500", verticalAlign: "baseline" }}
+        >
+          {title}
+        </span>
+      </div>
       <span>{children}</span>
       <style jsx>
         {`

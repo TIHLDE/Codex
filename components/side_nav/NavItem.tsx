@@ -26,7 +26,7 @@ export function NavItem({
   const [isCollapsed, setIsCollapsed] = useState(!isActive);
 
   return (
-    <div key={parentData.href} style={{ marginTop: "0.4rem" }}>
+    <div key={parentData.href} style={{ marginTop: "0.5rem" }}>
       <span
         className={
           "material-symbols-outlined icon chevron not-selectable" +
