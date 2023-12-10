@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { ThemeSwitcher } from "./ThemeSwitcher";
-import FoodManagerLogo from "../FoodManagerLogo";
+import FoodManagerLogo from "./FoodManagerLogo";
 
 interface TopNavProps {
   children?: React.ReactNode;

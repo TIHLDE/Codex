@@ -7,15 +7,15 @@ export const navItems: NavItemData[] = [
   },
   {
     title: "Frontend",
-    href: "/frontend",
+    href: "/website",
     children: [
       {
         title: "Components",
-        href: "/frontend/components",
+        href: "/website/components",
       },
       {
         title: "Style guide",
-        href: "/frontend/style_guide",
+        href: "/website/style_guide",
       },
     ],
   },

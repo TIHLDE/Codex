@@ -40,14 +40,18 @@ export function NavItem({
       >
         chevron_right
       </span>
-      <Link href={parentData.href} className={"side-link"}>
+      <Link
+        href={parentData.href}
+        className={"side-link"}
+        onClick={() => setIsCollapsed(false)}
+      >
         <span
           style={{
             fontWeight: isActive ? "bold" : undefined,
-            color: "var(--text-color)",
-            textDecoration: currentRoute.endsWith(parentData.href)
-              ? "underline"
-              : "none",
+            fontSize: 18,
+            color: currentRoute.endsWith(parentData.href)
+              ? "var(--border-color)"
+              : "var(--text-color)",
           }}
         >
           {parentData.title}
