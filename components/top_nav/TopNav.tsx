@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import FoodManagerLogo from "./FoodManagerLogo";
+import TexiconLogo from "./TexiconLogo";
 
 interface TopNavProps {
   children?: React.ReactNode;
@@ -16,11 +17,19 @@ export function TopNav({ children }: TopNavProps) {
           height: "auto",
           justifyContent: "center",
           display: "flex",
-          width: "8rem",
+          width: "10rem",
+          alignItems: "center",
+          gap: "0.5rem",
         }}
       >
+        <TexiconLogo style={{ height: "auto", width: "2.5rem" }} />
+        +
         <FoodManagerLogo
-          style={{ fill: "var(--text-color)", transitionDuration: "500ms" }}
+          style={{
+            marginTop: "0.2rem",
+            fill: "var(--text-color)",
+            transitionDuration: "500ms",
+          }}
         />
       </Link>
       {children && <section>{children}</section>}
