@@ -70,9 +70,9 @@ export default function DocumentationApp({
         <SideNav />
         <main className="flex column">
           <div className="header">
-            <h1>{pageProps.markdoc.frontmatter.title}</h1>
-            {pageProps.markdoc.frontmatter.version && (
-              <p>v.{pageProps.markdoc.frontmatter.version}</p>
+            <h1>{markdoc?.frontmatter?.title ?? "Error"}</h1>
+            {markdoc?.frontmatter?.version && (
+              <p>v.{markdoc.frontmatter.version}</p>
             )}
           </div>
           <Component {...pageProps} />
