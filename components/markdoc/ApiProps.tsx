@@ -10,6 +10,12 @@ interface ApiPropsProps {
 }
 
 export function ApiProps({ props }: { props: ApiPropsProps }) {
+  if (!props.url || !props.method || !props.response_codes)
+    throw new Error(
+      "Missing required props for ApiProps.\nMake sure the url, method" +
+        " and response_codes fields are set in the frontmatter.",
+    );
+
   return (
     <>
       <div className={"top-props"}>

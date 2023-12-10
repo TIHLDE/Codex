@@ -3,7 +3,6 @@ title: FoodManager Documentation
 description: Get started working with the FoodManager project
 ---
 
-# {% $markdoc.frontmatter.title %}
 
 {% callout %}
 This is the developer documentation for the FoodManager AS project, developed by Texicon AS.

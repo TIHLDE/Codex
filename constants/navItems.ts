@@ -1,12 +1,13 @@
 import { NavItemData } from "../components";
+import { TITLE } from "../pages/_app";
 
 export const navItems: NavItemData[] = [
   {
     title: "Contributing",
     href: "/contributing",
   },
-  {
-    title: "Frontend",
+  /* {
+    title: "Website",
     href: "/website",
     children: [
       {
@@ -16,6 +17,26 @@ export const navItems: NavItemData[] = [
       {
         title: "Style guide",
         href: "/website/style_guide",
+      },
+    ],
+  },*/
+  {
+    title: "App",
+    href: "/app",
+    children: [
+      {
+        title: "Core library",
+        href: "/app/core_library",
+        children: [
+          {
+            title: "Widgets",
+            href: "/app/core_library/widgets",
+          },
+        ],
+      },
+      {
+        title: "Style guide",
+        href: "/app/style_guide",
       },
     ],
   },

@@ -3,8 +3,6 @@ title: Contributing
 description: How to contribute
 ---
 
-# {% $markdoc.frontmatter.title %}
-
 {% callout type="info" title="Please read this page before contributing to the project" %}
 Some syntax and formatting rules are enforced by the formatting engine and project setup.
 {% /callout %}
@@ -33,6 +31,46 @@ If you plan on contributing to the project, you should read the following sectio
 This is where the documentation is written. The pages are written in markdown and are rendered 
 as static pages. The only exception is the `_app.tsx` file, which parses the markdown files and 
 generates the website pages.
+
+**Example:**
+
+In `/pages` folder:
+```yaml
+api
+  - index.md # this is the api page
+  - users
+    - index.md # this is the users page
+    - get_by_id.md
+    - create.md
+```
+
+In `/constants/navItems.ts` file:
+```typescript
+export const navItems = [
+  {
+    title: "API", // The title field is used to generate the sidebar, and can be anything
+    href: "/api",
+    children: [
+      {
+        title: "Users",
+        href: "/api/users",
+        children: [
+          {
+            title: "Get by ID",
+            href: "/api/users/get_by_id"
+          },
+          {
+            title: "Create",
+            href: "/api/users/create"
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+
 
 ### Components
 These are the React components used in the markdown files. These are used both as website 
@@ -69,6 +107,21 @@ description: How to contribute
 ---
 ```
 
+**Available props:**
+```yaml
+---
+title: string
+description: string
+version: string
+# For API pages (fields will not be shown without api_base partial)
+method: string
+url: string
+response_codes: string[]
+requires_auth: boolean # optional
+permissions: string[] # optional
+---
+```
+
 ### Api page
 The API pages have a few extra fields in the metadata section, which are used to generate the 
 endpoint's information bit. Following are the fields used in the metadata section:
@@ -102,5 +155,19 @@ if (code.startsWith("2")) {
 } 
 ```
 *(idk if it's worth making it more sophisticated...)*
+
+### Api partial
+
+The API partial is used to generate the top section of the API pages. It uses the metadata from 
+the frontmatter to generate the information bit. The partial is located in `markdoc/partials/api_base`.
+
+To use this partial, you need to add the following to the top of your markdown file:
+Note that the `file` path is absolute and does not need to be changed.
+
+```markdown
+(% partial file="api_base.md" / %)
+# replace parentheses with curly braces
+(I can't write it here because it will be rendered)
+```
 
 Well, that's all for ya! Happy coding!

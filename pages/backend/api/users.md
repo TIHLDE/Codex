@@ -3,7 +3,6 @@ title: Users API
 description: Endpoint for managing users
 ---
 
-# {% $markdoc.frontmatter.title %}
 
 {% callout %}
 A set of endpoints are available for managing users. Some are also available for access to a 

@@ -2,7 +2,6 @@
 title: Database
 ---
 
-# {% $markdoc.frontmatter.title %}
 
 {% callout %}
 The database holds FoodManager AS's relational data. The DB is still a work in progress.
