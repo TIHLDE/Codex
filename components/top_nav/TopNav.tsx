@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { ThemeSwitcher } from "./ThemeSwitcher";
-import FoodManagerLogo from "./FoodManagerLogo";
-import TexiconLogo from "./TexiconLogo";
+import Image from "next/image";
+import TihldeLogo from "../../public/assets/tihlde_logo.png";
 
 interface TopNavProps {
   children?: React.ReactNode;
@@ -15,22 +15,16 @@ export function TopNav({ children }: TopNavProps) {
         href="/"
         style={{
           height: "auto",
-          justifyContent: "center",
+          justifyContent: "flex-start",
           display: "flex",
           width: "10rem",
           alignItems: "center",
           gap: "0.5rem",
+          color: "var(--text-color)",
         }}
       >
-        <TexiconLogo style={{ height: "auto", width: "2.5rem" }} />
-        +
-        <FoodManagerLogo
-          style={{
-            marginTop: "0.2rem",
-            fill: "var(--text-color)",
-            transitionDuration: "500ms",
-          }}
-        />
+        <Image src={TihldeLogo} alt={"tihlde_logo"} width={30} height={30} />
+        Tihlde Docs
       </Link>
       {children && <section>{children}</section>}
       <ThemeSwitcher />

@@ -63,7 +63,7 @@ export default function DocumentationApp({
         <meta name="title" content={title} />
         <meta name="description" content={description} />
         <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/assets/tihlde_logo.png" />
       </Head>
       <TopNav />
       <div className="page">

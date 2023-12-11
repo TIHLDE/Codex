@@ -1,6 +1,6 @@
-# FoodManager documentation by Texicon
+# Index Documentation
 
-This is a documentation site for the FoodManager project. It is built using 
+This is a documentation site for Tihlde Index. It is built using 
 [Next.js](https://nextjs.org/) and [MarkDoc](https://markdoc.dev/).
 
 ![Next.js](https://img.shields.io/badge/Next.js-Framework-black)

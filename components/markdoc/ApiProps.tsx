@@ -92,6 +92,9 @@ export function ApiProps({ props }: { props: ApiPropsProps }) {
         }
 
         .success {
+          border-color: var(--good-color);
+          background-color: var(--good-background-color);
+          color: var(--good-color);
         }
 
         span.auth-icon {

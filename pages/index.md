@@ -1,11 +1,10 @@
 ---
-title: FoodManager Documentation
-description: Get started working with the FoodManager project
+title: Index Documentation 
+description: Find docs on how to contribute and setup the project here.
 ---
 
-
 {% callout %}
-This is the developer documentation for the FoodManager AS project, developed by Texicon AS.
+This is the developer documentation for the Tihlde Index sub-group.
 {% /callout %}
 
 ## Overview
@@ -17,11 +16,6 @@ For the frontend, there are two main components, the web frontend and the mobile
 frontend is built using [NextJS](https://nextjs.org/), and the mobile app is built using
 [Flutter](https://flutter.dev/).
 
-The backend is built using [Rust](https://www.rust-lang.org/), and uses
-[PostgreSQL](https://www.postgresql.org/) as a database. All web and backend components are bundled with [Docker](https://www.docker.com/).
-
-Design files are available in [Figma](https://www.figma.com/).
-
-Our main communication channel is [Discord](https://discord.com/), and we use our 
-[GitHub Organization](https://github.com/Texicon-AS) for hosting the code and docs, along with 
-issue boards and more.
+The backend is built using [Django](https://www.django-rest-framework.org), and uses
+[MySQL](https://www.mysql.com/) as a database. All backend components are bundled with 
+[Docker](https://www.docker.com/).

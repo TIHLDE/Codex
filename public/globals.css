@@ -17,31 +17,36 @@ body {
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   margin: 0;
     transition-duration: 500ms;
-    --text-color: #2f3e46;
-    --background-color: #cad2c5;
-    --card-color: #ABC4B0;
-    --border-color: #52796f;
-    --code-background-color: #dae3d6;
-    --link-color: #52796f;
+    --text-color: #312f31;
+    --background-color: #f2f2f2;
+    --card-color: #ffffff;
+    --border-color: #123657;
+    --code-background-color: #f3f9ff;
+    --link-color: #4d638f;
     --grey-bg-color: #dedede;
     --grey-color: #464646;
     --bad-color: #853f3f;
-    --bad-background-color: #f3bfbf;
+    --bad-background-color: #ffdfdf;
+    --good-color: #3f853f;
+    --good-background-color: #dfffdf;
 
     color: var(--text-color);
     background-color: var(--background-color);
 }
 
 body.dark {
-    --text-color: #cad2c5;
-    --background-color: #2f3e46;
-    --card-color: #354f52;
-    --code-background-color: #3e4c59;
-    --link-color: #65948a;
+    --good-background-color: #3f853f;
+    --good-color: #dfffdf;
+    --text-color: #f2f2f2;
+    --background-color: #071522;
+    --card-color: #123657;
+    --border-color: #6290C8;
+    --code-background-color: #0D2230;
+    --link-color: #4d638f;
     --grey-color: #dedede;
     --grey-bg-color: #464646;
     --bad-background-color: #853f3f;
-    --bad-color: #f3bfbf;
+    --bad-color: #ffe8e8;
 }
 
 p {
