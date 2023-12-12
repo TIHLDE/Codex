@@ -17,8 +17,8 @@ import "../public/codeStyle.css";
 import type { AppProps } from "next/app";
 import type { MarkdocNextJsPageProps } from "@markdoc/next.js";
 
-export const TITLE = "FoodManager Documentation";
-export const DESCRIPTION = "Documentation for FoodManager";
+export const TITLE = "Index Docs";
+export const DESCRIPTION = "Tihlde Index Documentation Reference";
 
 function collectHeadings(node, sections = []) {
   if (node) {
@@ -62,7 +62,7 @@ export default function DocumentationApp({
         <meta name="referrer" content="strict-origin" />
         <meta name="title" content={title} />
         <meta name="description" content={description} />
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/assets/tihlde_logo.png" />
         <link rel="icon" href="/assets/tihlde_logo.png" />
       </Head>
       <TopNav />

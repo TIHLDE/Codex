@@ -24,7 +24,7 @@ export function TopNav({ children }: TopNavProps) {
         }}
       >
         <Image src={TihldeLogo} alt={"tihlde_logo"} width={30} height={30} />
-        Tihlde Docs
+        Index Docs
       </Link>
       {children && <section>{children}</section>}
       <ThemeSwitcher />
