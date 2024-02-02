@@ -9,7 +9,7 @@ This is a documentation site for Tihlde Index. It is built using
 
 ## Contributing
 
-Please read the [page on contributing](https://food-manager.docs.texicon.no/contributing) before making any changes.
+Please read the [page on contributing](https://codex.tihlde.org/contributing) before making any changes.
 
 ## Setup
 
