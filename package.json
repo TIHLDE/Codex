@@ -10,7 +10,6 @@
     "@markdoc/markdoc": "latest",
     "@markdoc/next.js": "latest",
     "next": "latest",
-    "next-auth": "^4.24.5",
     "prettier": "^3.1.0",
     "prismjs": "latest",
     "react": "latest",
