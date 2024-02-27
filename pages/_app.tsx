@@ -7,9 +7,13 @@ import "prismjs";
 // Import other Prism themes here
 import "prismjs/components/prism-bash.min";
 import "prismjs/components/prism-javascript.min";
+import "prismjs/components/prism-typescript.min";
+import "prismjs/components/prism-makefile.min";
+import "prismjs/components/prism-markdown.min";
+import "prismjs/components/prism-docker.min";
 import "prismjs/components/prism-json.min";
+import "prismjs/components/prism-python.min";
 import "prismjs/components/prism-yaml.min";
-// import "prismjs/themes/prism.css";
 
 import "../public/globals.css";
 import "../public/codeStyle.css";
@@ -58,18 +62,18 @@ export default function DocumentationApp({
     <>
       <Head>
         <title>{title}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="referrer" content="strict-origin" />
-        <meta name="title" content={title} />
-        <meta name="description" content={description} />
-        <link rel="shortcut icon" href="/assets/tihlde_logo.png" />
-        <link rel="icon" href="/assets/tihlde_logo.png" />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta name='referrer' content='strict-origin' />
+        <meta name='title' content={title} />
+        <meta name='description' content={description} />
+        <link rel='shortcut icon' href='/assets/tihlde_logo.png' />
+        <link rel='icon' href='/assets/tihlde_logo.png' />
       </Head>
       <TopNav />
-      <div className="page">
+      <div className='page'>
         <SideNav />
-        <main className="flex column">
-          <div className="header">
+        <main className='flex column'>
+          <div className='header'>
             <h1>{markdoc?.frontmatter?.title ?? "Error"}</h1>
             {markdoc?.frontmatter?.version && (
               <p>v.{markdoc.frontmatter.version}</p>
