@@ -20,7 +20,7 @@ export function ApiProps({ props }: { props: ApiPropsProps }) {
         <div>
           <div className="">{props.method + ' ' + props.url}</div>
         </div>
-        <span style={{ display: 'inline-flex', gap: '0.3rem' }}>
+        <span className={'inline-flex gap-1'}>
           {props.requires_auth && (
             <div className={'chip warning'}>
               <span className="material-symbols-outlined auth-icon">key</span>{' '}
@@ -28,13 +28,16 @@ export function ApiProps({ props }: { props: ApiPropsProps }) {
             </div>
           )}
           {props.permissions?.map((c) => (
-            <div className={'chip warning'}>{c}</div>
+            <div key={c} className={'chip warning'}>
+              {c}
+            </div>
           ))}
         </span>
         <div>
           <span style={{ gap: '0.3rem', display: 'inline-flex' }}>
             {props.response_codes.map((response_code) => (
               <div
+                key={response_code}
                 className={
                   'chip ' + (response_code.startsWith('2') ? 'success' : 'bad')
                 }

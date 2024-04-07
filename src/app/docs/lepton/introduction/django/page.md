@@ -12,10 +12,10 @@ Django sin arkitektur er bygd opp ved det man kaller "apps". Dette vil si at man
 
 ```
 app/
-├─ content/
-   ├─ models/
-   ├─ serializers/
-   ├─ views/
+ - content/
+   -  models/
+   - serializers/
+   - views/
 ```
 
 Her ser man et enkelt eksempel på hvordan en app kan se ut. Merk at mappen på rotnivået "app" ikke er det som er appen vår. App er mappen som vi har resten av prosjektet inni. Her er det mappen "content" som er vår opprettede app. Det finnes flere mapper og filer i en app, men det kommer vi tilbake til senere i dokumentasjonen.
@@ -91,8 +91,8 @@ Her ser vi en klasse av typen serializer, som har en Meta klasse inni seg. For a
 ### Views
 Til slutt kommer vi til views mappen. Det er her vi definerer viewsets. Et viewset sin oppgave er å ta imot en forespørsel, hente ut data ved hjelp av modellen, og returnere serialized data ved hjelp av en serializer. Det skal dermed bli utført veldig lite logikk og kode i selve viewsetet. Dette skal gjøres i modellen og serializern. Det er ikke så mye å vise til her, siden de byggeklossene som et viewset består av, vil vi komme tilbake til i videre dokumentasjon. Det som kan nevnes nå er at man har primært fem hoved funksjoner, som er følgende:
 
-* list: for å returnere en liste av alle instanser i tabellen. Dette er en GET request.
-* retrieve: for å hente en enkel instans basert på id. Dette er en GET request.
-* create: for å lage nye instanser. Dette er en POST request.
-* update: for å oppdatere en instans. Dette er en PUT request.
-* destroy: for å slette en instans. Dette er en DELETE request.
+- list: for å returnere en liste av alle instanser i tabellen. Dette er en GET request.
+- retrieve: for å hente en enkel instans basert på id. Dette er en GET request.
+- create: for å lage nye instanser. Dette er en POST request.
+- update: for å oppdatere en instans. Dette er en PUT request.
+- destroy: for å slette en instans. Dette er en DELETE request.
