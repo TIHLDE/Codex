@@ -1,112 +1,117 @@
 ---
-title: Getting started
+title: Kom i gang
 ---
 
-Learn how to get CacheAdvance set up in your project in under thirty minutes or it's free. {% .lead %}
 
 {% quick-links %}
 
-{% quick-link title="Installation" icon="installation" href="/" description="Step-by-step guides to setting up your system and installing the library." /%}
+{% quick-link title="Lepton" icon="installation" href="/" description="Step-by-step guides to setting up your system and installing the library." /%}
 
-{% quick-link title="Architecture guide" icon="presets" href="/" description="Learn how the internals work and contribute." /%}
-
-{% quick-link title="Plugins" icon="plugins" href="/" description="Extend the library with third-party plugins or write your own." /%}
-
-{% quick-link title="API reference" icon="theming" href="/" description="Learn to easily customize and modify your app's visual design to fit your brand." /%}
+{% quick-link title="Kvark" icon="presets" href="/" description="Learn how the internals work and contribute." /%}
 
 {% /quick-links %}
 
-Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste.
-
 ---
 
-## Quick start
+## Intro
 
-Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur.
-
-### Installing dependencies
-
-Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.
-
-```shell
-npm install @tailwindlabs/cache-advance
-```
-
-Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.
-
-{% callout type="warning" title="Oh no! Something bad happened!" %}
-This is what a disclaimer message looks like. You might want to include inline `code` in it. Or maybe you’ll want to include a [link](/) in it. I don’t think we should get too carried away with other scenarios like lists or tables — that would be silly.
+{% callout title="TLDR" %}
+Dokumentasjonssider ligger i `src/app/docs` mappen. Bruk filene `src/app/templates` for å komme 
+i gang med nye sider. Husk å oppdatere `src/app/lib/navigation.ts` med linker!
 {% /callout %}
 
-### Configuring the library
+Dette prosjektet er bygget med [Nextjs](https://nextjs.org/), et React server-side rammeverk og
+[Markdoc](https://markdoc.dev/), en markdown dokumentasjonsmalingsmotor.
+Prosjektet er hostet på [Vercel](https://vercel.com/), skaperne av Nextjs.
 
-Sit commodi iste iure molestias qui amet voluptatem sed quaerat. Nostrum aut pariatur. Sint ipsa praesentium dolor error cumque velit tenetur quaerat exercitationem. Consequatur et cum atque mollitia qui quia necessitatibus.
+Grunnen til at vi bruker Markdoc er for å kunne skrive dokumentasjon i markdown og ha det
+rendret som et statisk nettsted, samtidig som vi kan bruke React-komponenter i markdown-filene.
+Dette lar oss skrive dokumenter raskt, tilpasse nettstedet, forhåndsvise komponenter og
+innebygde lenker.
 
-```js
-// cache-advance.config.js
-export default {
-  strategy: 'predictive',
-  engine: {
-    cpus: 12,
-    backups: ['./storage/cache.wtf'],
-  },
-}
-```
+Utover det følger alle markdown-filer vanlig Markdown-syntaks. Vennligst konsulter
+[Markdoc-dokumentasjonen](https://markdoc.dev/docs) for mer informasjon.
 
-Possimus saepe veritatis sint nobis et quam eos. Architecto consequatur odit perferendis fuga eveniet possimus rerum cumque. Ea deleniti voluptatum deserunt voluptatibus ut non iste. Provident nam asperiores vel laboriosam omnis ducimus enim nesciunt quaerat. Minus tempora cupiditate est quod.
+## Prosjektstruktur
 
-{% callout title="You should know!" %}
-This is what a disclaimer message looks like. You might want to include inline `code` in it. Or maybe you’ll want to include a [link](/) in it. I don’t think we should get too carried away with other scenarios like lists or tables — that would be silly.
+Hvis du kun planlegger å skrive dokumentasjon, kan du åpne mappen `src/app/docs` og
+begynne å skrive markdown `(.md)`-filer. Følg eksempelvis hvordan andre sider er skrevet. Sørg for
+at du lenker filene til navigasjonsmenyen ved å legge inn en lenke i `app/lib/navigation.ts`.
+
+Hvis du planlegger å bidra til prosjektet, bør du lese de følgende seksjonene.
+
+### Sider
+
+Dette er hvor dokumentasjonen blir skrevet. Sidene er skrevet i markdown og blir rendret
+som statiske sider. Resten av prosjektet går til utforming av nettsiden og kompilering av
+markdown-filene til statisk html.
+
+### Komponenter
+
+Dette er React-komponentene som brukes i markdown-filene. De brukes både som nettsidekomponenter og
+visse markdown-komponenter. For eksempel kan `callout`-komponenten brukes i markdown og blir senere
+
+{% callout title="Callout" %}
+Slik ser "callout" komponenten ut, som du kan bruke i din dokumentasjon. Det finnes flere slike
+komponenter, bare å utforske!.
 {% /callout %}
 
+Det finnes allerede flere komponenter du kan bruke, men dersom du ønsker å lage din egen så
+sjekk ut [Markdoc-dokumentasjonen](https://markdoc.dev/docs/tags) for mer informasjon.
+
+### Markdoc
+
+I mappen `src/app/markdoc` ligger alt av nodes og tags som brukes for å manipulere
+markdown-filene. Noder brukes for å "style" markdownen, som for eksempel kodeblokker:
+
+```javascript
+console.log("Jeg er en kodeblokk!")
+```
+
+Tagger derimot lar oss bygge egne komponenter som "Callout" komponenten ovenfor. Da wrapper du
+bare teksten din med curly brace og prosent. (Kan ikke skrives som eksempel her da, ellers
+får vi en feilmelding ...)
+
+## Markdown-side
+
+Hver markdown-fil har en metadataseksjon på toppen, som brukes til å generere siden. Denne
+delen er skrevet i YAML, og blir tolket av Markdoc-motoren. Bruk alltid `title` feltet, slik at
+vi får generert en tittel til siden din.
+*Eksempel*
+
+```yaml
 ---
-
-## Basic usage
-
-Praesentium laudantium magni. Consequatur reiciendis aliquid nihil iusto ut in et. Quisquam ut et aliquid occaecati. Culpa veniam aut et voluptates amet perspiciatis. Qui exercitationem in qui. Vel qui dignissimos sit quae distinctio.
-
-### Your first cache
-
-Minima vel non iste debitis. Consequatur repudiandae et quod accusamus sit molestias consequatur aperiam. Et sequi ipsa eum voluptatibus ipsam. Et quisquam ut.
-
-Qui quae esse aspernatur fugit possimus. Quam sed molestiae temporibus. Eum perferendis dignissimos provident ea et. Et repudiandae quasi accusamus consequatur dolore nobis. Quia reiciendis necessitatibus a blanditiis iste quia. Ut quis et amet praesentium sapiente.
-
-Atque eos laudantium. Optio odit aspernatur consequuntur corporis soluta quidem sunt aut doloribus. Laudantium assumenda commodi.
-
-### Clearing the cache
-
-Vel aut velit sit dolor aut suscipit at veritatis voluptas. Laudantium tempore praesentium. Qui ut voluptatem.
-
-Ea est autem fugiat velit esse a alias earum. Dolore non amet soluta eos libero est. Consequatur qui aliquam qui odit eligendi ut impedit illo dignissimos.
-
-Ut dolore qui aut nam. Natus temporibus nisi voluptatum labore est ex error vel officia. Vero repellendus ut. Suscipit voluptate et placeat. Eius quo corporis ab et consequatur quisquam. Nihil officia facere dolorem occaecati alias deleniti deleniti in.
-
-### Adding middleware
-
-Officia nobis tempora maiores id iusto magni reprehenderit velit. Quae dolores inventore molestiae perspiciatis aut. Quis sequi officia quasi rem officiis officiis. Nesciunt ut cupiditate. Sunt aliquid explicabo enim ipsa eum recusandae. Vitae sunt eligendi et non beatae minima aut.
-
-Harum perferendis aut qui quibusdam tempore laboriosam voluptatum qui sed. Amet error amet totam exercitationem aut corporis accusantium dolorum. Perspiciatis aut animi et. Sed unde error ut aut rerum.
-
-Ut quo libero aperiam mollitia est repudiandae quaerat corrupti explicabo. Voluptas accusantium sed et doloribus voluptatem fugiat a mollitia. Numquam est magnam dolorem asperiores fugiat. Soluta et fuga amet alias temporibus quasi velit. Laudantium voluptatum perspiciatis doloribus quasi facere. Eveniet deleniti veniam et quia veritatis minus veniam perspiciatis.
-
+title: Min dokumentasjonsside
 ---
+```
 
-## Getting help
+### Api-sider
 
-Consequuntur et aut quisquam et qui consequatur eligendi. Necessitatibus dolorem sit. Excepturi cumque quibusdam soluta ullam rerum voluptatibus. Porro illo sequi consequatur nisi numquam nisi autem. Ut necessitatibus aut. Veniam ipsa voluptatem sed.
+Vi har laget en løsning for å dokumentere API-sider, som krever en litt annerledes utforming av
+markdown siden din. Følge metadata skal inkluderes:
 
-### Submit an issue
+```yaml
+---
+title: "Endpoint title"
+description: "Enpoint description"
+method: METHOD
+url: v1/your/endpoint
+response_codes:
+  - "201 Created"
+  - "401 Unauthorized"
+  - "599 Another code"
+requires_auth: true # not required
+permissions: # also not required
+  - "permission1"
+  - "permission2"
+---
+```
 
-Inventore et aut minus ut voluptatem nihil commodi doloribus consequatur. Facilis perferendis nihil sit aut aspernatur iure ut dolores et. Aspernatur odit dignissimos. Aut qui est sint sint.
+Du kan fjerne `permission` feletet dersom endepunktet ikke krever noen scropes, men behold
+`requires_auth` feltet dersom endepunktet krever at brukeren er logget inn.
 
-Facere aliquam qui. Dolorem officia ipsam adipisci qui molestiae. Error voluptatem reprehenderit ex.
+{% callout title="Pro tip" %}
+Du finner templates for de mest vanlige bruksområdene i `app/templates` mappen :)
+{% /callout %}
 
-Consequatur enim quia maiores aperiam et ipsum dicta. Quam ut sit facere sit quae. Eligendi veritatis aut ut veritatis iste ut adipisci illo.
-
-### Join the community
-
-Praesentium facilis iste aliquid quo quia a excepturi. Fuga reprehenderit illo sequi voluptatem voluptatem omnis. Id quia consequatur rerum consectetur eligendi et omnis. Voluptates iusto labore possimus provident praesentium id vel harum quisquam. Voluptatem provident corrupti.
-
-Eum et ut. Qui facilis est ipsa. Non facere quia sequi commodi autem. Dicta autem sit sequi omnis impedit. Eligendi amet dolorum magnam repudiandae in a.
-
-Molestiae iusto ut exercitationem dolorem unde iusto tempora atque nihil. Voluptatem velit facere laboriosam nobis ea. Consequatur rerum velit ipsum ipsam. Et qui saepe consequatur minima laborum tempore voluptatum et. Quia eveniet eaque sequi consequatur nihil eos.
+Det var alt du trengte for å starte, god progging!
