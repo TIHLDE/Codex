@@ -1,55 +1,24 @@
 export const navigation = [
   {
     title: 'Introduksjon',
-    links: [
-      { title: 'Kom i gang', href: '/' },
-    ],
+    links: [{ title: 'Kom i gang', href: '/' }],
   },
   {
-    title: 'Core concepts',
+    title: 'Lepton',
     links: [
-      { title: 'Understanding caching', href: '/docs/understanding-caching' },
+      { title: 'Introduksjon', href: '/docs/lepton' },
       {
-        title: 'Predicting user behavior',
-        href: '/docs/predicting-user-behavior',
+        title: 'Modeller og tabeller i databasen',
+        href: '/docs/lepton/core/models',
       },
-      { title: 'Basics of time-travel', href: '/docs/basics-of-time-travel' },
+      { title: 'Serializere og JSON', href: '/docs/lepton/core/serializers' },
       {
-        title: 'Introduction to string theory',
-        href: '/docs/introduction-to-string-theory',
+        title: 'Hvordan håndtere filopplastning',
+        href: '/docs/lepton/extensions/fileUpload',
       },
-      { title: 'The butterfly effect', href: '/docs/the-butterfly-effect' },
-    ],
-  },
-  {
-    title: 'Advanced guides',
-    links: [
-      { title: 'Writing plugins', href: '/docs/writing-plugins' },
-      { title: 'Neuralink integration', href: '/docs/neuralink-integration' },
-      { title: 'Temporal paradoxes', href: '/docs/temporal-paradoxes' },
-      { title: 'Testing', href: '/docs/testing' },
-      { title: 'Compile-time caching', href: '/docs/compile-time-caching' },
-      {
-        title: 'Predictive data generation',
-        href: '/docs/predictive-data-generation',
-      },
-    ],
-  },
-  {
-    title: 'API reference',
-    links: [
-      { title: 'CacheAdvance.predict()', href: '/docs/cacheadvance-predict' },
-      { title: 'CacheAdvance.flush()', href: '/docs/cacheadvance-flush' },
-      { title: 'CacheAdvance.revert()', href: '/docs/cacheadvance-revert' },
-      { title: 'CacheAdvance.regret()', href: '/docs/cacheadvance-regret' },
-    ],
-  },
-  {
-    title: 'Contributing',
-    links: [
-      { title: 'How to contribute', href: '/docs/how-to-contribute' },
-      { title: 'Architecture guide', href: '/docs/architecture-guide' },
-      { title: 'Design principles', href: '/docs/design-principles' },
+      { title: 'Hva er Django?', href: '/docs/lepton/introduction/django' },
+      { title: 'ORM', href: '/docs/lepton/introduction/orm' },
+      { title: 'Hva er REST API?', href: '/docs/lepton/introduction/restApi' },
     ],
   },
 ]
