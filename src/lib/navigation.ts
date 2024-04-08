@@ -4,6 +4,10 @@ export const navigation = [
     links: [{ title: 'Kom i gang', href: '/' }],
   },
   {
+    title: 'Test',
+    links: [{ title: 'Testing', href: '/docs/lol' }],
+  },
+  {
     title: 'Lepton',
     links: [
       { title: 'Introduksjon', href: '/docs/lepton' },

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 
 import { type Section, type Subsection } from '@/lib/sections'
+import { log } from 'console'
 
 export function TableOfContents({
   tableOfContents,
@@ -34,7 +35,7 @@ export function TableOfContents({
     let headings = getHeadings(tableOfContents)
     function onScroll() {
       let top = window.scrollY
-      let current = headings[0].id
+      let current = headings[0]?.id
       for (let heading of headings) {
         if (top >= heading.top - 10) {
           current = heading.id

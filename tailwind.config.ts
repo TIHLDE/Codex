@@ -1,5 +1,6 @@
 import typographyPlugin from '@tailwindcss/typography'
 import { type Config } from 'tailwindcss'
+import { colors } from 'tailwindcss/defaultTheme'
 
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx,md}'],
