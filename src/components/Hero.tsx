@@ -51,10 +51,15 @@ export function Hero() {
               <p className="inline bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text font-display text-5xl tracking-tight text-transparent">
                 Codex
               </p>
-              <p className="mt-3 text-2xl tracking-tight text-slate-400">TIHLDE Index sin dokumentasjonsnettside</p>
+              <p className="mt-3 text-2xl tracking-tight text-slate-400">
+                TIHLDE Index sin dokumentasjonsnettside
+              </p>
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
                 <Button href="#get-started">Kom i gang</Button>
-                <Button href="https://github.com/TIHLDE/Codex" variant="secondary">
+                <Button
+                  href="https://github.com/TIHLDE/Codex"
+                  variant="secondary"
+                >
                   Se på GitHub
                 </Button>
               </div>
