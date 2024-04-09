@@ -3,6 +3,7 @@ import {
   MinutesPostResponse,
   PagedResponse,
   PaginationRequest,
+  SingleMinutesPostResponse,
   UserResponse,
 } from './types';
 
@@ -94,7 +95,7 @@ export const addMinutesPost = async (
 export const getMinutesPost = async (
   token: string,
   id: number,
-): Promise<MinutesPostResponse> => {
+): Promise<SingleMinutesPostResponse> => {
   console.log(token);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}/`,
@@ -106,7 +107,7 @@ export const getMinutesPost = async (
     throw new Error('Failed to fetch minutes post by id');
   }
 
-  return (await response.json()) as MinutesPostResponse;
+  return (await response.json()) as SingleMinutesPostResponse;
 };
 
 export const updateMinutesPost = async (
@@ -152,28 +153,28 @@ export const deleteMinutesPost = async (
   return (await response.json()) as MinutesPostResponse;
 };
 
-/*
 export const getPagedMinutesPosts = async (
   token: string,
   pagination: PaginationRequest,
 ): Promise<PagedResponse> => {
-  const headers = {
-    'Content-Type': 'application/json',
-    'x-csrf-token': token,
-  };
-
-  const params = new URLSearchParams({
-    page: pagination.page.toString(),
-    order_by: (!pagination.ascending ? '-' : '') + `${pagination.ordering}`,
-    filter: pagination.filter,
-    search: pagination.search,
-  });
+  // const params = {
+  //     page: pagination.page.toString(),
+  //     order_by: (!pagination.ascending ? '-' : '') + `${pagination.ordering}`,
+  // };
+  //
+  // if(pagination.)
+  //   {
+  //     filter: pagination.filter,
+  //     search: pagination.search,
+  // }
+  //
+  // const query = new URLSearchParams(params);
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/?${params}`,
+    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/`,
     {
-      method: 'PUT',
-      headers: headers,
+      method: 'GET',
+      headers: getHeaders(token),
     },
   );
 
@@ -184,4 +185,3 @@ export const getPagedMinutesPosts = async (
 
   return (await response.json()) as PagedResponse;
 };
-*/

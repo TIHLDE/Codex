@@ -62,7 +62,6 @@ export interface PagedResponse {
 export interface MinutesPostResponse {
   id: number;
   title: string;
-  content: string;
   author: {
     user_id: string;
     last_name: string;
@@ -72,6 +71,10 @@ export interface MinutesPostResponse {
   created_at: Date;
   updated_at: Date;
   tag: 'Møtereferat' | 'Dokument';
+}
+
+export interface SingleMinutesPostResponse extends MinutesPostResponse {
+  content: string;
 }
 
 export interface PaginationRequest {
