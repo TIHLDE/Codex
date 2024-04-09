@@ -21,4 +21,4 @@ export const navigation = [
       { title: 'Hva er REST API?', href: '/docs/lepton/introduction/restApi' },
     ],
   },
-]
+];

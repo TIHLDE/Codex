@@ -1,6 +1,7 @@
-import typographyPlugin from '@tailwindcss/typography'
-import { type Config } from 'tailwindcss'
-import { colors } from 'tailwindcss/defaultTheme'
+import typographyPlugin from '@tailwindcss/typography';
+import formPlugin from '@tailwindcss/forms';
+import { type Config } from 'tailwindcss';
+import { colors } from 'tailwindcss/defaultTheme';
 
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx,md}'],
@@ -31,5 +32,5 @@ export default {
       },
     },
   },
-  plugins: [typographyPlugin],
-} satisfies Config
+  plugins: [typographyPlugin, formPlugin],
+} satisfies Config;
