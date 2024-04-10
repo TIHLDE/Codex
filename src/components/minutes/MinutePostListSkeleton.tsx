@@ -29,8 +29,7 @@ function SkeletonListTile() {
   return (
     <li
       className={clsx(
-        'relative flex cursor-pointer items-center space-x-4 rounded-md px-2 py-4' +
-          ' hover:bg-slate-700',
+        'relative flex items-center space-x-4 rounded-md px-2 py-4',
       )}
     >
       <div className="min-w-0 flex-auto">
