@@ -5,11 +5,11 @@ import { ClockIcon } from '@heroicons/react/24/outline';
 import { MinuteOrdering, PagedResponse, PaginationRequest } from '@/auth/types';
 import clsx from 'clsx';
 import { Button } from '@/components/Button';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { Combobox } from '@headlessui/react';
-import { useDebounce } from 'use-debounce';
-import { BarsArrowDownIcon } from '@heroicons/react/16/solid';
+import { ArrowLeftIcon, BarsArrowDownIcon } from '@heroicons/react/16/solid';
+import MinutesPostListSkeleton from '@/components/minutes/MinutePostListSkeleton';
 
 const tagStyles = {
   ['Møtereferat']: 'text-gray-400 bg-gray-400/10 ring-gray-400/20',
@@ -23,35 +23,18 @@ export interface MinutesListProps {
   minutePosts: PagedResponse | null;
   isLoading: boolean;
   onChangePagination: (options: PaginationRequest) => void;
+  pagination: PaginationRequest;
 }
 
 export default function MinutesList({
   onSelect,
   onCreate,
-  isLoading,
   selectedPostId,
   minutePosts,
   onChangePagination,
+  pagination,
+  isLoading,
 }: MinutesListProps) {
-  const [currentPagination, setCurrentPagination] = useState<PaginationRequest>(
-    {
-      search: '',
-      ordering: 'title',
-      ascending: true,
-      page: 1,
-    },
-  );
-
-  const [pagination] = useDebounce(currentPagination, 1000);
-
-  useEffect(() => {
-    onChangePagination(pagination);
-  }, [pagination]);
-
-  if (isLoading || !minutePosts) {
-    return <div>Loading ...</div>;
-  }
-
   return (
     <div className="flex max-h-[calc(100svh-2rem)] w-full max-w-md flex-col overflow-y-scroll">
       <div className="flex flex-col gap-3 py-5 sm:px-2 dark:bg-slate-900">
@@ -59,9 +42,10 @@ export default function MinutesList({
           <div className="ml-4 mt-2">
             <a
               href={'/'}
-              className="text-base font-semibold leading-6 text-gray-900 dark:text-gray-100"
+              className="flex flex-row items-center text-base font-semibold leading-6 text-gray-900 dark:text-gray-100"
             >
-              CODEX / Dokumenter
+              <ArrowLeftIcon className={'mr-2 inline h-5 w-5'} /> CODEX /
+              Dokumenter
             </a>
           </div>
           <div className="ml-4 mt-2 flex-shrink-0">
@@ -73,104 +57,106 @@ export default function MinutesList({
         <div className={'flex w-full flex-row flex-wrap gap-3'}>
           <div className={'flex w-full items-end gap-2'}>
             <SearchField
-              value={currentPagination.search ?? ''}
+              value={pagination.search ?? ''}
               onChange={(value) =>
-                setCurrentPagination({
-                  ...currentPagination,
+                onChangePagination({
+                  ...pagination,
                   search: value,
                 })
               }
             />
             <SortingDropdown
               onChange={(field) =>
-                setCurrentPagination({
-                  ...currentPagination,
+                onChangePagination({
+                  ...pagination,
                   ordering: field.id,
                 })
               }
-              field={
-                sortingOptions.find((s) => s.id === currentPagination.ordering)!
-              }
+              field={sortingOptions.find((s) => s.id === pagination.ordering)!}
             />
             <Button
               variant={'secondary'}
               onClick={() =>
-                setCurrentPagination((c) => ({
-                  ...c,
-                  ascending: !c.ascending,
-                }))
+                onChangePagination({
+                  ...pagination,
+                  ascending: !pagination.ascending,
+                })
               }
             >
               <BarsArrowDownIcon
                 className={clsx(
                   'h-5 w-5 text-slate-100 duration-200',
-                  currentPagination.ascending ? 'rotate-180' : '',
+                  pagination.ascending ? 'rotate-180' : '',
                 )}
               />
             </Button>
           </div>
         </div>
       </div>
-      <ul role="list" className="divide-y divide-white/5">
-        {minutePosts.results.map((minute) => (
-          <li
-            onClick={() => onSelect(minute.id)}
-            key={minute.id}
-            className={clsx(
-              'relative flex cursor-pointer items-center space-x-4 rounded-md px-2 py-4' +
-                ' hover:bg-slate-700',
-              selectedPostId === minute.id ? 'bg-slate-800' : '',
-            )}
-          >
-            <div className="min-w-0 flex-auto">
-              <div className="flex items-center gap-x-3">
-                <h2 className="min-w-0 text-sm font-semibold leading-6 text-white">
-                  <span className="flex items-center gap-x-2">
-                    <span className="truncate text-lg">{minute.title}</span>
-                    <span className="text-gray-400">/</span>
-                    <span className="whitespace-nowrap text-gray-300">
-                      {`${minute.author.first_name} ${minute.author.last_name}`}
-                    </span>
-                    <span className="absolute inset-0" />
-                  </span>
-                </h2>
-              </div>
-              <div className="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-400">
-                <p className="inline-flex items-center gap-1 truncate">
-                  <ClockIcon className={'h-4 w-4'} aria-hidden="true" />
-                  {formatDate(minute.created_at, 'HH:mm' + ' dd.MM.yy', {
-                    locale: nb,
-                  })}
-                </p>
-                <svg
-                  viewBox="0 0 2 2"
-                  className="h-0.5 w-0.5 flex-none fill-gray-300"
-                >
-                  <circle cx={1} cy={1} r={1} />
-                </svg>
-                <p className="whitespace-nowrap">
-                  Sist oppdatert{' '}
-                  {formatRelative(minute.updated_at, new Date(), {
-                    locale: nb,
-                  })}
-                </p>
-              </div>
-            </div>
-            <div
+      {Boolean(minutePosts) && !isLoading ? (
+        <ul role="list" className="divide-y divide-white/5">
+          {minutePosts!.results.map((minute) => (
+            <li
+              onClick={() => onSelect(minute.id)}
+              key={minute.id}
               className={clsx(
-                tagStyles[minute.tag],
-                'flex-none rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset',
+                'relative flex cursor-pointer items-center space-x-4 rounded-md px-2 py-4' +
+                  ' hover:bg-slate-700',
+                selectedPostId === minute.id ? 'bg-slate-800' : '',
               )}
             >
-              {minute.tag}
-            </div>
-            <ChevronRightIcon
-              className="h-5 w-5 flex-none text-gray-400"
-              aria-hidden="true"
-            />
-          </li>
-        ))}
-      </ul>
+              <div className="min-w-0 flex-auto">
+                <div className="flex items-center gap-x-3">
+                  <h2 className="min-w-0 text-sm font-semibold leading-6 text-white">
+                    <span className="flex items-center gap-x-2">
+                      <span className="truncate text-lg">{minute.title}</span>
+                      <span className="text-gray-400">/</span>
+                      <span className="whitespace-nowrap text-gray-300">
+                        {`${minute.author.first_name} ${minute.author.last_name}`}
+                      </span>
+                      <span className="absolute inset-0" />
+                    </span>
+                  </h2>
+                </div>
+                <div className="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-400">
+                  <p className="inline-flex items-center gap-1 truncate">
+                    <ClockIcon className={'h-4 w-4'} aria-hidden="true" />
+                    {formatDate(minute.created_at, 'HH:mm' + ' dd.MM.yy', {
+                      locale: nb,
+                    })}
+                  </p>
+                  <svg
+                    viewBox="0 0 2 2"
+                    className="h-0.5 w-0.5 flex-none fill-gray-300"
+                  >
+                    <circle cx={1} cy={1} r={1} />
+                  </svg>
+                  <p className="whitespace-nowrap">
+                    Sist oppdatert{' '}
+                    {formatRelative(minute.updated_at, new Date(), {
+                      locale: nb,
+                    })}
+                  </p>
+                </div>
+              </div>
+              <div
+                className={clsx(
+                  tagStyles[minute.tag],
+                  'flex-none rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset',
+                )}
+              >
+                {minute.tag}
+              </div>
+              <ChevronRightIcon
+                className="h-5 w-5 flex-none text-gray-400"
+                aria-hidden="true"
+              />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <MinutesPostListSkeleton />
+      )}
     </div>
   );
 }
