@@ -163,7 +163,7 @@ export const getPagedMinutesPosts = async (
   console.log(JSON.stringify(pagination, null, 2));
   const params = {
     page: pagination.page.toString(),
-    order_by: (!pagination.ascending ? '-' : '') + `${pagination.ordering}`,
+    ordering: (!pagination.ascending ? '-' : '') + `${pagination.ordering}`,
   } satisfies any;
 
   if (pagination.search) {
