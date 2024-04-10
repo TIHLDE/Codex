@@ -35,8 +35,12 @@ export default function MinutesContentHeader({
         </div>
 
         <div className={'flex justify-end gap-4'}>
-          <Button variant={'secondary'}>Rediger</Button>
-          <Button variant={'destructive'}>Slett</Button>
+          <Button variant={'secondary'} onClick={onEdit}>
+            Rediger
+          </Button>
+          <Button variant={'destructive'} onClick={onDelete}>
+            Slett
+          </Button>
         </div>
       </div>
     </div>
