@@ -10,7 +10,7 @@ Prosjektet er hostet på [Vercel](https://vercel.com/), skaperne av Nextjs.
 
 Grunnen til at vi bruker Markdoc er for å kunne skrive dokumentasjon i markdown og ha det
 rendret som et statisk nettsted, samtidig som vi kan bruke React-komponenter i markdown-filene.
-Dette lar oss skrive dokumenter raskt, tilpasse nettstedet, forhåndsvise komponenter og 
+Dette lar oss skrive dokumenter raskt, tilpasse nettstedet, forhåndsvise komponenter og
 innebygde lenker.
 
 Utover det følger alle markdown-filer vanlig Markdown-syntaks. Vennligst konsulter
@@ -19,24 +19,27 @@ Utover det følger alle markdown-filer vanlig Markdown-syntaks. Vennligst konsul
 ## Prosjektstruktur
 
 Hvis du kun planlegger å skrive dokumentasjon, kan du åpne mappen `src/app/docs` og
-begynne å skrive markdown `(.md)`-filer. Følg eksempelvis hvordan andre sider er skrevet. Sørg for 
+begynne å skrive markdown `(.md)`-filer. Følg eksempelvis hvordan andre sider er skrevet. Sørg for
 at du lenker filene til navigasjonsmenyen ved å legge inn en lenke i `app/lib/navigation.ts`.
 
 Hvis du planlegger å bidra til prosjektet, bør du lese de følgende seksjonene.
 
 ### Sider
+
 Dette er hvor dokumentasjonen blir skrevet. Sidene er skrevet i markdown og blir rendret
-som statiske sider. Resten av prosjektet går til utforming av nettsiden og kompilering av 
+som statiske sider. Resten av prosjektet går til utforming av nettsiden og kompilering av
 markdown-filene til statisk html.
 
 **Eksempel:**
 
 ### Komponenter
+
 Dette er React-komponentene som brukes i markdown-filene. De brukes både som nettsidekomponenter og visse markdown-komponenter. For eksempel kan `callout`-komponenten brukes i markdown og blir senere oversatt til html gjennom den respektive komponenten. Disse blir referert til som tags av Markdoc-motoren.
 
 Det er noen få steg for å lage en slik komponent, vennligst se [Markdoc-dokumentasjonen](https://markdoc.dev/docs/tags) for mer informasjon.
 
 ### Markdoc
+
 Filer relatert til Markdoc, som delvis sider (injisering av innhold i en side), og
 deklarasjoner for egendefinerte tags og noder. En node konverterer markdown til markdown, mens en tag
 skaper en React-komponent fra markdown.
@@ -45,14 +48,16 @@ skaper en React-komponent fra markdown.
 tillater en fin refaktorering. Denne delen bruker `markdoc/tags/api_props`-taggen for å rendre innholdet, som er generert fra metadataen på toppen av alle API-sider.
 
 ### Offentlig
+
 Statisk filer, som ikoner, bilder og stilark lagres her. Disse brukes kun av
 Nextjs for å rendre komponenter.
 
 ## Markdown-side
+
 Hver markdown-fil har en metadataseksjon på toppen, som brukes til å generere siden. Denne
 delen er skrevet i YAML, og blir tolket av Markdoc-motoren. Bruk alltid `title` og
 `description`-feltene, da disse brukes til å lage sidetittelen og metabeskrivelsen.
-*For example, the following metadata is used to generate this page:*
+_For example, the following metadata is used to generate this page:_
 
 ```yaml
 ---
@@ -62,6 +67,7 @@ description: How to contribute
 ```
 
 **Available props:**
+
 ```yaml
 ---
 title: string
@@ -77,38 +83,41 @@ permissions: string[] # optional
 ```
 
 ### Api page
+
 The API pages have a few extra fields in the metadata section, which are used to generate the
 endpoint's information bit. Following are the fields used in the metadata section:
 
 ```yaml
 ---
-title: "Endpoint title"
-description: "Does some fancy magic using Rust macros"
+title: 'Endpoint title'
+description: 'Does some fancy magic using Rust macros'
 method: METHOD
 url: v1/your/endpoint
 response_codes:
-  - "201 Created"
-  - "401 Unauthorized"
-  - "599 Another code"
+  - '201 Created'
+  - '401 Unauthorized'
+  - '599 Another code'
 requires_auth: true # not required
 permissions: # also not required
-  - "permission1"
-  - "permission2"
+  - 'permission1'
+  - 'permission2'
 ---
 ```
+
 You can omit the `permission` field, but keep the `requires_auth` field if the endpoint requires
 the user to be authenticated, but not have any special scopes.
 
 Response code colors are automatically generated based on the response code, and are as follows:
 
 ```javascript
-if (code.startsWith("2")) {
-  return "green"
+if (code.startsWith('2')) {
+  return 'green'
 } else {
-  return "red"
-} 
+  return 'red'
+}
 ```
-*(idk if it's worth making it more sophisticated...)*
+
+_(idk if it's worth making it more sophisticated...)_
 
 ### Api partial
 
@@ -120,7 +129,9 @@ Note that the `file` path is absolute and does not need to be changed.
 
 ```markdown
 (% partial file="api_base.md" / %)
+
 # replace parentheses with curly braces
+
 (I can't write it here because it will be rendered)
 ```
 

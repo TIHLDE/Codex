@@ -1,6 +1,6 @@
 import { Callout } from '@/components/Callout'
 import { QuickLink, QuickLinks } from '@/components/QuickLinks'
-import { ApiProps } from '../components/ApiProps'
+import { ApiDescription } from '@/components/ApiDescription'
 
 const tags = {
   callout: {
@@ -44,7 +44,7 @@ const tags = {
     },
   },
   'api-description': {
-    render: ApiProps,
+    render: ApiDescription,
     selfClosing: true,
     attributes: {
       props: {},

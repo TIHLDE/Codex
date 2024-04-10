@@ -2,7 +2,6 @@
 title: Kom i gang
 ---
 
-
 {% quick-links %}
 
 {% quick-link title="Lepton" icon="installation" href="/" description="Step-by-step guides to setting up your system and installing the library." /%}
@@ -16,7 +15,7 @@ title: Kom i gang
 ## Intro
 
 {% callout title="TLDR" %}
-Dokumentasjonssider ligger i `src/app/docs` mappen. Bruk filene `src/app/templates` for å komme 
+Dokumentasjonssider ligger i `src/app/docs` mappen. Bruk filene `src/app/templates` for å komme
 i gang med nye sider. Husk å oppdatere `src/app/lib/navigation.ts` med linker!
 {% /callout %}
 
@@ -65,7 +64,7 @@ I mappen `src/app/markdoc` ligger alt av nodes og tags som brukes for å manipul
 markdown-filene. Noder brukes for å "style" markdownen, som for eksempel kodeblokker:
 
 ```javascript
-console.log("Jeg er en kodeblokk!")
+console.log('Jeg er en kodeblokk!')
 ```
 
 Tagger derimot lar oss bygge egne komponenter som "Callout" komponenten ovenfor. Da wrapper du
@@ -77,7 +76,7 @@ får vi en feilmelding ...)
 Hver markdown-fil har en metadataseksjon på toppen, som brukes til å generere siden. Denne
 delen er skrevet i YAML, og blir tolket av Markdoc-motoren. Bruk alltid `title` feltet, slik at
 vi får generert en tittel til siden din.
-*Eksempel*
+_Eksempel_
 
 ```yaml
 ---
@@ -92,18 +91,18 @@ markdown siden din. Følge metadata skal inkluderes:
 
 ```yaml
 ---
-title: "Endpoint title"
-description: "Enpoint description"
+title: 'Endpoint title'
+description: 'Enpoint description'
 method: METHOD
 url: v1/your/endpoint
 response_codes:
-  - "201 Created"
-  - "401 Unauthorized"
-  - "599 Another code"
+  - '201 Created'
+  - '401 Unauthorized'
+  - '599 Another code'
 requires_auth: true # not required
 permissions: # also not required
-  - "permission1"
-  - "permission2"
+  - 'permission1'
+  - 'permission2'
 ---
 ```
 
