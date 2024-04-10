@@ -1,6 +1,6 @@
 import React from 'react';
 import { SingleMinutesPostResponse } from '@/auth/types';
-import MinutesContentHeader from '@/app/(private)/minutes/minutesContentHeader';
+import MinutesContentHeader from '@/components/minutes/MinutesContentHeader';
 import Markdown from 'react-markdown';
 
 export interface MinutesContentProps {

@@ -160,21 +160,21 @@ export const getPagedMinutesPosts = async (
   token: string,
   pagination: PaginationRequest,
 ): Promise<PagedResponse> => {
-  // const params = {
-  //     page: pagination.page.toString(),
-  //     order_by: (!pagination.ascending ? '-' : '') + `${pagination.ordering}`,
-  // };
-  //
-  // if(pagination.)
-  //   {
-  //     filter: pagination.filter,
-  //     search: pagination.search,
-  // }
-  //
-  // const query = new URLSearchParams(params);
+  console.log(JSON.stringify(pagination, null, 2));
+  const params = {
+    page: pagination.page.toString(),
+    order_by: (!pagination.ascending ? '-' : '') + `${pagination.ordering}`,
+  } satisfies any;
+
+  if (pagination.search) {
+    // @ts-ignore
+    params.search = pagination.search;
+  }
+
+  const query = new URLSearchParams(params);
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/`,
+    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/?${query}`,
     {
       method: 'GET',
       headers: getHeaders(token),

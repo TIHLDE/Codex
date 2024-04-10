@@ -2,7 +2,6 @@ import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import { SingleMinutesPostResponse } from '@/auth/types';
-import { MinutesContentProps } from '@/app/(private)/minutes/minutesContent';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');

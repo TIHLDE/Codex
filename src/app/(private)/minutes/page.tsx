@@ -1,13 +1,18 @@
 'use client';
 
-import MinutesList from './minutesList';
-import MinutesContent from '@/app/(private)/minutes/minutesContent';
+import MinutesList from '../../../components/minutes/MinutesList';
+import MinutesContent from '@/components/minutes/MinutesContent';
 import { useSession } from 'next-auth/react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import MinutesContentEditor, {
   MinutesFormValues,
-} from '@/app/(private)/minutes/editor/minutesContentEditor';
-import { keepPreviousData, useMutation, useQuery } from '@tanstack/react-query';
+} from '@/components/minutes/editor/MinutesContentEditor';
+import {
+  keepPreviousData,
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+} from '@tanstack/react-query';
 import {
   addMinutesPost,
   deleteMinutesPost,
@@ -15,16 +20,27 @@ import {
   getPagedMinutesPosts,
   updateMinutesPost,
 } from '@/auth/tihlde';
-import { MinutesPostResponse, MinuteTag } from '@/auth/types';
-import ConfirmDeletePostDialog from '@/app/(private)/minutes/confirmDeletePostDialog';
+import {
+  MinutesPostResponse,
+  MinuteTag,
+  PaginationRequest,
+} from '@/auth/types';
+import ConfirmDeletePostDialog from '@/components/minutes/ConfirmDeletePostDialog';
 
 export default function MinutesPage() {
   const [selectedMinuteId, setSelectedMinuteId] = useState<number | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const session = useSession();
-  const [page, setPage] = useState(0);
   const [isConfirmDeleteDialogOpen, setIsConfirmDeleteDialogOpen] =
     useState(false);
+  const [currentPagination, setCurrentPagination] = useState<PaginationRequest>(
+    {
+      search: '',
+      ordering: 'title',
+      ascending: true,
+      page: 1,
+    },
+  );
 
   const token = useMemo(
     () => session?.data?.user?.tihldeUserToken ?? '',
@@ -36,16 +52,21 @@ export default function MinutesPage() {
     isLoading,
     refetch: refetchAllPosts,
   } = useQuery({
-    queryKey: ['minutes', page],
+    queryKey: ['minutes', currentPagination.page],
     queryFn: () =>
       getPagedMinutesPosts(token ?? '', {
-        page,
-        ascending: true,
-        ordering: 'title',
+        page: currentPagination.page,
+        ascending: currentPagination.ascending,
+        ordering: currentPagination.ordering,
+        search: currentPagination.search,
       }),
     placeholderData: keepPreviousData,
     enabled: Boolean(token),
   });
+
+  useEffect(() => {
+    void refetchAllPosts();
+  }, [currentPagination]);
 
   const {
     data: minutePost,
@@ -154,6 +175,7 @@ export default function MinutesPage() {
         onCreate={handleCreate}
         minutePosts={minutes ?? null}
         isLoading={isLoading}
+        onChangePagination={setCurrentPagination}
       />
       {isEditing ? (
         <MinutesContentEditor

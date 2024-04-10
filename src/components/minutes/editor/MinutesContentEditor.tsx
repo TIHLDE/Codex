@@ -3,7 +3,7 @@ import * as yup from 'yup';
 import { TextField } from '@/components/TextField';
 import MDEditor from '@uiw/react-md-editor';
 import { minuteTags, SingleMinutesPostResponse } from '@/auth/types';
-import TagDropdown from '@/app/(private)/minutes/editor/tagDropdown';
+import TagDropdown from '@/components/minutes/editor/TagDropdown';
 import { Button } from '@/components/Button';
 import { useEffect } from 'react';
 
