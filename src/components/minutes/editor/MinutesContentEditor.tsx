@@ -63,25 +63,25 @@ export default function MinutesContentEditor({
         onSubmit={formik.handleSubmit}
         className={'flex h-full w-full flex-col gap-4'}
       >
-        <div className={'flex w-full items-start justify-start gap-4'}>
-          <TextField
-            formik={formik}
-            field={'title'}
-            name={'Tittel'}
-            className={'max-w-sm'}
-          />
-          <TagDropdown
-            value={formik.values.tag}
-            onChange={(tag) => formik.setFieldValue('tag', tag, true)}
-          />
-          <div className={'flex h-full flex-col justify-center'}>
-            <Button type={'submit'}>Lagre</Button>
+        <div className={'flex w-full items-start justify-between gap-4'}>
+          <div className={'flex items-center justify-start gap-4'}>
+            <TextField
+              formik={formik}
+              field={'title'}
+              name={'Tittel'}
+              className={'max-w-sm'}
+            />
+            <TagDropdown
+              value={formik.values.tag}
+              onChange={(tag) => formik.setFieldValue('tag', tag, true)}
+            />
           </div>
-          <div className={'flex h-full flex-col justify-center'}>
+          <div className={'flex h-full items-center justify-end gap-4'}>
+            <Button type={'submit'}>Lagre</Button>
             <Button
               type={'button'}
+              variant={'destructive'}
               onClick={handleDiscard}
-              className={'bg-red-500 text-white'}
             >
               Forkast endringer
             </Button>

@@ -51,7 +51,7 @@ export default function MinutesContentHeader({
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-slate-700">
                 <div className="py-1">
                   <Menu.Item>
                     {({ active }) => (
@@ -60,9 +60,9 @@ export default function MinutesContentHeader({
                         onClick={onEdit}
                         className={classNames(
                           active
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-700',
-                          'flex justify-between px-4 py-2 text-sm',
+                            ? 'bg-slate-600 text-gray-100'
+                            : 'text-gray-100',
+                          'flex px-4 py-2 text-sm',
                         )}
                       >
                         <span>Rediger</span>
@@ -76,9 +76,9 @@ export default function MinutesContentHeader({
                         onClick={onDelete}
                         className={classNames(
                           active
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-700',
-                          'flex justify-between px-4 py-2 text-sm',
+                            ? 'bg-slate-600 text-gray-100'
+                            : 'text-gray-100',
+                          'flex  px-4 py-2 text-sm',
                         )}
                       >
                         <span>Slett</span>
