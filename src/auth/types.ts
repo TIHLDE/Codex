@@ -70,7 +70,7 @@ export interface MinutesPostResponse {
   };
   created_at: Date;
   updated_at: Date;
-  tag: 'Møtereferat' | 'Dokument';
+  tag: MinuteTag;
 }
 
 export interface SingleMinutesPostResponse extends MinutesPostResponse {
@@ -86,3 +86,6 @@ export interface PaginationRequest {
   search?: string;
   page: number;
 }
+
+export const minuteTags = ['Møtereferat', 'Dokument'] as const;
+export type MinuteTag = (typeof minuteTags)[number];

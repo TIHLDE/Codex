@@ -1,6 +1,12 @@
 import { Button } from '@/components/Button';
 
-export default function MinutesListHeader() {
+interface MinutesListHeaderProps {
+  onCreate: () => void;
+}
+
+export default function MinutesListHeader({
+  onCreate,
+}: MinutesListHeaderProps) {
   return (
     <div className="bg-slate-900 px-4 py-5 sm:px-6">
       <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
@@ -13,7 +19,9 @@ export default function MinutesListHeader() {
           </a>
         </div>
         <div className="ml-4 mt-2 flex-shrink-0">
-          <Button type="button">Nytt dokument</Button>
+          <Button onClick={onCreate} type="button">
+            Nytt dokument
+          </Button>
         </div>
       </div>
     </div>

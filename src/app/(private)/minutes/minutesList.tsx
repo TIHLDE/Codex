@@ -1,12 +1,10 @@
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import MinutesListHeader from './minutesListHeader';
-import { useState } from 'react';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
-import { getPagedMinutesPosts } from '@/auth/tihlde';
 import { formatDate, formatRelative } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import { ClockIcon } from '@heroicons/react/24/outline';
+import { PagedResponse } from '@/auth/types';
 
 const tagStyles = {
   ['Møtereferat']: 'text-gray-400 bg-gray-400/10 ring-gray-400/20',
@@ -20,38 +18,31 @@ function classNames(...classes: string[]) {
 export interface MinutesListProps {
   onSelect: (postId: number) => void;
   selectedPostId: number | null;
+  onCreate: () => void;
+  minutePosts: PagedResponse | null;
+  isLoading: boolean;
 }
 
 export default function MinutesList({
   onSelect,
   selectedPostId,
+  onCreate,
+  isLoading,
+  minutePosts,
 }: MinutesListProps) {
-  const [page, setPage] = useState(0);
-
   const session = useSession({
     required: true,
   });
 
-  const { data: minutes, isLoading } = useQuery({
-    queryKey: ['minutes', page],
-    queryFn: () =>
-      getPagedMinutesPosts(session?.data?.user?.tihldeUserToken ?? '', {
-        page,
-        ascending: true,
-        ordering: 'title',
-      }),
-    placeholderData: keepPreviousData,
-  });
-
-  if (isLoading) {
+  if (isLoading || !minutePosts) {
     return <div>Loading ...</div>;
   }
 
   return (
     <div className="flex w-full max-w-md flex-col">
-      <MinutesListHeader />
+      <MinutesListHeader onCreate={onCreate} />
       <ul role="list" className="divide-y divide-white/5">
-        {minutes!.results.map((minute) => (
+        {minutePosts.results.map((minute) => (
           <li
             onClick={() => onSelect(minute.id)}
             key={minute.id}

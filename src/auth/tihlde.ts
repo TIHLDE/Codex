@@ -1,6 +1,7 @@
 import {
   MembershipResponse,
   MinutesPostResponse,
+  MinuteTag,
   PagedResponse,
   PaginationRequest,
   SingleMinutesPostResponse,
@@ -74,13 +75,14 @@ export const addMinutesPost = async (
   token: string,
   title: string,
   content: string,
+  tag: MinuteTag,
 ): Promise<MinutesPostResponse> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/`,
     {
       method: 'POST',
       headers: getHeaders(token),
-      body: JSON.stringify({ title, content }),
+      body: JSON.stringify({ title, content, tag }),
     },
   );
 
@@ -115,13 +117,14 @@ export const updateMinutesPost = async (
   id: number,
   title: string,
   content: string,
+  tag: MinuteTag,
 ): Promise<MinutesPostResponse> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}`,
     {
       method: 'PUT',
       headers: getHeaders(token),
-      body: JSON.stringify({ title, content }),
+      body: JSON.stringify({ title, content, tag }),
     },
   );
 

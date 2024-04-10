@@ -10,10 +10,14 @@ function classNames(...classes: string[]) {
 
 export interface MinutesContentHeaderProps {
   minute: SingleMinutesPostResponse;
+  onEdit: () => void;
+  onDelete: () => void;
 }
 
 export default function MinutesContentHeader({
   minute,
+  onEdit,
+  onDelete,
 }: MinutesContentHeaderProps) {
   return (
     <div className="border-b border-gray-200 pb-5">
@@ -54,6 +58,7 @@ export default function MinutesContentHeader({
                     {({ active }) => (
                       <a
                         href="#"
+                        onClick={onEdit}
                         className={classNames(
                           active
                             ? 'bg-gray-100 text-gray-900'
@@ -69,6 +74,7 @@ export default function MinutesContentHeader({
                     {({ active }) => (
                       <a
                         href="#"
+                        onClick={onDelete}
                         className={classNames(
                           active
                             ? 'bg-gray-100 text-gray-900'
