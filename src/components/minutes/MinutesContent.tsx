@@ -16,7 +16,7 @@ export default function MinutesContent({
   return (
     <main
       className={
-        'h-full w-full rounded-lg bg-slate-800 p-4 lg:h-[calc(100svh-2rem)]'
+        'h-full w-full rounded-lg bg-slate-100 p-4 lg:h-[calc(100svh-2rem)] dark:bg-slate-800'
       }
     >
       {minute && (

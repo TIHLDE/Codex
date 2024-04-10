@@ -4,7 +4,7 @@ export default function MinutePostSkeleton() {
   return (
     <main
       className={
-        'h-full w-full rounded-lg bg-slate-800 p-4 lg:h-[calc(100svh-2rem)]'
+        'h-full w-full rounded-lg bg-slate-100 p-4 lg:h-[calc(100svh-2rem)] dark:bg-slate-800'
       }
     >
       <div className="border-b border-gray-200 pb-5">
@@ -43,6 +43,11 @@ export default function MinutePostSkeleton() {
 
 export function Skeleton({ className }: { className: string }) {
   return (
-    <div className={clsx('animate-pulse rounded-md bg-slate-600', className)} />
+    <div
+      className={clsx(
+        'animate-pulse rounded-md bg-slate-300 dark:bg-slate-600',
+        className,
+      )}
+    />
   );
 }

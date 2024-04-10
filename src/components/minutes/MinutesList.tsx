@@ -12,8 +12,9 @@ import { ArrowLeftIcon, BarsArrowDownIcon } from '@heroicons/react/16/solid';
 import MinutesPostListSkeleton from '@/components/minutes/MinutePostListSkeleton';
 
 const tagStyles = {
-  ['Møtereferat']: 'text-gray-400 bg-gray-400/10 ring-gray-400/20',
-  ['Dokument']: 'text-sky-400 bg-sky-400/10 ring-sky-400/30',
+  ['Møtereferat']:
+    'text-gray-700 dark:text-gray-400 bg-gray-400/10 ring-gray-400/20',
+  ['Dokument']: 'text-sky-700 dark:text-sky-400 bg-sky-400/10 ring-sky-400/30',
 };
 
 export interface MinutesListProps {
@@ -85,7 +86,7 @@ export default function MinutesList({
             >
               <BarsArrowDownIcon
                 className={clsx(
-                  'h-5 w-5 text-slate-100 duration-200',
+                  'h-5 w-5 text-slate-800 duration-200 dark:text-slate-100',
                   pagination.ascending ? 'rotate-180' : '',
                 )}
               />
@@ -94,40 +95,47 @@ export default function MinutesList({
         </div>
       </div>
       {Boolean(minutePosts) && !isLoading ? (
-        <ul role="list" className="divide-y divide-white/5">
+        <ul role="list" className="divide-black/4 divide-y dark:divide-white/5">
           {minutePosts!.results.map((minute) => (
             <li
               onClick={() => onSelect(minute.id)}
               key={minute.id}
               className={clsx(
                 'relative flex cursor-pointer items-center space-x-4 rounded-md px-2 py-4' +
-                  ' hover:bg-slate-700',
-                selectedPostId === minute.id ? 'bg-slate-800' : '',
+                  ' hover:bg-slate-100 dark:hover:bg-slate-700',
+                selectedPostId === minute.id
+                  ? 'bg-slate-200 dark:bg-slate-800'
+                  : '',
               )}
             >
               <div className="min-w-0 flex-auto">
                 <div className="flex items-center gap-x-3">
-                  <h2 className="min-w-0 text-sm font-semibold leading-6 text-white">
+                  <h2 className="min-w-0 text-sm font-semibold leading-6 text-slate-800 dark:text-white">
                     <span className="flex items-center gap-x-2">
                       <span className="truncate text-lg">{minute.title}</span>
-                      <span className="text-gray-400">/</span>
-                      <span className="whitespace-nowrap text-gray-300">
+                      <span className="text-gray-700 dark:text-gray-400">
+                        /
+                      </span>
+                      <span className="whitespace-nowrap text-gray-700 dark:text-gray-300">
                         {`${minute.author.first_name} ${minute.author.last_name}`}
                       </span>
                       <span className="absolute inset-0" />
                     </span>
                   </h2>
                 </div>
-                <div className="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-400">
+                <div className="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-800 dark:text-gray-400">
                   <p className="inline-flex items-center gap-1 truncate">
-                    <ClockIcon className={'h-4 w-4'} aria-hidden="true" />
+                    <ClockIcon
+                      className={'min-h-4 min-w-4'}
+                      aria-hidden="true"
+                    />
                     {formatDate(minute.created_at, 'HH:mm' + ' dd.MM.yy', {
                       locale: nb,
                     })}
                   </p>
                   <svg
                     viewBox="0 0 2 2"
-                    className="h-0.5 w-0.5 flex-none fill-gray-300"
+                    className="h-0.5 w-0.5 flex-none fill-gray-700 dark:fill-gray-300"
                   >
                     <circle cx={1} cy={1} r={1} />
                   </svg>
@@ -148,7 +156,7 @@ export default function MinutesList({
                 {minute.tag}
               </div>
               <ChevronRightIcon
-                className="h-5 w-5 flex-none text-gray-400"
+                className="h-5 w-5 flex-none text-gray-700 dark:text-gray-400"
                 aria-hidden="true"
               />
             </li>
@@ -245,7 +253,9 @@ function SortingDropdown({ onChange, field }: SortingDropdownProps) {
                 className={({ active }) =>
                   clsx(
                     'relative cursor-default select-none py-2 pl-3 pr-9',
-                    active ? 'bg-sky-600 text-white' : 'text-gray-100',
+                    active
+                      ? 'bg-sky-600 text-white'
+                      : 'text-gray-800 dark:text-gray-100',
                   )
                 }
               >
