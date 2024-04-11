@@ -55,7 +55,7 @@ export default function withSearch(nextConfig = {}) {
 
                         let md = fs.readFileSync(path.join(pagesDir, file), 'utf8');
 
-                        let sections
+                        let sections;
 
                         if (cache.get(file)?.[0] === md) {
                             sections = cache.get(file)[1]
@@ -91,11 +91,10 @@ export default function withSearch(nextConfig = {}) {
 
               let data = ${JSON.stringify(data)}
 
-              for (let { url, sections, cleanedUrl } of data) {
+              for (let { url, sections, nextUrl } of data) {
                 for (let [title, hash, content] of sections) {
-                console.log(url);
                   sectionIndex.add({
-                    url: cleanedUrl + (hash ? ('#' + hash) : ''),
+                    url: nextUrl + (hash ? ('#' + hash) : ''),
                     title,
                     content: [title, ...content].join('\\n'),
                     pageTitle: hash ? sections[0][0] : undefined,
