@@ -10,6 +10,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { Combobox } from '@headlessui/react';
 import { ArrowLeftIcon, BarsArrowDownIcon } from '@heroicons/react/16/solid';
 import MinutesPostListSkeleton from '@/components/minutes/MinutePostListSkeleton';
+import MinutesPagination from '@/components/minutes/MinutesPagination';
 
 const tagStyles = {
   ['Møtereferat']:
@@ -25,9 +26,13 @@ export interface MinutesListProps {
   isLoading: boolean;
   onChangePagination: (options: PaginationRequest) => void;
   pagination: PaginationRequest;
+  onNext: () => void;
+  onPrevious: () => void;
 }
 
 export default function MinutesList({
+  onPrevious,
+  onNext,
   onSelect,
   onCreate,
   selectedPostId,
@@ -95,73 +100,83 @@ export default function MinutesList({
         </div>
       </div>
       {Boolean(minutePosts) && !isLoading ? (
-        <ul role="list" className="divide-black/4 divide-y dark:divide-white/5">
-          {minutePosts!.results.map((minute) => (
-            <li
-              onClick={() => onSelect(minute.id)}
-              key={minute.id}
-              className={clsx(
-                'relative flex cursor-pointer items-center space-x-4 rounded-md px-2 py-4' +
-                  ' hover:bg-slate-100 dark:hover:bg-slate-700',
-                selectedPostId === minute.id
-                  ? 'bg-slate-200 dark:bg-slate-800'
-                  : '',
-              )}
-            >
-              <div className="min-w-0 flex-auto">
-                <div className="flex items-center gap-x-3">
-                  <h2 className="min-w-0 text-sm font-semibold leading-6 text-slate-800 dark:text-white">
-                    <span className="flex items-center gap-x-2">
-                      <span className="truncate text-lg">{minute.title}</span>
-                      <span className="text-gray-700 dark:text-gray-400">
-                        /
-                      </span>
-                      <span className="whitespace-nowrap text-gray-700 dark:text-gray-300">
-                        {`${minute.author.first_name} ${minute.author.last_name}`}
-                      </span>
-                      <span className="absolute inset-0" />
-                    </span>
-                  </h2>
-                </div>
-                <div className="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-800 dark:text-gray-400">
-                  <p className="inline-flex items-center gap-1 truncate">
-                    <ClockIcon
-                      className={'min-h-4 min-w-4'}
-                      aria-hidden="true"
-                    />
-                    {formatDate(minute.created_at, 'HH:mm' + ' dd.MM.yy', {
-                      locale: nb,
-                    })}
-                  </p>
-                  <svg
-                    viewBox="0 0 2 2"
-                    className="h-0.5 w-0.5 flex-none fill-gray-700 dark:fill-gray-300"
-                  >
-                    <circle cx={1} cy={1} r={1} />
-                  </svg>
-                  <p className="whitespace-nowrap">
-                    Sist oppdatert{' '}
-                    {formatRelative(minute.updated_at, new Date(), {
-                      locale: nb,
-                    })}
-                  </p>
-                </div>
-              </div>
-              <div
+        <>
+          <ul
+            role="list"
+            className="divide-black/4 divide-y dark:divide-white/5"
+          >
+            {minutePosts!.results.map((minute) => (
+              <li
+                onClick={() => onSelect(minute.id)}
+                key={minute.id}
                 className={clsx(
-                  tagStyles[minute.tag],
-                  'flex-none rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset',
+                  'relative flex cursor-pointer items-center space-x-4 rounded-md px-2 py-4' +
+                    ' hover:bg-slate-100 dark:hover:bg-slate-700',
+                  selectedPostId === minute.id
+                    ? 'bg-slate-200 dark:bg-slate-800'
+                    : '',
                 )}
               >
-                {minute.tag}
-              </div>
-              <ChevronRightIcon
-                className="h-5 w-5 flex-none text-gray-700 dark:text-gray-400"
-                aria-hidden="true"
-              />
-            </li>
-          ))}
-        </ul>
+                <div className="min-w-0 flex-auto">
+                  <div className="flex items-center gap-x-3">
+                    <h2 className="min-w-0 text-sm font-semibold leading-6 text-slate-800 dark:text-white">
+                      <span className="flex items-center gap-x-2">
+                        <span className="truncate text-lg">{minute.title}</span>
+                        <span className="text-gray-700 dark:text-gray-400">
+                          /
+                        </span>
+                        <span className="whitespace-nowrap text-gray-700 dark:text-gray-300">
+                          {`${minute.author.first_name} ${minute.author.last_name}`}
+                        </span>
+                        <span className="absolute inset-0" />
+                      </span>
+                    </h2>
+                  </div>
+                  <div className="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-800 dark:text-gray-400">
+                    <p className="inline-flex items-center gap-1 truncate">
+                      <ClockIcon
+                        className={'min-h-4 min-w-4'}
+                        aria-hidden="true"
+                      />
+                      {formatDate(minute.created_at, 'HH:mm' + ' dd.MM.yy', {
+                        locale: nb,
+                      })}
+                    </p>
+                    <svg
+                      viewBox="0 0 2 2"
+                      className="h-0.5 w-0.5 flex-none fill-gray-700 dark:fill-gray-300"
+                    >
+                      <circle cx={1} cy={1} r={1} />
+                    </svg>
+                    <p className="whitespace-nowrap">
+                      Sist oppdatert{' '}
+                      {formatRelative(minute.updated_at, new Date(), {
+                        locale: nb,
+                      })}
+                    </p>
+                  </div>
+                </div>
+                <div
+                  className={clsx(
+                    tagStyles[minute.tag],
+                    'flex-none rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset',
+                  )}
+                >
+                  {minute.tag}
+                </div>
+                <ChevronRightIcon
+                  className="h-5 w-5 flex-none text-gray-700 dark:text-gray-400"
+                  aria-hidden="true"
+                />
+              </li>
+            ))}
+          </ul>
+          <MinutesPagination
+            minutePosts={minutePosts}
+            onNext={onNext}
+            onPrevious={onPrevious}
+          />
+        </>
       ) : (
         <MinutesPostListSkeleton />
       )}

@@ -181,6 +181,12 @@ export default function MinutesPage() {
         }
         onChangePagination={setTempPagination}
         pagination={tempPagination}
+        onNext={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+        onPrevious={function (): void {
+          throw new Error('Function not implemented.');
+        }}
       />
       {isEditing ? (
         <MinutesContentEditor
