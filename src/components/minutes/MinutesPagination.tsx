@@ -1,4 +1,6 @@
 import { PagedResponse, PaginationRequest } from '@/auth/types';
+import { Button } from '@/components/Button';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/16/solid';
 
 interface MinutesPaginationProps {
   minutePosts?: PagedResponse | null;
@@ -22,33 +24,29 @@ export default function MinutesPagination({
       className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 dark:bg-slate-900"
       aria-label="Pagination"
     >
-      <div className="hidden sm:block">
+      <div className="flex flex-1 items-center justify-center gap-4 ">
+        {minutePosts.previous && (
+          <Button onClick={onPrevious} variant={'secondary'}>
+            <ArrowLeftIcon
+              className={'h-5 w-5 text-slate-900 dark:text-slate-100'}
+            />
+          </Button>
+        )}
         <p className="text-sm text-gray-700 dark:text-slate-100">
-          Viser side <span className="font-medium">{pagination.page}</span> med{' '}
-          <span className="font-medium">{minutePosts.count}</span>{' '}
+          Viser side{' '}
+          <span className="font-medium">{pagination.page ?? '0'}</span> med{' '}
+          <span className="font-medium">{minutePosts.results.length}</span>{' '}
           {minutePosts.count === 0 || minutePosts.count > 1
             ? 'resultater'
-            : 'resultat'}
+            : 'resultat'}{' '}
+          av <span className="font-medium">{minutePosts.count}</span>{' '}
         </p>
-      </div>
-      <div className="flex flex-1 justify-between sm:justify-end">
-        {minutePosts.previous && (
-          <a
-            href="#"
-            className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
-            onClick={onPrevious}
-          >
-            Previous
-          </a>
-        )}
         {minutePosts.next && (
-          <a
-            href="#"
-            className="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
-            onClick={onNext}
-          >
-            Next
-          </a>
+          <Button onClick={onNext} variant={'secondary'}>
+            <ArrowRightIcon
+              className={'h-5 w-5 text-slate-900 dark:text-slate-100'}
+            />
+          </Button>
         )}
       </div>
     </nav>
