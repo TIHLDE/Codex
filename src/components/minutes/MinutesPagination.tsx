@@ -1,12 +1,14 @@
-import { PagedResponse } from '@/auth/types';
+import { PagedResponse, PaginationRequest } from '@/auth/types';
 
 interface MinutesPaginationProps {
   minutePosts?: PagedResponse | null;
   onNext: () => void;
   onPrevious: () => void;
+  pagination: PaginationRequest;
 }
 
 export default function MinutesPagination({
+  pagination,
   minutePosts,
   onPrevious,
   onNext,
@@ -22,8 +24,7 @@ export default function MinutesPagination({
     >
       <div className="hidden sm:block">
         <p className="text-sm text-gray-700 dark:text-slate-100">
-          Viser <span className="font-medium">{minutePosts.previous}</span> til{' '}
-          <span className="font-medium">{minutePosts.next}</span> av{' '}
+          Viser side <span className="font-medium">{pagination.page}</span> med{' '}
           <span className="font-medium">{minutePosts.count}</span>{' '}
           {minutePosts.count === 0 || minutePosts.count > 1
             ? 'resultater'
@@ -31,20 +32,24 @@ export default function MinutesPagination({
         </p>
       </div>
       <div className="flex flex-1 justify-between sm:justify-end">
-        <a
-          href="#"
-          className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
-          onClick={onPrevious}
-        >
-          Previous
-        </a>
-        <a
-          href="#"
-          className="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
-          onClick={onNext}
-        >
-          Next
-        </a>
+        {minutePosts.previous && (
+          <a
+            href="#"
+            className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
+            onClick={onPrevious}
+          >
+            Previous
+          </a>
+        )}
+        {minutePosts.next && (
+          <a
+            href="#"
+            className="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
+            onClick={onNext}
+          >
+            Next
+          </a>
+        )}
       </div>
     </nav>
   );

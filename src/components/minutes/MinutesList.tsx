@@ -175,6 +175,7 @@ export default function MinutesList({
             minutePosts={minutePosts}
             onNext={onNext}
             onPrevious={onPrevious}
+            pagination={pagination}
           />
         </>
       ) : (
