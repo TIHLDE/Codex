@@ -163,7 +163,6 @@ export default function MinutesPage() {
   };
 
   const handleConfirmDelete = async () => {
-    console.log(selectedMinuteId);
     if (!selectedMinuteId) return;
     setIsConfirmDeleteDialogOpen(false);
     await deletePost({ id: selectedMinuteId });

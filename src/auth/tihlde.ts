@@ -98,7 +98,6 @@ export const getMinutesPost = async (
   token: string,
   id: number,
 ): Promise<SingleMinutesPostResponse> => {
-  console.log(token);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}/`,
     { headers: getHeaders(token) },
@@ -160,7 +159,6 @@ export const getPagedMinutesPosts = async (
   token: string,
   pagination: PaginationRequest,
 ): Promise<PagedResponse> => {
-  console.log(JSON.stringify(pagination, null, 2));
   const params = {
     page: pagination.page.toString(),
     ordering: (!pagination.ascending ? '-' : '') + `${pagination.ordering}`,

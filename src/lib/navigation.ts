@@ -1,17 +1,31 @@
-export const navigation = [
+export interface Navigation {
+  title: string;
+  href?: string;
+  children?: Navigation[];
+}
+
+export const navigation: Navigation[] = [
   {
-    title: 'Introduksjon',
-    links: [{ title: 'Kom i gang', href: '/' }],
+    title: 'Kom i gang',
+    href: '/',
   },
   {
     title: 'Lepton',
-    links: [
-      { title: 'Introduksjon', href: '/docs/lepton' },
+    href: '/docs/lepton',
+    children: [
       {
-        title: 'Modeller og tabeller i databasen',
-        href: '/docs/lepton/core/models',
+        title: 'Basics',
+        children: [
+          {
+            title: 'Modeller og tabeller i databasen',
+            href: '/docs/lepton/basics/models',
+          },
+          {
+            title: 'Serializere og JSON',
+            href: '/docs/lepton/basics/serializers',
+          },
+        ],
       },
-      { title: 'Serializere og JSON', href: '/docs/lepton/core/serializers' },
       {
         title: 'Hvordan håndtere filopplastning',
         href: '/docs/lepton/extensions/fileUpload',
@@ -20,5 +34,9 @@ export const navigation = [
       { title: 'ORM', href: '/docs/lepton/introduction/orm' },
       { title: 'Hva er REST API?', href: '/docs/lepton/introduction/restApi' },
     ],
+  },
+  {
+    title: 'Projects',
+    href: '/docs/projects',
   },
 ];

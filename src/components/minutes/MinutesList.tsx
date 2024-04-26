@@ -11,6 +11,7 @@ import { Combobox } from '@headlessui/react';
 import { ArrowLeftIcon, BarsArrowDownIcon } from '@heroicons/react/16/solid';
 import MinutesPostListSkeleton from '@/components/minutes/MinutePostListSkeleton';
 import MinutesPagination from '@/components/minutes/MinutesPagination';
+import Link from 'next/link';
 
 const tagStyles = {
   ['Møtereferat']:
@@ -46,13 +47,13 @@ export default function MinutesList({
       <div className="flex flex-col gap-3 py-5 sm:px-2 dark:bg-slate-900">
         <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
           <div className="ml-4 mt-2">
-            <a
+            <Link
               href={'/'}
               className="flex flex-row items-center text-base font-semibold leading-6 text-gray-900 dark:text-gray-100"
             >
               <ArrowLeftIcon className={'mr-2 inline h-5 w-5'} /> CODEX /
               Dokumenter
-            </a>
+            </Link>
           </div>
           <div className="ml-4 mt-2 flex-shrink-0">
             <Button onClick={onCreate} type="button">

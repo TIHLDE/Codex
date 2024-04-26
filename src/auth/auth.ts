@@ -64,8 +64,6 @@ const authOptions: AuthOptions = {
 
           if (!isInIndex) return null;
 
-          console.log(tihldeUserToken);
-
           return { ...user, tihldeUserToken, id: user.user_id };
         } catch (error) {
           console.error(error);
