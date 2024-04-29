@@ -1,6 +1,7 @@
 import {
   MembershipResponse,
   MinutesPostResponse,
+  MinuteTag,
   PagedResponse,
   PaginationRequest,
   SingleMinutesPostResponse,
@@ -74,13 +75,14 @@ export const addMinutesPost = async (
   token: string,
   title: string,
   content: string,
+  tag: MinuteTag,
 ): Promise<MinutesPostResponse> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/`,
     {
       method: 'POST',
       headers: getHeaders(token),
-      body: JSON.stringify({ title, content }),
+      body: JSON.stringify({ title, content, tag }),
     },
   );
 
@@ -96,7 +98,6 @@ export const getMinutesPost = async (
   token: string,
   id: number,
 ): Promise<SingleMinutesPostResponse> => {
-  console.log(token);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}/`,
     { headers: getHeaders(token) },
@@ -115,13 +116,14 @@ export const updateMinutesPost = async (
   id: number,
   title: string,
   content: string,
+  tag: MinuteTag,
 ): Promise<MinutesPostResponse> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}`,
     {
       method: 'PUT',
       headers: getHeaders(token),
-      body: JSON.stringify({ title, content }),
+      body: JSON.stringify({ title, content, tag }),
     },
   );
 
@@ -157,21 +159,20 @@ export const getPagedMinutesPosts = async (
   token: string,
   pagination: PaginationRequest,
 ): Promise<PagedResponse> => {
-  // const params = {
-  //     page: pagination.page.toString(),
-  //     order_by: (!pagination.ascending ? '-' : '') + `${pagination.ordering}`,
-  // };
-  //
-  // if(pagination.)
-  //   {
-  //     filter: pagination.filter,
-  //     search: pagination.search,
-  // }
-  //
-  // const query = new URLSearchParams(params);
+  const params = {
+    page: pagination.page.toString(),
+    ordering: (!pagination.ascending ? '-' : '') + `${pagination.ordering}`,
+  } satisfies any;
+
+  if (pagination.search) {
+    // @ts-ignore
+    params.search = pagination.search;
+  }
+
+  const query = new URLSearchParams(params);
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/`,
+    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/?${query}`,
     {
       method: 'GET',
       headers: getHeaders(token),

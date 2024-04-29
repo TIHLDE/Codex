@@ -55,9 +55,12 @@ function Header() {
         <Search />
       </div>
       <div className="relative flex basis-0 justify-end gap-6 sm:gap-8 md:flex-grow">
-        <a href={'/minutes'} className={'text-slate-200 hover:underline'}>
+        <Link
+          href={'/minutes'}
+          className={'text-slate-800 hover:underline dark:text-slate-200'}
+        >
           Dokumenter
-        </a>
+        </Link>
         <ThemeSelector className="relative z-10" />
         <Link
           href="https://github.com/TIHLDE/Codex"

@@ -70,7 +70,7 @@ export interface MinutesPostResponse {
   };
   created_at: Date;
   updated_at: Date;
-  tag: 'Møtereferat' | 'Dokument';
+  tag: MinuteTag;
 }
 
 export interface SingleMinutesPostResponse extends MinutesPostResponse {
@@ -78,11 +78,20 @@ export interface SingleMinutesPostResponse extends MinutesPostResponse {
 }
 
 export interface PaginationRequest {
-  ordering: 'created_at' | 'updated_at' | 'title' | 'author' | 'tag';
+  ordering: MinuteOrdering;
   ascending: boolean;
-  title?: string;
-  author?: string;
-  tag?: string;
   search?: string;
   page: number;
 }
+
+export const minuteOrderings = [
+  'created_at',
+  'updated_at',
+  'title',
+  'author',
+  'tag',
+] as const;
+export type MinuteOrdering = (typeof minuteOrderings)[number];
+
+export const minuteTags = ['Møtereferat', 'Dokument'] as const;
+export type MinuteTag = (typeof minuteTags)[number];
