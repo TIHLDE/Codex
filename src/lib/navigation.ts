@@ -14,15 +14,31 @@ export const navigation: Navigation[] = [
     href: '/docs/lepton',
     children: [
       {
-        title: 'Basics',
+        title: 'Introduksjon',
+        href: '/docs/lepton/introduction',
+      },
+      {
+        title: 'Installasjon',
+        href: '/docs/lepton/installation',
+      },
+      {
+        title: 'Et lite eksempel',
+        href: '/docs/lepton/example',
+      },
+      {
+        title: 'How-to',
         children: [
           {
             title: 'Modeller og tabeller i databasen',
-            href: '/docs/lepton/basics/models',
+            href: '/docs/lepton/howto/models',
           },
           {
             title: 'Serializere og JSON',
-            href: '/docs/lepton/basics/serializers',
+            href: '/docs/lepton/howto/serializers',
+          },
+          {
+            title: 'Viewsets og respons',
+            href: '/docs/lepton/howto/viewsets',
           },
         ],
       },
@@ -33,7 +49,45 @@ export const navigation: Navigation[] = [
     ],
   },
   {
-    title: 'Projects',
+    title: 'Prosjekter',
     href: '/docs/projects',
+    children: [
+      {
+        title: 'Lepton',
+        href: '/docs/projects/lepton'
+      },
+      {
+        title: 'Kvark',
+        href: '/docs/projects/kvark'
+      },
+      {
+        title: 'Kontres',
+        href: '/docs/projects/kontres'
+      },
+      {
+        title: 'Blitzed',
+        href: '/docs/projects/blitzed'
+      },
+      {
+        title: 'Codex',
+        href: '/docs/projects/codex'
+      },
+      {
+        title: 'Fondet',
+        href: '/docs/projects/fondet'
+      },
+      {
+        title: 'Jubileum',
+        href: '/docs/projects/jubileum'
+      },
+      {
+        title: 'Shorty',
+        href: '/docs/projects/shorty'
+      },
+      {
+        title: 'ScriptStack',
+        href: '/docs/projects/scriptstack'
+      }
+    ]
   },
 ];
