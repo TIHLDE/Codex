@@ -61,8 +61,17 @@ export const navigation: Navigation[] = [
         href: '/docs/kvark/installation',
       },
       {
-        title: 'Et lite eksempel',
-        href: '/docs/kvark/example',
+        title: 'Eksempler',
+        children: [
+          {
+            title: 'Innføring i React',
+            href: '/docs/kvark/examples/react',
+          },
+          {
+            title: 'Innføring i Typescript',
+            href: '/docs/kvark/examples/typescript',
+          },
+        ],
       },
       {
         title: 'How-to',
