@@ -4,9 +4,9 @@ title: Kom i gang
 
 {% quick-links %}
 
-{% quick-link title="Lepton" icon="installation" href="/" description="Step-by-step guides to setting up your system and installing the library." /%}
+{% quick-link title="Lepton" icon="installation" href="/" description="Backend og API for Kvark" /%}
 
-{% quick-link title="Kvark" icon="presets" href="/" description="Learn how the internals work and contribute." /%}
+{% quick-link title="Kvark" icon="presets" href="/" description="Frontenden til TIHLDEs nettside" /%}
 
 {% /quick-links %}
 
@@ -64,7 +64,7 @@ I mappen `src/app/markdoc` ligger alt av nodes og tags som brukes for å manipul
 markdown-filene. Noder brukes for å "style" markdownen, som for eksempel kodeblokker:
 
 ```javascript
-console.log('Jeg er en kodeblokk!')
+console.log('Jeg er en kodeblokk!');
 ```
 
 Tagger derimot lar oss bygge egne komponenter som "Callout" komponenten ovenfor. Da wrapper du
