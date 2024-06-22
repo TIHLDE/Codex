@@ -79,8 +79,10 @@ VITE_API_URL=http://localhost:8000/
 
 ### Koble til produksjonsapiet til Index
 
-````text
+```text
 VITE_API_URL=https://api.tihlde.org
+```
+
 ## 7 - Start opp frontendserveren
 
 Nå er alt i boks, og du kan starte nettsida! For å gjøre dette, må du kjøre følgende kommanda i terminalen, og pass på at du er i riktig mappe:
@@ -93,7 +95,7 @@ $\Documents\GitHub\Kvark:~$ pnpm start
   ➜  Network: http://10.144.144.68:3000/
   ➜  Network: http://192.168.2.56:3000/
   ➜  press h + enter to show help
-````
+```
 
 ## Videre arbeid
 

@@ -70,7 +70,7 @@ Typescript er en mye brukt teknologi (både i arbeidslivet og på hjemmesnekra p
 
 ## Nodejs
 
-Nodejs er det underliggende verktøyet som gjør det mulig å kjøre javascriptkoden (som kompileres fra typescript) på egen maskin utenfor nettleseren. Dersom man har prøvd å dobbelttrykke på en javascript-fil før, har man sett at fila ikke kan kjøres. Det er dette nodejs tar seg av, slik at man kan kjøre disse scriptene på maskinen. I tillegg har Nodejs et enorms økosystem av pakker som kan løse alle slags problemer. Disse hentes inn via **pnpm**.
+Nodejs er det underliggende verktøyet som gjør det mulig å kjøre javascriptkoden (som kompileres fra typescript) på egen maskin utenfor nettleseren. Dersom man har prøvd å dobbelttrykke på en javascript-fil før, har man sett at fila ikke kan kjøres. Det er dette nodejs tar seg av, slik at man kan kjøre disse scriptene på maskinen. I tillegg har Nodejs et enormt økosystem av pakker som kan løse alle slags problemer. Disse hentes inn via **pnpm**.
 
 ## Pnpm
 

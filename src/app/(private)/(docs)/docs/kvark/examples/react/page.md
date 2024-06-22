@@ -2,7 +2,7 @@
 title: 'Innføring i React'
 ---
 
-React er et veldig fleksibelt og givende rammeverk å arbeide med. Målet med denne siden er å gi deg en rekke verktøy og ressurser som kan tas i bruk for å bli godt kjent med denne nye måten å se på frontendteknologier på. Dessuten håper vi at det åpner en helt ny verden med muligheter for deg som skal lage Tihldes fremtidige brukergrensesnitter!
+React er et veldig fleksibelt og givende rammeverk å arbeide med. Målet med denne siden er å gi deg en rekke verktøy og ressurser som kan tas i bruk for å bli godt kjent med denne nye måten å se på frontendteknologier på. Dessuten håper vi at det åpner en helt ny verden med muligheter for deg som skal lage TIHLDEs fremtidige brukergrensesnitter!
 
 ## Lage en ny komponent
 
@@ -14,7 +14,7 @@ Dersom en mer generell komponent skal lages, som i prinsippet kan brukes overalt
 
 Med andre ord - velg en filplassering med omhu slik at det blir lett å forstå og vedlikeholde komponenten ved et seinere tidspunkt.
 
-Men nå er det på tide å lage en ny komponent, og denne skal vise en stor tekst som kan inneholde vilkårlig tekst. Dessuten ønsker vi at denne teksten skal ha en rød bakgrunn.
+Men nå er det på tide å lage en ny komponent, og denne skal vise en stor tekst som kan ha et vilkårlig innhold. Dessuten ønsker vi at denne teksten skal ha en rød bakgrunn.
 
 ```javascript
 const CoolTitle = () => {};

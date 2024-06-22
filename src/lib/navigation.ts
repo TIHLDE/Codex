@@ -62,6 +62,7 @@ export const navigation: Navigation[] = [
       },
       {
         title: 'Eksempler',
+        href: '/docs/kvark/examples/react',
         children: [
           {
             title: 'Innføring i React',
@@ -72,27 +73,6 @@ export const navigation: Navigation[] = [
             href: '/docs/kvark/examples/typescript',
           },
         ],
-      },
-      {
-        title: 'How-to',
-        children: [
-          {
-            title: 'Modeller og tabeller i databasen',
-            href: '/docs/kvark/howto/models',
-          },
-          {
-            title: 'Serializere og JSON',
-            href: '/docs/kvark/howto/serializers',
-          },
-          {
-            title: 'Viewsets og respons',
-            href: '/docs/kvark/howto/viewsets',
-          },
-        ],
-      },
-      {
-        title: 'Hvordan håndtere filopplastning',
-        href: '/docs/kvark/extensions/fileUpload',
       },
     ],
   },
