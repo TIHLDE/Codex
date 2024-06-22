@@ -112,7 +112,7 @@ export default function MinutesList({
                 key={minute.id}
                 className={clsx(
                   'relative flex cursor-pointer items-center space-x-4 rounded-md px-2 py-4' +
-                    ' hover:bg-slate-100 dark:hover:bg-slate-700',
+                  ' hover:bg-slate-100 dark:hover:bg-slate-700',
                   selectedPostId === minute.id
                     ? 'bg-slate-200 dark:bg-slate-800'
                     : '',
@@ -123,12 +123,12 @@ export default function MinutesList({
                     <h2 className="min-w-0 text-sm font-semibold leading-6 text-slate-800 dark:text-white">
                       <span className="flex items-center gap-x-2">
                         <span className="truncate text-lg">{minute.title}</span>
-                        <span className="text-gray-700 dark:text-gray-400">
-                          /
-                        </span>
-                        <span className="whitespace-nowrap text-gray-700 dark:text-gray-300">
-                          {`${minute.author.first_name} ${minute.author.last_name}`}
-                        </span>
+                        {/*<span className="text-gray-700 dark:text-gray-400">
+                            /
+                          </span>
+                            <span className="whitespace-nowrap text-gray-700 dark:text-gray-300">
+                              {`${minute.author.first_name} ${minute.author.last_name}`}
+                      </span>*/}
                         <span className="absolute inset-0" />
                       </span>
                     </h2>
@@ -240,8 +240,8 @@ function SortingDropdown({ onChange, field }: SortingDropdownProps) {
     query === ''
       ? sortingOptions
       : sortingOptions.filter((person) => {
-          return person.name.toLowerCase().includes(query.toLowerCase());
-        });
+        return person.name.toLowerCase().includes(query.toLowerCase());
+      });
 
   return (
     <Combobox as="div" value={field} onChange={onChange}>
