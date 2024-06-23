@@ -61,8 +61,8 @@ export const navigation: Navigation[] = [
         href: '/docs/kvark/installation',
       },
       {
-        title: 'Eksempler',
-        href: '/docs/kvark/examples/react',
+        title: 'Innføringer',
+        href: '/docs/kvark/examples',
         children: [
           {
             title: 'Innføring i React',
@@ -72,7 +72,20 @@ export const navigation: Navigation[] = [
             title: 'Innføring i Typescript',
             href: '/docs/kvark/examples/typescript',
           },
+          {
+            title: 'Innføring i Tailwind',
+            href: '/docs/kvark/examples/tailwind',
+          },
+          {
+            title: 'Innføring i shad/cn',
+            href: '/docs/kvark/examples/shadcn',
+          },
         ],
+      },
+      {
+        title: 'How-to',
+        href: '/docs/kvark/how-to',
+        children: [],
       },
     ],
   },
