@@ -85,7 +85,22 @@ export const navigation: Navigation[] = [
       {
         title: 'How-to',
         href: '/docs/kvark/how-to',
-        children: [],
+        children: [
+          {
+            title: 'API-kall',
+            href: '/docs/kvark/how-to/api-call',
+            children: [
+              {
+                title: 'Lage en API-funksjon',
+                href: '/docs/kvark/how-to/api-call/create',
+              },
+              {
+                title: 'Bruke en API-funksjon',
+                href: '/docs/kvark/how-to/api-call/use',
+              },
+            ],
+          },
+        ],
       },
     ],
   },

@@ -27,7 +27,7 @@ React er et frontend-rammeverk for å bygge brukergrensesnitt. Det lar oss lage 
 
 Material UI er et ferdig stilisert komponentbibliotek i henhold til Googles retningslinjer for Material design. Dette fases nå ut til fordel for shadcn, som er et mer lettvektig og stiliserbart verktøy for å utvikle egne komponentbiblioteker.
 
-## Shadcn
+## Shad/cn
 
 Shadcn er en løsning bestående av ferdigimplementerte komponenter, som lett kan stiliseres med tailwind. Ved å ta i bruk [shadcn/ui](https://ui.shadcn.com/) kan man manuelt legge til enkelte komponenter, som automatisk tar i bruk fargepalettet som er definert i kodebasen.
 
