@@ -2,7 +2,7 @@
 title: 'Installering'
 ---
 
-Det å sette i gang med utvikling på Kvart er veldig enkelt, og krever kun noen få steg. Følg denne veivisningen punkt for punkt, og vipps så er du i gang!
+Det å sette i gang med utvikling på Kvark er veldig enkelt, og krever kun noen få steg. Følg denne veivisningen punkt for punkt, og vipps så er du i gang!
 
 ## 1 - Installer nodejs og npm
 
