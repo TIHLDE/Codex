@@ -2,6 +2,7 @@ import React from 'react';
 import { SingleMinutesPostResponse } from '@/auth/types';
 import MinutesContentHeader from '@/components/minutes/MinutesContentHeader';
 import Markdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 export interface MinutesContentProps {
   minute: SingleMinutesPostResponse | null;
@@ -16,7 +17,7 @@ export default function MinutesContent({
   return (
     <main
       className={
-        'h-full w-full rounded-lg bg-slate-100 p-4 lg:h-[calc(100svh-2rem)] dark:bg-slate-800'
+        'h-full w-full rounded-lg bg-slate-100 p-4 lg:h-[calc(100svh-2rem)] dark:bg-slate-800 overflow-y-scroll'
       }
     >
       {minute && (
@@ -34,7 +35,10 @@ export default function MinutesContent({
               h2: H2,
               h3: H3,
               strong: Strong,
+              ol: Ol,
+              ul: Ul,
             }}
+            rehypePlugins={[rehypeRaw]}
           >
             {minute.content}
           </Markdown>
@@ -55,4 +59,10 @@ function H3({ children }: { children?: React.ReactNode }) {
 }
 function Strong({ children }: { children?: React.ReactNode }) {
   return <strong className={'font-bold'}>{children}</strong>;
+}
+function Ol({ children }: { children?: React.ReactNode }) {
+  return <ol className={'ml-2 list-inside list-decimal'}>{children}</ol>;
+}
+function Ul({ children }: { children?: React.ReactNode }) {
+  return <ul className={'ml-2 list-inside list-disc'}>{children}</ul>;
 }
