@@ -40,6 +40,14 @@ export const navigation: Navigation[] = [
             title: 'Viewsets og respons',
             href: '/docs/lepton/howto/viewsets',
           },
+          {
+            title: 'Viewsets, filtrering og søk',
+            href: '/docs/lepton/howto/filtering',
+          },
+          {
+            title: 'Viewsets og paginering',
+            href: '/docs/lepton/howto/pagination',
+          }
         ],
       },
       {
