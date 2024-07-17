@@ -64,7 +64,7 @@ class MyViewSet(BaseViewSet, ActionMixin):
 ```
 Her ser vi hvordan vi setter opp atributter i et viewset:
 
-* Vi definerer en klasse med følgende annotasjon: *\<Modellnavn>ViewSet*.
+* Vi definerer en klasse med følgende konvensjon: *\<Modellnavn>ViewSet*.
 * Vi arver de to klassene *BaseViewSet* og *ActionMixin* som vi har nevnt over.
 * serializer_class: Her sender vi inn hvilke serializer vi vil bruke som default. Ønsker man å gjøre dette valget dynamisk basert på vilkår kan man bruke metoden get_serializer(self). Ethvert viewset må ha enten serializer definert som variabel eller en metode som returnerer viewsetet. Hvis ikke vil Django kaste en feil.
 * permission_classes: Her ser vi at vi setter inn vår egendefinerte permission class. Denne MÅ være med, og en forklaring på hvorfor kan du lese om i egen dokumentasjon om rettighetssystemet.

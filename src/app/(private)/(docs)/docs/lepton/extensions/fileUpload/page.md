@@ -210,5 +210,54 @@ class MyUpdateSerializer(BaseModelSerializer):
 
 Her ser vi et eksempel på hvordan vi arver BaseModelSerializer og overkjører update metoden. Det er viktig at hvis man overkjører update metoden så man man kalle på super().update(...) for å sørge for at den eventuelt gamle filen slettes.
 
+## Hvordan håndtere filer i et tilpasset endepunkt
+Obs! Merk at @action og tilpassete endepunkter blir skrevet mer om i ***Tilpassete endepunkter***.
+
+```python
+    @action(
+        detail=True,
+        methods=["post"],
+        url_path="mail-gift-cards",
+        parser_classes=(
+            MultiPartParser,
+            FormParser,
+        ),
+    )
+    def mail_gift_cards(self, request, *args, **kwargs):
+
+        event = self.get_object()
+        dispatcher = request.user
+        files = request.FILES.getlist("file")
+
+        try:
+            send_gift_cards_by_email(
+                event,
+                files,
+                dispatcher
+            )
+            return Response(
+                {
+                    "detail": "Gavekortene er sendt! Vi vil sende deg en mer utfyllende oversikt til din epost."
+                },
+                status=status.HTTP_200_OK,
+            )
+        except EventGiftCardAmountMismatchError as e:
+            return Response(
+                {"detail": e.message},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        except ValueError as e:
+            capture_exception(e)
+            return Response(
+                {
+                    "detail": f"Noe gikk galt da vi prøvde å sende ut gavekortene. Gi det et nytt forsøk senere eller "
+                    f"kontakt Index på {MAIL_INDEX} eller slack."
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+```
+
+I de aller fleste tilfeller der frontend skal sende forespørsler til backend, så vil type forespørsel være av JSON format. Det vil si at data som blir sendt via en POST eller UPDATE forespørsel sendes som JSON. Men når det skal sendes filer via et API, må dette behandles annerledes. Her kommer det et nytt parameter inn i @action, nemlig parser_classes. I dette tilfellet er bruker vi to innebygde parser klasser fra Django som håndterer forespørselen og filen(e) som sendes. Dermed har det bli lagt til et attributt *FILES* på requesten som sendes.
+
 ## Konklusjon
 For å konkludere så er det sjeldent at man trenger å håndtere filopplastning i ditt eget oppsett rundt en modell. Bruk OptionalImage i modellen og BaseModelSerializer i serializer. Deretter håndterer dere filopplastningen på frontend med /upload endepunktet, og deretter sender man returnert bilde url inn til endepunktet for viewsettet.
