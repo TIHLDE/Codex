@@ -47,6 +47,10 @@ export const navigation: Navigation[] = [
           {
             title: 'Viewsets og paginering',
             href: '/docs/lepton/howto/pagination',
+          },
+          {
+            title: 'Tilpassete endepunkter',
+            href: '/docs/lepton/howto/custom-endpoints',
           }
         ],
       },
