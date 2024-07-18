@@ -50,7 +50,7 @@ export const navigation: Navigation[] = [
           },
           {
             title: 'Tilpassete endepunkter',
-            href: '/docs/lepton/howto/custom-endpoints',
+            href: '/docs/lepton/howto/custom_endpoints',
           }
         ],
       },
