@@ -10,6 +10,15 @@ export const navigation: Navigation[] = [
     href: '/',
   },
   {
+    title: 'Nytt medlem?',
+    children: [
+      {
+        title: 'Første steg',
+        href: '/docs/new_member/first_steps'
+      }
+    ] 
+  },
+  {
     title: 'Lepton',
     href: '/docs/lepton',
     children: [
