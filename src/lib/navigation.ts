@@ -55,6 +55,15 @@ export const navigation: Navigation[] = [
         ],
       },
       {
+        title: 'Konfig',
+        children: [
+          {
+            title: 'Makefile',
+            href: '/docs/lepton/config/makefile'
+          }
+        ]
+      },
+      {
         title: 'Hvordan håndtere filopplastning',
         href: '/docs/lepton/extensions/fileUpload',
       },
