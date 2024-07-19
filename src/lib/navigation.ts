@@ -76,6 +76,15 @@ export const navigation: Navigation[] = [
         title: 'Hvordan håndtere filopplastning',
         href: '/docs/lepton/extensions/fileUpload',
       },
+      {
+        title: 'Bruk av eksternt API',
+        children: [
+          {
+            title: 'Verifisering med Feide',
+            href: '/docs/lepton/external_api/feide'
+          }
+        ]
+      }
     ],
   },
   {
