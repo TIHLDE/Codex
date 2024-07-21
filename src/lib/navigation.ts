@@ -35,6 +35,31 @@ export const navigation: Navigation[] = [
         href: '/docs/lepton/example',
       },
       {
+        title: 'Viewsets',
+        children: [
+          {
+            title: 'Intro',
+            href: '/docs/lepton/viewsets/intro'
+          },
+          {
+            title: 'Viewsets, filtrering og søk',
+            href: '/docs/lepton/viewsets/filtering',
+          },
+          {
+            title: 'Viewsets og paginering',
+            href: '/docs/lepton/viewsets/pagination',
+          },
+          {
+            title: 'Tilpassete endepunkter',
+            href: '/docs/lepton/viewsets/custom_endpoints',
+          },
+          {
+            title: 'Feilhåndtering for endepunkter',
+            href: '/docs/lepton/viewsets/exceptions'
+          }
+        ]
+      },
+      {
         title: 'How-to',
         children: [
           {
@@ -44,22 +69,6 @@ export const navigation: Navigation[] = [
           {
             title: 'Serializere og JSON',
             href: '/docs/lepton/howto/serializers',
-          },
-          {
-            title: 'Viewsets og respons',
-            href: '/docs/lepton/howto/viewsets',
-          },
-          {
-            title: 'Viewsets, filtrering og søk',
-            href: '/docs/lepton/howto/filtering',
-          },
-          {
-            title: 'Viewsets og paginering',
-            href: '/docs/lepton/howto/pagination',
-          },
-          {
-            title: 'Tilpassete endepunkter',
-            href: '/docs/lepton/howto/custom_endpoints',
           }
         ],
       },
