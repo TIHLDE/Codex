@@ -60,6 +60,23 @@ export const navigation: Navigation[] = [
         ]
       },
       {
+        title: 'Modeller',
+        children: [
+          {
+            title: 'Intro',
+            href: '/docs/lepton/models/intro'
+          },
+          {
+            title: 'Django ORM',
+            href: '/docs/lepton/models/orm'
+          },
+          {
+            title: 'Model fields',
+            href: '/docs/lepton/models/fields'
+          }
+        ]
+      },
+      {
         title: 'How-to',
         children: [
           {
