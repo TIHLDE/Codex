@@ -35,6 +35,10 @@ export const navigation: Navigation[] = [
         href: '/docs/lepton/example',
       },
       {
+        title: 'Django ORM',
+        href: '/docs/lepton/introduction/orm'
+      },
+      {
         title: 'How-to',
         children: [
           {
