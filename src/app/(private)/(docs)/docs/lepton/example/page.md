@@ -500,6 +500,10 @@ urlpatterns = [
 Nå har vi satt vårt endepunkt for *Entry* til å være på https://api.tihlde.org/entries/.
 
 
+## Admin panel
+En ting vi også vil gjøre er å legge til modellene i admin panelet til Django. Dette kan du lese mer om i seksjonen **Admin panel** under **Modeller**.
+
+
 ## Testing av kode
 Det siste vi må gjøre før vi kan si oss ferdig med et prosjekt er å lage tester for koden. Vi ønsker å teste så mye som mulig før man prøver å integrere de nye endepunktene i frontend, slik at det ikke blir mye surr frem og tilbake mellom backend og frontend. Man vil aldri kunne teste for alt, men ved hjelp av integrasjonsstester får vi testet at våre endepunkt fungerer som tiltenkt.
 

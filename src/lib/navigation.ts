@@ -73,6 +73,10 @@ export const navigation: Navigation[] = [
           {
             title: 'Model fields',
             href: '/docs/lepton/models/fields'
+          },
+          {
+            title: 'Admin panel',
+            href: '/docs/lepton/models/admin'
           }
         ]
       },
