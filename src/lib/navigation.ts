@@ -81,16 +81,37 @@ export const navigation: Navigation[] = [
         ]
       },
       {
+        title: 'Testing',
+        children: [
+          {
+            title: 'Intro',
+            href: '/docs/lepton/testing/intro'
+          },
+          {
+            title: 'Pytest',
+            href: '/docs/lepton/testing/pytest'
+          },
+          {
+            title: 'Enhetstester',
+            href: '/docs/lepton/testing/unit'
+          },
+          {
+            title: 'Integrasjonstester',
+            href: '/docs/lepton/testing/integration'
+          },
+          {
+            title: 'Test-driven development',
+            href: '/docs/lepton/testing/tdd'
+          }
+        ]
+      },
+      {
         title: 'How-to',
         children: [
           {
-            title: 'Modeller og tabeller i databasen',
-            href: '/docs/lepton/howto/models',
+            title: 'Hvordan håndtere filopplastning',
+            href: '/docs/lepton/extensions/fileUpload',
           },
-          {
-            title: 'Serializere og JSON',
-            href: '/docs/lepton/howto/serializers',
-          }
         ],
       },
       {
@@ -101,11 +122,7 @@ export const navigation: Navigation[] = [
             href: '/docs/lepton/config/makefile'
           }
         ]
-      },
-      {
-        title: 'Hvordan håndtere filopplastning',
-        href: '/docs/lepton/extensions/fileUpload',
-      },
+      }
     ],
   },
   {
