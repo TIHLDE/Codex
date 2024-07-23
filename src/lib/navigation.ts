@@ -118,6 +118,10 @@ export const navigation: Navigation[] = [
         title: 'How-to',
         children: [
           {
+            title: 'Hvordan bruke tasks med Celery',
+            href: '/docs/lepton/howto/celery'
+          },
+          {
             title: 'Hvordan håndtere filopplastning',
             href: '/docs/lepton/howto/fileUpload',
           },
