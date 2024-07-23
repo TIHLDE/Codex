@@ -35,6 +35,36 @@ export const navigation: Navigation[] = [
         href: '/docs/lepton/example',
       },
       {
+        title: 'Modeller',
+        children: [
+          {
+            title: 'Intro',
+            href: '/docs/lepton/models/intro'
+          },
+          {
+            title: 'Django ORM',
+            href: '/docs/lepton/models/orm'
+          },
+          {
+            title: 'Model fields',
+            href: '/docs/lepton/models/fields'
+          },
+          {
+            title: 'Admin panel',
+            href: '/docs/lepton/models/admin'
+          }
+        ]
+      },
+      {
+        title: 'Serializer',
+        children: [
+          {
+            title: 'Intro',
+            href: '/docs/lepton/serializers/intro'
+          }
+        ]
+      },
+      {
         title: 'Viewsets',
         children: [
           {
@@ -56,27 +86,6 @@ export const navigation: Navigation[] = [
           {
             title: 'Feilhåndtering for endepunkter',
             href: '/docs/lepton/viewsets/exceptions'
-          }
-        ]
-      },
-      {
-        title: 'Modeller',
-        children: [
-          {
-            title: 'Intro',
-            href: '/docs/lepton/models/intro'
-          },
-          {
-            title: 'Django ORM',
-            href: '/docs/lepton/models/orm'
-          },
-          {
-            title: 'Model fields',
-            href: '/docs/lepton/models/fields'
-          },
-          {
-            title: 'Admin panel',
-            href: '/docs/lepton/models/admin'
           }
         ]
       },
@@ -110,7 +119,7 @@ export const navigation: Navigation[] = [
         children: [
           {
             title: 'Hvordan håndtere filopplastning',
-            href: '/docs/lepton/extensions/fileUpload',
+            href: '/docs/lepton/howto/fileUpload',
           },
         ],
       },
