@@ -125,6 +125,10 @@ export const navigation: Navigation[] = [
             title: 'Hvordan håndtere filopplastning',
             href: '/docs/lepton/howto/fileUpload',
           },
+          {
+            title: 'Hvordan håndtere rettigheter',
+            href: '/docs/lepton/howto/permissions'
+          }
         ],
       },
       {
