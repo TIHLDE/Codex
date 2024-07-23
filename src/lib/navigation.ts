@@ -35,36 +35,92 @@ export const navigation: Navigation[] = [
         href: '/docs/lepton/example',
       },
       {
-        title: 'Django ORM',
-        href: '/docs/lepton/introduction/orm'
+        title: 'How-to',
+        children: [
+          {
+            title: 'Intro',
+            href: '/docs/lepton/models/intro'
+          },
+          {
+            title: 'Django ORM',
+            href: '/docs/lepton/models/orm'
+          },
+          {
+            title: 'Model fields',
+            href: '/docs/lepton/models/fields'
+          },
+          {
+            title: 'Admin panel',
+            href: '/docs/lepton/models/admin'
+          }
+        ]
+      },
+      {
+        title: 'Serializer',
+        children: [
+          {
+            title: 'Intro',
+            href: '/docs/lepton/serializers/intro'
+          }
+        ]
+      },
+      {
+        title: 'Viewsets',
+        children: [
+          {
+            title: 'Intro',
+            href: '/docs/lepton/viewsets/intro'
+          },
+          {
+            title: 'Viewsets, filtrering og søk',
+            href: '/docs/lepton/viewsets/filtering',
+          },
+          {
+            title: 'Viewsets og paginering',
+            href: '/docs/lepton/viewsets/pagination',
+          },
+          {
+            title: 'Tilpassete endepunkter',
+            href: '/docs/lepton/viewsets/custom_endpoints',
+          },
+          {
+            title: 'Feilhåndtering for endepunkter',
+            href: '/docs/lepton/viewsets/exceptions'
+          }
+        ]
+      },
+      {
+        title: 'Testing',
+        children: [
+          {
+            title: 'Intro',
+            href: '/docs/lepton/testing/intro'
+          },
+          {
+            title: 'Pytest',
+            href: '/docs/lepton/testing/pytest'
+          },
+          {
+            title: 'Enhetstester',
+            href: '/docs/lepton/testing/unit'
+          },
+          {
+            title: 'Integrasjonstester',
+            href: '/docs/lepton/testing/integration'
+          },
+          {
+            title: 'Test-driven development',
+            href: '/docs/lepton/testing/tdd'
+          }
+        ]
       },
       {
         title: 'How-to',
         children: [
           {
-            title: 'Modeller og tabeller i databasen',
-            href: '/docs/lepton/howto/models',
+            title: 'Hvordan håndtere filopplastning',
+            href: '/docs/lepton/howto/fileUpload',
           },
-          {
-            title: 'Serializere og JSON',
-            href: '/docs/lepton/howto/serializers',
-          },
-          {
-            title: 'Viewsets og respons',
-            href: '/docs/lepton/howto/viewsets',
-          },
-          {
-            title: 'Viewsets, filtrering og søk',
-            href: '/docs/lepton/howto/filtering',
-          },
-          {
-            title: 'Viewsets og paginering',
-            href: '/docs/lepton/howto/pagination',
-          },
-          {
-            title: 'Tilpassete endepunkter',
-            href: '/docs/lepton/howto/custom_endpoints',
-          }
         ],
       },
       {
