@@ -52,6 +52,10 @@ export const navigation: Navigation[] = [
           {
             title: 'Admin panel',
             href: '/docs/lepton/models/admin'
+          },
+          {
+            title: 'Factory',
+            href: '/docs/lepton/models/factory'
           }
         ]
       },
