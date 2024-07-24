@@ -72,6 +72,10 @@ export const navigation: Navigation[] = [
             href: '/docs/lepton/viewsets/intro'
           },
           {
+            title: 'Oppsett av URL',
+            href: '/docs/lepton/viewsets/url'
+          },
+          {
             title: 'Viewsets, filtrering og søk',
             href: '/docs/lepton/viewsets/filtering',
           },
