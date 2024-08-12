@@ -12,7 +12,7 @@ const createEmbeddings = async () => {
     for (const [key, value] of Object.entries(documents)) {
         console.log('Processing: ', key);
         const sections = parseMDFile({ path: key, content: value });
-        await uploadSections(sections);
+        sections.length && await uploadSections(sections);
     }
 };
 

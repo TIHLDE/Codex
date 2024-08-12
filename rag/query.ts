@@ -3,16 +3,19 @@ import embeddContent from "./lib/openAI";
 
 
 const query = async () => {
-    const prompt = 'Hvordan kan jeg finne ut mer om Pablo Escobar?';
+    const prompt = 'Hvordan kan jeg sette opp en modell med aksesskontroll?';
 
     const embeddings = await embeddContent(prompt);
 
-    const { data: documents } = await supaBaseClient.rpc('match_documents_filter', {
+    const { data: documents } = await supaBaseClient.rpc('match_documents', {
         query_embedding: embeddings,
         match_threshold: 0.5,
         match_count: 5,
-        filter_tag: 'docs'
+        // filter_tag: 'docs'
     });
+
+    console.log(documents)
+    return
 
     let contextText = ''
 

@@ -43,31 +43,20 @@ var query = function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                prompt = 'Hvordan kan jeg finne ut mer om Pablo Escobar?';
+                prompt = 'Hvordan kan jeg sette opp en modell med aksesskontroll?';
                 return [4 /*yield*/, (0, openAI_1.default)(prompt)];
             case 1:
                 embeddings = _a.sent();
-                return [4 /*yield*/, client_1.default.rpc('match_documents_filter', {
+                return [4 /*yield*/, client_1.default.rpc('match_documents', {
                         query_embedding: embeddings,
                         match_threshold: 0.5,
                         match_count: 5,
-                        filter_tag: 'docs'
+                        // filter_tag: 'docs'
                     })];
             case 2:
                 documents = (_a.sent()).data;
-                contextText = '';
-                for (i = 0; i < documents.length; i++) {
-                    document_1 = documents[i];
-                    content = document_1.content;
-                    contextText += "".concat(content.trim(), "\n---\n");
-                }
-                LLMPrompt = "\n        Du er en veldig engasjert representant for Codex som elsker \u00E5 hjelpe utviklere! Gitt f\u00F8lgende instrukser fra Codex sin dokumentasjon, svar p\u00E5 sp\u00F8rsm\u00E5l med kun gitt informasjon. Hvis du er usikker og svaret ikke ligger i dokumentasjonen, svar \"Beklager, jeg vet ikke hvordan jeg skal hjelpe med det.\".\n\n        Instrukser: ".concat(contextText, "\n\n        Sp\u00F8rsm\u00E5l: \"\"\"\n        ").concat(prompt, "\n        \"\"\"\n\n        Svar p\u00E5 norsk og i markdown-format, med relevante kodeblokker hvis det er n\u00F8dvendig.\n    ");
-                return [4 /*yield*/, client_1.openaiClient.chat.completions.create({
-                        messages: [
-                            { role: 'system', content: LLMPrompt },
-                        ],
-                        model: 'gpt-4o-mini'
-                    })];
+                console.log(documents);
+                return [2 /*return*/];
             case 3:
                 completion = _a.sent();
                 console.log(completion.choices[0]);

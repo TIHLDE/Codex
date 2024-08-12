@@ -41,17 +41,33 @@ var markdown_1 = require("./lib/markdown");
 var markdownParser_1 = require("./lib/markdownParser");
 var supabase_1 = require("./lib/supabase");
 var createEmbeddings = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var startFolder, documents, _i, _a, _b, key, value, sections;
-    return __generator(this, function (_c) {
-        startFolder = (0, path_1.join)(__dirname, '..', 'src', 'app', '(private)', '(docs)', 'docs');
-        documents = (0, markdown_1.default)(startFolder);
-        for (_i = 0, _a = Object.entries(documents); _i < _a.length; _i++) {
-            _b = _a[_i], key = _b[0], value = _b[1];
-            console.log('Processing: ', key);
-            sections = (0, markdownParser_1.default)({ path: key, content: value });
-            (0, supabase_1.default)(sections);
+    var startFolder, documents, _i, _a, _b, key, value, sections, _c;
+    return __generator(this, function (_d) {
+        switch (_d.label) {
+            case 0:
+                startFolder = (0, path_1.join)(__dirname, '..', 'src', 'app', '(private)', '(docs)', 'docs');
+                documents = (0, markdown_1.default)(startFolder);
+                _i = 0, _a = Object.entries(documents);
+                _d.label = 1;
+            case 1:
+                if (!(_i < _a.length)) return [3 /*break*/, 5];
+                _b = _a[_i], key = _b[0], value = _b[1];
+                console.log('Processing: ', key);
+                sections = (0, markdownParser_1.default)({ path: key, content: value });
+                _c = sections.length;
+                if (!_c) return [3 /*break*/, 3];
+                return [4 /*yield*/, (0, supabase_1.default)(sections)];
+            case 2:
+                _c = (_d.sent());
+                _d.label = 3;
+            case 3:
+                _c;
+                _d.label = 4;
+            case 4:
+                _i++;
+                return [3 /*break*/, 1];
+            case 5: return [2 /*return*/];
         }
-        return [2 /*return*/];
     });
 }); };
 createEmbeddings();
