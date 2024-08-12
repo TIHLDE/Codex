@@ -35,7 +35,7 @@ export const navigation: Navigation[] = [
         href: '/docs/lepton/example',
       },
       {
-        title: 'Modeller',
+        title: 'How-to',
         children: [
           {
             title: 'Intro',
@@ -145,6 +145,19 @@ export const navigation: Navigation[] = [
           {
             title: 'Makefile',
             href: '/docs/lepton/config/makefile'
+          }
+        ]
+      },
+      {
+        title: 'Hvordan håndtere filopplastning',
+        href: '/docs/lepton/extensions/fileUpload',
+      },
+      {
+        title: 'Bruk av eksternt API',
+        children: [
+          {
+            title: 'Verifisering med Feide',
+            href: '/docs/lepton/external_api/feide'
           }
         ]
       }
