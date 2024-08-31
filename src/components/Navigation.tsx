@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { navigation, type Navigation } from '@/lib/navigation';
 import React from 'react';
 import Link from 'next/link';
+import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 
 export function Navigation({
   className,
@@ -41,37 +42,17 @@ function RecursiveLink({
   onLinkClick?: React.MouseEventHandler<HTMLAnchorElement>;
   level?: number;
 }) {
-  const pathname = usePathname();
+  const [expanded, setExpanded] = React.useState<boolean>(false);
 
   return (
     <li key={navigation.href} className="pl-2">
-      {navigation.href ? (
-        <Link
-          href={navigation.href ?? ''}
-          onClick={onLinkClick}
-          className={clsx(
-            'block',
-            navigation.href === pathname
-              ? 'font-semibold text-sky-500'
-              : 'text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300',
-          )}
-        >
-          {navigation.title}
-        </Link>
-      ) : (
-        <span
-          className={clsx(
-            'block',
-            navigation.href === pathname
-              ? 'font-semibold text-sky-500'
-              : 'text-slate-500 dark:text-slate-400',
-          )}
-        >
-          {navigation.title}
-        </span>
-      )}
+        <NavigationExpandable
+          navigation={navigation}
+          expanded={expanded}
+          setExpanded={setExpanded}
+        />
 
-      {navigation.children && (
+      {navigation.children && expanded && (
         <ul
           role="list"
           className="mt-2 space-y-2 border-l-2 border-slate-100 lg:mt-4 lg:space-y-4 lg:border-slate-200 dark:border-slate-800"
@@ -87,10 +68,71 @@ function RecursiveLink({
             </div>
           ))}
         </ul>
-      )}
+      )
+    }
     </li>
   );
 }
+
+
+interface NavigationExpandableProps {
+  navigation: Navigation;
+  expanded: boolean;
+  setExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+  onLinkClick?: React.MouseEventHandler<HTMLAnchorElement>;
+};
+
+function NavigationExpandable({
+  navigation,
+  expanded,
+  setExpanded,
+  onLinkClick,
+}: NavigationExpandableProps) {
+  const pathname = usePathname();
+
+  const Icon = expanded ? ChevronDownIcon : ChevronRightIcon;
+
+  const handleExpand = () => {
+    setExpanded(!expanded);
+  };
+
+  if (navigation.href) {
+    return (
+      <div className='flex items-center justify-between w-full space-x-2'>
+        <Link
+          href={navigation.href ?? ''}
+          onClick={onLinkClick}
+          className={clsx(
+            'block',
+            navigation.href === pathname
+              ? 'font-semibold text-sky-500'
+              : 'text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300',
+          )}
+        >
+          {navigation.title}
+        </Link>
+
+        {navigation.children && (
+          <button onClick={handleExpand} className='p-1 rounded-full hover:bg-gray-200'>
+            <Icon className='w-5 h-5'/>
+          </button>
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <div className='flex items-center justify-between w-full space-x-2'>
+      <p>
+        {navigation.title}
+      </p>
+
+      <button onClick={handleExpand} className='p-1 rounded-full hover:bg-gray-200'>
+        <Icon className='w-5 h-5'/>
+      </button>
+    </div>
+  );
+};
 
 function NavigationSection({ section, onLinkClick }: NavigationSectionProps) {
   return (
