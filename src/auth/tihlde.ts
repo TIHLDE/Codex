@@ -1,3 +1,4 @@
+import { env } from '../lib/env';
 import {
   MembershipResponse,
   MinutesPostResponse,
@@ -20,7 +21,7 @@ export const loginToTIHLDE = async (
   password: string,
 ): Promise<string> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/auth/login/`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/auth/login/`,
     {
       method: 'POST',
       headers: {
@@ -39,7 +40,7 @@ export const loginToTIHLDE = async (
 
 export const getTIHLDEUser = async (token: string, user_id: string) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/users/${user_id}/`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/users/${user_id}/`,
     {
       headers: getHeaders(token),
     },
@@ -54,13 +55,8 @@ export const getTIHLDEUser = async (token: string, user_id: string) => {
 };
 
 export const getIsInPermittedGroup = async (token: string): Promise<boolean> => {
-  const ALLOWED_GROUPS = process.env.NEXT_PUBLIC_ALLOWED_GROUP_SLUGS?.split(',');
-  if (!ALLOWED_GROUPS) {
-    throw new Error('No allowed groups specified');
-  }
-
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/users/me/memberships/`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/users/me/memberships/`,
     {
       headers: getHeaders(token),
     },
@@ -73,7 +69,7 @@ export const getIsInPermittedGroup = async (token: string): Promise<boolean> => 
 
   const data = (await response.json()) as MembershipResponse;
 
-  return data.results.some((r) => ALLOWED_GROUPS.includes(r.group.slug));
+  return data.results.some((r) => env.NEXT_PUBLIC_ALLOWED_GROUP_SLUGS.includes(r.group.slug));
 };
 
 export const addMinutesPost = async (
@@ -83,7 +79,7 @@ export const addMinutesPost = async (
   tag: MinuteTag,
 ): Promise<MinutesPostResponse> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/`,
     {
       method: 'POST',
       headers: getHeaders(token),
@@ -104,7 +100,7 @@ export const getMinutesPost = async (
   id: number,
 ): Promise<SingleMinutesPostResponse> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}/`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}/`,
     { headers: getHeaders(token) },
   );
 
@@ -124,7 +120,7 @@ export const updateMinutesPost = async (
   tag: MinuteTag,
 ): Promise<MinutesPostResponse> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}`,
     {
       method: 'PUT',
       headers: getHeaders(token),
@@ -145,7 +141,7 @@ export const deleteMinutesPost = async (
   id: number,
 ): Promise<MinutesPostResponse> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}`,
     {
       method: 'DELETE',
       headers: getHeaders(token),
@@ -177,7 +173,7 @@ export const getPagedMinutesPosts = async (
   const query = new URLSearchParams(params);
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/?${query}`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/?${query}`,
     {
       method: 'GET',
       headers: getHeaders(token),

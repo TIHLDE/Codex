@@ -5,7 +5,6 @@ import {
   Session,
   User,
 } from 'next-auth';
-import { AdapterUser } from 'next-auth/adapters';
 import { DefaultJWT, JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { getIsInPermittedGroup, getTIHLDEUser, loginToTIHLDE } from './tihlde';
