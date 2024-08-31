@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SingleMinutesPostResponse } from '@/auth/types';
 import MinutesContentHeader from '@/components/minutes/MinutesContentHeader';
 import Markdown from 'react-markdown';
@@ -14,10 +14,13 @@ export default function MinutesContent({
   onDelete,
   onEdit,
 }: MinutesContentProps) {
+  useEffect(() => {
+    console.log(minute?.content);
+  }, [onEdit]);
   return (
     <main
       className={
-        'h-full w-full rounded-lg bg-slate-100 p-4 lg:h-[calc(100svh-2rem)] dark:bg-slate-800 overflow-y-scroll'
+        'h-full w-full rounded-lg bg-slate-100 p-4 lg:h-[calc(100svh-2rem)] dark:bg-slate-950 overflow-y-scroll'
       }
     >
       {minute && (

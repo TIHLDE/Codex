@@ -56,7 +56,7 @@ export default function MinutesContentEditor({
   return (
     <main
       className={
-        'h-full w-full rounded-lg bg-slate-800 p-4 lg:h-[calc(100svh-2rem)]'
+        'h-full w-full rounded-lg bg-slate-100 dark:bg-slate-950 p-4 lg:h-[calc(100svh-2rem)]'
       }
     >
       <form
