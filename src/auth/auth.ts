@@ -8,7 +8,7 @@ import {
 import { AdapterUser } from 'next-auth/adapters';
 import { DefaultJWT, JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { getIsInIndex, getTIHLDEUser, loginToTIHLDE } from './tihlde';
+import { getIsInPermittedGroup, getTIHLDEUser, loginToTIHLDE } from './tihlde';
 
 declare module 'next-auth' {
   interface Session extends DefaultSession {
@@ -56,13 +56,13 @@ const authOptions: AuthOptions = {
 
           if (!tihldeUserToken) return null;
 
-          // Check if in index and get user
-          const [isInIndex, user] = await Promise.all([
-            getIsInIndex(tihldeUserToken),
+          // Check if in allowed group and get user
+          const [isPermittedAccess, user] = await Promise.all([
+            getIsInPermittedGroup(tihldeUserToken),
             getTIHLDEUser(tihldeUserToken, credentials.username),
           ]);
 
-          if (!isInIndex) return null;
+          if (!isPermittedAccess) return null;
 
           return { ...user, tihldeUserToken, id: user.user_id };
         } catch (error) {

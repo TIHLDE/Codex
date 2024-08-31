@@ -53,7 +53,12 @@ export const getTIHLDEUser = async (token: string, user_id: string) => {
   return (await response.json()) as UserResponse;
 };
 
-export const getIsInIndex = async (token: string): Promise<boolean> => {
+export const getIsInPermittedGroup = async (token: string): Promise<boolean> => {
+  const ALLOWED_GROUPS = process.env.NEXT_PUBLIC_ALLOWED_GROUP_SLUGS?.split(',');
+  if (!ALLOWED_GROUPS) {
+    throw new Error('No allowed groups specified');
+  }
+
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_TIHLDE_API_URL}/users/me/memberships/`,
     {
@@ -68,7 +73,7 @@ export const getIsInIndex = async (token: string): Promise<boolean> => {
 
   const data = (await response.json()) as MembershipResponse;
 
-  return data.results.some((r) => r.group.slug === 'index');
+  return data.results.some((r) => ALLOWED_GROUPS.includes(r.group.slug));
 };
 
 export const addMinutesPost = async (
