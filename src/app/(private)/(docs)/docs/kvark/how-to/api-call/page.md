@@ -2,6 +2,8 @@
 title: 'API-kall'
 ---
 
+API-kall er det som binder frontenden sammen med backend. Når eksempelvis brukerinformasjon, nyhetsartikler, arrangementer, spørreundersøkelser og grupper skal vises på nettsida vår, må den først gjøre et API-kall til backenden for å hente ut informasjonen som skal vises. Akkurat hvordan dette skjer skal vi ta for oss nå.
+
 For å gjøre API-kall, kan vi ta i bruk koden som er definert i `api.tsx`-fila. Her finner vi mange funksjoner som håndterer innhentingen av data fra backend for deg, hvor URLen de går til for å hente dataen leses fra `.env`-fila som er blitt snakket om tidligere.
 
 Dersom du leser dette, bør du allerede være til dels kjent med hvordan Javascript fungerer. For å gjøre et HTTP-kall, brukes gjerne `fetch`-funksjonen hvor man får tilbake en `promise`:

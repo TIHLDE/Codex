@@ -118,7 +118,11 @@ export const CoolTitle = ({ className, ...props }: React.HTMLProps<HTMLDivElemen
 };
 ```
 
-Frykt ikke - du kommer til å få en rekke ressurser på bunnen av denne sida som forklarer akkurat hva alt dette betyr.
+Frykt ikke - du kommer til å få en rekke ressurser på bunnen av denne sida som forklarer akkurat hva alt dette betyr. Når du leser på ressursene, er det noen ting du burde legge ekstra vekt på:
+
+- Hooks (useEffect, useState)
+- Props
+- Gi React-komponenter typer (typescript)
 
 ## Videre lesing
 
@@ -131,3 +135,4 @@ Når som du har fått en helt grunnleggende forståelse for React, vil du henvis
 - [tailwindcss sin dokumentasjonsside](https://tailwindcss.com/) (Denne er fin for å finne tailwindklasser som tilsvarer den CSSen du er ute etter)
 - [cn-funksjon med tailwind](https://www.youtube.com/watch?v=re2JFITR7TI&t=112s&ab_channel=ByteGrad)
 - [Innføring i Typescript](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html)
+- [Typer i React](https://react.dev/learn/typescript)

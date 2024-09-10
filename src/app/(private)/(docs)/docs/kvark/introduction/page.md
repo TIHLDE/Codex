@@ -2,12 +2,11 @@
 title: 'Introduksjon'
 ---
 
-Kvark benytter seg i hovedsak av følgende teknologier:
+Kvark er frontendkodebasen for TIHLDE-nettsida, som du sikkert allerede har tatt i bruk flere ganger ([tihlde.org](https://tihlde.org)). Kvark benytter seg i hovedsak av følgende teknologier:
 
 - Vite
 - React
-- MUI (Material UI) **(I ferd med å fases ut)**
-- Shadcn **(I ferd med å erstatte MUI)**
+- Shadcn
 - Typescript
 - Nodejs
 - Pnpm
@@ -17,19 +16,15 @@ Kvark benytter seg i hovedsak av følgende teknologier:
 
 ## Vite
 
-Vite er et moderne byggeverktøy som tilbyr raskere oppstartstid og hot module replacement (HMR), noe som forbedrer utvikleropplevelsen. Den benytter seg av native ES Modules, som gjør den raskere enn tradisjonelle bundlere som Webpack.
+Vite er et moderne byggeverktøy som tilbyr raskere oppstartstid og hot module replacement (HMR), noe som forbedrer utvikleropplevelsen ved å automatisk laste inn endringer i kildekoden uten at man trenger å laste inn hele sida på nytt. Den benytter seg av native ES Modules, som gjør den raskere enn tradisjonelle bundlere som Webpack. Mye av dette er fancy tech-lingo som ikke har noe å si for deg som skal kode på nettsida, men det er likevel greit å ha i bakhodet.
 
 ## React
 
 React er et frontend-rammeverk for å bygge brukergrensesnitt. Det lar oss lage komponentbaserte applikasjoner, noe som gjør koden mer modulær og gjenbrukbar. Reacts virtuelle DOM gir bedre ytelse ved å minimere kostbare DOM-manipulasjoner. Å bruke React er ganske annerledes fra å skrive vanlig Javascript, HTML og CSS, men det er virkelig verdt å mestre dette. Det finnes mange grunner, deriblant at vi i all hovedsak bruker dette i Index, men også fordi det er det mest populære rammeverket, som tilbyr et enormt økosystem med utvidelser.
 
-## MUI (Material UI)
-
-Material UI er et ferdig stilisert komponentbibliotek i henhold til Googles retningslinjer for Material design. Dette fases nå ut til fordel for shadcn, som er et mer lettvektig og stiliserbart verktøy for å utvikle egne komponentbiblioteker.
-
 ## Shad/cn
 
-Shadcn er en løsning bestående av ferdigimplementerte komponenter, som lett kan stiliseres med tailwind. Ved å ta i bruk [shadcn/ui](https://ui.shadcn.com/) kan man manuelt legge til enkelte komponenter, som automatisk tar i bruk fargepalettet som er definert i kodebasen.
+Shadcn er en løsning bestående av ferdigimplementerte komponenter, som lett kan stiliseres med tailwind. Ved å ta i bruk [shadcn/ui](https://ui.shadcn.com/) kan man manuelt legge til enkelte komponenter, som automatisk tar i bruk fargepalettet som er definert i kodebasen. Dessuten kan man endre på kildekoden til disse så mye man vil, som legger til rette for at de kan være helt spesiallagde.
 
 ## Typescript
 
