@@ -35,7 +35,7 @@ export const navigation: Navigation[] = [
         href: '/docs/lepton/example',
       },
       {
-        title: 'How-to',
+        title: 'Models',
         children: [
           {
             title: 'Intro',
