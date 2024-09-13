@@ -1,6 +1,8 @@
 ---
-title: 'Bruke en API-funksjon'
+title: 'Bruke en API-funksjon (GET)'
 ---
+
+Denne siden tar for seg å bruke en API-funksjon for å **_hente_** data. For å se hvordan man **_sender_** data og **_utfører endringer på dataen_** til backend, [gå til neste side](/docs/kvark/how-to/api-call/use-mutation).
 
 Nå som API-funksjonen er blitt laget, må vi bruke den på en hensiktsmessig måte. Her kommer `react-query` inn i bildet, som lar oss håndtere datainnhenting, caching og revalidering på en praktisk måte. Vi kommer til å gi funksjonen vi har laget som et argument til biblioteket, og så vil det meste skje automatisk.
 
@@ -51,4 +53,65 @@ Vi kan se for oss at spørringen opp mot backend har fire steg som kommer etter 
 
 ## Hvordan en hook brukes i en komponent
 
-WIP
+Nå er det på tide å ta API-hooken vi har laget i bruk! La oss se på et eksempel fra en eksisterende komponent.
+
+### Case Study
+
+`/src/hooks/Event.ts`
+
+```javascript
+export const useEventById = (eventId: Event['id']) =>
+  useQuery<Event, RequestResponse>(EVENT_QUERY_KEYS.detail(eventId), () => API.getEvent(eventId), { enabled: eventId !== -1 });
+```
+
+`/src/pages/EventDetails/index.tsx`
+
+```javascript
+const EventDetails = () => {
+  const { id } = useParams();
+  const { data, isLoading, isError } = useEventById(Number(id));
+```
+
+Dette er kode som er hentet fra siden for å vise et detaljert arrangement. Som vi kan se, tas `useEventById`-hooken i bruk, og vi gir den en id (som er id-en til arrangementet). Det som vil skje umiddelbart etter at hooken lastes inn og kjøres er følgende:
+
+- useEventById sender et HTTP-kall til backenden med IFetch-metoden. Variablene vi har destrukturert - `data`, `isLoading` og `isError` vil ha initialverdier som følger
+
+  - `isLoading` er `true`
+  - `data` er `undefined`
+  - `isError` er `false`
+
+- Etter en stund vil vi få et svar fra backend. Da vil de destrukturerte verdiene se slik ut:
+  - `isLoading` er `false`
+  - `data` har typen som ble satt i genericen til useQuery i `/src/hooks/Event.ts` (fra det første eksempelet i dette delkapittelet `useQuery<➡️Event⬅️, RequestResponse>([...])`). Dersom det har oppstått en feil, vil `data` være undefined.
+  - `isError` er enten `true` eller `false`, avhengig om det har oppstått en feil under innhentingen.
+
+`useEventById`-hooken eksporterer også en rekke andre variabler som vi kan hente ut ([bilde](/images/useQueryvalues.png)). Vi kan for eksempel skrive følgende dersom vi ønsker å ta i bruk noen av de andre variablene som eksporteres fra `useEventById`:
+
+```javascript
+const { data, isLoading, isError, isSuccess, refetch } = useEventById(
+  Number(id),
+);
+```
+
+Nå skal vi bevege oss videre ned i `/src/pages/EventDetails/index.tsx`-fila for å se hvordan de ulike variablene brukes.
+
+```tsx
+<div>
+  <div>
+    {isLoading ? (
+      <EventRendererLoading />
+    ) : (
+      data !== undefined && <EventRenderer data={data} />
+    )}
+  </div>
+</div>
+```
+
+Her kan vi se hvordan de ulike variablene fra `useEventById` blir tatt i bruk, og det er overraskende enkelt! Alle variablene er **reaktive**, og derfor vil det som vises på nettsida automatisk oppdateres dersom de endrer verdi etter at komponenten først ble vist.
+
+For å konkretisere, så gjør koden følgende:
+
+- Dersom `isLoading` er `true`, vis `<EventRendererLoading />`. Denne vises altså midlertidig fram til dataen er hentet fra backend.
+- Dersom `isLoading` er `false` og `data` ikke er `undefined`, vis `<EventRenderer data={data} />` og send inn den innhentede dataen fra backend gjennom `data`-proppen.
+
+Hvis props fortsatt ikke er et kjent konsept, er det viktig å aller først få en [grunnleggende forståelse for **React**](/docs/kvark/examples/react).

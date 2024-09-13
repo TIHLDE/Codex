@@ -51,7 +51,7 @@ For å laste ned git kan du følge [git sin egen dokumentasjon](https://git-scm.
 
 ## 4 - Last ned Kvark
 
-Nå er det på tide å laste ned Kvark-kodebasen ned til PCen din! Det enkleste er å følge [denne fine veiledningen til GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository), som forklarer det i god detalj. Husk å finne fram riktig repository når du skal kopiere URL-en!
+Nå er det på tide å laste Kvark-kodebasen ned til PCen din! Det enkleste er å følge [denne fine veiledningen til GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository), som forklarer det i god detalj. Husk å finne fram riktig repository når du skal kopiere URL-en!
 
 ## 5 - Åpne kodebasen i et valgfritt kodeverktøy, installer avhengigheter med terminalen
 
@@ -80,7 +80,7 @@ VITE_API_URL=http://localhost:8000/
 ### Koble til produksjonsapiet til Index
 
 ```text
-VITE_API_URL=https://api.tihlde.org
+VITE_API_URL=https://api.tihlde.org/
 ```
 
 ## 7 - Start opp frontendserveren

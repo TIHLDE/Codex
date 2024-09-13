@@ -1,5 +1,5 @@
 ---
-title: 'Lage en API-funksjon'
+title: 'Lage en API-funksjon (QUERY)'
 ---
 
 Når du skal lage en ny API-funksjon, er det viktig å forstå hvordan det skal bygges opp. [ Som tidligere nevnt ser dette ikke ut som når man bruker en vanlig fetch-funksjon ](/docs/kvark/how-to/api-call), og hvorfor dette er tilfellet skal vi ta for oss nå.
