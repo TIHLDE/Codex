@@ -144,7 +144,7 @@ export const updateMinutesPost = async (
   group: MinuteGroup
 ): Promise<MinutesPostResponse> => {
   const response = await fetch(
-    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}/`,
     {
       method: 'PUT',
       headers: getHeaders(token),

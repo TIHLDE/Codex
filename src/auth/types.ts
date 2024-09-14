@@ -71,7 +71,7 @@ export interface MinutesPostResponse {
   created_at: Date;
   updated_at: Date;
   tag: MinuteTag;
-  group: MinuteGroup;
+  group: Group;
 }
 
 export interface SingleMinutesPostResponse extends MinutesPostResponse {

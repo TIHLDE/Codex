@@ -12,7 +12,7 @@ import { getValidGroupMemberships } from '@/auth/tihlde';
 
 const validationSchema = yup.object({
   title: yup.string().required('Du må fylle inn tittel'),
-  content: yup.string().required('Du må fylle inn innholdet'),
+  content: yup.string().required('Du må fylle inn innhold'),
   tag: yup.string().oneOf(minuteTags).required('Du må bruke en tag'),
   group: yup.string().oneOf(minuteGroups).required('Du må velge en gruppe'),
 });
@@ -49,17 +49,23 @@ export default function MinutesContentEditor({
   const getGroups = async () => {
     setIsGroupsLoading(true);
     try {
-      if (!token) {
-        return [];
-      }
       const groups = await getValidGroupMemberships(token);
   
-      if (!groups.length) return;
-  
-      formik.setValues(values => ({
-        ...values,
-        group: groups[0].name as MinuteGroup,
-      }));
+      if (groups.length) {
+        formik.setValues(values => ({
+          ...values,
+          group: groups[0].name as MinuteGroup,
+        }));
+      }
+
+      if (existingMinute) {
+        formik.setValues({
+          tag: existingMinute.tag,
+          content: existingMinute.content,
+          title: existingMinute.title,
+          group: existingMinute.group.name as MinuteGroup,
+        });
+      }
       setGroups(groups);
     } catch (e) {
       console.error(e);
@@ -69,15 +75,6 @@ export default function MinutesContentEditor({
   };
 
   useEffect(() => {
-    if (existingMinute) {
-      formik.setValues({
-        tag: existingMinute.tag,
-        content: existingMinute.content,
-        title: existingMinute.title,
-        group: existingMinute.group,
-      });
-    }
-
     getGroups();
   }, [existingMinute]);
 
@@ -102,24 +99,25 @@ export default function MinutesContentEditor({
         onSubmit={formik.handleSubmit}
         className={'flex h-full w-full flex-col gap-4'}
       >
-        <div className={'flex w-full items-start justify-between gap-4'}>
-          <div className={'flex justify-start gap-4'}>
+        <div className={'flex w-full justify-between'}>
+          <div className='space-y-4'>
             <TextField
               formik={formik}
               field={'title'}
               name={'Tittel'}
-              className={'max-w-sm'}
             />
-            <TagDropdown
-              value={formik.values.tag}
-              onChange={(tag) => formik.setFieldValue('tag', tag, true)}
-            />
-            <GroupDropdown
-              value={formik.values.group}
-              onChange={(group) => formik.setFieldValue('group', group, true)}
-              groups={groups}
-              isLoading={isGroupsLoading}
-            />
+            <div className={'flex justify-start gap-4'}>
+              <TagDropdown
+                value={formik.values.tag}
+                onChange={(tag) => formik.setFieldValue('tag', tag, true)}
+              />
+              <GroupDropdown
+                value={formik.values.group}
+                onChange={(group) => formik.setFieldValue('group', group, true)}
+                groups={groups}
+                isLoading={isGroupsLoading}
+              />
+            </div>
           </div>
           <div className={'flex h-full items-center justify-end gap-4'}>
             <Button type={'submit'}>Lagre</Button>
