@@ -1,6 +1,8 @@
 import { env } from '../lib/env';
 import {
+  Group,
   MembershipResponse,
+  MinuteGroup,
   MinutesPostResponse,
   MinuteTag,
   PagedResponse,
@@ -72,18 +74,39 @@ export const getIsInPermittedGroup = async (token: string): Promise<boolean> => 
   return data.results.some((r) => env.NEXT_PUBLIC_ALLOWED_GROUP_SLUGS.includes(r.group.slug));
 };
 
+export const getValidGroupMemberships = async (token: string): Promise<Group[]> => {
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/users/me/memberships/`,
+    {
+      headers: getHeaders(token),
+    },
+  );
+
+  if (!response.ok) {
+    console.error(response.status, response.statusText, await response.json());
+    throw new Error('Failed to fetch memberships');
+  }
+
+  const data = (await response.json()) as MembershipResponse;
+
+  return data.results
+    .filter((r) => env.NEXT_PUBLIC_ALLOWED_GROUP_SLUGS.includes(r.group.slug))
+    .map((r) => r.group);
+};
+
 export const addMinutesPost = async (
   token: string,
   title: string,
   content: string,
   tag: MinuteTag,
+  group: MinuteGroup
 ): Promise<MinutesPostResponse> => {
   const response = await fetch(
     `${env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/`,
     {
       method: 'POST',
       headers: getHeaders(token),
-      body: JSON.stringify({ title, content, tag }),
+      body: JSON.stringify({ title, content, tag, group: group.toLowerCase() }),
     },
   );
 
@@ -118,13 +141,14 @@ export const updateMinutesPost = async (
   title: string,
   content: string,
   tag: MinuteTag,
+  group: MinuteGroup
 ): Promise<MinutesPostResponse> => {
   const response = await fetch(
     `${env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}`,
     {
       method: 'PUT',
       headers: getHeaders(token),
-      body: JSON.stringify({ title, content, tag }),
+      body: JSON.stringify({ title, content, tag, group: group.toLowerCase() }),
     },
   );
 
