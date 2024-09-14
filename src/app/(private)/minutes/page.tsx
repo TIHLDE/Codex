@@ -16,6 +16,7 @@ import {
   updateMinutesPost,
 } from '@/auth/tihlde';
 import {
+  MinuteGroup,
   MinutesPostResponse,
   MinuteTag,
   PaginationRequest,
@@ -83,7 +84,7 @@ export default function MinutesPage() {
   const { mutateAsync: updatePost } = useMutation<
     MinutesPostResponse,
     Error,
-    { content: string; title: string; id: number; tag: MinuteTag }
+    { content: string; title: string; id: number; tag: MinuteTag, group: MinuteGroup }
   >({
     mutationFn: (context) =>
       updateMinutesPost(
@@ -92,6 +93,7 @@ export default function MinutesPage() {
         context.title,
         context.content,
         context.tag,
+        context.group
       ),
     onSuccess: () => refetchMinutePost(),
   });
@@ -99,10 +101,10 @@ export default function MinutesPage() {
   const { mutateAsync: createPost } = useMutation<
     MinutesPostResponse,
     Error,
-    { content: string; title: string; tag: MinuteTag }
+    { content: string; title: string; tag: MinuteTag, group: MinuteGroup }
   >({
     mutationFn: (context) =>
-      addMinutesPost(token, context.title, context.content, context.tag),
+      addMinutesPost(token, context.title, context.content, context.tag, context.group),
     onSuccess: async (data) => {
       await refetchAllPosts();
       setSelectedMinuteId(data.id);
@@ -139,6 +141,7 @@ export default function MinutesPage() {
         tag: values.tag,
         title: values.title,
         content: values.content,
+        group: values.group,
       });
     } else {
       // Create new
@@ -146,6 +149,7 @@ export default function MinutesPage() {
         tag: values.tag,
         content: values.content,
         title: values.title,
+        group: values.group,
       });
     }
     setIsEditing(false);

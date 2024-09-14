@@ -71,6 +71,7 @@ export interface MinutesPostResponse {
   created_at: Date;
   updated_at: Date;
   tag: MinuteTag;
+  group: Group;
 }
 
 export interface SingleMinutesPostResponse extends MinutesPostResponse {
@@ -95,3 +96,6 @@ export type MinuteOrdering = (typeof minuteOrderings)[number];
 
 export const minuteTags = ['Møtereferat', 'Dokument'] as const;
 export type MinuteTag = (typeof minuteTags)[number];
+
+export const minuteGroups = ['Index', 'Drift'] as const;
+export type MinuteGroup = (typeof minuteGroups)[number];
