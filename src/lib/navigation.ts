@@ -169,7 +169,6 @@ export const navigation: Navigation[] = [
   },
   {
     title: 'Kvark',
-    href: '/docs/kvark',
     children: [
       {
         title: 'Introduksjon',
@@ -238,6 +237,15 @@ export const navigation: Navigation[] = [
         ],
       },
     ],
+  },
+  {
+    title: 'OpenStack',
+    children: [
+      {
+        title: 'Oppsett',
+        href: '/docs/openstack/installation',
+      }
+    ]
   },
   {
     title: 'Prosjekter',
