@@ -15,7 +15,7 @@ For å bruke CLI'en må du først installere nødvendig programvare. Hvis du bru
 
 Ved å bruke Linux (Ubuntu i dette eksempelet) kan du kjøre følgende kommando:
 
-```
+```bash
 sudo apt install python3-openstackclient
 ```
 
@@ -36,7 +36,7 @@ Du kan kjøre OpenStack RC scriptet fra din egen PC og bruke OpenStack. Siden du
 
 Ved å bruke WSL kan du bruke følgende kommando for å overføre:
 
-```
+```bash
 scp <prosjektnavn>-openrc.sh <brukernavn>@login.stud.ntnu.no:.
 ```
 
@@ -44,7 +44,7 @@ Du vil bli spurt om ditt NTNU passord.
 
 Etter dette kan du koble deg inn på serveren ved hjelp av SSH:
 
-```
+```bash
 ssh <brukernavn>@login.stud.ntnu.no
 ```
 
@@ -52,7 +52,7 @@ Her må du også skrive inn ditt NTNU passord.
 
 Nå kan du aktivere ditt script som du har flyttet over. På denne måten vil du aktivere en kobling opp mot ditt prosjekt slik at du kan begynne å opprette ressurser.
 
-```
+```bash
 # Se alle dine filer
 ls -l
 
