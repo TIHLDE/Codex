@@ -69,3 +69,6 @@ openstack project list
 | a63265774dc24104aed0a5165e323222 | STUDORG_TIHLDE       |
 +----------------------------------+----------------------+
 ```
+
+## Web
+Hvis du ønsker å bruke nettsiden til NTNU sin Openstack kan du logge inn med din NTNU bruker på [https://stack.it.ntnu.no/horizon/auth/login/](https://stack.it.ntnu.no/horizon/auth/login/)
