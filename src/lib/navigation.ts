@@ -16,6 +16,10 @@ export const navigation: Navigation[] = [
         title: 'Første steg',
         href: '/docs/new_member/first_steps',
       },
+      {
+        title: 'WSL',
+        href: '/docs/new_member/wsl',
+      }
     ],
   },
   {
