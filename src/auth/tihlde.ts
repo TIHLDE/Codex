@@ -1,5 +1,7 @@
 import { env } from '../lib/env';
 import {
+  CoursePostResponse,
+  CourseTag,
   Group,
   MembershipResponse,
   MinuteGroup,
@@ -210,4 +212,65 @@ export const getPagedMinutesPosts = async (
   }
 
   return (await response.json()) as PagedResponse;
+};
+
+export const isLeader = async (token: string): Promise<boolean> => {
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/users/me/memberships/`,
+    {
+      headers: getHeaders(token),
+    },
+  );
+
+  if (!response.ok) {
+    console.error(response.status, response.statusText, await response.json());
+    throw new Error('Failed to fetch memberships');
+  }
+
+  const data = await response.json() as MembershipResponse;
+
+  const isLeader = data.results.some((r) => r.membership_type === 'LEADER');
+
+  return isLeader;
+};
+
+export const addCourse = async (
+  token: string,
+  title: string,
+  start_date: string,
+  start_registration_at: string,
+  end_registration_at: string,
+  location: string,
+  mazemap_link: string,
+  organizer: MinuteGroup,
+  lecturer: string,
+  tag: CourseTag,
+  description?: string,
+): Promise<CoursePostResponse> => {
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/courses/`,
+    {
+      method: 'POST',
+      headers: getHeaders(token),
+      body: JSON.stringify({
+        title,
+        description,
+        start_date,
+        start_registration_at,
+        end_registration_at,
+        location,
+        mazemap_link,
+        organizer: organizer.toLowerCase(),
+        lecturer,
+        tag,
+      }),
+    },
+  );
+
+  if (!response.ok) {
+    console.error(response.status, response.statusText, await response.json());
+    throw new Error('Failed to add course');
+  }
+
+  return (await response.json()) as CoursePostResponse;
 };

@@ -85,6 +85,20 @@ export interface PaginationRequest {
   page: number;
 }
 
+export interface CoursePostResponse {
+  id: number;
+  title: string;
+  description: string;
+  start_date: Date;
+  start_registration_at: Date;
+  end_registration_at: Date;
+  location: string;
+  mazemap_link: string;
+  organizer: string;
+  lecturer: string;
+  tag: CourseTag;
+};
+
 export const minuteOrderings = [
   'created_at',
   'updated_at',
@@ -99,3 +113,6 @@ export type MinuteTag = (typeof minuteTags)[number];
 
 export const minuteGroups = ['Index', 'Drift'] as const;
 export type MinuteGroup = (typeof minuteGroups)[number];
+
+export const courseTags = ['Workshop', 'Lecture'];
+export type CourseTag = (typeof courseTags)[number];

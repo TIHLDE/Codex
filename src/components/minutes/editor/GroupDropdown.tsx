@@ -26,7 +26,7 @@ export interface GroupDropdownProps {
   value?: MinuteGroup;
   onChange: (value: MinuteGroup) => void;
   groups: Group[];
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 export default function GroupDropdown({ value, onChange, groups, isLoading }: GroupDropdownProps ) {
