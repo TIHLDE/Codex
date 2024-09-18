@@ -54,7 +54,7 @@ export function TextField<T extends Record<string, unknown>>({
         )}
       </div>
       {isError && (
-        <p className="mt-2 text-sm text-red-600" id="email-error">
+        <p className="mt-2 text-sm text-red-600" id="textfield-error">
           {formik.errors[field] as string}
         </p>
       )}

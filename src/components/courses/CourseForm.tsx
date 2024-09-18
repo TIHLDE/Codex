@@ -9,6 +9,9 @@ import * as yup from 'yup';
 import { TextAreaField } from '../forms/TextAreaField';
 import { TextField } from '../forms/TextField';
 import GroupDropdown from '../minutes/editor/GroupDropdown';
+import { DateTimePicker } from '../forms/DateTimePicker';
+import CourseTagDropdown from './CourseTagDropdown';
+import { UserSearch } from '../forms/UserSearch';
 
 
 const validationSchema = yup.object().shape({
@@ -83,10 +86,10 @@ export const CourseForm = () => {
 
     return (
         <form
-            className='max-w-6xl w-full py-6 px-12 border rounded-md mx-auto space-y-4'
+            className='max-w-6xl w-full py-6 px-12 border rounded-md mx-auto space-y-8'
             onSubmit={formik.handleSubmit}
         >
-            <div className='flex space-x-4'>
+            <div className='flex space-x-8'>
                 <TextField
                     formik={formik}
                     name='Tittel'
@@ -94,15 +97,32 @@ export const CourseForm = () => {
                     className='w-full'
                 />
 
-                {/* <TextField
+                <DateTimePicker
                     formik={formik}
-                    name='Tittel'
-                    field='title'
+                    name='Startdato'
+                    field='start_date'
                     className='w-full'
-                /> */}
+                />
             </div>
 
-            <div className='flex space-x-4'>
+            <div className='flex space-x-8'>
+                <DateTimePicker
+                    formik={formik}
+                    name='Start påmelding'
+                    field='start_registration_at'
+                    className='w-full'
+                />
+
+                <DateTimePicker
+                    formik={formik}
+                    name='Slutt påmelding'
+                    field='end_registration_at'
+                    className='w-full'
+                />
+
+            </div>
+
+            <div className='flex space-x-8'>
                 <TextField
                     formik={formik}
                     name='Lokasjon'
@@ -118,6 +138,26 @@ export const CourseForm = () => {
                 />
             </div>
 
+            <div className='flex space-x-8'>
+                <GroupDropdown
+                    value={formik.values.organizer}
+                    onChange={(organizer) => formik.setFieldValue('organizer', organizer, true)}
+                    groups={groups as Group[]}
+                />
+
+                <CourseTagDropdown
+                    value={formik.values.tag}
+                    onChange={(tag) => formik.setFieldValue('tag', tag, true)}
+                />
+
+                <UserSearch
+                    formik={formik}
+                    name='Kursholder'
+                    field='lecturer'
+                    className='w-full'
+                />
+            </div>
+
             <TextAreaField
                 formik={formik}
                 name='Beskrivelse'
@@ -125,13 +165,6 @@ export const CourseForm = () => {
                 className='w-full min-h-60'
             />
 
-            <div>
-                <GroupDropdown
-                    value={formik.values.organizer}
-                    onChange={(organizer) => formik.setFieldValue('organizer', organizer, true)}
-                    groups={groups as Group[]}
-                />
-            </div>
         </form>
     );
 };

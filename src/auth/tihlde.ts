@@ -10,6 +10,8 @@ import {
   PagedResponse,
   PaginationRequest,
   SingleMinutesPostResponse,
+  User,
+  UserPagedResponse,
   UserResponse,
 } from './types';
 
@@ -274,3 +276,22 @@ export const addCourse = async (
 
   return (await response.json()) as CoursePostResponse;
 };
+
+export const getUsers = async (token: string, search: string): Promise<User[]> => {
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/users/?search=${search}`,
+    {
+      headers: getHeaders(token),
+    },
+  );
+
+  if (!response.ok) {
+    console.error(response.status, response.statusText, await response.json());
+    throw new Error('Failed to fetch user');
+  }
+
+  const data = await response.json() as UserPagedResponse;
+  const results = data.results as User[];
+
+  return results;
+}

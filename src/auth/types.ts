@@ -52,6 +52,13 @@ export interface UserResponse {
   email: string;
 }
 
+export interface UserPagedResponse {
+  count: number;
+  next: null;
+  previous: null;
+  results: UserResponse[];
+};
+
 export interface PagedResponse {
   count: number;
   next: number | null;
@@ -116,3 +123,9 @@ export type MinuteGroup = (typeof minuteGroups)[number];
 
 export const courseTags = ['Workshop', 'Lecture'];
 export type CourseTag = (typeof courseTags)[number];
+
+export const courseObjectTags = [
+  { value: 'Workshop', label: 'Workshop' },
+  { value: 'Lecture', label: 'Forelesning' }
+];
+export type CourseObjectTag = (typeof courseObjectTags)[number];
