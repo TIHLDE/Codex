@@ -1,4 +1,5 @@
 import { CoursesHeader } from "@/components/courses/Header";
+import { CoursesList } from "@/components/courses/List";
 
 
 const CoursesPage = () => {
@@ -9,6 +10,7 @@ const CoursesPage = () => {
                 back_url="/"
                 next_page="/courses/create"
             />
+            <CoursesList />
         </main>
     )
 };

@@ -40,6 +40,18 @@ export interface Study {
   expiration_date: null;
 }
 
+export interface Course {
+  id: number;
+  title: string;
+  start_date: string;
+  location: string;
+  tag: CourseTag;
+  organizer: Group;
+  lecturer: User;
+  number_of_registrations: number;
+  viewer_is_registered: boolean;
+};
+
 export type TIHLDEAuthParams = {
   user_id: string;
   password: string;
@@ -104,6 +116,33 @@ export interface CoursePostResponse {
   organizer: string;
   lecturer: string;
   tag: CourseTag;
+};
+
+export interface Registration {
+  user: User;
+  order: number;
+}
+
+export interface CourseDetailResponse {
+  id: number;
+  title: string;
+  description: string;
+  start_date: Date;
+  start_registration_at: Date;
+  end_registration_at: Date;
+  location: string;
+  mazemap_link: string;
+  organizer: Group;
+  lecturer: User;
+  tag: CourseTag;
+  registrations: Registration[];
+};
+
+export interface CoursePagedResponse {
+  count: number;
+  next: number | null;
+  previous: number | null;
+  results: Course[];
 };
 
 export const minuteOrderings = [

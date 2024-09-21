@@ -1,5 +1,7 @@
 import { env } from '../lib/env';
 import {
+  CourseDetailResponse,
+  CoursePagedResponse,
   CoursePostResponse,
   CourseTag,
   Group,
@@ -294,4 +296,54 @@ export const getUsers = async (token: string, search: string): Promise<User[]> =
   const results = data.results as User[];
 
   return results;
+}
+
+export const getCourses  = async (token: string): Promise<CoursePagedResponse> => {
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/courses/`,
+    {
+      headers: getHeaders(token),
+    },
+  );
+
+  if (!response.ok) {
+    console.error(response.status, response.statusText, await response.json());
+    throw new Error('Failed to fetch courses');
+  }
+
+  return (await response.json()) as CoursePagedResponse;
+};
+
+export const getCourse = async (token: string, id: string): Promise<CourseDetailResponse> => {
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/courses/${id}/`,
+    {
+      headers: getHeaders(token),
+    },
+  );
+
+  if (!response.ok) {
+    console.error(response.status, response.statusText, await response.json());
+    throw new Error('Failed to fetch course');
+  }
+
+  return (await response.json()) as CourseDetailResponse;
+}
+
+export const createCourseRegistration = async (token: string, course_id: number): Promise<void> => {
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/courses/${course_id}/registrations/`,
+    {
+      method: 'POST',
+      headers: getHeaders(token),
+      body: JSON.stringify({
+        course: course_id,
+      }),
+    },
+  );
+
+  if (!response.ok) {
+    console.error(response.status, response.statusText, await response.json());
+    throw new Error('Failed to register for course');
+  }
 }
