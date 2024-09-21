@@ -12,6 +12,8 @@ import GroupDropdown from '../minutes/editor/GroupDropdown';
 import { DateTimePicker } from '../forms/DateTimePicker';
 import CourseTagDropdown from './CourseTagDropdown';
 import { UserSearch } from '../forms/UserSearch';
+import { Button } from '../Button';
+import { useRouter } from 'next/navigation';
 
 
 const validationSchema = yup.object().shape({
@@ -44,6 +46,7 @@ const initialValues = {
 
 
 export const CourseForm = () => {
+    const router = useRouter();
     const session = useSession();
 
     const groups = [
@@ -63,19 +66,26 @@ export const CourseForm = () => {
     );
 
     const onSave = async (values: CourseFormValues) => {
-        await addCourse(
-            token,
-            values.title,
-            values.start_date.toISOString(),
-            values.start_registration_at.toISOString(),
-            values.end_registration_at.toISOString(),
-            values.location,
-            values.mazemap_link,
-            values.organizer,
-            values.lecturer,
-            values.tag,
-            values.description
-        )
+        try {
+            await addCourse(
+                token,
+                values.title,
+                values.start_date,
+                values.start_registration_at,
+                values.end_registration_at,
+                values.location,
+                values.mazemap_link,
+                values.organizer,
+                values.lecturer,
+                values.tag,
+                values.description
+            );
+
+            router.replace('/courses');
+            router.refresh();
+        } catch (e) {
+            console.error(e);
+        }
     };  
 
     const formik = useFormik<CourseFormValues>({
@@ -165,6 +175,12 @@ export const CourseForm = () => {
                 className='w-full min-h-60'
             />
 
+            <Button
+                type='submit'
+                className='w-full'
+            >
+                Lagre
+            </Button>
         </form>
     );
 };

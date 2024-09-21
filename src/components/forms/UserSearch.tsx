@@ -36,6 +36,10 @@ export function UserSearch<T extends Record<string, unknown>>({
     };
 
     useEffect(() => {
+        if (debouncedSearch.length === 0) {
+            setUsers([]);
+        }
+
         if (debouncedSearch) {
             searchUser();
         }
@@ -54,11 +58,11 @@ export function UserSearch<T extends Record<string, unknown>>({
         <div className={className} onClick={(e) => e.stopPropagation()}>
             {isOpen && (
             <div 
-                className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10"
+                className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-10"
                 onClick={handleExpand}
             >
                 <div 
-                    className="max-w-2xl w-full mx-auto bg-slate-700 p-4 rounded-md shadow-lg z-20 py-4 px-6 space-y-4"
+                    className="max-w-2xl w-full mx-auto bg-slate-950 border p-4 rounded-md shadow-lg z-20 py-4 px-6 space-y-4 min-h-96"
                     onClick={(e) => e.stopPropagation()}
                 >
                     <div>
@@ -77,15 +81,7 @@ export function UserSearch<T extends Record<string, unknown>>({
                         />
                     </div>
 
-                    <div>
-                        {user && (
-                            <div>
-                                <p>
-                                    {user.first_name} {user.last_name}
-                                </p>
-                            </div>
-                        )}
-                    </div>
+                    <div className="w-full h-0.5 rounded-md bg-slate-700" />
 
                     <div className="space-y-2">
                         {users.map((u) => (
@@ -93,8 +89,9 @@ export function UserSearch<T extends Record<string, unknown>>({
                                 key={u.user_id}
                                 className="flex items-center justify-between px-2 py-1.5 bg-slate-800 rounded-md cursor-pointer"
                                 onClick={() => {
-                                    setUser(u);
+                                    handleExpand();
                                     formik.setFieldValue(field as string, u.user_id);
+                                    setUser(u);
                                 }}
                             >
                                 <p className="text-white">{u.first_name} {u.last_name}</p>
@@ -109,7 +106,7 @@ export function UserSearch<T extends Record<string, unknown>>({
                 className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100" 
                 htmlFor={field as string}
             >
-            {name}
+                {name}
             </label>
             <div className="relative mt-2 rounded-md shadow-sm">
             <div 

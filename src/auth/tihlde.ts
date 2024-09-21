@@ -239,9 +239,9 @@ export const isLeader = async (token: string): Promise<boolean> => {
 export const addCourse = async (
   token: string,
   title: string,
-  start_date: string,
-  start_registration_at: string,
-  end_registration_at: string,
+  start_date: Date,
+  start_registration_at: Date,
+  end_registration_at: Date,
   location: string,
   mazemap_link: string,
   organizer: MinuteGroup,
@@ -250,7 +250,7 @@ export const addCourse = async (
   description?: string,
 ): Promise<CoursePostResponse> => {
   const response = await fetch(
-    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/courses/`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/courses/`,
     {
       method: 'POST',
       headers: getHeaders(token),
