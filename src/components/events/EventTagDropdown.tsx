@@ -15,24 +15,24 @@
 import { useState } from 'react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { Combobox } from '@headlessui/react';
-import { CourseObjectTag, courseObjectTags, CourseTag, courseTags } from '@/auth/types';
+import { EventTag, eventTags } from '@/auth/types';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export interface CourseTagDropdownProps {
-  value?: CourseTag;
-  onChange: (value: CourseTag) => void;
+export interface EventTagDropdownProps {
+  value?: EventTag;
+  onChange: (value: EventTag) => void;
 }
 
-export default function CourseTagDropdown({ value, onChange }: CourseTagDropdownProps) {
+export default function EventTagDropdown({ value, onChange }: EventTagDropdownProps) {
   const [query, setQuery] = useState('');
 
   const filteredTags =
     query === ''
-      ? courseTags
-      : courseTags.filter((tag) => {
+      ? eventTags
+      : eventTags.filter((tag) => {
           return tag.toLowerCase().includes(query.toLowerCase());
         });
 
@@ -45,7 +45,7 @@ export default function CourseTagDropdown({ value, onChange }: CourseTagDropdown
         <Combobox.Input
           className="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 dark:bg-slate-700 dark:text-gray-100"
           onChange={(event) => setQuery(event.target.value)}
-          displayValue={(tag: CourseTag) => tag}
+          displayValue={(tag: EventTag) => tag}
         />
         <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
           <ChevronUpDownIcon

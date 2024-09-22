@@ -1,9 +1,10 @@
 import { env } from '../lib/env';
 import {
-  CourseDetailResponse,
-  CoursePagedResponse,
-  CoursePostResponse,
-  CourseTag,
+  EventDetailResponse,
+  EventPagedResponse,
+  EventPostResponse,
+  EventRegistrationsPagedResponse,
+  EventTag,
   Group,
   MembershipResponse,
   MinuteGroup,
@@ -11,6 +12,7 @@ import {
   MinuteTag,
   PagedResponse,
   PaginationRequest,
+  Registration,
   SingleMinutesPostResponse,
   User,
   UserPagedResponse,
@@ -238,7 +240,7 @@ export const isLeader = async (token: string): Promise<boolean> => {
   return isLeader;
 };
 
-export const addCourse = async (
+export const addEvent = async (
   token: string,
   title: string,
   start_date: Date,
@@ -248,11 +250,11 @@ export const addCourse = async (
   mazemap_link: string,
   organizer: MinuteGroup,
   lecturer: string,
-  tag: CourseTag,
+  tag: EventTag,
   description?: string,
-): Promise<CoursePostResponse> => {
+): Promise<EventPostResponse> => {
   const response = await fetch(
-    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/courses/`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/`,
     {
       method: 'POST',
       headers: getHeaders(token),
@@ -276,7 +278,7 @@ export const addCourse = async (
     throw new Error('Failed to add course');
   }
 
-  return (await response.json()) as CoursePostResponse;
+  return (await response.json()) as EventPostResponse;
 };
 
 export const getUsers = async (token: string, search: string): Promise<User[]> => {
@@ -298,9 +300,9 @@ export const getUsers = async (token: string, search: string): Promise<User[]> =
   return results;
 }
 
-export const getCourses  = async (token: string): Promise<CoursePagedResponse> => {
+export const getEvents = async (token: string): Promise<EventPagedResponse> => {
   const response = await fetch(
-    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/courses/`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/`,
     {
       headers: getHeaders(token),
     },
@@ -308,15 +310,15 @@ export const getCourses  = async (token: string): Promise<CoursePagedResponse> =
 
   if (!response.ok) {
     console.error(response.status, response.statusText, await response.json());
-    throw new Error('Failed to fetch courses');
+    throw new Error('Failed to fetch events');
   }
 
-  return (await response.json()) as CoursePagedResponse;
+  return (await response.json()) as EventPagedResponse;
 };
 
-export const getCourse = async (token: string, id: string): Promise<CourseDetailResponse> => {
+export const getEvent= async (token: string, id: string): Promise<EventDetailResponse> => {
   const response = await fetch(
-    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/courses/${id}/`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/${id}/`,
     {
       headers: getHeaders(token),
     },
@@ -327,23 +329,58 @@ export const getCourse = async (token: string, id: string): Promise<CourseDetail
     throw new Error('Failed to fetch course');
   }
 
-  return (await response.json()) as CourseDetailResponse;
+  const data = await response.json();
+
+  return data as EventDetailResponse;
 }
 
-export const createCourseRegistration = async (token: string, course_id: number): Promise<void> => {
+export const createEventRegistration = async (token: string, event_id: number): Promise<void> => {
   const response = await fetch(
-    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/courses/${course_id}/registrations/`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/${event_id}/registrations/`,
     {
       method: 'POST',
       headers: getHeaders(token),
       body: JSON.stringify({
-        course: course_id,
+        event: event_id,
       }),
     },
   );
 
   if (!response.ok) {
     console.error(response.status, response.statusText, await response.json());
-    throw new Error('Failed to register for course');
+    throw new Error('Failed to register for event');
   }
 }
+
+export const getEventRegistrations = async (token: string, event_id: number): Promise<EventRegistrationsPagedResponse> => {
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/${event_id}/registrations/`,
+    {
+      headers: getHeaders(token),
+    },
+  );
+
+  if (!response.ok) {
+    console.error(response.status, response.statusText, await response.json());
+    throw new Error('Failed to fetch registrations');
+  }
+
+  const data = await response.json();
+
+  return data as EventRegistrationsPagedResponse;
+};
+
+export const deleteEventRegistration = async (token: string, event_id: number, registration_id: number): Promise<void> => {
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/${event_id}/registrations/${registration_id}/`,
+    {
+      method: 'DELETE',
+      headers: getHeaders(token),
+    },
+  );
+
+  if (!response.ok) {
+    console.error(response.status, response.statusText, await response.json());
+    throw new Error('Failed to delete registration');
+  }
+};

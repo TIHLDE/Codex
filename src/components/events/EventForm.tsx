@@ -1,7 +1,5 @@
 "use client";
 
-import { addCourse } from '@/auth/tihlde';
-import { courseTags, Group, MinuteGroup, minuteGroups } from '@/auth/types';
 import { useFormik } from 'formik';
 import { useSession } from 'next-auth/react';
 import { useMemo } from 'react';
@@ -10,10 +8,12 @@ import { TextAreaField } from '../forms/TextAreaField';
 import { TextField } from '../forms/TextField';
 import GroupDropdown from '../minutes/editor/GroupDropdown';
 import { DateTimePicker } from '../forms/DateTimePicker';
-import CourseTagDropdown from './CourseTagDropdown';
 import { UserSearch } from '../forms/UserSearch';
 import { Button } from '../Button';
 import { useRouter } from 'next/navigation';
+import { addEvent } from '@/auth/tihlde';
+import { eventTags, Group, minuteGroups } from '@/auth/types';
+import EventTagDropdown from './EventTagDropdown';
 
 
 const validationSchema = yup.object().shape({
@@ -26,10 +26,10 @@ const validationSchema = yup.object().shape({
     mazemap_link: yup.string().url('Må være en gyldig URL').required('Du må fylle inn Mazemap-link'),
     organizer: yup.string().oneOf(minuteGroups).required('Du må velge en gruppe'),
     lecturer: yup.string().required('Du må fylle inn kursholder'),
-    tag: yup.string().oneOf(courseTags).required('Du må velge en tag'),
+    tag: yup.string().oneOf(eventTags).required('Du må velge en tag'),
 });
 
-export type CourseFormValues = yup.InferType<typeof validationSchema>;
+export type EventFormValues = yup.InferType<typeof validationSchema>;
 
 const initialValues = {
     title: '',
@@ -42,10 +42,10 @@ const initialValues = {
     organizer: 'Index',
     lecturer: '',
     tag: 'Workshop',
-} satisfies CourseFormValues;
+} satisfies EventFormValues;
 
 
-export const CourseForm = () => {
+export const EventForm = () => {
     const router = useRouter();
     const session = useSession();
 
@@ -65,9 +65,9 @@ export const CourseForm = () => {
       [session],
     );
 
-    const onSave = async (values: CourseFormValues) => {
+    const onSave = async (values: EventFormValues) => {
         try {
-            await addCourse(
+            await addEvent(
                 token,
                 values.title,
                 values.start_date,
@@ -81,14 +81,14 @@ export const CourseForm = () => {
                 values.description
             );
 
-            router.replace('/courses');
+            router.replace('/events');
             router.refresh();
         } catch (e) {
             console.error(e);
         }
     };  
 
-    const formik = useFormik<CourseFormValues>({
+    const formik = useFormik<EventFormValues>({
         initialValues,
         validationSchema,
         onSubmit: onSave,
@@ -155,7 +155,7 @@ export const CourseForm = () => {
                     groups={groups as Group[]}
                 />
 
-                <CourseTagDropdown
+                <EventTagDropdown
                     value={formik.values.tag}
                     onChange={(tag) => formik.setFieldValue('tag', tag, true)}
                 />

@@ -56,10 +56,10 @@ function Header() {
       </div>
       <div className="relative flex basis-0 justify-end gap-6 sm:gap-8 md:flex-grow">
         <Link
-          href={'/courses'}
+          href={'/events'}
           className={'text-slate-800 hover:underline dark:text-slate-200'}
         >
-          Kurs
+          Arrangement
         </Link>
         <Link
           href={'/minutes'}

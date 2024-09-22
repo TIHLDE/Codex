@@ -2,11 +2,11 @@ import { MinuteGroup } from "@/auth/types";
 import clsx from "clsx";
 
 
-interface CourseOrganizerProps {
+interface EventOrganizerProps {
     organizer: MinuteGroup;
 };
 
-export const CourseOrganizer = ({ organizer }: CourseOrganizerProps) => {
+export const EventOrganizer = ({ organizer }: EventOrganizerProps) => {
 
     const getColor = () => {
         switch (organizer) {

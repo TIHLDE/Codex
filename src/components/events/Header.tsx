@@ -6,17 +6,17 @@ import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 
-type CoursesHeaderProps = {
+type EventsHeaderProps = {
     back_url: string;
     back_text: string;
     next_page?: string;
 };
 
-export const CoursesHeader = async ({
+export const EventsHeader = async ({
     back_text,
     back_url,
     next_page
-}: CoursesHeaderProps) => {
+}: EventsHeaderProps) => {
     const session = await getServerSession(authOptions);
 
     const hasAccess = await isLeader(session?.user.tihldeUserToken ?? "");
@@ -32,11 +32,11 @@ export const CoursesHeader = async ({
 
             {next_page && hasAccess && (
                 <Link
-                    href="/courses/create"
+                    href="/events/create"
                     className="flex items-center space-x-2"
                 >
                     <p>
-                        Opprett kurs
+                        Opprett arrangement
                     </p>
                     <PlusIcon className="h-6 w-6 text-gray-900 dark:text-gray-100" />
                 </Link>

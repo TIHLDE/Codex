@@ -1,12 +1,12 @@
-import { CourseTag as CourseTagType } from "@/auth/types";
+import { EventTag as EventTagType } from "@/auth/types";
 import clsx from "clsx";
 
 
-interface CourseTagProps {
-    tag: CourseTagType;
+interface EventTagProps {
+    tag: EventTagType;
 };
 
-export const CourseTag = ({ tag }: CourseTagProps) => {
+export const EventTag = ({ tag }: EventTagProps) => {
 
     const getColor = () => {
         switch (tag) {

@@ -40,16 +40,15 @@ export interface Study {
   expiration_date: null;
 }
 
-export interface Course {
+export interface Event {
   id: number;
   title: string;
   start_date: string;
   location: string;
-  tag: CourseTag;
+  tag: EventTag;
   organizer: Group;
   lecturer: User;
   number_of_registrations: number;
-  viewer_is_registered: boolean;
 };
 
 export type TIHLDEAuthParams = {
@@ -104,7 +103,7 @@ export interface PaginationRequest {
   page: number;
 }
 
-export interface CoursePostResponse {
+export interface EventPostResponse {
   id: number;
   title: string;
   description: string;
@@ -115,15 +114,16 @@ export interface CoursePostResponse {
   mazemap_link: string;
   organizer: string;
   lecturer: string;
-  tag: CourseTag;
+  tag: EventTag;
 };
 
 export interface Registration {
-  user: User;
+  registration_id: number;
+  user_info: User;
   order: number;
 }
 
-export interface CourseDetailResponse {
+export interface EventDetailResponse {
   id: number;
   title: string;
   description: string;
@@ -134,15 +134,22 @@ export interface CourseDetailResponse {
   mazemap_link: string;
   organizer: Group;
   lecturer: User;
-  tag: CourseTag;
-  registrations: Registration[];
+  tag: EventTag;
+  viewer_is_registered: boolean;
 };
 
-export interface CoursePagedResponse {
+export interface EventPagedResponse {
   count: number;
   next: number | null;
   previous: number | null;
-  results: Course[];
+  results: Event[];
+};
+
+export interface EventRegistrationsPagedResponse {
+  count: number;
+  next: number | null;
+  previous: number | null;
+  results: Registration[];
 };
 
 export const minuteOrderings = [
@@ -160,11 +167,11 @@ export type MinuteTag = (typeof minuteTags)[number];
 export const minuteGroups = ['Index', 'Drift'] as const;
 export type MinuteGroup = (typeof minuteGroups)[number];
 
-export const courseTags = ['Workshop', 'Lecture'];
-export type CourseTag = (typeof courseTags)[number];
+export const eventTags = ['Workshop', 'Lecture'];
+export type EventTag = (typeof eventTags)[number];
 
-export const courseObjectTags = [
+export const eventObjectTags = [
   { value: 'Workshop', label: 'Workshop' },
   { value: 'Lecture', label: 'Forelesning' }
 ];
-export type CourseObjectTag = (typeof courseObjectTags)[number];
+export type EventObjectTag = (typeof eventObjectTags)[number];
