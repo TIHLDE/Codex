@@ -22,7 +22,7 @@ Før du begynner å laste ned de diverse verktøyene kan det være gunstig å be
 
 For Mac og Linux bruker man noe som heter Homebrew og det kan lastes ned [her](https://brew.sh/). Hvis du velger denne ruten så kan du heller søke på Google hvordan du laster ned f.eks. Git med homebrew istedenfor å følge stegene nedenfor.
 
-For Windows så er det ikke like nødvendig med dette siden de fleste pakker er justert for at det er lett å laste ned via en vanlig metode som man er kjent med. Men hvis man ønsker det samme som Mac og Linux kan du laste ned det tilsvarende [verktøyet Chocolatey her](https://docs.chocolatey.org/en-us/choco/setup/).
+For Windows så er det ikke like nødvendig med dette siden de fleste pakker er justert for at det er lett å laste ned via en vanlig metode som man er kjent med. Men hvis man ønsker det samme som Mac og Linux kan du laste ned det tilsvarende [verktøyet Chocolatey her](https://docs.chocolatey.org/en-us/choco/setup/). Om du har Windows 11, så har du sansynligvis [WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/) installert  om du bruker PowerShell.
 
 ## IDE
 Hvis du har vært i en forelesning i et emne tilknyttet programmering har du mest sannsynlig fullført dette steget. Hvis ikke så er IDE et verktøy man bruker for å skrive og kjøre kode. Den vanligste IDE'en å benytte seg av er **Visual Studio Code** som er gratis. For å laste ned VSCode så besøk [nettsiden deres](https://code.visualstudio.com/), så vil det dukke opp en "last ned" knapp. Trykk på denne og følg instruksene.
@@ -53,7 +53,7 @@ Det er en mulighet å sette Docker til å kjøre i bakgrunnen hver gang man star
 ## Make
 Make er et program vi bruker for å kunne kjøre kommandolinjer uten å måtte skrive de fullt ut hver gang. Istedenfor har vi en fil med et sett med make kommandoer, som f.eks. *make start*, som utfører en lengre kommandolinje for oss. Dette gjør det lettere å huske på ulike kommandoer. Igjen brukes dette primært for Lepton per nå.
 
-For å laste ned Make på windows følg [instruksene her](https://gnuwin32.sourceforge.net/packages/make.htm). Det ser litt shady ut, men dette er et verktøy brukt av millioner av utviklere og er helt trygt. Alternativt med Chocolatey installert kan du kjøre kommandoen: choco install make
+For å laste ned Make på windows følg [instruksene her](https://gnuwin32.sourceforge.net/packages/make.htm). Det ser litt shady ut, men dette er et verktøy brukt av millioner av utviklere og er helt trygt. Alternativt med Chocolatey installert kan du kjøre kommandoen: `choco install make`. Om du bruker WinGet, så kan du kjøre kommandoen `winget install -e --id GnuWin32.Make`
 
 Hvis man har Homebrew installert så kjører man kommandoen: brew install make
 
@@ -69,6 +69,10 @@ For å laste ned Python på Windows, Mac og Linux, kan du følge disse instruksj
 4. Velg "Add Python to PATH" under "Customize installation" for å legge til Python i systemets PATH-miljøvariabel.
 5. Klikk på "Install Now" for å starte installasjonen.
 6. Vent til installasjonen er fullført, og Python vil være installert på Windows-maskinen din.
+
+Alternativt:
+- `choco install python312` - For å installere python versjon 3.12 med chocolatey
+- `winget install -e --id Python.Python.3.11` - Fo å installere python versjon 3.11 med WinGet
 
 ### Mac:
 1. Åpne Terminal-appen på Mac.
@@ -94,6 +98,10 @@ Node.js er en populær plattform for å kjøre JavaScript på serveren. Her er i
 4. Godta lisensavtalen og velg installasjonsstedet.
 5. Klikk på "Next" for å starte installasjonen.
 6. Vent til installasjonen er fullført, og Node.js vil være installert på Windows-maskinen din.
+
+Alternativt:
+- `choco install nodejs-lts` - For å installere Node.JS LTS (Long Term Support) med chocolatey
+- `winget install -e --id OpenJS.NodeJS.LTS` - For å installere Node.JS LTS (Long Term Support) med WinGet
 
 ### Mac:
 1. Åpne Terminal-appen på Mac.
