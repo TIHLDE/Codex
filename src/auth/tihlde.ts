@@ -281,6 +281,48 @@ export const addEvent = async (
   return (await response.json()) as EventPostResponse;
 };
 
+export const updateEvent = async (
+  token: string,
+  id: number,
+  title: string,
+  start_date: Date,
+  start_registration_at: Date,
+  end_registration_at: Date,
+  location: string,
+  mazemap_link: string,
+  organizer: MinuteGroup,
+  lecturer: string,
+  tag: EventTag,
+  description?: string,
+): Promise<EventPostResponse> => {
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/${id}/`,
+    {
+      method: 'PUT',
+      headers: getHeaders(token),
+      body: JSON.stringify({
+        title,
+        description,
+        start_date,
+        start_registration_at,
+        end_registration_at,
+        location,
+        mazemap_link,
+        organizer: organizer.toLowerCase(),
+        lecturer,
+        tag,
+      }),
+    },
+  );
+
+  if (!response.ok) {
+    console.error(response.status, response.statusText, await response.json());
+    throw new Error('Failed to update course');
+  }
+
+  return (await response.json()) as EventPostResponse;
+};
+
 export const getUsers = async (token: string, search: string): Promise<User[]> => {
   const response = await fetch(
     `${env.NEXT_PUBLIC_TIHLDE_API_URL}/users/?search=${search}`,
@@ -352,9 +394,9 @@ export const createEventRegistration = async (token: string, event_id: number): 
   }
 }
 
-export const getEventRegistrations = async (token: string, event_id: number): Promise<EventRegistrationsPagedResponse> => {
+export const getEventRegistrations = async (token: string, event_id: number, page?: number): Promise<EventRegistrationsPagedResponse> => {
   const response = await fetch(
-    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/${event_id}/registrations/`,
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/${event_id}/registrations/?page=${page ?? 1}`,
     {
       headers: getHeaders(token),
     },

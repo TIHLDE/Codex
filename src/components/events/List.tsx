@@ -12,7 +12,7 @@ export const EventsList = async () => {
 
     return (
         <div className="max-w-4xl w-full mx-auto mt-20 grid grid-cols-1 gap-4">
-            {events.results.map((event) => <EventItem event={event} />)}
+            {events.results.map((event) => <EventItem key={event.id} event={event} />)}
         </div>
     );
 };

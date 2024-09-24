@@ -135,7 +135,14 @@ export interface EventDetailResponse {
   organizer: Group;
   lecturer: User;
   tag: EventTag;
+  permissions: Permission;
   viewer_is_registered: boolean;
+};
+
+export interface Permission {
+  write: boolean;
+  destroy: boolean;
+  update: boolean;
 };
 
 export interface EventPagedResponse {

@@ -11,8 +11,8 @@ import { DateTimePicker } from '../forms/DateTimePicker';
 import { UserSearch } from '../forms/UserSearch';
 import { Button } from '../Button';
 import { useRouter } from 'next/navigation';
-import { addEvent } from '@/auth/tihlde';
-import { eventTags, Group, minuteGroups } from '@/auth/types';
+import { addEvent, updateEvent } from '@/auth/tihlde';
+import { EventDetailResponse, eventTags, Group, MinuteGroup, minuteGroups } from '@/auth/types';
 import EventTagDropdown from './EventTagDropdown';
 
 
@@ -31,23 +31,27 @@ const validationSchema = yup.object().shape({
 
 export type EventFormValues = yup.InferType<typeof validationSchema>;
 
-const initialValues = {
-    title: '',
-    description: '',
-    start_date: new Date(new Date().setDate(new Date().getDate() + 7)),
-    start_registration_at: new Date(),
-    end_registration_at: new Date(new Date().setDate(new Date().getDate() + 6)),
-    location: '',
-    mazemap_link: '',
-    organizer: 'Index',
-    lecturer: '',
-    tag: 'Workshop',
-} satisfies EventFormValues;
 
+interface EventFormProps {
+    event?: EventDetailResponse;
+};
 
-export const EventForm = () => {
+export const EventForm = ({ event }: EventFormProps) => {
     const router = useRouter();
     const session = useSession();
+    
+    const initialValues = {
+        title: event?.title ?? '',
+        description: event?.description ?? '',
+        start_date: event?.start_date ??  new Date(new Date().setDate(new Date().getDate() + 7)),
+        start_registration_at: event?.start_registration_at ?? new Date(),
+        end_registration_at: event?.end_registration_at ?? new Date(new Date().setDate(new Date().getDate() + 6)),
+        location: event?.location ?? '',
+        mazemap_link: event?.mazemap_link ?? '',
+        organizer: event?.organizer.name as MinuteGroup ?? '',
+        lecturer: event?.lecturer.user_id ?? '',
+        tag: event?.tag ?? '',
+    } satisfies EventFormValues;
 
     const groups = [
         {
@@ -67,19 +71,36 @@ export const EventForm = () => {
 
     const onSave = async (values: EventFormValues) => {
         try {
-            await addEvent(
-                token,
-                values.title,
-                values.start_date,
-                values.start_registration_at,
-                values.end_registration_at,
-                values.location,
-                values.mazemap_link,
-                values.organizer,
-                values.lecturer,
-                values.tag,
-                values.description
-            );
+            if (event) {
+                await updateEvent(
+                    token,
+                    event.id,
+                    values.title,
+                    values.start_date,
+                    values.start_registration_at,
+                    values.end_registration_at,
+                    values.location,
+                    values.mazemap_link,
+                    values.organizer,
+                    values.lecturer,
+                    values.tag,
+                    values.description
+                )
+            } else {
+                await addEvent(
+                    token,
+                    values.title,
+                    values.start_date,
+                    values.start_registration_at,
+                    values.end_registration_at,
+                    values.location,
+                    values.mazemap_link,
+                    values.organizer,
+                    values.lecturer,
+                    values.tag,
+                    values.description
+                );
+            }
 
             router.replace('/events');
             router.refresh();
@@ -96,7 +117,7 @@ export const EventForm = () => {
 
     return (
         <form
-            className='max-w-6xl w-full py-6 px-12 border rounded-md mx-auto space-y-8'
+            className='max-w-6xl w-full py-6 px-12 border border-slate-600 rounded-md mx-auto space-y-8'
             onSubmit={formik.handleSubmit}
         >
             <div className='flex space-x-8'>
@@ -179,7 +200,7 @@ export const EventForm = () => {
                 type='submit'
                 className='w-full'
             >
-                Lagre
+                {event ? 'Oppdater arrangement' : 'Legg til arrangement'}
             </Button>
         </form>
     );

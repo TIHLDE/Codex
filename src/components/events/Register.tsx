@@ -35,10 +35,23 @@ export const RegisterToEvent = ({ event, registrations }: RegisterToEventProps) 
         }
     };
 
+    if (new Date(event.end_registration_at) < new Date() && !event.viewer_is_registered) {
+        return (
+            <Button
+                disabled
+                className="w-full"
+                variant="destructive"
+            >
+                Påmelding er stengt
+            </Button>
+        );
+    }
+
     return (
         <Button
             onClick={register}
             className="w-full"
+            variant={event.viewer_is_registered ? "destructive" : "primary"}
         >
             {
                 event.viewer_is_registered ? "Meld deg av" : "Meld deg på"

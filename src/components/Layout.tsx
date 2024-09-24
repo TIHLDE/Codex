@@ -59,7 +59,7 @@ function Header() {
           href={'/events'}
           className={'text-slate-800 hover:underline dark:text-slate-200'}
         >
-          Arrangement
+          Arrangementer
         </Link>
         <Link
           href={'/minutes'}
