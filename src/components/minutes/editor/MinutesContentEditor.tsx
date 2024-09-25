@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { TextField } from '@/components/TextField';
 import MDEditor from '@uiw/react-md-editor';
 import { Group, MinuteGroup, minuteGroups, minuteTags, SingleMinutesPostResponse } from '@/auth/types';
 import TagDropdown from '@/components/minutes/editor/TagDropdown';
@@ -9,6 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 import GroupDropdown from './GroupDropdown';
 import { useSession } from 'next-auth/react';
 import { getValidGroupMemberships } from '@/auth/tihlde';
+import { TextField } from '@/components/forms/TextField';
 
 const validationSchema = yup.object({
   title: yup.string().required('Du må fylle inn tittel'),

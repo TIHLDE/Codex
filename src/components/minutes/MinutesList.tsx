@@ -51,7 +51,7 @@ export default function MinutesList({
               href={'/'}
               className="flex flex-row items-center text-base font-semibold leading-6 text-gray-900 dark:text-gray-100"
             >
-              <ArrowLeftIcon className={'mr-2 inline h-5 w-5'} /> CODEX /
+              <ArrowLeftIcon className='mr-2 inline h-5 w-5' /> CODEX /
               Dokumenter
             </Link>
           </div>

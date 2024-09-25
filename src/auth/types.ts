@@ -40,6 +40,17 @@ export interface Study {
   expiration_date: null;
 }
 
+export interface Event {
+  id: number;
+  title: string;
+  start_date: string;
+  location: string;
+  tag: EventTag;
+  organizer: Group;
+  lecturer: User;
+  number_of_registrations: number;
+};
+
 export type TIHLDEAuthParams = {
   user_id: string;
   password: string;
@@ -51,6 +62,13 @@ export interface UserResponse {
   last_name: string;
   email: string;
 }
+
+export interface UserPagedResponse {
+  count: number;
+  next: null;
+  previous: null;
+  results: UserResponse[];
+};
 
 export interface PagedResponse {
   count: number;
@@ -85,6 +103,62 @@ export interface PaginationRequest {
   page: number;
 }
 
+export interface EventPostResponse {
+  id: number;
+  title: string;
+  description: string;
+  start_date: Date;
+  start_registration_at: Date;
+  end_registration_at: Date;
+  location: string;
+  mazemap_link: string;
+  organizer: string;
+  lecturer: string;
+  tag: EventTag;
+};
+
+export interface Registration {
+  registration_id: number;
+  user_info: User;
+  order: number;
+}
+
+export interface EventDetailResponse {
+  id: number;
+  title: string;
+  description: string;
+  start_date: Date;
+  start_registration_at: Date;
+  end_registration_at: Date;
+  location: string;
+  mazemap_link: string;
+  organizer: Group;
+  lecturer: User;
+  tag: EventTag;
+  permissions: Permission;
+  viewer_is_registered: boolean;
+};
+
+export interface Permission {
+  write: boolean;
+  destroy: boolean;
+  update: boolean;
+};
+
+export interface EventPagedResponse {
+  count: number;
+  next: number | null;
+  previous: number | null;
+  results: Event[];
+};
+
+export interface EventRegistrationsPagedResponse {
+  count: number;
+  next: number | null;
+  previous: number | null;
+  results: Registration[];
+};
+
 export const minuteOrderings = [
   'created_at',
   'updated_at',
@@ -99,3 +173,12 @@ export type MinuteTag = (typeof minuteTags)[number];
 
 export const minuteGroups = ['Index', 'Drift'] as const;
 export type MinuteGroup = (typeof minuteGroups)[number];
+
+export const eventTags = ['Workshop', 'Lecture'];
+export type EventTag = (typeof eventTags)[number];
+
+export const eventObjectTags = [
+  { value: 'Workshop', label: 'Workshop' },
+  { value: 'Lecture', label: 'Forelesning' }
+];
+export type EventObjectTag = (typeof eventObjectTags)[number];

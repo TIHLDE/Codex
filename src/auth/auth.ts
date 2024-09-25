@@ -19,6 +19,7 @@ declare module 'next-auth' {
     first_name: string;
     last_name: string;
     tihldeUserToken: string;
+    user_id: string;
   }
 
   interface JWT extends DefaultJWT {
