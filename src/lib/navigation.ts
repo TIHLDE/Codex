@@ -61,6 +61,10 @@ export const navigation: Navigation[] = [
             title: 'Factory',
             href: '/docs/lepton/models/factory',
           },
+          {
+            title: "Polymorfisme (Arv)",
+            href: '/docs/lepton/models/polymorphic',
+          }
         ],
       },
       {
@@ -70,6 +74,10 @@ export const navigation: Navigation[] = [
             title: 'Intro',
             href: '/docs/lepton/serializers/intro',
           },
+          {
+            title: "Polymorfisme (Arv)",
+            href: '/docs/lepton/serializers/polymorphic',
+          }
         ],
       },
       {
@@ -99,6 +107,10 @@ export const navigation: Navigation[] = [
             title: 'Feilhåndtering for endepunkter',
             href: '/docs/lepton/viewsets/exceptions',
           },
+          {
+            title: 'Polymorfisme (Arv)',
+            href: '/docs/lepton/viewsets/polymorphic'
+          }
         ],
       },
       {
@@ -151,10 +163,6 @@ export const navigation: Navigation[] = [
             href: '/docs/lepton/config/makefile',
           },
         ],
-      },
-      {
-        title: 'Hvordan håndtere filopplastning',
-        href: '/docs/lepton/extensions/fileUpload',
       },
       {
         title: 'Bruk av eksternt API',
