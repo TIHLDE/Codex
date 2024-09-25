@@ -65,7 +65,7 @@ def update(self, request, *args, **kwargs):
 På denne måten router vi til riktig serializer slik at vi kan opprette og oppdatere instanser på riktig måte.
 
 {% callout title="Må prøves!" %}
-Per nå har jeg ikke fått testet ut ordentlig med routing til riktig serializer. Det kan hande det går an å bruke ***FormPolymorphicSerializer** med create og update metoder, hvis man kaller på serializeren med parameteret partial=True
+Per nå har jeg ikke fått testet ut ordentlig med routing til riktig serializer. Det kan hande det går an å bruke FormPolymorphicSerializer med create og update metoder, hvis man kaller på serializeren med parameteret partial=True
 
 Dette må utforskes
 {% /callout %}
