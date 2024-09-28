@@ -43,7 +43,7 @@ export default function MinutesList({
   isLoading,
 }: MinutesListProps) {
   return (
-    <div className="flex max-h-[calc(100svh-2rem)] w-full max-w-md flex-col overflow-y-scroll">
+    <div className="flex max-h-[calc(100svh-2rem)] max-w-xl w-full flex-col overflow-y-scroll px-2">
       <div className="flex flex-col gap-3 py-5 sm:px-2 dark:bg-slate-900">
         <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
           <div className="ml-4 mt-2">
@@ -123,12 +123,6 @@ export default function MinutesList({
                     <h2 className="min-w-0 text-sm font-semibold leading-6 text-slate-800 dark:text-white">
                       <span className="flex items-center gap-x-2">
                         <span className="truncate text-lg">{minute.title}</span>
-                        {/*<span className="text-gray-700 dark:text-gray-400">
-                            /
-                          </span>
-                            <span className="whitespace-nowrap text-gray-700 dark:text-gray-300">
-                              {`${minute.author.first_name} ${minute.author.last_name}`}
-                      </span>*/}
                         <span className="absolute inset-0" />
                       </span>
                     </h2>

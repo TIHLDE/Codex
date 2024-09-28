@@ -21,8 +21,8 @@ export default function MinutesContentHeader({
 }: MinutesContentHeaderProps) {
   return (
     <div className="border-b border-gray-400 pb-5 dark:border-gray-200">
-      <div className="sm:flex sm:items-baseline sm:justify-between">
-        <div className="sm:w-0 sm:flex-1">
+      <div className="space-y-4">
+        <div>
           <h1
             id="message-heading"
             className="text-2xl font-semibold leading-6 text-gray-800 dark:text-gray-100"
@@ -34,7 +34,7 @@ export default function MinutesContentHeader({
           </p>
         </div>
 
-        <div className={'flex justify-end gap-4'}>
+        <div className={'flex justify-end space-x-2'}>
           <Button variant={'secondary'} onClick={onEdit}>
             Rediger
           </Button>

@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import MDEditor from '@uiw/react-md-editor';
 import { Group, MinuteGroup, minuteGroups, minuteTags, SingleMinutesPostResponse } from '@/auth/types';
 import TagDropdown from '@/components/minutes/editor/TagDropdown';
 import { Button } from '@/components/Button';
@@ -9,6 +8,7 @@ import GroupDropdown from './GroupDropdown';
 import { useSession } from 'next-auth/react';
 import { getValidGroupMemberships } from '@/auth/tihlde';
 import { TextField } from '@/components/forms/TextField';
+import { TextAreaField } from '@/components/forms/TextAreaField';
 
 const validationSchema = yup.object({
   title: yup.string().required('Du må fylle inn tittel'),
@@ -92,14 +92,14 @@ export default function MinutesContentEditor({
   return (
     <main
       className={
-        'h-full w-full rounded-lg bg-slate-800 p-4 lg:h-[calc(100svh-2rem)]'
+        'h-full w-full rounded-lg dark:bg-slate-800 p-2 lg:h-[calc(100svh-2rem)]'
       }
     >
       <form
         onSubmit={formik.handleSubmit}
         className={'flex h-full w-full flex-col gap-4'}
       >
-        <div className={'flex w-full justify-between'}>
+        <div className='space-y-4'>
           <div className='space-y-4'>
             <TextField
               formik={formik}
@@ -119,7 +119,7 @@ export default function MinutesContentEditor({
               />
             </div>
           </div>
-          <div className={'flex h-full items-center justify-end gap-4'}>
+          <div className='flex items-center space-x-2'>
             <Button type={'submit'}>Lagre</Button>
             <Button
               type={'button'}
@@ -130,10 +130,11 @@ export default function MinutesContentEditor({
             </Button>
           </div>
         </div>
-        <MDEditor
-          height={'100%'}
-          value={formik.values.content}
-          onChange={(value) => formik.setFieldValue('content', value, true)}
+        <TextAreaField
+          formik={formik}
+          field={'content'}
+          name={'Innhold'}
+          className='h-96'
         />
       </form>
     </main>

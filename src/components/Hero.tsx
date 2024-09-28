@@ -57,6 +57,7 @@ export function Hero() {
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
                 <Button href="#get-started">Kom i gang</Button>
                 <Button
+                  className='bg-white'
                   href="https://github.com/TIHLDE/Codex"
                   variant="secondary"
                 >
