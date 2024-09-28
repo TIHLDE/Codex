@@ -14,7 +14,7 @@ interface EventItemProps {
 
 export const EventItem = ({ event }: EventItemProps) => {
     return (
-        <div className="w-full border border-slate-600 px-3 py-2 rounded-md space-y-8">
+        <div className="w-full shadow-sm border border-gray-300 dark:border-slate-600 px-3 py-2 rounded-md space-y-8">
             <div className="space-y-2">
                 <div>
                     <h1 className="text-xl font-bold">

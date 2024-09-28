@@ -22,8 +22,8 @@ export const EventDetails = ({ event, registrations, numberOfRegistrations }: Ev
             <div className="flex space-x-8">
                 <div className="max-w-md w-full space-y-4">
                     {event.viewer_is_registered && (
-                        <div className="w-full border border-emerald-800 bg-emerald-200 rounded-md p-4">
-                            <p className="text-center text-emerald-800">
+                        <div className="w-full border border-emerald-500 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-200 rounded-md p-4">
+                            <p className="text-center text-emerald-500 dark:text-emerald-800">
                                 Du er påmeldt til arrangementet
                             </p>
                         </div>
@@ -31,7 +31,7 @@ export const EventDetails = ({ event, registrations, numberOfRegistrations }: Ev
 
                     <div className="w-full border border-slate-600 rounded-md shadow-sm space-y-4 p-4">
                         <div className="space-y-1">
-                            <h1 className="text-sm font-semibold text-sky-500">
+                            <h1 className="text-sm font-semibold text-sky-600 dark:text-sky-500">
                                 Startdato:
                             </h1>
                             <div className="flex items-center space-x-2">
@@ -41,7 +41,7 @@ export const EventDetails = ({ event, registrations, numberOfRegistrations }: Ev
                         </div>
 
                         <div className="space-y-1">
-                            <h1 className="text-sm font-semibold text-sky-500">
+                            <h1 className="text-sm font-semibold text-sky-600 dark:text-sky-500">
                                 Påmeldingsstart:
                             </h1>
                             <div className="flex items-center space-x-2">
@@ -51,7 +51,7 @@ export const EventDetails = ({ event, registrations, numberOfRegistrations }: Ev
                         </div>
 
                         <div className="space-y-1">
-                            <h1 className="text-sm font-semibold text-sky-500">
+                            <h1 className="text-sm font-semibold text-sky-600 dark:text-sky-500">
                                 Påmeldingsslutt:
                             </h1>
                             <div className="flex items-center space-x-2">
@@ -63,12 +63,12 @@ export const EventDetails = ({ event, registrations, numberOfRegistrations }: Ev
 
                     <div className="w-full border border-slate-600 rounded-md shadow-sm space-y-4 p-4">
                         <div className="space-y-1">
-                            <h1 className="text-sm font-semibold text-sky-500">
+                            <h1 className="text-sm font-semibold text-sky-600 dark:text-sky-500">
                                 Lokasjon:
                             </h1>
                             <div className="flex items-center space-x-2">
                                 <HomeIcon className="h-5 w-5" />
-                                <a target="_blank" href={event.mazemap_link} className="text-sm text-gray-400 hover:text-sky-400 underline">
+                                <a target="_blank" href={event.mazemap_link} className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500 dark:hover:text-sky-400 underline">
                                     {event.location}
                                 </a>
                             </div>

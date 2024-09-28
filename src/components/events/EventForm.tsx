@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import { addEvent, updateEvent } from '@/auth/tihlde';
 import { EventDetailResponse, eventTags, Group, MinuteGroup, minuteGroups } from '@/auth/types';
 import EventTagDropdown from './EventTagDropdown';
+import { EventDeleteButton } from './EventDeleteButton';
 
 
 const validationSchema = yup.object().shape({
@@ -117,7 +118,7 @@ export const EventForm = ({ event }: EventFormProps) => {
 
     return (
         <form
-            className='max-w-6xl w-full py-6 px-12 border border-slate-600 rounded-md mx-auto space-y-8'
+            className='max-w-6xl w-full py-6 px-12 border border-gray-300 dark:border-slate-600 rounded-md mx-auto space-y-8'
             onSubmit={formik.handleSubmit}
         >
             <div className='flex space-x-8'>
@@ -186,6 +187,7 @@ export const EventForm = ({ event }: EventFormProps) => {
                     name='Kursholder'
                     field='lecturer'
                     className='w-full'
+                    placeholderUser={event?.lecturer}
                 />
             </div>
 
@@ -196,12 +198,17 @@ export const EventForm = ({ event }: EventFormProps) => {
                 className='w-full min-h-60'
             />
 
-            <Button
-                type='submit'
-                className='w-full'
-            >
-                {event ? 'Oppdater arrangement' : 'Legg til arrangement'}
-            </Button>
+            <div className='space-y-2'>
+                <Button
+                    type='submit'
+                    className='w-full'
+                    variant='submit'
+                >
+                    {event ? 'Oppdater arrangement' : 'Legg til arrangement'}
+                </Button>
+
+                {event && <EventDeleteButton className='w-full' event={event} token={token} />}
+            </div>
         </form>
     );
 };

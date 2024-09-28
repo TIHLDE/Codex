@@ -8,7 +8,7 @@ interface EventDateProps {
 
 export const EventDate = ({ date, className }: EventDateProps) => {
     return (
-        <p className={clsx("text-sm text-gray-400", className)}>
+        <p className={clsx("text-sm text-gray-600 dark:text-gray-400", className)}>
             {new Date(date).toLocaleDateString('nb-NO', {
                 year: 'numeric',
                 month: 'long',

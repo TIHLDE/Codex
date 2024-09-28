@@ -426,3 +426,18 @@ export const deleteEventRegistration = async (token: string, event_id: number, r
     throw new Error('Failed to delete registration');
   }
 };
+
+export const deleteEvent = async (token: string, event_id: number): Promise<void> => {
+  const response = await fetch(
+    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/${event_id}/`,
+    {
+      method: 'DELETE',
+      headers: getHeaders(token),
+    },
+  );
+
+  if (!response.ok) {
+    console.error(response.status, response.statusText, await response.json());
+    throw new Error('Failed to delete event');
+  }
+};

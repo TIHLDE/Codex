@@ -13,16 +13,18 @@ export interface UserSearchProps<T extends Record<string, unknown>> {
     field: keyof T;
     name: string;
     className?: string;
+    placeholderUser?: User;
 };
 
 export function UserSearch<T extends Record<string, unknown>>({
     formik,
     field,
     name,
-    className
+    className,
+    placeholderUser
 }: UserSearchProps<T>) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [user, setUser] = useState<User>();
+    const [user, setUser] = useState<User | null>(placeholderUser ?? null);
     const [users, setUsers] = useState<User[]>([]);
     const [search, setSearch] = useState<string>('');
     const debouncedSearch = useDebounce(search, 500);
@@ -62,7 +64,7 @@ export function UserSearch<T extends Record<string, unknown>>({
                 onClick={handleExpand}
             >
                 <div 
-                    className="max-w-2xl w-full mx-auto bg-slate-950 border p-4 rounded-md shadow-lg z-20 py-4 px-6 space-y-4 min-h-96"
+                    className="max-w-2xl w-full mx-auto dark:bg-slate-950 bg-white border border-gray-300 dark:border-slate-800 p-4 rounded-md shadow-lg z-20 py-4 px-6 space-y-4 min-h-96"
                     onClick={(e) => e.stopPropagation()}
                 >
                     <div>
@@ -75,26 +77,27 @@ export function UserSearch<T extends Record<string, unknown>>({
                         <input
                             id={field as string}
                             name={field as string}
-                            className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 bg-slate-700 text-white px-3 cursor-pointer"
+                            className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-800 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 bg-white dark:bg-slate-950 dark:text-white px-3 cursor-pointer"
                             type="text"
                             onChange={(e) => setSearch(e.target.value)}
                         />
                     </div>
 
-                    <div className="w-full h-0.5 rounded-md bg-slate-700" />
+                    <div className="w-full h-0.5 rounded-md bg-gray-200 dark:bg-slate-900" />
 
                     <div className="space-y-2">
                         {users.map((u) => (
                             <div 
                                 key={u.user_id}
-                                className="flex items-center justify-between px-2 py-1.5 bg-slate-800 rounded-md cursor-pointer"
+                                className="flex items-center justify-between px-2 py-1.5 bg-white dark:bg-slate-950 rounded-md cursor-pointer border border-gray-300 dark:border-slate-800"
                                 onClick={() => {
                                     handleExpand();
                                     formik.setFieldValue(field as string, u.user_id);
                                     setUser(u);
+                                    setUsers([]);
                                 }}
                             >
-                                <p className="text-white">{u.first_name} {u.last_name}</p>
+                                <p className="dark:text-white">{u.first_name} {u.last_name}</p>
                             </div>
                         ))}
                     </div>
@@ -110,7 +113,7 @@ export function UserSearch<T extends Record<string, unknown>>({
             </label>
             <div className="relative mt-2 rounded-md shadow-sm">
             <div 
-                className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 bg-slate-700 text-white px-3 cursor-pointer"
+                className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 dark:placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 dark:bg-slate-900 dark:text-white px-3 cursor-pointer"
                 onClick={handleExpand}
             >
                 {user
