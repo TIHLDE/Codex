@@ -1,3 +1,5 @@
+"use client";
+
 import type { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import type { FormikProps } from 'formik';
 import { ExclamationCircleIcon } from '@heroicons/react/16/solid';

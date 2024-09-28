@@ -15,9 +15,7 @@ export default function MinutesContent({
 }: MinutesContentProps) {
   return (
     <main
-      className={
-        'h-full w-full rounded-lg bg-slate-100 p-4 lg:h-[calc(100svh-2rem)] dark:bg-slate-800 overflow-y-scroll'
-      }
+      className='h-full w-full rounded-lg p-4 lg:h-[calc(100svh-2rem)] overflow-y-scroll space-y-8'
     >
       {minute && (
         <MinutesContentHeader
@@ -26,11 +24,7 @@ export default function MinutesContent({
           onDelete={onDelete}
         />
       )}
-      {minute && (
-        <div className={'my-3'}>
-          <MarkdownRenderer content={minute.content} />
-        </div>
-      )}
+      {minute && <MarkdownRenderer content={minute.content} />}
     </main>
   );
 };
