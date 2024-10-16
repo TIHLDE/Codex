@@ -247,22 +247,77 @@ export const navigation: Navigation[] = [
     ],
   },
   {
-    title: 'OpenStack',
+    title: 'Drift',
     children: [
       {
-        title: 'Oppsett',
-        href: '/docs/openstack/installation',
-      },
-      {
-        title: 'Virtuelle maskiner',
+        title: 'OpenStack',
         children: [
           {
-            title: 'Opprettelse med CLI',
-            href: '/docs/openstack/vm/cli',
+            title: 'Oppsett',
+            href: '/docs/openstack/installation',
           },
           {
-            title: 'Opprettelse med Web',
-            href: '/docs/openstack/vm/web',
+            title: 'Virtuelle maskiner',
+            children: [
+              {
+                title: 'Opprettelse med CLI',
+                href: '/docs/openstack/vm/cli',
+              },
+              {
+                title: 'Opprettelse med Web',
+                href: '/docs/openstack/vm/web',
+              }
+            ]
+          }
+        ]
+      },
+      {
+        title: 'Ressurser',
+        href: '/docs/drift/resources'
+      },
+      {
+        title: 'Utfordringer',
+        href: '/docs/drift/challenges',
+        children: [
+          {
+            title: 'Let\'s HTTP-arty',
+            href: '/docs/drift/challenges/http'
+          },
+          {
+            title: 'Coolify',
+            href: '/docs/drift/challenges/coolify'
+          },
+          {
+            title: 'Cron-quer the Clock',
+            href: '/docs/drift/challenges/cronjob'
+          },
+          {
+            title: 'DBeast in Drift',
+            href: '/docs/drift/challenges/db'
+          },
+          {
+            title: 'Harmony and Discord',
+            href: '/docs/drift/challenges/discord'
+          },
+          {
+            title: 'Docker, I hardly know her',
+            href: '/docs/drift/challenges/docker'
+          },
+          {
+            title: 'Git on up',
+            href: '/docs/drift/challenges/git'
+          },
+          {
+            title: 'System of a D(aemon)',
+            href: '/docs/drift/challenges/services'
+          },
+          {
+            title: 'To Sudo or Not To Sudo / Shell Yeah!',
+            href: '/docs/drift/challenges/terminal'
+          },
+          {
+            title: 'Nginx-pect the Unexpected',
+            href: '/docs/drift/challenges/nginx'
           }
         ]
       }
