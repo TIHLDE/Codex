@@ -1,5 +1,5 @@
 ---
-title: Git on up 🪩💃🕺
+title: Git on up 🪩💃🕺 (#7)
 ---
 
 ## Difficulty

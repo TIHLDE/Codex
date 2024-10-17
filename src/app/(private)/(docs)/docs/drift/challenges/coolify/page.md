@@ -1,5 +1,5 @@
 ---
-title: Coolify
+title: Coolify (#2)
 ---
 
 ## Difficulty
