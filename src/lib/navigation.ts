@@ -280,6 +280,53 @@ export const navigation: Navigation[] = [
         href: '/docs/drift/challenges',
         children: [
           {
+            title: 'Template',
+            href: '/docs/drift/challenges/template'
+          },
+          {
+            title: 'Linux',
+            children: [
+              {
+                title: 'Linux Lift-Off (#1)',
+                href: '/docs/drift/challenges/linux/intro'
+              },
+              {
+                title: 'Mastering the Essentials (#2)',
+                href: '/docs/drift/challenges/linux/essentials'
+              },
+              {
+                title: 'Scripting and Automation (#3)',
+                href: '/docs/drift/challenges/linux/script'
+              },
+            ]
+          },
+          {
+            title: 'Git',
+            children: [
+              {
+                title: 'Git on up (#1)',
+                href: '/docs/drift/challenges/git/intro'
+              },
+            ]
+          },
+          {
+            title: 'Databaser',
+            children: [
+              {
+                title: 'DB noob in Drift (#1)',
+                href: '/docs/drift/challenges/db/noob'
+              },
+              {
+                title: 'Building a Data-Driven World (#2)',
+                href: '/docs/drift/challenges/db/sql'
+              },
+              {
+                title: 'Pythonic Data Mastery (#3)',
+                href: '/docs/drift/challenges/db/alchemy'
+              }
+            ]
+          },
+          {
             title: 'Let\'s HTTP-arty (#1)',
             href: '/docs/drift/challenges/http'
           },
@@ -292,20 +339,12 @@ export const navigation: Navigation[] = [
             href: '/docs/drift/challenges/cronjob'
           },
           {
-            title: 'DBeast in Drift (#4)',
-            href: '/docs/drift/challenges/db'
-          },
-          {
             title: 'Harmony and Discord (#5)',
             href: '/docs/drift/challenges/discord'
           },
           {
             title: 'Docker, I hardly know her (#6)',
             href: '/docs/drift/challenges/docker'
-          },
-          {
-            title: 'Git on up (#7)',
-            href: '/docs/drift/challenges/git'
           },
           {
             title: 'System of a D(aemon) (#8)',

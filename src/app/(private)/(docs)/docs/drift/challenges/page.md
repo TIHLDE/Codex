@@ -2,32 +2,15 @@
 title: Utfordringer
 ---
 
-Det er mulig for alle å opprette utfordringer! Når du oppretter en utfordring skal følgende template brukes:
+## Linux
+1. [Linux Lift-Off](/docs/drift/challenges/linux/intro)
+2. [Mastering the Essentials](/docs/drift/challenges/linux/essentials)
+3. [Scripting and Automation](/docs/drift/challenges/linux/script)
 
-## Difficulty
-&#9733;&#9733;&#9733;&#9734;&#9734;
+## Git
+1. [Git on up](/docs/drift/challenges/git/intro)
 
-## Useful prior knowledge
-- ...
-
-## Pre-requisties
-- ...
-
-## Purpose
-Describe purpose here
-
-At the end of this challenge, you should:
-- ...
-
-## Objective
-Describe what needs to be done for the challenge
-
-
-## Bonus Challenge
-- ...
-
-## Useful Resources
-- ...
-
-### Author(s)
-...
+## Databaser
+1. [DN noob in Drift](/docs/drift/challenges/db/noob)
+2. [Building a Data-Driven World](/docs/drift/challenges/db/sql)
+3. [Pythonic Data Mastery](/docs/drift/challenges/db/alchemy)

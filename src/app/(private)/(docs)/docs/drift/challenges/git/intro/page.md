@@ -1,5 +1,5 @@
 ---
-title: Git on up 🪩💃🕺 (#7)
+title: Git on up 🪩💃🕺 (#1)
 ---
 
 ## Difficulty
@@ -37,9 +37,9 @@ The main objective for this challenge is to initialize a local repository, add s
 - Attempt GitHub Actions challenge and integrate into this repository.
 
 ## Useful Resources
-- https://git-scm.com/
-- https://docs.github.com/en/get-started
-- https://www.conventionalcommits.org/en/v1.0.0/
+- [Git](https://git-scm.com/)
+- [GitHub](https://docs.github.com/en/get-started)
+- [Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
 ### Author(s)
 Trym Hamer Gudvangen
