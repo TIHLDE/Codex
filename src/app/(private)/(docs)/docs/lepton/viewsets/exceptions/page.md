@@ -2,7 +2,7 @@
 title: "Feilhåndtering for endepunkter"
 ---
 
-Når vi skal lage våre endepunkter ved hjelp av Viewsets, er det my som kan gå galt i koden. Derfor er det viktig for ethvert API å håndtere mulige feil og returnere en respons til frontend med riktig statuskode og en logisk melding.
+Når vi skal lage våre endepunkter ved hjelp av Viewsets, er det mye som kan gå galt i koden. Derfor er det viktig for ethvert API å håndtere mulige feil og returnere en respons til frontend med riktig statuskode og en logisk melding.
 
 ## En lang rekke med håndteringer
 I et Viewset så legger vi til grunn at vi skal sette opp feilhåndtering som tar høyde for alle mulige feil som default.
