@@ -327,6 +327,32 @@ export const navigation: Navigation[] = [
             ]
           },
           {
+            title: 'Web',
+            children: [
+              {
+                title: 'Personal Profile Page (#1)',
+                href: '/docs/drift/challenges/web/profile'
+              },
+              {
+                title: 'Interactive Forms (#2)',
+                href: '/docs/drift/challenges/web/contact'
+              },
+              {
+                title: 'What Next? (#3)',
+                href: '/docs/drift/challenges/web/next/intro'
+              }
+            ]
+          },
+          {
+            title: 'Api',
+            children: [
+              {
+                title: 'Introdction to Node (#1)',
+                href: '/docs/drift/challenges/api/node'
+              },
+            ]
+          },
+          {
             title: 'Let\'s HTTP-arty (#1)',
             href: '/docs/drift/challenges/http'
           },
