@@ -336,6 +336,10 @@ export const navigation: Navigation[] = [
               {
                 title: 'Interactive Forms (#2)',
                 href: '/docs/drift/challenges/web/contact'
+              },
+              {
+                title: 'What Next? (#3)',
+                href: '/docs/drift/challenges/web/next/intro'
               }
             ]
           },
