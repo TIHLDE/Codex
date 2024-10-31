@@ -428,6 +428,10 @@ export const navigation: Navigation[] = [
         title: 'ScriptStack',
         href: '/docs/projects/scriptstack',
       },
+      {
+        title: 'Minecraft-server',
+        href: '/docs/projects/minecraft-server'
+      }
     ],
   },
 ];
