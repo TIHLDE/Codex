@@ -272,6 +272,16 @@ export const navigation: Navigation[] = [
         ]
       },
       {
+        title: 'Linux',
+        href: '/docs/drift/linux',
+        children: [
+          {
+            title: 'Brukere i Linux',
+            href: '/docs/drift/linux/users'
+          }
+        ]
+      },
+      {
         title: 'Ressurser',
         href: '/docs/drift/resources'
       },
