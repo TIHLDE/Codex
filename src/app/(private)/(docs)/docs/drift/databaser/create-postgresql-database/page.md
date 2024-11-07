@@ -1,5 +1,5 @@
 ---
-tittel: Hvordan lage PostgreSQL database på database-server
+tittel: Hvordan lage en PostgreSQL database for et prosjekt
 ---
 
 _skrevet 07.11.2024_
