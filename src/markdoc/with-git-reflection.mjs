@@ -10,29 +10,29 @@ const getFileGitInfo = async (filePath) => {
 
   // Get latest info (last updated)
   const { stdout: updatedStdout } = await execPromise(
-    `git log -1 --format=%an,%aI,%s -- '${filePath}'`,
+    `git log -1 --format=%an,%aI,%s,%H -- '${filePath}'`,
   );
 
-  const [updatedByAuthor, updatedDateIso, updatedMessage] = updatedStdout
-    .trim()
-    .split(',');
+  const [updatedByAuthor, updatedDateIso, updatedMessage, updatedHash] =
+    updatedStdout.trim().split(',');
 
   // Get info about file creation
   const { stdout: createdStdout } = await execPromise(
-    `git log --follow --format=%an,%aI,%s --date default '${filePath}' | tail -1`,
+    `git log --follow --format=%an,%aI,%s,%H --date default '${filePath}' | tail -1`,
   );
 
-  const [createdByAuthor, createdDateIso, createdMessage] = createdStdout
-    .trim()
-    .split(',');
+  const [createdByAuthor, createdDateIso, createdMessage, createdHash] =
+    createdStdout.trim().split(',');
 
   return {
     updatedByAuthor,
     updatedDateIso,
     updatedMessage,
+    updatedHash,
     createdByAuthor,
     createdDateIso,
     createdMessage,
+    createdHash,
   };
 };
 
