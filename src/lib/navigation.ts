@@ -19,7 +19,7 @@ export const navigation: Navigation[] = [
       {
         title: 'WSL',
         href: '/docs/new_member/wsl',
-      }
+      },
     ],
   },
   {
@@ -62,9 +62,9 @@ export const navigation: Navigation[] = [
             href: '/docs/lepton/models/factory',
           },
           {
-            title: "Polymorfisme (Arv)",
+            title: 'Polymorfisme (Arv)',
             href: '/docs/lepton/models/polymorphic',
-          }
+          },
         ],
       },
       {
@@ -75,9 +75,9 @@ export const navigation: Navigation[] = [
             href: '/docs/lepton/serializers/intro',
           },
           {
-            title: "Polymorfisme (Arv)",
+            title: 'Polymorfisme (Arv)',
             href: '/docs/lepton/serializers/polymorphic',
-          }
+          },
         ],
       },
       {
@@ -109,8 +109,8 @@ export const navigation: Navigation[] = [
           },
           {
             title: 'Polymorfisme (Arv)',
-            href: '/docs/lepton/viewsets/polymorphic'
-          }
+            href: '/docs/lepton/viewsets/polymorphic',
+          },
         ],
       },
       {
@@ -266,16 +266,16 @@ export const navigation: Navigation[] = [
               {
                 title: 'Opprettelse med Web',
                 href: '/docs/openstack/vm/web',
-              }
-            ]
-          }
-        ]
+              },
+            ],
+          },
+        ],
       },
       {
         title: 'Databaser',
         children: [
           {
-            title: 'Å lage en PostgreSQL database for et prosjekt',
+            title: 'Hvordan lage en PostgreSQL database for et prosjekt',
             href: '/docs/drift/databaser/create-postgresql-database',
           },
         ],
@@ -286,13 +286,13 @@ export const navigation: Navigation[] = [
         children: [
           {
             title: 'Brukere i Linux',
-            href: '/docs/drift/linux/users'
-          }
-        ]
+            href: '/docs/drift/linux/users',
+          },
+        ],
       },
       {
         title: 'Ressurser',
-        href: '/docs/drift/resources'
+        href: '/docs/drift/resources',
       },
       {
         title: 'Utfordringer',
@@ -300,112 +300,112 @@ export const navigation: Navigation[] = [
         children: [
           {
             title: 'Template',
-            href: '/docs/drift/challenges/template'
+            href: '/docs/drift/challenges/template',
           },
           {
             title: 'Linux',
             children: [
               {
                 title: 'Linux Lift-Off (#1)',
-                href: '/docs/drift/challenges/linux/intro'
+                href: '/docs/drift/challenges/linux/intro',
               },
               {
                 title: 'Mastering the Essentials (#2)',
-                href: '/docs/drift/challenges/linux/essentials'
+                href: '/docs/drift/challenges/linux/essentials',
               },
               {
                 title: 'Scripting and Automation (#3)',
-                href: '/docs/drift/challenges/linux/script'
+                href: '/docs/drift/challenges/linux/script',
               },
-            ]
+            ],
           },
           {
             title: 'Git',
             children: [
               {
                 title: 'Git on up (#1)',
-                href: '/docs/drift/challenges/git/intro'
+                href: '/docs/drift/challenges/git/intro',
               },
-            ]
+            ],
           },
           {
             title: 'Databaser',
             children: [
               {
                 title: 'DB noob in Drift (#1)',
-                href: '/docs/drift/challenges/db/noob'
+                href: '/docs/drift/challenges/db/noob',
               },
               {
                 title: 'Building a Data-Driven World (#2)',
-                href: '/docs/drift/challenges/db/sql'
+                href: '/docs/drift/challenges/db/sql',
               },
               {
                 title: 'Pythonic Data Mastery (#3)',
-                href: '/docs/drift/challenges/db/alchemy'
-              }
-            ]
+                href: '/docs/drift/challenges/db/alchemy',
+              },
+            ],
           },
           {
             title: 'Web',
             children: [
               {
                 title: 'Personal Profile Page (#1)',
-                href: '/docs/drift/challenges/web/profile'
+                href: '/docs/drift/challenges/web/profile',
               },
               {
                 title: 'Interactive Forms (#2)',
-                href: '/docs/drift/challenges/web/contact'
+                href: '/docs/drift/challenges/web/contact',
               },
               {
                 title: 'What Next? (#3)',
-                href: '/docs/drift/challenges/web/next/intro'
-              }
-            ]
+                href: '/docs/drift/challenges/web/next/intro',
+              },
+            ],
           },
           {
             title: 'Api',
             children: [
               {
                 title: 'Introdction to Node (#1)',
-                href: '/docs/drift/challenges/api/node'
+                href: '/docs/drift/challenges/api/node',
               },
-            ]
+            ],
           },
           {
-            title: 'Let\'s HTTP-arty (#1)',
-            href: '/docs/drift/challenges/http'
+            title: "Let's HTTP-arty (#1)",
+            href: '/docs/drift/challenges/http',
           },
           {
             title: 'Coolify (#2)',
-            href: '/docs/drift/challenges/coolify'
+            href: '/docs/drift/challenges/coolify',
           },
           {
             title: 'Cron-quer the Clock (#3)',
-            href: '/docs/drift/challenges/cronjob'
+            href: '/docs/drift/challenges/cronjob',
           },
           {
             title: 'Harmony and Discord (#5)',
-            href: '/docs/drift/challenges/discord'
+            href: '/docs/drift/challenges/discord',
           },
           {
             title: 'Docker, I hardly know her (#6)',
-            href: '/docs/drift/challenges/docker'
+            href: '/docs/drift/challenges/docker',
           },
           {
             title: 'System of a D(aemon) (#8)',
-            href: '/docs/drift/challenges/services'
+            href: '/docs/drift/challenges/services',
           },
           {
             title: 'To Sudo or Not To Sudo / Shell Yeah! (#9)',
-            href: '/docs/drift/challenges/terminal'
+            href: '/docs/drift/challenges/terminal',
           },
           {
             title: 'Nginx-pect the Unexpected (#10)',
-            href: '/docs/drift/challenges/nginx'
-          }
-        ]
-      }
-    ]
+            href: '/docs/drift/challenges/nginx',
+          },
+        ],
+      },
+    ],
   },
   {
     title: 'Prosjekter',
@@ -449,8 +449,8 @@ export const navigation: Navigation[] = [
       },
       {
         title: 'Minecraft-server',
-        href: '/docs/projects/minecraft-server'
-      }
+        href: '/docs/projects/minecraft-server',
+      },
     ],
   },
 ];
