@@ -272,6 +272,15 @@ export const navigation: Navigation[] = [
         ]
       },
       {
+        title: 'Databaser',
+        children: [
+          {
+            title: 'Hvordan lage en PostgreSQL database for et prosjekt',
+            href: '/docs/drift/databaser/create-postgresql-database',
+          },
+        ],
+      },
+      {
         title: 'Linux',
         href: '/docs/drift/linux',
         children: [
