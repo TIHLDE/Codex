@@ -26,7 +26,9 @@ create-postgresql-database <database-navn>
 
 hvor `<database-navn>` er navnet på databasen du skal lage. Databasen vil da bli laget automagisk og du vil da få ut credentials som du må ta vare på og ikke miste(!!!).
 
-_HUSK: du kan bare koble til databasen fra NTNU sitt interne nettverk. Bruk NTNU sin VPN for å få tilgang fra utsiden av NTNU sitt nettverk._
+{% callout title="HUSK" type="warning" %}
+Du kan bare koble til databasen fra NTNU sitt interne nettverk. Bruk NTNU sin VPN for å få tilgang på databasen fra utsiden av NTNU sitt nettverk.
+{% /callout %}
 
 ## Lag databasen manuelt
 
@@ -73,4 +75,6 @@ DB_PASSWORD=<password>
 
 hvor `<ip-address>` er IP-adressen til _database-server_ (den 7. november 2024 så var IP-adressen `10.212.25.14`).
 
-_HUSK: du kan bare koble til databasen fra NTNU sitt interne nettverk. Trenger du tilgang til databasen utenfor NTNU sitt nettverk så må du bruke NTNU sin VPN._
+{% callout title="HUSK" type="warning" %}
+Du kan bare koble til databasen fra NTNU sitt interne nettverk. Bruk NTNU sin VPN for å få tilgang på databasen fra utsiden av NTNU sitt nettverk.
+{% /callout %}
