@@ -62,7 +62,7 @@ export const navigation: Navigation[] = [
             href: '/docs/lepton/models/factory',
           },
           {
-            title: ""Polymorfisme (Arv)"",
+            title: "Polymorfisme (Arv)",
             href: '/docs/lepton/models/polymorphic',
           }
         ],
@@ -75,7 +75,7 @@ export const navigation: Navigation[] = [
             href: '/docs/lepton/serializers/intro',
           },
           {
-            title: ""Polymorfisme (Arv)"",
+            title: "Polymorfisme (Arv)",
             href: '/docs/lepton/serializers/polymorphic',
           }
         ],
@@ -272,14 +272,14 @@ export const navigation: Navigation[] = [
         ]
       },
       {
-              title: 'Databaser',
-              children: [
-                {
-                  title: 'Hvordan lage en PostgreSQL database for et prosjekt',
-                  href: '/docs/drift/databaser/create-postgresql-database',
-                },
-              ],
-            },
+        title: 'Databaser',
+        children: [
+          {
+            title: 'Hvordan lage en PostgreSQL database for et prosjekt',
+            href: '/docs/drift/databaser/create-postgresql-database',
+          },
+        ],
+      },
       {
         title: 'Linux',
         href: '/docs/drift/linux',
@@ -372,7 +372,7 @@ export const navigation: Navigation[] = [
             ]
           },
           {
-            title: ''Let\\'s HTTP-arty (#1)'',
+            title: 'Let\'s HTTP-arty (#1)',
             href: '/docs/drift/challenges/http'
           },
           {
