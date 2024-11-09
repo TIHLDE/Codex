@@ -4,9 +4,9 @@ title: Kom i gang
 
 {% quick-links %}
 
-{% quick-link title="Lepton" icon="installation" href="/" description="Backend og API for Kvark" /%}
+{% quick-link title="Lepton" icon="installation" href="/docs/lepton" description="Backend og API for Kvark" /%}
 
-{% quick-link title="Kvark" icon="presets" href="/" description="Frontenden til TIHLDEs nettside" /%}
+{% quick-link title="Kvark" icon="presets" href="/docs/kvark/introduction" description="Frontenden til TIHLDEs nettside" /%}
 
 {% /quick-links %}
 
@@ -83,34 +83,5 @@ _Eksempel_
 title: Min dokumentasjonsside
 ---
 ```
-
-### Api-sider
-
-Vi har laget en løsning for å dokumentere API-sider, som krever en litt annerledes utforming av
-markdown siden din. Følge metadata skal inkluderes:
-
-```yaml
----
-title: 'Endpoint title'
-description: 'Enpoint description'
-method: METHOD
-url: v1/your/endpoint
-response_codes:
-  - '201 Created'
-  - '401 Unauthorized'
-  - '599 Another code'
-requires_auth: true # not required
-permissions: # also not required
-  - 'permission1'
-  - 'permission2'
----
-```
-
-Du kan fjerne `permission` feletet dersom endepunktet ikke krever noen scropes, men behold
-`requires_auth` feltet dersom endepunktet krever at brukeren er logget inn.
-
-{% callout title="Pro tip" %}
-Du finner templates for de mest vanlige bruksområdene i `app/templates` mappen :)
-{% /callout %}
 
 Det var alt du trengte for å starte, god progging!

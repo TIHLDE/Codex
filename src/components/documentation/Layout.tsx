@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
-import { Hero } from '@/components/Hero';
-import { Logo } from '@/components/Logo';
-import { MobileNavigation } from '@/components/MobileNavigation';
-import { Navigation } from '@/components/Navigation';
-import { Search } from '@/components/Search';
-import { ThemeSelector } from '@/components/ThemeSelector';
+import { Hero } from '@/components/documentation/Hero';
+import { Logo } from '@/components/ui/Logo';
+import { MobileNavigation } from '@/components/documentation/MobileNavigation';
+import { Navigation } from '@/components/documentation/Navigation';
+import { Search } from '@/components/documentation/Search';
+import { ThemeSelector } from '@/components/ui/ThemeSelector';
 
 function GitHubIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (

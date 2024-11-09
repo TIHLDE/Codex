@@ -21,7 +21,7 @@ const lexend = localFont({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Docs',
+    template: '%s - Dokumentasjon',
     default: 'Codex',
   },
   description: 'Dokumentasjonsnettside for TIHLDE INDEX',

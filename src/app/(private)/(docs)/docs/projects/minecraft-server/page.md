@@ -81,7 +81,9 @@ Jeg lagde en VM med Debian så _image-navn_ blir for meg `debian`. Bruker du Ubu
 Først må vi passe på at vi installerer en moderne nok Java-version, noe du kan finne ut [her](https://minecraft.wiki/w/Tutorials/Setting_up_a_server#Java_version).
 Installasjonen for dette varierer litt ut i fra hvilken image du valgte da du laget VM-instansen, hvilken Java versjon du fant ut at du trenger.
 
-**P.S.** : For de som bryr seg så krever Minecraft-serveren bare Java JRE så du må ikke ha JDK-en (men det går så klart fint det også).
+{% callout title="P.S." %}
+For de som bryr seg så krever Minecraft-serveren bare Java JRE så du må ikke ha JDK-en (men det går så klart fint det også):
+{% /callout %}
 
 Når dette ble skrevet (17.10.2024) så var siste Minecraft-server versjon 1.21.1 og dette krever minst Java 21. Desverre har Debian 12 repositoriene bare Java 17 så Java 21 må installeres på en litt annen metode for meg. Dersom du bruker Debian 13+ eller Ubuntu vil du mest sannsynlig kunne installere riktig Java versjon med:
 

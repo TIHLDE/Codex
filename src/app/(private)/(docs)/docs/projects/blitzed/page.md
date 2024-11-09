@@ -165,7 +165,7 @@ export default function ClientPage() {
 }
 ```
 
-Dette eksempelet viser en komponent som henter ut en turnering hvert 5. sekund, og bruker `console.log` for å printe ut til konsollen hver gang `tournament` endrer på seg.
+Dette eksempelet viser en komponent som henter ut en turnering hvert 3. sekund, og bruker `console.log` for å printe ut til konsollen hver gang `tournament` endrer på seg.
 
 Lær mer om hvordan du bruker queries og mutations på client-side med [Tanstack query](https://tanstack.com/query/latest). Vi bruker Tanstack for å kjøre alle client-side prosedyre-operasjoner. Du kan også lese mer om oppsettet på [T3-stack](https://create.t3.gg/en/usage/trpc).
 

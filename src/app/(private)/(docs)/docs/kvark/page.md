@@ -1,5 +1,5 @@
 ---
-title: 'Introduksjon'
+title: 'Introduksjon til Kvark'
 ---
 
 Kvark er frontendkodebasen for TIHLDE-nettsida, som du sikkert allerede har tatt i bruk flere ganger ([tihlde.org](https://tihlde.org)). Kvark benytter seg i hovedsak av følgende teknologier:

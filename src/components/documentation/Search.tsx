@@ -75,7 +75,7 @@ function useAutocomplete({
       React.KeyboardEvent
     >({
       id,
-      placeholder: 'Find something...',
+      placeholder: 'Søk i Codex',
       defaultActiveItemId: 0,
       onStateChange({ state }) {
         setAutocompleteState(state);
@@ -257,15 +257,15 @@ const SearchInput = forwardRef<
   let inputProps = autocomplete.getInputProps({ inputElement: null });
 
   return (
-    <div className="group relative flex h-12">
+    <div className="group relative flex h-12 overflow-visible rounded-t-2xl">
       <SearchIcon className="pointer-events-none absolute left-4 top-0 h-full w-5 fill-slate-400 dark:fill-slate-500" />
       <input
         ref={inputRef}
+        {...inputProps}
         className={clsx(
-          'flex-auto appearance-none bg-transparent pl-12 text-slate-900 outline-none placeholder:text-slate-400 focus:w-full focus:flex-none sm:text-sm dark:text-white [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden',
+          'flex-auto appearance-none rounded-xl bg-transparent pl-12 text-slate-900 placeholder:text-slate-400 focus:w-full focus:flex-none sm:text-sm dark:text-white [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden',
           autocompleteState.status === 'stalled' ? 'pr-11' : 'pr-4',
         )}
-        {...inputProps}
         onKeyDown={(event) => {
           if (
             event.key === 'Escape' &&
@@ -385,7 +385,7 @@ function SearchDialog({
                 />
                 <div
                   ref={panelRef}
-                  className="border-t border-slate-200 bg-white px-2 py-3 empty:hidden dark:border-slate-400/10 dark:bg-slate-800"
+                  className=" bg-white px-2 py-3 empty:hidden dark:border-slate-400/10 dark:bg-slate-800"
                   {...autocomplete.getPanelProps({})}
                 >
                   {autocompleteState.isOpen && (
@@ -448,7 +448,7 @@ export function Search() {
       >
         <SearchIcon className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 md:group-hover:fill-slate-400 dark:fill-slate-500" />
         <span className="sr-only md:not-sr-only md:ml-2 md:text-slate-500 md:dark:text-slate-400">
-          Search docs
+          Søk i Codex
         </span>
         {modifierKey && (
           <kbd className="ml-auto hidden font-medium text-slate-400 md:block dark:text-slate-500">

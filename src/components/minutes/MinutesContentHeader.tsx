@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import { SingleMinutesPostResponse } from '@/auth/types';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/ui/Button';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');

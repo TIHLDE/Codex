@@ -1,8 +1,14 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { Group, MinuteGroup, minuteGroups, minuteTags, SingleMinutesPostResponse } from '@/auth/types';
+import {
+  Group,
+  MinuteGroup,
+  minuteGroups,
+  minuteTags,
+  SingleMinutesPostResponse,
+} from '@/auth/types';
 import TagDropdown from '@/components/minutes/editor/TagDropdown';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/ui/Button';
 import { useEffect, useMemo, useState } from 'react';
 import GroupDropdown from './GroupDropdown';
 import { useSession } from 'next-auth/react';
@@ -50,9 +56,9 @@ export default function MinutesContentEditor({
     setIsGroupsLoading(true);
     try {
       const groups = await getValidGroupMemberships(token);
-  
+
       if (groups.length) {
-        formik.setValues(values => ({
+        formik.setValues((values) => ({
           ...values,
           group: groups[0].name as MinuteGroup,
         }));
@@ -92,20 +98,16 @@ export default function MinutesContentEditor({
   return (
     <main
       className={
-        'h-full w-full rounded-lg dark:bg-slate-800 p-2 lg:h-[calc(100svh-2rem)]'
+        'h-full w-full rounded-lg p-2 lg:h-[calc(100svh-2rem)] dark:bg-slate-800'
       }
     >
       <form
         onSubmit={formik.handleSubmit}
         className={'flex h-full w-full flex-col gap-4'}
       >
-        <div className='space-y-4'>
-          <div className='space-y-4'>
-            <TextField
-              formik={formik}
-              field={'title'}
-              name={'Tittel'}
-            />
+        <div className="space-y-4">
+          <div className="space-y-4">
+            <TextField formik={formik} field={'title'} name={'Tittel'} />
             <div className={'flex justify-start gap-4'}>
               <TagDropdown
                 value={formik.values.tag}
@@ -119,7 +121,7 @@ export default function MinutesContentEditor({
               />
             </div>
           </div>
-          <div className='flex items-center space-x-2'>
+          <div className="flex items-center space-x-2">
             <Button type={'submit'}>Lagre</Button>
             <Button
               type={'button'}
@@ -134,7 +136,7 @@ export default function MinutesContentEditor({
           formik={formik}
           field={'content'}
           name={'Innhold'}
-          className='h-96'
+          className="h-96"
         />
       </form>
     </main>
