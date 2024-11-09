@@ -8,16 +8,16 @@ export default function NotFound() {
           404
         </p>
         <h1 className="mt-3 font-display text-3xl tracking-tight text-slate-900 dark:text-white">
-          Page not found
+          Denne siden finnes ikke
         </h1>
         <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-          Sorry, we couldn’t find the page you’re looking for.
+          Beklager, men vi kunne ikke finne siden du leter etter.
         </p>
         <Link
           href="/"
           className="mt-8 text-sm font-medium text-slate-900 dark:text-white"
         >
-          Go back home
+          Gå tilbake hjem
         </Link>
       </div>
     </div>
