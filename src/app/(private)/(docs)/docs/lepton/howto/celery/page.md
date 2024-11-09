@@ -1,10 +1,11 @@
 ---
-title: "Hvordan bruke Celery og tasks"
+title: 'Hvordan bruke Celery og tasks'
 ---
 
 Celery er et bibliotek som gir oss muligheten til å sette opp det vi kaller **tasks**. En task er en metode som blir utført til et gitt tidspunkt. Dette kan enten bli satt opp med en **cronjob** eller at vi selv setter et tidspunkt i fremtiden den skal kjøre.
 
 ## Oppsett av en task
+
 ```python
 class BaseTask(celery.Task):
     """
@@ -20,9 +21,10 @@ class BaseTask(celery.Task):
 
 Vi har laget en egen klasse som vi bruker for alle tasks. Den gjør ikke stort annet enn å arve fra Celery sin **Task** klasse og legge til muligheten for logging.
 
-I hver **app** finner man en mappe som heter **tasks**. Inni her oppretter man tasks. 
+I hver **app** finner man en mappe som heter **tasks**. Inni her oppretter man tasks.
 
 ### Cronjob
+
 En **cronjob** er en jobb vi setter til å bli gjort til et spesifikt tidspunkt. Dette kan være hvert 15. minutt 24/7 eller kun klokken 12 hver dag.
 
 ```python
@@ -46,8 +48,8 @@ Dette er en task som vi bruker for å slette alle logger om bruk av nettsiden so
 
 Det første man gjør for å lage en task er å bruke celery sin dekoratør. Vi henter ut app fra vår config fil til celery.
 
-* **bind**: Dette settes alltid til True, og gjøres for at tasken kan kalle på seg selv ved hjelp av **self** argumentet. Dette er for at en task skal kunne prøve på nytt hvis den feiler. Alle tasks må derfor ha self som første argument selv om self ikke brukes.
-* **base**: Hvilken klasse vi skal bruke, og da bruker vi vår klasse nevnt tidligere.
+- **bind**: Dette settes alltid til True, og gjøres for at tasken kan kalle på seg selv ved hjelp av **self** argumentet. Dette er for at en task skal kunne prøve på nytt hvis den feiler. Alle tasks må derfor ha self som første argument selv om self ikke brukes.
+- **base**: Hvilken klasse vi skal bruke, og da bruker vi vår klasse nevnt tidligere.
 
 Dette er en task som vi skal bruke i en cronjob. For å finne frem til våre cronjobs så må vi inn i config filen til celery i app/celery.
 
@@ -70,6 +72,7 @@ app.conf.update(
 Her ser vi at vi har sett opp et **schedule** som lister opp alle cronjobs vi skal benytte oss av med tilhørende metode og kjøreplan. Denne setter vi inn i konfigurasjonen til vår **celery app**.
 
 ### Fremtidige tasks
+
 I noen tilfeller så ønsker vi å kjøre en task et x antall sekunder, minutter eller timer frem i tid.
 
 ```python
@@ -118,7 +121,5 @@ check_if_has_paid.apply_async(
 
 Ved å bruke metoden **apply_async** kaller vi på tasken, men gir beskjed om hvor lenge til det det er den skal bli utført.
 
-* **args**: Alle argumenter man kan sende inn i tasken må sendes som en tuppel i args argumentet.
-* **countdown**: Når tasken skal kjøre. Definert i sekunder. **get_countdown_time** returnere et x antall sekunder som tasken skal vente før den kjører.
-
-
+- **args**: Alle argumenter man kan sende inn i tasken må sendes som en tuppel i args argumentet.
+- **countdown**: Når tasken skal kjøre. Definert i sekunder. **get_countdown_time** returnere et x antall sekunder som tasken skal vente før den kjører.

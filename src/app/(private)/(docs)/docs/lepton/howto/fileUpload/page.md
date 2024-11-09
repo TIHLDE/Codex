@@ -1,5 +1,5 @@
 ---
-title: "Hvordan håndtere filopplastning"
+title: 'Hvordan håndtere filopplastning'
 ---
 
 I TIHLDE benytter vi oss av Microsoft Azure for å lagre filer. Dette gir medlemmer av TIHLDE muligheten til å laste opp filer som bilder og dokumenter. Dette benytter vi blant annet oss av når vi laster opp bilder for et arrangement eller en nyhet.
@@ -41,15 +41,18 @@ class FileHandler(ABC):
     def uploadBlob(self):
         pass
 ```
+
 Dette er en abstrakt klasse som vi bruker som moderklasse for neste klasse vi skal vise.
 Denne klassen har flere metoder vi benytter for å kunne lage en container og en blob som lastes opp til Azure. Du kan lese mer om hva dette er i Microsoft sin [dokumentasjon.](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction)
 
 Merk også at det er en metode som sjekker om størrelsen på bilde er større enn 50MB.
+
 ```python
 def checkBlobSize(self):
     if self.blob.size > self.SIZE_50_MB:
        raise ValueError("Filen kan ikke være større enn 50 MB")
 ```
+
 Denne størrelsen kommer nok til å bli redusert til en lavere størrelse, både for å spare penger, men også for å opprettholde TIHLDE sine bærekraftsprofil.
 
 Neste fil vi skal se på finner vi i app/common/azure_file_handler.py.
@@ -121,7 +124,6 @@ class AzureFileHandler(FileHandler):
 
 Denne klassen håndterer filopplastning til Azure ved hjelp av Azure sitt eget python bibliotek. Vi skal ikke gå innom det her, siden dette er et tredjepartsbibliotek som dere kan lese om i Microsoft sin egen dokumentasjon.
 
-
 ## Hvordan bruke AzureFileHandler
 
 Nå skal vi se på hvordan vi kan benytte oss av klassen AzureFileHandler for å laste opp filer. Vi har et eget endepunkt vi benytter oss av når vi laster opp bilder på /upload. Det blir blant annet sendt en forespørsel med et bilde når man legger ved bilde på et arrangement eller en nyhet. Deretter får man returnert en url til bildet (eks. https://leptonstoragedev.blob.core.windows.net/imagepng/4f780d5e-288b-4a29-9a39-448a1d80de98cnbc.png).
@@ -160,11 +162,13 @@ def upload(request):
             status=status.HTTP_400_BAD_REQUEST,
         )
 ```
+
 Det som er i fokus for denne metoden er at denne håndterer POST requests og vil kun kjøre hvis det er et medlem av TIHLDE som sender inn en fil.
 
 Metoden henter ut vedlagte filer og bruker AzureFileHandler(blob).uploadBlob() til å laste opp minimum en fil.
 
 ## Hvordan modeller håndterer filopplastning
+
 Vi har nå sett på hvordan man bruke AzureFileHandler klassen til å laste opp bilder til Azure. Hvis man skal sende en POST forespørsel med en fil må content-type være satt til multipart/form-data istedenfor application/json. Dette gjør det vanskeligere å sende json data samtidig som man sender en fil.
 
 Dermed er det bedre å håndtere filopplastning for seg selv. Et eksempel på dette er når man oppretter en nyhet på frontend. Når man oppretter en nyhet så velger man et bilde og så sendes det en POST request til /upload. Som nevnt returnerer denne en url til bildet, som man sender med POST request til /news, som da legger til url til bildet for modellen.
@@ -193,6 +197,7 @@ class BaseModelSerializer(serializers.ModelSerializer):
             replace_file(instance.image, validated_data.get("image", None))
         return super().update(instance, validated_data)
 ```
+
 Alle våre serializers arver fra BaseModelSerializer, som vist over. Her ser vi at det er kodet inn en update metode.
 Det som skjer her er at det sjekkes om det finnes en ny image-url i den innsendte dataen, og om instansen av modellen allerede har et bilde. Hvis dette er sant, så kjører vi replace_file metoden som fjerner bildet fra Azure. Grunnen til at vi må gjøre dette er fordi når man laster opp et nytt bilde for f.eks. en nyhet, så slettes ikke det gamle bildet. Derfor må vi slette det gamle bildet her før vi oppdaterer url for instansen.
 
@@ -211,7 +216,8 @@ class MyUpdateSerializer(BaseModelSerializer):
 Her ser vi et eksempel på hvordan vi arver BaseModelSerializer og overkjører update metoden. Det er viktig at hvis man overkjører update metoden så man man kalle på super().update(...) for å sørge for at den eventuelt gamle filen slettes.
 
 ## Hvordan håndtere filer i et tilpasset endepunkt
-Obs! Merk at @action og tilpassete endepunkter blir skrevet mer om i ***Tilpassete endepunkter***.
+
+Obs! Merk at @action og tilpassete endepunkter blir skrevet mer om i **_Tilpassete endepunkter_**.
 
 ```python
     @action(
@@ -257,7 +263,8 @@ Obs! Merk at @action og tilpassete endepunkter blir skrevet mer om i ***Tilpasse
             )
 ```
 
-I de aller fleste tilfeller der frontend skal sende forespørsler til backend, så vil type forespørsel være av JSON format. Det vil si at data som blir sendt via en POST eller UPDATE forespørsel sendes som JSON. Men når det skal sendes filer via et API, må dette behandles annerledes. Her kommer det et nytt parameter inn i @action, nemlig parser_classes. I dette tilfellet er bruker vi to innebygde parser klasser fra Django som håndterer forespørselen og filen(e) som sendes. Dermed har det bli lagt til et attributt *FILES* på requesten som sendes.
+I de aller fleste tilfeller der frontend skal sende forespørsler til backend, så vil type forespørsel være av JSON format. Det vil si at data som blir sendt via en POST eller UPDATE forespørsel sendes som JSON. Men når det skal sendes filer via et API, må dette behandles annerledes. Her kommer det et nytt parameter inn i @action, nemlig parser_classes. I dette tilfellet er bruker vi to innebygde parser klasser fra Django som håndterer forespørselen og filen(e) som sendes. Dermed har det bli lagt til et attributt _FILES_ på requesten som sendes.
 
 ## Konklusjon
+
 For å konkludere så er det sjeldent at man trenger å håndtere filopplastning i ditt eget oppsett rundt en modell. Bruk OptionalImage i modellen og BaseModelSerializer i serializer. Deretter håndterer dere filopplastningen på frontend med /upload endepunktet, og deretter sender man returnert bilde url inn til endepunktet for viewsettet.

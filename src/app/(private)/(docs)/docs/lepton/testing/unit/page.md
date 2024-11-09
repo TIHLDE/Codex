@@ -2,7 +2,7 @@
 title: Enhetstester
 ---
 
-Denne seksjonen blir ganske kort siden vi har dekket det meste i de forrige seksjonene. Men vi skal ta for oss et eksempel på en enkel enhetstest. 
+Denne seksjonen blir ganske kort siden vi har dekket det meste i de forrige seksjonene. Men vi skal ta for oss et eksempel på en enkel enhetstest.
 
 Som nevnt er enhetstester for å teste funksjonalitet på et lavere nivå. Så la oss ta for oss en enkel funksjon.
 

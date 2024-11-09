@@ -1,5 +1,5 @@
 ---
-title: "Opprettelse av falske modell instanser"
+title: 'Opprettelse av falske modell instanser'
 ---
 
 Når vi skal teste våre endpunkt og våre modeller, så må vi ofte ha noen instanser av en modell å teste opp i mot. Siden hver test lager en ny "falsk" database, så krever dette opprettelse av instanser for hver test.
@@ -7,6 +7,7 @@ Når vi skal teste våre endpunkt og våre modeller, så må vi ofte ha noen ins
 Det tar lang tid å skulle bruke Django ORM til å opprette ny instanser hver gang. Derfor har vi noe vi kaller **Factory**. Dette vil si at man lager en fabrikk for en modell, og ved å kalle på denne får man en instans med enten tilfeldige verdier, eller faste verdier vi setter selv.
 
 ## Hvordan sette opp en Factory
+
 For å sette opp en **Factory** bruker vi **factory-boy** og Django sitt eget.
 
 ```python
@@ -42,13 +43,14 @@ I tillegg bruker vi factory-biblioteket for å kunne lage tilfeldige verdier. He
 Det anbefales å lage en **Factory** så utfyllende som mulig, slik at de blir lettere å bruke og kan brukes til flere ulike testscenarioer.
 
 ## Hvordan bruke en instans fra en Factory
+
 ```python
 # Hent en instans
 group = GroupFactory()
 
 # Hent en instans med verdier vi setter selv
 custom_group = GroupFactory(
-    name="Min gruppe", 
+    name="Min gruppe",
     slug="min-gruppe"
 )
 ```

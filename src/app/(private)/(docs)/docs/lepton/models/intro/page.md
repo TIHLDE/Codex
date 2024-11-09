@@ -1,16 +1,15 @@
 ---
-title: "Modeller og tabeller i databasen"
+title: 'Modeller og tabeller i databasen'
 ---
 
-
 I "intro til Django" viste vi hvordan en modell er et sett med instrukser som Django bruker for å opprette tabeller i databasen vår. I denne artikkelen skal vi se nærmere på hvordan modeller kan settes opp og hva man kan gjøre.
-
 
 ## Abstrakte modeller
 
 Som nevnt tidligere, har vi 3 modeller i kodebasen vår som alle våre modeller arver fra. Av de 3 er det 2 som man alltid skal arve fra, og en som er valgfri. Alle disse 3 modellene er abstrakte, som vil si at de ikke skal brukes for seg selv, men som en forelder til andre klasser.
 
 ### Base Model
+
 ```python
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
@@ -23,6 +22,7 @@ class BaseModel(models.Model):
 Denne modellen gjør ikke noe mer spesielt enn å legge til to felter som holder kontroll over dato en instans av tabellen blir laget og når det oppdateres. Dette legges til i instansen automatisk hver gang en instans opprettes eller oppdateres.
 
 ### Optional Image (valgfritt bruk)
+
 ```python
 class OptionalImage(models.Model):
     image = models.URLField(max_length=600, null=True, blank=True)
@@ -35,6 +35,7 @@ class OptionalImage(models.Model):
 Denne modellen er valgfri og en modell arver fra denne hvis man skal ha et bilde. Et eksempel er Event modellen som arver fra denne for å kunne legge ved et forsidebilde for et Event.
 
 ### Permission Model
+
 ```python
 class BasePermissionModel(models.Model):
     read_access = []
@@ -65,11 +66,12 @@ class BasePermissionModel(models.Model):
 Denne modellen er den siste modellen, som i likhet med BaseModel må arves hver gang du oppretter en ny modell. Vårt rettighetssystem er bygget oppå denne modellen. Kort fortalt så sjekker denne modellen om en bruker er en del av en gruppe som har write og read access. Dette tilsier om en bruker har lov til å lage, oppdatere og slette en instans, og om brukeren kan lese instansen. Du kan lese mer om rettighetssystemet [her](https://github.com/lepton/wiki).
 
 ### Eksempel
+
 ```python
 class MyNewModel(BaseModel, BasePermissionModel):
     read_access = (Groups.TIHLDE,)
     write_access = (*AdminGroup.admin(),)
-    
+
     title = models.CharField(max_length=200)
     description = models.TextField(default="", blank=True)
 
@@ -96,15 +98,19 @@ Som dere nå trolig har lagt merke til så er det mulig å definere en egen klas
 class Meta:
         ordering = ("create_at",)
 ```
+
 I dette eksempelet ser vi hvordan en liste av instanser vil bli sortert etter created_at tidspunkt. Hvis man skriver -created_at sorteres det i DESC, men uten - så er det ASC.
 
 Du kan lese mer om de ulike valgene i [Django sin egen dokumentasjon](https://docs.djangoproject.com/en/5.0/ref/models/options/).
 
 ## Representasjon
+
 I Python kan man definere hvordan et objekt av en klasse skal leses hvis man bruker str() metoden på objektet. I Django gjør vi det samme, så vi kan representere en instans i Django sitt eget admin panel.
+
 ```python
 def __str__(self):
     return f"{self.title} - starting {self.start_date} at {self.location}"
 ```
+
 Dette gjør at vi vil se en instans av Event i Admin panelet som: "Låvefest - starting 2024-13-02 18:00:00+00:00 at Fremmo Gård"
 **OBS!** Merk at denne metoden er utenfor Meta klassen.

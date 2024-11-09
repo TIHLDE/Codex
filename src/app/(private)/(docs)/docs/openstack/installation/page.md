@@ -11,6 +11,7 @@ Det varierer fra person til person hva man foretrekker å bruke. Men merk at hvi
 ## CLI
 
 ### Installering
+
 For å bruke CLI'en må du først installere nødvendig programvare. Hvis du bruker Windows anbefaler vi sterkt at du følger vår guide på å laste ned WSL. Hvis du vil laste ned OpenStack sin CLI på en annen måte, så følg [NTNU sin guide](https://www.ntnu.no/wiki/display/skyhigh/Openstack+CLI+on+Windows).
 
 Ved å bruke Linux (Ubuntu i dette eksempelet) kan du kjøre følgende kommando:
@@ -20,6 +21,7 @@ sudo apt install python3-openstackclient
 ```
 
 ### Innlogging
+
 Neste steg er å autentisere deg opp mot NTNU. For å kunne koble deg opp mot OpenStack er du avhengig av å være logget inn slik at du kan koble deg opp mot et prosjekt du er en del av.
 
 Første steg er å hente ut en **OpenStack RC** fil som er et script som du kan bruke for å autentisere deg selv opp mot ditt prosjekt i OpenStack. Du henter dette ved å gå til [https://stack.it.ntnu.no/horizon/project/api_access/](https://stack.it.ntnu.no/horizon/project/api_access/). Du logger inn med ditt NTNU brukernavn og passord.
@@ -71,4 +73,5 @@ openstack project list
 ```
 
 ## Web
+
 Hvis du ønsker å bruke nettsiden til NTNU sin Openstack kan du logge inn med din NTNU bruker på [https://stack.it.ntnu.no/horizon/auth/login/](https://stack.it.ntnu.no/horizon/auth/login/)

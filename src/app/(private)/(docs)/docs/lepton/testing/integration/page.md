@@ -37,24 +37,23 @@ def get_blog_data(
 
 Her ser vi først noen **imports** som de aller fleste integrasjonstester er avhengige av:
 
-* **pytest**: For å sette opp selve testene.
-* **status**: Enum for å hente ulike responskoder.
-* **_add_user_to_group**: En metode vi har for å legge en bruker til en spesifikk gruppe.
-* **get_api_client**: En metode vi har for å opprette en fake klient for å sende en forespørsel til vårt endepunkt med bruker sin token sendt med for å verifisere seg.
+- **pytest**: For å sette opp selve testene.
+- **status**: Enum for å hente ulike responskoder.
+- **\_add_user_to_group**: En metode vi har for å legge en bruker til en spesifikk gruppe.
+- **get_api_client**: En metode vi har for å opprette en fake klient for å sende en forespørsel til vårt endepunkt med bruker sin token sendt med for å verifisere seg.
 
 Videre har vi en konstant og to metoder:
 
-* **API_BLOGS_BASE_URL**: Base url, kommer til å bruke denne mye.
-* **get_blogs_url_detail**: Hente ut url for en spesifikk blogg for oppdatering og sletting.
-* **get_blog_data**: Hente ut data som skal sendes i en forespørsel for å opprette eller oppdatere en blogg.
-
+- **API_BLOGS_BASE_URL**: Base url, kommer til å bruke denne mye.
+- **get_blogs_url_detail**: Hente ut url for en spesifikk blogg for oppdatering og sletting.
+- **get_blog_data**: Hente ut data som skal sendes i en forespørsel for å opprette eller oppdatere en blogg.
 
 Videre så må vi sette opp selve testen:
 
 ```python
 @pytest.mark.django_db
 @pytest.mark.parametrize(
-    "group_name, excpected_status_code", 
+    "group_name, excpected_status_code",
     [
         *[
             (group, staus.HTTP_200_OK)

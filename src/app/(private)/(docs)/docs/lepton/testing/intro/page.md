@@ -5,6 +5,7 @@ title: Hvordan teste kode?
 Når man lager et API, så gjør man det med ett formål: å sende data til bruker. I vårt tilfelle blir denne dataen visualisert for brukeren ved hjelp av Kvark. Din oppgave som backend utvikler er å gjøre API'et best mulig.
 
 ## Hvorfor tester vi kode?
+
 Som medlem av Index så kommer du til å jobbed med prosjekter med et eller flere team. Som backend utvikler er din rolle å gjøre klar nødvendige endepunkt for frontend utviklerne. Du bestemmer deg for følgende taktikk:
 
 1. Du koder et endepunkt.
@@ -19,6 +20,7 @@ Derfor tester vi koden vår. Vi tester koden etter et sett med scenariorer vi ve
 Ved å teste koden vår kan vi på egenhånd finne ut hvilke feil vi har og hva som må rettes opp i før vi leverer endepunktene til frontend utvikleren. Det er så klart ikke alt vi kan test opp mot, siden vi ikke kan forutse alle mulige situasjoner, men de mest åpenbare scenarioene er det viktig at vi tester.
 
 ## Integrasjon vs enhet
+
 Så det er to hovedområder innenfor testing som vi i Index fokuserer mest på når det kommer til Lepton. Det er **integrasjonstester** og **enhetstester**.
 
 En **enhetsstest** er en test som tester en enkel funksjon. Dette kan være en funksjon som tester om vår matematiske funksjon gir riktig resultat:

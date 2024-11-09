@@ -4,15 +4,15 @@ title: 'Introduksjon'
 
 Lepton benytter seg av følgende teknologier:
 
-* Django
-* Django REST
-* MySQL
-* Celery
-* RabbitMQ
-* Docker
-* Sentry
-* Azure blob storage
-* Pytest
+- Django
+- Django REST
+- MySQL
+- Celery
+- RabbitMQ
+- Docker
+- Sentry
+- Azure blob storage
+- Pytest
 
 ## Django Core og REST
 
@@ -53,28 +53,24 @@ Det finnes mange flere funksjoner og måter å bruke ORM'et på. Du kan lese mer
 
 Celery er verktøy som gir oss muligheten til å lage "tasks". Dette bruker vi blant annet for å sende ut daglige eposter til aktuelle medlemmer av TIHLDE klokken 12:00. Det brukes også for å sjekke om betalte påmeldinger blir betalt innen riktig tid. Du kan lese mer om bruk av celery her:
 
-* [Introduksjon til Celery](https://codex.tihlde.org/)
-* [Bruk av Celery og Vipps](https://codex.tihlde.org/)
-
+- [Introduksjon til Celery](https://codex.tihlde.org/)
+- [Bruk av Celery og Vipps](https://codex.tihlde.org/)
 
 ## RabbitMQ
 
 RabbitMQ er det vi kaller en "message broker". Vi bruker dette for å sette opp køer for prosesser som kjører på backend. Eksempelvis har vi arrangementer som har opptil 150 påmeldinger på et sekund. Dette fører til en stor trafikk på systemene våre som kan føre til at de går ned. For å redusere pågangen vil RabbitMQ styre inngående trafikk i køer som reduserer pågangen.
 
-
 ## Docker
 
 Docker er en plattform for containerisering som gjør det mulig å pakke en applikasjon sammen med alle dens avhengigheter, biblioteker og konfigurasjoner, slik at den kan kjøre konsistent på tvers av ulike miljøer. Ved å kjøre Lepton gjennom Docker, har vi ikke noe behov for å laste ned pakker, eller Python forsåvidt, for å kjøre koden vår. Dette resulterer i at alle kan kjøre samme kode uten problemer forårsaket av et noen bruker macOS og noen Windows.
-
 
 ## Sentry
 
 Sentry overvåker ytelse for systemet vårt. Vi bruker det for å logge feil som skjer i systemet. Sentry gir oss også en egen webplattform der vi kan se detaljerte logger på feil som skjer. Vi får også ukentlige mail som varsler oss om antall feil per uke.
 
-
 ## Azure blob storage
 
-Siden vi hoster både database, og Lepton på Azure, så er det naturlig at vi lagrer filer her også. Derfor har vi implementert Azure blob storage funksjonalitet for å kunne laste opp filer. Dette blir introdusert mer i dybden i vår [dokumentasjon om  filopplastning.](https://codex.tihlde.org/)
+Siden vi hoster både database, og Lepton på Azure, så er det naturlig at vi lagrer filer her også. Derfor har vi implementert Azure blob storage funksjonalitet for å kunne laste opp filer. Dette blir introdusert mer i dybden i vår [dokumentasjon om filopplastning.](https://codex.tihlde.org/)
 
 ## Pytest
 

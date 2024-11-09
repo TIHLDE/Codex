@@ -9,6 +9,7 @@ Det å sette i gang med utvikling på Kvark er veldig enkelt, og krever kun noen
 Følg denne lenka, og last ned Nodejs LTS. Ved å laste ned Nodejs får man også automatisk npm med på kjøpet! [Last ned Nodejs og npm her](https://nodejs.org/en).
 
 ### Pakkebehandlere
+
 - Windows (Chocolatey): `choco install nodejs-lts`
 - Windows (WinGet): `winget install -e --id OpenJS.NodeJS.LTS`
 - Mac (Brew): `brew install node`
