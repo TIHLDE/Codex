@@ -4,23 +4,24 @@ title: Lepton
 
 ## Beskrivelse
 
-* **Hvorfor ble det til?** Da TIHLDE ville ha en egen nettside som ikke ble hostet på Wordpress, var det behov for en egen backend for å sette opp systemer.
-* **Hvem er målgruppen?** Målgruppen er alle medlemmer av TIHLDE, samt eksterne interessenter som har interesse av TIHLDE, slik som studenter, lærere og bedrifter.
-* **Hvilke funksjoner og krav oppfyller prosjektet?** Lepton fyller flere krav, og fyller stadig nye krav. Dette er alt fra en felles autentisering- og autorisasjontjeneste for TIHLDE, samt systemer for arrangementer, nyheter, grupper osv.
-* **Status til prosjektet:** Prosjektet er fortsatt i drift, og er per dags dato kjernen for all backend for TIHLDE sine systemer.
+- **Hvorfor ble det til?** Da TIHLDE ville ha en egen nettside som ikke ble hostet på Wordpress, var det behov for en egen backend for å sette opp systemer.
+- **Hvem er målgruppen?** Målgruppen er alle medlemmer av TIHLDE, samt eksterne interessenter som har interesse av TIHLDE, slik som studenter, lærere og bedrifter.
+- **Hvilke funksjoner og krav oppfyller prosjektet?** Lepton fyller flere krav, og fyller stadig nye krav. Dette er alt fra en felles autentisering- og autorisasjontjeneste for TIHLDE, samt systemer for arrangementer, nyheter, grupper osv.
+- **Status til prosjektet:** Prosjektet er fortsatt i drift, og er per dags dato kjernen for all backend for TIHLDE sine systemer.
 
 ## Techstack
+
 Lepton benytter seg av følgende teknologier:
 
-* Django
-* Django REST
-* MySQL
-* Celery
-* RabbitMQ
-* Docker
-* Sentry
-* Azure blob storage
-* Pytest
+- Django
+- Django REST
+- MySQL
+- Celery
+- RabbitMQ
+- Docker
+- Sentry
+- Azure blob storage
+- Pytest
 
 ### Django Core og REST
 
@@ -56,4 +57,4 @@ Når man utvikler et API er det viktig å teste koden. På denne måten kan vi t
 
 ## Hovedansvarlig
 
-* Mads Nylund: madsnyl@gmail.com (15.08.2023 - )
+- Mads Nylund: madsnyl@gmail.com (15.08.2023 - )

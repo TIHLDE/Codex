@@ -1,8 +1,8 @@
 ---
-title: "Hvordan sette opp URL for et endepunkt"
+title: 'Hvordan sette opp URL for et endepunkt'
 ---
 
-Når du har kodet ferdig et viewset må du bestemme hvilken url man skal kalle på for å komme til de ulike endepunktene du har laget for viewsettet. Dette gjør man ved å opprette en urls.py fil i **appen**. 
+Når du har kodet ferdig et viewset må du bestemme hvilken url man skal kalle på for å komme til de ulike endepunktene du har laget for viewsettet. Dette gjør man ved å opprette en urls.py fil i **appen**.
 
 ```python
 from django.urls import include, path, re_path
@@ -56,4 +56,3 @@ urlpatterns = [
 ```
 
 I vår eksempel med Toddel, så blir endepunktet man kaller på for **ToddelViewSet**: https://api.tihlde.org/toddel/.
-

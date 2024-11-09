@@ -1,22 +1,22 @@
 ---
-title: "Viewsets og paginering"
+title: 'Viewsets og paginering'
 ---
 
-I seksjonen ***Viewsets og responser*** har vi sett på hvordan et basic ViewSet settes opp med arv, attributter og metoder for CRUD. I denne seksjonen skal vi se nærmere på hvordan vi kan paginere en respons. Det vil altså si at vi deler opp antall instanser vi sender tilbake til frontend i oppdelte sider på et x antall instanser. Dette gjør vi for å forhindre å sende store mengder data som fører til  større kostnader for TIHLDE og tregere responser sendt til frontend.
+I seksjonen **_Viewsets og responser_** har vi sett på hvordan et basic ViewSet settes opp med arv, attributter og metoder for CRUD. I denne seksjonen skal vi se nærmere på hvordan vi kan paginere en respons. Det vil altså si at vi deler opp antall instanser vi sender tilbake til frontend i oppdelte sider på et x antall instanser. Dette gjør vi for å forhindre å sende store mengder data som fører til større kostnader for TIHLDE og tregere responser sendt til frontend.
 
 ## Hvordan URL paginering fungerer
+
 I likhet med filtering og søk er det URL'en til forespørselen man benytter seg av for å paginere. En typisk forespørsel kan dermed se slik ut:
 
 ```js
-const response = await fetch(
-    "https://api.tihlde.org/minutes/?count=25&page=3"
-)
+const response = await fetch('https://api.tihlde.org/minutes/?count=25&page=3');
 ```
 
 Her sier vi ved hjelp av URL'en at vi ønsker hente ut 25 instanser på side nummer 3. Det vil altså si at vi ønsker alle instanser som er fra og med 51 til og med 75. Igjen så er det logikk i Django og støttende pakker som utfører denne logikken for oss.
 
 ## ActionMixin (mulig techdebt)
-I seksjonen ***Viewsets og responser*** ble det nevnt at klassen ActionMixin arves i et ViewSet for å åpne for paginering. Dette er derimot en mulig techdebt, altså kode som er skrevet og ikke fikset opp i senere tid. Ved å søke på denne klassen i kodebasen vil man finne flere eksempeler på ViewSets som benytter seg av denne. Men derimot så har vi en annen metode som vi heller bruker som håndterer ActionMixin sin funksjonalitet for oss.
+
+I seksjonen **_Viewsets og responser_** ble det nevnt at klassen ActionMixin arves i et ViewSet for å åpne for paginering. Dette er derimot en mulig techdebt, altså kode som er skrevet og ikke fikset opp i senere tid. Ved å søke på denne klassen i kodebasen vil man finne flere eksempeler på ViewSets som benytter seg av denne. Men derimot så har vi en annen metode som vi heller bruker som håndterer ActionMixin sin funksjonalitet for oss.
 
 ```python
 class ActionMixin:
@@ -30,8 +30,8 @@ Det klassen i bunn og grunn gir oss, er en metode for å returne en paginert res
 
 ```python
 return self.paginate_response(
-    data=events, 
-    serializer=EventListSerializer, 
+    data=events,
+    serializer=EventListSerializer,
     context={"request": request}
 )
 ```
@@ -39,7 +39,8 @@ return self.paginate_response(
 Dette er dermed en måte å sende tilbake en respons med paginering. Heldigvis er det kun 3 klasser som benytter seg av denne metoden. Vi ønsker derimot ikke mer bruk av denne metoden, for å opprettholde god kodestil.
 
 ## BasePagination (den riktige metoden)
-Det vi derimot benytter oss av er ***BasePagination*** klassen i attributtet pagination_class i ViewSet klassen. Ved bruk av èn enkelt linje med kode så kan vi returnere Respons klassen på vanlig måte som vist i andre seksjoner, og i tillegg få med paginerings informasjon.
+
+Det vi derimot benytter oss av er **_BasePagination_** klassen i attributtet pagination_class i ViewSet klassen. Ved bruk av èn enkelt linje med kode så kan vi returnere Respons klassen på vanlig måte som vist i andre seksjoner, og i tillegg få med paginerings informasjon.
 
 ```python
 from collections import OrderedDict

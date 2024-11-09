@@ -1,17 +1,3 @@
-/*
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 import { useState } from 'react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { Combobox } from '@headlessui/react';
@@ -29,7 +15,12 @@ export interface GroupDropdownProps {
   isLoading?: boolean;
 }
 
-export default function GroupDropdown({ value, onChange, groups, isLoading }: GroupDropdownProps ) {
+export default function GroupDropdown({
+  value,
+  onChange,
+  groups,
+  isLoading,
+}: GroupDropdownProps) {
   const [query, setQuery] = useState<string>('');
 
   const filteredGroups =
@@ -40,10 +31,8 @@ export default function GroupDropdown({ value, onChange, groups, isLoading }: Gr
         });
 
   if (isLoading) {
-    return (
-      <Skeleton className="w-full h-10" />
-    );
-  };
+    return <Skeleton className="h-10 w-full" />;
+  }
 
   return (
     <Combobox as="div" value={value} onChange={onChange}>
@@ -52,7 +41,7 @@ export default function GroupDropdown({ value, onChange, groups, isLoading }: Gr
       </Combobox.Label>
       <div className="relative mt-2">
         <Combobox.Input
-          className="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 dark:bg-slate-900 dark:text-gray-100"
+          className="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-10 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6 dark:bg-slate-900 dark:text-gray-100 dark:ring-slate-600"
           onChange={(event) => setQuery(event.target.value)}
           displayValue={(tag: string) => tag}
         />

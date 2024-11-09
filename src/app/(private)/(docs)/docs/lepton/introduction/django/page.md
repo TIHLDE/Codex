@@ -1,5 +1,5 @@
 ---
-title: "Hva er Django?"
+title: 'Hva er Django?'
 ---
 
 Django er et rammeverk som gjør det for oss som utviklere, lettere å utvikle et REST API. Dette vil
@@ -22,10 +22,10 @@ egne mapper som har ulike funksjonaliteter.
 
 ```yaml
 - app
-    - content/
-    - models/
-    - serializers/
-    - views/
+  - content/
+  - models/
+  - serializers/
+  - views/
 ```
 
 Her ser man et enkelt eksempel på hvordan en app kan se ut. Merk at mappen på rotnivået "app" ikke

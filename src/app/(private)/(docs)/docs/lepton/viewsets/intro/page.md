@@ -1,10 +1,11 @@
 ---
-title: "Viewsets og Responser"
+title: 'Viewsets og Responser'
 ---
 
 I Django er ViewSets en del av Django REST Framework, som er et verktøysett for å lage RESTful API-er i Django. ViewSets er en praktisk måte å organisere visninger (views) for API-er på, og de tilbyr en abstraksjon som gjør det enkelt å definere vanlige CRUD-operasjoner (Create, Read, Update, Delete) for ressurser.
 
 ## BaseViewSet
+
 I likhet med models og serializers har vi en baseclass som skal være med i alle viewsets vi lager.
 
 ```python
@@ -38,9 +39,11 @@ class LoggingViewSetMixin(LoggingMethodMixin):
         self._log_on_destroy(instance)
         instance.delete()
 ```
+
 Denne klassen er viktig å ha med siden den gir oss mulighet for automatisk logging av handlinger brukere utfører. Dette gir oss i Index mulighet til å se om noen misbruker rettighetene sine.
 
 Vi har også følgende metode:
+
 ```python
 class ActionMixin:
     def paginate_response(self, data, serializer, context=None):
@@ -49,9 +52,10 @@ class ActionMixin:
         return self.get_paginated_response(serializer.data)
 ```
 
-Denne modellen arves slik at vi kan benytte oss av pagination. Pagination er at vi kan dele opp en response i sider, slik at vi ikke returnerer veldig store mengder data på en gang. Dette kan du lese mer om i seksjonen om *Pagination*. 
+Denne modellen arves slik at vi kan benytte oss av pagination. Pagination er at vi kan dele opp en response i sider, slik at vi ikke returnerer veldig store mengder data på en gang. Dette kan du lese mer om i seksjonen om _Pagination_.
 
 ## Oppsett
+
 ```python
 from app.common.viewsets import BaseViewSet
 from app.common.mixins import ActionMixin
@@ -62,28 +66,32 @@ class MyViewSet(BaseViewSet, ActionMixin):
     queryset = MyModel.objects.all()
     pagination_class = BasePagination
 ```
+
 Her ser vi hvordan vi setter opp atributter i et viewset:
 
-* Vi definerer en klasse med følgende konvensjon: *\<Modellnavn>ViewSet*.
-* Vi arver de to klassene *BaseViewSet* og *ActionMixin* som vi har nevnt over.
-* serializer_class: Her sender vi inn hvilke serializer vi vil bruke som default. Ønsker man å gjøre dette valget dynamisk basert på vilkår kan man bruke metoden get_serializer(self). Ethvert viewset må ha enten serializer definert som variabel eller en metode som returnerer viewsetet. Hvis ikke vil Django kaste en feil.
-* permission_classes: Her ser vi at vi setter inn vår egendefinerte permission class. Denne MÅ være med, og en forklaring på hvorfor kan du lese om i egen dokumentasjon om rettighetssystemet.
-* queryset: Dette definerer hvilke data vi ønsker å sende ut som default. Vi kommer tilbake til et eksempel senere.
-* pagination_class: Dette er klassen som definerer hvordan vi skal håndtere Pagination. Denne trenger ikke å være med hvis man ikke skal benytte seg av pagination. Men i de fleste tilfeller ønkser vi pagination.
-
+- Vi definerer en klasse med følgende konvensjon: _\<Modellnavn>ViewSet_.
+- Vi arver de to klassene _BaseViewSet_ og _ActionMixin_ som vi har nevnt over.
+- serializer_class: Her sender vi inn hvilke serializer vi vil bruke som default. Ønsker man å gjøre dette valget dynamisk basert på vilkår kan man bruke metoden get_serializer(self). Ethvert viewset må ha enten serializer definert som variabel eller en metode som returnerer viewsetet. Hvis ikke vil Django kaste en feil.
+- permission_classes: Her ser vi at vi setter inn vår egendefinerte permission class. Denne MÅ være med, og en forklaring på hvorfor kan du lese om i egen dokumentasjon om rettighetssystemet.
+- queryset: Dette definerer hvilke data vi ønsker å sende ut som default. Vi kommer tilbake til et eksempel senere.
+- pagination_class: Dette er klassen som definerer hvordan vi skal håndtere Pagination. Denne trenger ikke å være med hvis man ikke skal benytte seg av pagination. Men i de fleste tilfeller ønkser vi pagination.
 
 ## Crud
+
 Videre skal vi se på hvordan man setter opp de ulike CRUD endepunketene. En viktig bemerkelse for Django er at de nevnte metodene MÅ bli definert med riktige navn på metodene. Eller så vil ikke Django klare å benytte riktige metoder når frontend kaller på de ulike endepunktene.
 
 ### GET - list
+
 ```python
     def list(self, request, *args, **kwargs):
         # Denne brukes sjeldent, og vi kommer tilbake
         # til den i seksjonen om Pagination.
 ```
-Her ser vi hvilken metode man bruker for å lage en GET request som henter ut flere instanser. Et eksempel er hvordan man kan se en liste over arrangementer på TIHLDE siden. Vi kommer tilbake til dette under *Pagination* seksjonen siden vi lar Django og definerte klasser (nevnt over) håndtere dette for oss.
+
+Her ser vi hvilken metode man bruker for å lage en GET request som henter ut flere instanser. Et eksempel er hvordan man kan se en liste over arrangementer på TIHLDE siden. Vi kommer tilbake til dette under _Pagination_ seksjonen siden vi lar Django og definerte klasser (nevnt over) håndtere dette for oss.
 
 ### GET - retrieve
+
 ```python
     def retrieve(self, request, pk):
         try:
@@ -112,10 +120,7 @@ Her ser vi hvilken metode man bruker for å lage en GET request som henter ut fl
 Her ser vi hvilken metode man bruker for å håndtere en GET request som spør etter èn spesifikk instans. Et typisk kall vil se slik ut fra frontend:
 
 ```js
-const response = await fetch(
-    "GET",
-    "https://api.tihlde.org/my_endpoint/1"
-)
+const response = await fetch('GET', 'https://api.tihlde.org/my_endpoint/1');
 ```
 
 Det vil si at enhver GET forespørsel som spør etter en spesifikk instans med en gitt ID fra url'en vil bli navigert til vår **retrieve** metode. Som vi ser i eksempelet er det definert et argument **pk**, som står for primary key. Det vil si ID'en til instansen som blir sendt i url'en (1 i dette tilfellet). Som vist i eksempelet over blir ikke PK brukt (men det må fortsatt defineres), og det er en årsak til dette:
@@ -126,7 +131,7 @@ Det vil si at enhver GET forespørsel som spør etter en spesifikk instans med e
 # Henter ut instansen manuelt ved hjelp av ORM
 my_instance = MyModel.filter(id=pk).first()
 
-# Hvis ikke instansen finnnes så returnerer man 
+# Hvis ikke instansen finnnes så returnerer man
 # en 404 status kode
 if my_instance == None:
     return Response(
@@ -164,8 +169,8 @@ return Response(
 
 Når man benytter en serializer for å omgjøre kun èn instans om til JSON, er det nødvendig å sende inn instansen som første parameter i MySerializer. Deretter sender man inn en context, som er et nøkkelverdipar med request som kommer fra retrieve argumentene. Til slutt setter vi **many** til False siden vi kun ønsker èn instans. Det vi sender tilbake til frontend som har gjort denne forespørselen er da serializer.data som vil være et JSON objekt.
 
-
 ### POST
+
 ```python
     def create(self, request, *args, **kwargs):
         try:
@@ -199,8 +204,8 @@ Det første steget er å hente ut data som blir sendt med POST forespørselen. D
 
 Hvis data som blir sendt ikke er riktig, eller har mangler, så sender vi tilbake en statuskode på 400 og create_serializer.errors. Dette vil være en liste over hvilke feil og mangler som er i innsendt data.
 
-
 ### PUT
+
 ```python
     def update(self, request, *args, **kwargs):
         try:
@@ -239,8 +244,8 @@ Hvis data som blir sendt ikke er riktig, eller har mangler, så sender vi tilbak
 
 Her ser vi hvordan man lager en metode for å oppdatere en instans. Dette er veldig likt som i en **create (POST)** metode. Eneste forskjellen er at man istedenfor å lage en ny instans så henter man den eksisterende instansen ved hjelp av self.get_object(). Deretter følger samme logikk ved at innsendt data blir validert og at instansen blir oppdatert og sendt tilbake til frontend med statuskode 200.
 
-
 ### DELETE
+
 ```python
     def destroy(self, request, *args, **kwargs):
         try:
@@ -258,6 +263,6 @@ Her ser vi hvordan man lager en metode for å oppdatere en instans. Dette er vel
 
 Her ser man hvordan man håndterer sletting av en instans. Som man ser så er det veldig enkelt, og ved første øyekast kan det se ut som at alt man gjør er å kalle på foreldermetoden. Slik klasser fungerer, så vil destroy allerede være en eksisterende metode som ikke trenger å bli definert på nytt. MEN likevel så gjør vi det? Dette kommer av statuskoden vi sender tilbake til frontend. En **DELETE** forespørsel sender statuskode 204 tilbake hvis den lykkes. Men i vår frontend (Kvark) så har vi ikke tatt høyde fra at 204 er en mulig statuskode, og frontend håndterer dette som en feil selvom det ikke er det. Så klart er det beste å gjøre her, å fikse opp i denne feilen på frontend, men uansett så fortsetter vi å skrive våre destroy metoder på denne måten.
 
-
 ### Noen siste bemerkninger
+
 Vi har nå gjennomgått standard endepunkter for et ViewSet. Det er flere vi skal gå gjennom i en senere seksjon. Men noe vi vil bemerke er bruken vår av try og except. Hvis vi ikke bruker dette, så vil en potensiell feil på serveren ikke gi noe logisk respons til frontend, og dette gjør det vanskelig å debugge. Dermed er det viktig at vi håndterer alle mulige feil, slik at backend får sendt tilbake en logisk respons til frontend slik at det er lettere å forstå feilen.

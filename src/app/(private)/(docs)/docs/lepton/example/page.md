@@ -7,9 +7,11 @@ I denne seksjonen vil vi gå gjennom et lite eksempel på hvordan man setter opp
 I dette eksempelet vil vi ta for oss opprettningen av en Blogg som kan ha artikler skrevet av en eller flere forfattere.
 
 ## Oppsett av tabeller
+
 Siden Django er objektbasert så trenger vi å representere vår tabell i databasen som en klasse. Altså en modell. I dette tilfellet trenger vi tre modeller; Blog, Entry og Author. For Author bruker vi vår eksisterende User modell, siden det vil være medlemmer av TIHLDE som skal være forfattere.
 
 ### Arv
+
 ```python
 class Blog(BaseModel, BasePermissionModel):
     ...
@@ -20,9 +22,10 @@ class Entry(BaseModel, BasePermissionModel, OptionalImage):
 
 Vi starter med å arve **BaseModel** og **BasePermissionModel** for begge klasser siden vi ønsker både funksjonaliteten til Django sin innebygde Model klasse, og vi ønsker å styre hvem som skal ha ulike rettigheter for å kunne opprette, redigere, lese og slette.
 
-*Entry* modellen arver i tillegg fra OptionalImage klassen siden vi ønsker å kunne legge ved et forsidebilde for hver artikkel.
+_Entry_ modellen arver i tillegg fra OptionalImage klassen siden vi ønsker å kunne legge ved et forsidebilde for hver artikkel.
 
 ### Default rettigheter
+
 Når man benytter seg av BasePermissionModel klassen må man sette to default rettigheter for hvem som har lov til å redigere data og hvem som har lov til å lese data.
 
 ```python
@@ -38,6 +41,7 @@ class Entry(BaseModel, BasePermissionModel, OptionalImage):
 Som default bestemmer vi oss for at alle brukere som er medlem av TIHLDE (altså har en registrert og godkjent bruker) kan se blogger og lese innlegg i bloggen. Videre bestemmer vi oss for at kun brukere som er med i HS har lov til å opprette, oppdatere og slette blogger og innlegg.
 
 ### Attributter
+
 Så må vi legge til attributter for begge klasser, altså verdier som skal være med for hver rad i tabellen.
 
 ```python
@@ -58,7 +62,7 @@ class Blog(BaseModel, BasePermissionModel):
         null=True,
         default=None,
         on_delete=models.SET_NULL
-    ) 
+    )
 
     # Feltene under blir automatisk lagt til fra forelderklassene, og trenger ikke å være med
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
@@ -103,7 +107,8 @@ class Entry(BaseModel, BasePermissionModel, OptionalImage):
 Da har vi opprettet attributtene for to modeller. Beskrivelse for hvert felt er kommentert i kodeboksen over.
 
 ### Konfigurering av rettigheter
-Hittil har vi satt default rettigheter, men vi har ikke spesifisert på et mer detaljert nivå hvem som skal få lov til å gjøre hva. Denne delen er litt mer innviklet å forstå og kan virke som mye kode for liten grunn. Det er viktig at du leser ***Seksjonen om Rettigheter*** for å forstå hvorfor vi gjør dette. Men kort fortalt må man først sette hvilke rettigheter som er tilegnet hvem på overordnet nivå, og deretter for et spesifikt objekt / instans.
+
+Hittil har vi satt default rettigheter, men vi har ikke spesifisert på et mer detaljert nivå hvem som skal få lov til å gjøre hva. Denne delen er litt mer innviklet å forstå og kan virke som mye kode for liten grunn. Det er viktig at du leser **_Seksjonen om Rettigheter_** for å forstå hvorfor vi gjør dette. Men kort fortalt må man først sette hvilke rettigheter som er tilegnet hvem på overordnet nivå, og deretter for et spesifikt objekt / instans.
 
 Vi starter med rettighetene for Blogg:
 
@@ -114,10 +119,10 @@ class Blog(...):
     read_access = (Groups.TIHLDE, )
 
     """
-    I dette tilfellet for alt som omgår oppretting, oppdatering og 
-    sletting så vil vi at kun ledere for undergrupper skal kunne 
+    I dette tilfellet for alt som omgår oppretting, oppdatering og
+    sletting så vil vi at kun ledere for undergrupper skal kunne
     gjøre dette for en blogg. Dermed kan vi bare benytte oss av
-    default has_write_permission metoden fra 
+    default has_write_permission metoden fra
     BasePermissionModel klassen for alle metodene, siden vi har
     satt default rettighet til at kun HS skal ha write_access.
     """
@@ -125,21 +130,21 @@ class Blog(...):
     @classmethod
     def has_write_permission(cls, request):
         return cls.has_write_permission(request)
-    
+
     @classmethod
     def has_update_permission(cls, request):
         return cls.has_write_permission(request)
-    
+
     @classmethod
     def has_destroy_permission(cls, request):
         return cls.has_write_permission(request)
 
     def has_object_update_permission(cls, request):
         return cls.has_write_permission(request)
-    
+
     def has_object_delete_permission(cls, request):
         return cls.has_write_permission(request)
-    
+
     """
     Det samme gjelder for lesing av blogger. Alle medlemmer av TIHLDE
     skal kunne se en liste over og detaljer om en blogg.
@@ -148,11 +153,11 @@ class Blog(...):
     @classmethod
     def has_read_permission(cls, request):
         return cls.has_read_permission(request)
-    
+
     @classmethod
     def has_retrieve_permission(cls, request):
         return cls.has_read_permission(request)
-    
+
     def has_object_retrieve_permission(cls, request):
         return cls.has_read_permission(request)
 
@@ -185,15 +190,15 @@ class Entry(...):
             cls.has_write_permission(request)
             or request.user.memberships_with_blog_entries_access.exists()
         )
-    
+
     @classmethod
     def has_update_permission(cls, request):
         return cls.has_write_permission(request)
-    
+
     @classmethod
     def has_destroy_permission(cls, request):
         return cls.has_write_permission(request)
-    
+
     def has_object_write_permission(self, request):
         return (
             self.has_write_permission(request) or
@@ -201,33 +206,35 @@ class Entry(...):
                 request.user, self.blog.group
             )
         )
-    
+
     def has_object_update_permission(self, request):
         return self.has_object_write_permission(request)
-    
+
     def has_object_destroy_permission(self, request):
         return self.has_object_write_permission(request)
-    
+
     @classmethod
     def has_read_permission(cls, request):
         return cls.has_read_permission(request)
-    
+
     @classmethod
     def has_retrieve_permission(cls, request):
         return cls.has_read_permission(request)
-    
+
     def has_object_retrieve_permission(cls, request):
         return cls.has_read_permission(request)
 
 ```
 
 ## Oppsett av Serializer
-Fra og med nå så forholder vi oss til at det allerede eksisterer en instans av *Blogg* og så forholder vi oss til *Entry*. 
+
+Fra og med nå så forholder vi oss til at det allerede eksisterer en instans av _Blogg_ og så forholder vi oss til _Entry_.
 
 Neste steg er dermed å opprette en **Serializer** som skal hjelpe oss med å omgjøre fra en instans av en klasse, til JSON format som vi kan sende tilbake til frontend.
 
 ### Arv og fields
-Vi skal lage flere typer serializere. Vi velger også å arve fra vår egen klasse *BaseModelSerializer* siden den arver Django sin Serializer klasse, samtidig som den håndterer oppdatering av bilde. Det er ikke i alle tilfeller at vi benytter oss av et bilde for modellen vår, men det er greit å bruke den for det siden den ikke påvirker noe annet.
+
+Vi skal lage flere typer serializere. Vi velger også å arve fra vår egen klasse _BaseModelSerializer_ siden den arver Django sin Serializer klasse, samtidig som den håndterer oppdatering av bilde. Det er ikke i alle tilfeller at vi benytter oss av et bilde for modellen vår, men det er greit å bruke den for det siden den ikke påvirker noe annet.
 
 ```python
 class EntrySerializer(BaseModelSerializer):
@@ -251,7 +258,7 @@ class EntrySerializer(BaseModelSerializer):
 
 class EntryListSerializer(BaseModelSerializer):
     author = SimpleUserSerializer(read_only=True)
-    
+
     class Meta:
         model = Entry
         fields = (
@@ -276,7 +283,7 @@ class EntryCreateSerializer(BaseModelSerializer):
             "image_alt",
             "blog"
         )
-    
+
     def create(self, validated_data):
         author = self.context["request"].user
         entry = Entry.objects.create(**validated_data, author=author)
@@ -298,16 +305,17 @@ class EntryUpdateSerializer(BaseModelSerializer):
 
 Her ser vi hvordan vi har laget fire forskjellige Serializere:
 
-* EntrySerializer: Her har vi laget en serializer for når man skal hente ut kun en instans av Entry. Dermed får man hentet ut all data, og man henter også ut data om forfatter og bloggen, som er to andre serializere som er laget fra før.
-* EntryListSerializer: Her har vi laget en serializer for når man skal hente ut en liste med instanser av Entry. Dermed ønsker vi ikke å hente alt for mye data, og dropper blant annet *blog* og *body*. 
-* EntryCreateSerializer: Her overkjører vi create metoden for å kunne sette author til å være brukeren som prøver å lage et innlegg. Merk at vi kun skriver inn *blog* som et felt, og ikke må håndtere å finne ut hvilken blog det er. Django vil selv håndtere dette feltet ved å sjekke om id for *Blog* som blir sendt inn er en eksisterende id.
-* EntryUpdateSerializer: Her setter vi inn kun de attributtene som er nødvendige for å gjøre en oppdatering av innlegget. Vi ønsker ikke at forfatter og blogg skal kunne endres etter den først er laget.
-
+- EntrySerializer: Her har vi laget en serializer for når man skal hente ut kun en instans av Entry. Dermed får man hentet ut all data, og man henter også ut data om forfatter og bloggen, som er to andre serializere som er laget fra før.
+- EntryListSerializer: Her har vi laget en serializer for når man skal hente ut en liste med instanser av Entry. Dermed ønsker vi ikke å hente alt for mye data, og dropper blant annet _blog_ og _body_.
+- EntryCreateSerializer: Her overkjører vi create metoden for å kunne sette author til å være brukeren som prøver å lage et innlegg. Merk at vi kun skriver inn _blog_ som et felt, og ikke må håndtere å finne ut hvilken blog det er. Django vil selv håndtere dette feltet ved å sjekke om id for _Blog_ som blir sendt inn er en eksisterende id.
+- EntryUpdateSerializer: Her setter vi inn kun de attributtene som er nødvendige for å gjøre en oppdatering av innlegget. Vi ønsker ikke at forfatter og blogg skal kunne endres etter den først er laget.
 
 ## Oppsett av ViewSet
+
 Nå som vi har laget både en modell og en serializer, kan vi lage selve endepunktene for å opprette, oppdatere, slette og hente ut instanser.
 
 ### Oppsett av klasse
+
 ```python
 class EntryViewSet(BaseViewSet):
     queryset = Entry.objects.all()
@@ -329,13 +337,14 @@ class EntryViewSet(BaseViewSet):
         return super().get_serializer_class()
 ```
 
-Vi setter opp en klasse for Entry sitt ViewSet ved å arve vår egendefinerte klasse **BaseViewSet**. Videre setter vi opp **BasicViewPermission** for å håndtere rettigheter som vi satte opp i modellen vår. Vi legger også ved **BasePagination** siden vi ønsker paginering. Vi legger også ved muligheten for å kunne søke etter innlegg basert på tittel og informasjon om forfatter. Videre er vårt **queryset** satt som default å hente ut alle instanser. 
+Vi setter opp en klasse for Entry sitt ViewSet ved å arve vår egendefinerte klasse **BaseViewSet**. Videre setter vi opp **BasicViewPermission** for å håndtere rettigheter som vi satte opp i modellen vår. Vi legger også ved **BasePagination** siden vi ønsker paginering. Vi legger også ved muligheten for å kunne søke etter innlegg basert på tittel og informasjon om forfatter. Videre er vårt **queryset** satt som default å hente ut alle instanser.
 
 Til slutt har vi satt vår **EntrySerializer** som default. Men vi legger også ved en **get_serializer_class** metode som gjør at vi kan endre vår serializer basert på om det er en GET request for list, siden vi da ønsker en annen type serializer.
 
 Videre skal vi se på hvordan man setter opp endepunkter, og du vil se at ved å benytte oss av en god arkitektur med modeller og serializere, er det behov for veldig lite kode i selve ViewSettet.
 
 ### POST
+
 ```python
 def create(self, request, *args, **kwargs):
     try:
@@ -363,9 +372,10 @@ def create(self, request, *args, **kwargs):
         )
 ```
 
-Vår create metode som skal håndtere POST forespørsler setter vi opp ved å anvende vår **EntryCreateSerializer** for å opprette en ny instans av *Entry*. 
+Vår create metode som skal håndtere POST forespørsler setter vi opp ved å anvende vår **EntryCreateSerializer** for å opprette en ny instans av _Entry_.
 
 ### PUT
+
 ```python
 def update(self, request, *args, **kwargs):
     try:
@@ -388,9 +398,10 @@ def update(self, request, *args, **kwargs):
         )
 ```
 
-Vår update metode som skal håndtere PUT forespørsler setter vi opp ved å anvende vår **EntryUpdateSerializer** for å oppdatere en eksisterende instans av *Entry*.
+Vår update metode som skal håndtere PUT forespørsler setter vi opp ved å anvende vår **EntryUpdateSerializer** for å oppdatere en eksisterende instans av _Entry_.
 
 ## DELETE
+
 ```python
 def destroy(self, request, *args, **kwargs):
     try:
@@ -409,10 +420,12 @@ def destroy(self, request, *args, **kwargs):
 Vår destroy metode som skal håndtere DELETE forespørsler setter vi opp ved å anvende ved å kalle på metoden vi har arvet, men vi endrer på statuskoden.
 
 ## GET
+
 Siden dette eksempelet ikke er noe komplekst, så holder vi oss til å ikke definere metodene **list** og **retrieve** siden vi kun skal benytte oss av et queryset og serializer som vi allerede har definert for å velge ut data.
 
 ## Uthenting av innlegg for en spesifikk blogg
-Hittil har vi latt være å røre vår list funksjon. Dette kommer av at vi ønsker å ha mulighet til å se alle *Entry* instanser uten å måtte filtrere på blogg. Men vi ønsker også en måte å hente ut instanser som er tilknyttet en spesifikk blogg. 
+
+Hittil har vi latt være å røre vår list funksjon. Dette kommer av at vi ønsker å ha mulighet til å se alle _Entry_ instanser uten å måtte filtrere på blogg. Men vi ønsker også en måte å hente ut instanser som er tilknyttet en spesifikk blogg.
 
 Det er to måter å gjøre dette på; enten ved hjelp av filtrering eller ved å opprette et egendefinert endepunkt. Først skal vi se på hvordan man lager et eget endepunkt:
 
@@ -431,7 +444,7 @@ def blog_entries(self, request, blog_id):
                 {"detail": "Fant ikke blog."},
                 status=status.HTTP_404_NOT_FOUND,
             )
-        
+
         entries = Entry.objects.filter(blog=blog)
 
         serializer = EntryListSerializer(
@@ -451,7 +464,7 @@ def blog_entries(self, request, blog_id):
         )
 ```
 
-I dette tilfellet ser vi hvordan vi setter url'en til å legge ved en id for bloggen og deretter finner ut om den eksisterer. Deretter filtrerer vi ut *Entry* instanser som er assosiert med denne bloggen. Dette er en litt tungtvint metode å bruke for å hente ut inlegg til en blogg. Ved noen anledninger så er det behov for å utføre mye mer logikk som er vanskelig basert på et filter, og da er dette en bedre metode.
+I dette tilfellet ser vi hvordan vi setter url'en til å legge ved en id for bloggen og deretter finner ut om den eksisterer. Deretter filtrerer vi ut _Entry_ instanser som er assosiert med denne bloggen. Dette er en litt tungtvint metode å bruke for å hente ut inlegg til en blogg. Ved noen anledninger så er det behov for å utføre mye mer logikk som er vanskelig basert på et filter, og da er dette en bedre metode.
 
 Men i vårt eksempel så skal vi se hvordan dette kan bli gjort lettere ved hjelp av filtrering.
 
@@ -468,15 +481,13 @@ class EntryViewset(...):
 Siden vårt filter er så enkelt som et slikt frontend kall:
 
 ```js
-const response = await fetch(
-    "https://api.tihlde.org/entries/?blog=1/"
-)
+const response = await fetch('https://api.tihlde.org/entries/?blog=1/');
 ```
 
 så er det er bare å sette inn blog som **filterset_fields** så vil **DjangoFilterBackend** sørge for at en GET list kall vil returnere kun innlegg som tilhører blog med tilsvarende id 1.
 
-
 ### Konfigurering av URL
+
 Nå som vi har opprettet flere endepunkt må vi bestemme oss for hvordan man skal kunne kalle på disse. Det gjør man ved å navigere til url.py i appen du befinner deg i.
 
 ```python
@@ -497,16 +508,15 @@ urlpatterns = [
 ]
 ```
 
-Nå har vi satt vårt endepunkt for *Entry* til å være på https://api.tihlde.org/entries/.
-
+Nå har vi satt vårt endepunkt for _Entry_ til å være på https://api.tihlde.org/entries/.
 
 ## Admin panel
+
 En ting vi også vil gjøre er å legge til modellene i admin panelet til Django. Dette kan du lese mer om i seksjonen **Admin panel** under **Modeller**.
 
-
 ## Testing av kode
-Det siste vi må gjøre før vi kan si oss ferdig med et prosjekt er å lage tester for koden. Vi ønsker å teste så mye som mulig før man prøver å integrere de nye endepunktene i frontend, slik at det ikke blir mye surr frem og tilbake mellom backend og frontend. Man vil aldri kunne teste for alt, men ved hjelp av integrasjonsstester får vi testet at våre endepunkt fungerer som tiltenkt.
 
+Det siste vi må gjøre før vi kan si oss ferdig med et prosjekt er å lage tester for koden. Vi ønsker å teste så mye som mulig før man prøver å integrere de nye endepunktene i frontend, slik at det ikke blir mye surr frem og tilbake mellom backend og frontend. Man vil aldri kunne teste for alt, men ved hjelp av integrasjonsstester får vi testet at våre endepunkt fungerer som tiltenkt.
 
 Vi skal ikke gå veldig detaljert inn i testing her, men vi skal se på et par eksempler:
 

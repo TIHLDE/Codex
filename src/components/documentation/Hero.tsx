@@ -1,26 +1,26 @@
-import { Fragment } from 'react'
-import Image from 'next/image'
-import clsx from 'clsx'
-import { Highlight } from 'prism-react-renderer'
+import { Fragment } from 'react';
+import Image from 'next/image';
+import clsx from 'clsx';
+import { Highlight } from 'prism-react-renderer';
 
-import { Button } from '@/components/Button'
-import { HeroBackground } from '@/components/HeroBackground'
-import blurCyanImage from '@/images/blur-cyan.png'
-import blurIndigoImage from '@/images/blur-indigo.png'
+import { Button } from '@/components/ui/Button';
+import { HeroBackground } from '@/components/documentation/HeroBackground';
+import blurCyanImage from '@/images/blur-cyan.png';
+import blurIndigoImage from '@/images/blur-indigo.png';
 
-const codeLanguage = 'javascript'
+const codeLanguage = 'javascript';
 const code = `export default {
   strategy: 'code more',
   engine: {
     cpus: 12,
     backups: ['./storage/cache.bruh'],
   },
-}`
+}`;
 
 const tabs = [
   { name: 'codex.config.js', isActive: true },
   { name: 'index.json', isActive: false },
-]
+];
 
 function TrafficLightsIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -29,7 +29,7 @@ function TrafficLightsIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
       <circle cx="21" cy="5" r="4.5" />
       <circle cx="37" cy="5" r="4.5" />
     </svg>
-  )
+  );
 }
 
 export function Hero() {
@@ -57,7 +57,7 @@ export function Hero() {
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
                 <Button href="#get-started">Kom i gang</Button>
                 <Button
-                  className='bg-white'
+                  className="bg-white"
                   href="https://github.com/TIHLDE/Codex"
                   variant="secondary"
                 >
@@ -174,5 +174,5 @@ export function Hero() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,14 +1,17 @@
 ---
-title: "Hvordan sende riktig JSON data"
+title: 'Hvordan sende riktig JSON data'
 ---
 
 Dette er en videreføring på dokumentasjonen om polymorfisme i modeller som du kan lese om [her](/docs/lepton/models/polymorphic). Denne tar utgangspunkt i at du har lest og forstått oppsettet av modeller før du leser dette.
 
 # Forms som eksempel
+
 Vi fortsetter å bruke modellen **Form** og de respektive barneklassene for å vise hvordan polymorfisme fungerer i Django. Vi bruker biblioteket [django-rest-polymorphic](https://github.com/denisorehovsky/django-rest-polymorphic) for å kunne kombinere vår serializer med modellene våre.
 
 ## Oppsett av serializere
+
 Første steg er å sette opp serializer klasser for alle tre klassene, slik vi er vandt til:
+
 ```python
 class FormSerializer(...):
     ...
@@ -70,6 +73,7 @@ Følgende steg er nødvendig for å sette opp slik at den vil mappe riktig i for
 4. For å få med alle verdier for de respektive modellene, må man sette inn de verdiene man ønsker i de ulike serializerne.
 
 ## Oppsett av create og update serializer
+
 Dessverre så støtter ikke polymorfisme bibliotekene våre en god måte å opprette create og update metoder for vår mapper serializer. Dermed må vi opprette egne create og update serializere for hver og en av våre serializere.
 
 ```python
@@ -102,4 +106,5 @@ class GroupFormUpdateSerializer(...):
 Som du ser her så gjør vi dette på samme måte som alltid, der vi spesifiserer hvilke fields vi ønsker å validere og hvordan vi skal oppdatere og lage instanser.
 
 ## Veien videre
+
 Neste steg er å implementere modellen og serializern inn i vårt viewset slik at vi kan sette opp våre endepunkter. Det kan du lese om [her.](/docs/lepton/viewsets/polymorphic)

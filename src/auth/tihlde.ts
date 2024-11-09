@@ -12,7 +12,6 @@ import {
   MinuteTag,
   PagedResponse,
   PaginationRequest,
-  Registration,
   SingleMinutesPostResponse,
   User,
   UserPagedResponse,
@@ -64,7 +63,9 @@ export const getTIHLDEUser = async (token: string, user_id: string) => {
   return (await response.json()) as UserResponse;
 };
 
-export const getIsInPermittedGroup = async (token: string): Promise<boolean> => {
+export const getIsInPermittedGroup = async (
+  token: string,
+): Promise<boolean> => {
   const response = await fetch(
     `${env.NEXT_PUBLIC_TIHLDE_API_URL}/users/me/memberships/`,
     {
@@ -79,10 +80,14 @@ export const getIsInPermittedGroup = async (token: string): Promise<boolean> => 
 
   const data = (await response.json()) as MembershipResponse;
 
-  return data.results.some((r) => env.NEXT_PUBLIC_ALLOWED_GROUP_SLUGS.includes(r.group.slug));
+  return data.results.some((r) =>
+    env.NEXT_PUBLIC_ALLOWED_GROUP_SLUGS.includes(r.group.slug),
+  );
 };
 
-export const getValidGroupMemberships = async (token: string): Promise<Group[]> => {
+export const getValidGroupMemberships = async (
+  token: string,
+): Promise<Group[]> => {
   const response = await fetch(
     `${env.NEXT_PUBLIC_TIHLDE_API_URL}/users/me/memberships/`,
     {
@@ -107,16 +112,13 @@ export const addMinutesPost = async (
   title: string,
   content: string,
   tag: MinuteTag,
-  group: MinuteGroup
+  group: MinuteGroup,
 ): Promise<MinutesPostResponse> => {
-  const response = await fetch(
-    `${env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/`,
-    {
-      method: 'POST',
-      headers: getHeaders(token),
-      body: JSON.stringify({ title, content, tag, group: group.toLowerCase() }),
-    },
-  );
+  const response = await fetch(`${env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/`, {
+    method: 'POST',
+    headers: getHeaders(token),
+    body: JSON.stringify({ title, content, tag, group: group.toLowerCase() }),
+  });
 
   if (!response.ok) {
     console.error(response.status, response.statusText, await response.json());
@@ -149,7 +151,7 @@ export const updateMinutesPost = async (
   title: string,
   content: string,
   tag: MinuteTag,
-  group: MinuteGroup
+  group: MinuteGroup,
 ): Promise<MinutesPostResponse> => {
   const response = await fetch(
     `${env.NEXT_PUBLIC_TIHLDE_API_URL}/minutes/${id}/`,
@@ -233,7 +235,7 @@ export const isLeader = async (token: string): Promise<boolean> => {
     throw new Error('Failed to fetch memberships');
   }
 
-  const data = await response.json() as MembershipResponse;
+  const data = (await response.json()) as MembershipResponse;
 
   const isLeader = data.results.some((r) => r.membership_type === 'LEADER');
 
@@ -323,7 +325,10 @@ export const updateEvent = async (
   return (await response.json()) as EventPostResponse;
 };
 
-export const getUsers = async (token: string, search: string): Promise<User[]> => {
+export const getUsers = async (
+  token: string,
+  search: string,
+): Promise<User[]> => {
   const response = await fetch(
     `${env.NEXT_PUBLIC_TIHLDE_API_URL}/users/?search=${search}`,
     {
@@ -336,11 +341,11 @@ export const getUsers = async (token: string, search: string): Promise<User[]> =
     throw new Error('Failed to fetch user');
   }
 
-  const data = await response.json() as UserPagedResponse;
+  const data = (await response.json()) as UserPagedResponse;
   const results = data.results as User[];
 
   return results;
-}
+};
 
 export const getEvents = async (token: string): Promise<EventPagedResponse> => {
   const response = await fetch(
@@ -358,7 +363,10 @@ export const getEvents = async (token: string): Promise<EventPagedResponse> => {
   return (await response.json()) as EventPagedResponse;
 };
 
-export const getEvent= async (token: string, id: string): Promise<EventDetailResponse> => {
+export const getEvent = async (
+  token: string,
+  id: string,
+): Promise<EventDetailResponse> => {
   const response = await fetch(
     `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/${id}/`,
     {
@@ -374,9 +382,12 @@ export const getEvent= async (token: string, id: string): Promise<EventDetailRes
   const data = await response.json();
 
   return data as EventDetailResponse;
-}
+};
 
-export const createEventRegistration = async (token: string, event_id: number): Promise<void> => {
+export const createEventRegistration = async (
+  token: string,
+  event_id: number,
+): Promise<void> => {
   const response = await fetch(
     `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/${event_id}/registrations/`,
     {
@@ -392,9 +403,13 @@ export const createEventRegistration = async (token: string, event_id: number): 
     console.error(response.status, response.statusText, await response.json());
     throw new Error('Failed to register for event');
   }
-}
+};
 
-export const getEventRegistrations = async (token: string, event_id: number, page?: number): Promise<EventRegistrationsPagedResponse> => {
+export const getEventRegistrations = async (
+  token: string,
+  event_id: number,
+  page?: number,
+): Promise<EventRegistrationsPagedResponse> => {
   const response = await fetch(
     `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/${event_id}/registrations/?page=${page ?? 1}`,
     {
@@ -412,7 +427,11 @@ export const getEventRegistrations = async (token: string, event_id: number, pag
   return data as EventRegistrationsPagedResponse;
 };
 
-export const deleteEventRegistration = async (token: string, event_id: number, registration_id: number): Promise<void> => {
+export const deleteEventRegistration = async (
+  token: string,
+  event_id: number,
+  registration_id: number,
+): Promise<void> => {
   const response = await fetch(
     `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/${event_id}/registrations/${registration_id}/`,
     {
@@ -427,7 +446,10 @@ export const deleteEventRegistration = async (token: string, event_id: number, r
   }
 };
 
-export const deleteEvent = async (token: string, event_id: number): Promise<void> => {
+export const deleteEvent = async (
+  token: string,
+  event_id: number,
+): Promise<void> => {
   const response = await fetch(
     `${env.NEXT_PUBLIC_TIHLDE_API_URL}/codex/events/${event_id}/`,
     {

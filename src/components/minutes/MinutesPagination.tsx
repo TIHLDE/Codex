@@ -1,5 +1,5 @@
 import { PagedResponse, PaginationRequest } from '@/auth/types';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/ui/Button';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/16/solid';
 
 interface MinutesPaginationProps {

@@ -5,7 +5,6 @@ import Link from 'next/link';
 import clsx from 'clsx';
 
 import { type Section, type Subsection } from '@/lib/sections';
-import { log } from 'console';
 
 export function TableOfContents({
   tableOfContents,
@@ -71,7 +70,7 @@ export function TableOfContents({
               id="on-this-page-title"
               className="font-display text-sm font-medium text-slate-900 dark:text-white"
             >
-              On this page
+              Innholdsfortegnelse
             </h2>
             <ol role="list" className="mt-4 space-y-3 text-sm">
               {tableOfContents.map((section) => {

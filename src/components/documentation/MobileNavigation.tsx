@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import { Suspense, useCallback, useEffect, useState } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { Dialog } from '@headlessui/react'
+import { Suspense, useCallback, useEffect, useState } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { Dialog } from '@headlessui/react';
 
-import { Navigation } from '@/components/Navigation'
+import { Navigation } from '@/components/documentation/Navigation';
 
 function MenuIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -18,7 +18,7 @@ function MenuIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     >
       <path d="M4 7h16M4 12h16M4 17h16" />
     </svg>
-  )
+  );
 }
 
 function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -33,31 +33,31 @@ function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     >
       <path d="M5 5l14 14M19 5l-14 14" />
     </svg>
-  )
+  );
 }
 
 function CloseOnNavigation({ close }: { close: () => void }) {
-  let pathname = usePathname()
-  let searchParams = useSearchParams()
+  let pathname = usePathname();
+  let searchParams = useSearchParams();
 
   useEffect(() => {
-    close()
-  }, [pathname, searchParams, close])
+    close();
+  }, [pathname, searchParams, close]);
 
-  return null
+  return null;
 }
 
 export function MobileNavigation() {
-  let [isOpen, setIsOpen] = useState(false)
-  let close = useCallback(() => setIsOpen(false), [setIsOpen])
+  let [isOpen, setIsOpen] = useState(false);
+  let close = useCallback(() => setIsOpen(false), [setIsOpen]);
 
   function onLinkClick(event: React.MouseEvent<HTMLAnchorElement>) {
-    let link = event.currentTarget
+    let link = event.currentTarget;
     if (
       link.pathname + link.search + link.hash ===
       window.location.pathname + window.location.search + window.location.hash
     ) {
-      close()
+      close();
     }
   }
 
@@ -94,5 +94,5 @@ export function MobileNavigation() {
         </Dialog.Panel>
       </Dialog>
     </>
-  )
+  );
 }

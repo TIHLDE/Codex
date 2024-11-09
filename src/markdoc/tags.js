@@ -1,6 +1,5 @@
-import { Callout } from '@/components/Callout'
-import { QuickLink, QuickLinks } from '@/components/QuickLinks'
-import { ApiDescription } from '@/components/ApiDescription'
+import { Callout } from '@/components/documentation/Callout';
+import { QuickLink, QuickLinks } from '@/components/documentation/QuickLinks';
 
 const tags = {
   callout: {
@@ -43,13 +42,6 @@ const tags = {
       href: { type: String },
     },
   },
-  'api-description': {
-    render: ApiDescription,
-    selfClosing: true,
-    attributes: {
-      props: {},
-    },
-  },
-}
+};
 
-export default tags
+export default tags;

@@ -1,4 +1,4 @@
-import { Layout } from '@/components/Layout';
+import { Layout } from '@/components/documentation/Layout';
 
 export default async function PrivateLayout({
   children,

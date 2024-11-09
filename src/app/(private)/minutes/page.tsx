@@ -84,7 +84,13 @@ export default function MinutesPage() {
   const { mutateAsync: updatePost } = useMutation<
     MinutesPostResponse,
     Error,
-    { content: string; title: string; id: number; tag: MinuteTag, group: MinuteGroup }
+    {
+      content: string;
+      title: string;
+      id: number;
+      tag: MinuteTag;
+      group: MinuteGroup;
+    }
   >({
     mutationFn: (context) =>
       updateMinutesPost(
@@ -93,7 +99,7 @@ export default function MinutesPage() {
         context.title,
         context.content,
         context.tag,
-        context.group
+        context.group,
       ),
     onSuccess: () => refetchMinutePost(),
   });
@@ -101,10 +107,16 @@ export default function MinutesPage() {
   const { mutateAsync: createPost } = useMutation<
     MinutesPostResponse,
     Error,
-    { content: string; title: string; tag: MinuteTag, group: MinuteGroup }
+    { content: string; title: string; tag: MinuteTag; group: MinuteGroup }
   >({
     mutationFn: (context) =>
-      addMinutesPost(token, context.title, context.content, context.tag, context.group),
+      addMinutesPost(
+        token,
+        context.title,
+        context.content,
+        context.tag,
+        context.group,
+      ),
     onSuccess: async (data) => {
       await refetchAllPosts();
       setSelectedMinuteId(data.id);

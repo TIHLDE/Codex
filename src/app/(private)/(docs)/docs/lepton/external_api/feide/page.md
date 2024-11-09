@@ -9,16 +9,18 @@ Dette er en metode vi har benyttet oss av i flere år, men som vi anser som tung
 Siden vi kun ønsker å verifisere om brukeren tilhører et av TIHLDE sine studier, men ikke bruke det som innloggingsmetode, så er et oppsett av dette ganske fort gjort.
 
 ## Bruker har to valg
+
 Vi ønsker å gi en bruker som ønsker å registere en bruker, to valg. Enten kan man opprette en bruker automatisk ved å logge seg inn med Feide, og så vil Lepton ta hånd om resten. Dette er det vi ønsker at brukere gjør. Men hva hvis det skjer en feil med innloggingen med Feide eller kanskje en ny student ikke har fått Feide konto enda? Dermed må vi fortsatt beholde vår gamle registreringsmetode.
 
 ## Hvordan bruke Feide som verifisering
+
 Denne dokumentasjonen er basert på Feide sin egen dokumentasjon som du kan lese mer om [her](https://docs.feide.no/service_providers/openid_connect/feide_obtaining_tokens.html#registering-your-application). Hvis det skal utbedres til å integrere selv innloggingsprosessen med Feide, krever det en bedre kjennskap med dokumentasjonen til Feide, enn det vi går gjennom her.
 
-
 ### Inlogging
+
 Det første steget for å benytte seg av Feide, er å gi brukeren mulighet til å logge inn med Feide. Dette er en ganske enkel prosess, ved å la bruker trykke på en knapp som sender brukeren til følgende url:
 
-```
+```python
 https://auth.dataporten.no/oauth/authorization?
 client_id=<our_feide_client_id>&
 response_type=code&
@@ -33,7 +35,7 @@ Dette vil redirecte brukeren til Feide sin egen innloggingsside som du mest sann
 
 Etter at bruker har logget inn med riktig Feide brukernavn og passord, blir brukeren sendt tilbake til vår redirect_url:
 
-```
+```vim
 HTTP/1.1 302 Found
 Location: https://tihlde.org/ny-bruker/feide?
 code=0f8cf5fa-dc3f-4c9d-a60c-b6016c4134fa&
@@ -42,10 +44,9 @@ state=f47282ec-0a8b-450a-b0da-dddb393fbeca
 
 Her ser vi at **code** er en token som varer i 10 min (dette er maks tid, og er usikkert om Feide bruker denne tiden eller mindre).
 
-
 ### Autentisering med Lepton
-Det er nå på tide å koble inn Lepton. Ved å benytte oss av **code** parameteret har vi mulighet til å hente ut en access_token for brukeren. Dermed sender vi en POST request til LEPTON API'et til **/feide/** med code som en del av body.
 
+Det er nå på tide å koble inn Lepton. Ved å benytte oss av **code** parameteret har vi mulighet til å hente ut en access_token for brukeren. Dermed sender vi en POST request til LEPTON API'et til **/feide/** med code som en del av body.
 
 ```python
 @api_view(["POST"])
@@ -117,8 +118,8 @@ class FeideUserCreateSerializer(serializers.Serializer):
 
 Vi benytter en egen **FeideSerializer** for å validere **code** som vi sender fra frontend. Denne må være nøyaktig 36 bokstaver lang.
 
-
 ### Uthenting av Feide token
+
 Selv om vi har validert lengde og type for **code**, er det ikke sikkert den er riktig. Dette finner vi ut ved å benytte oss av **get_feide_tokens** metoden vår.
 
 ```python
@@ -155,35 +156,33 @@ def get_feide_tokens(code: str) -> tuple[str, str]:
 Her benytter vi oss av Feide sitt API for å hente ut **access_token** og **id_token** (JWT) om innlogget bruker. Hvis denne forespørselen går gjennom vet vi at bruker er logget inn og autentisert gjennom Feide.
 
 ### Dekoding av JWT
+
 ```python
 full_name, username = get_feide_user_info_from_jwt(jwt_token)
 ```
 
 Neste steg er å dekode **id_token** fra forrige metode. JWT er en kjent metode man benytter for å autentisere en brukere, ved å sende ved informasjon i token. Du kan lese mer om [JWT her](https://jwt.io/introduction).
 
-```
+```json
 {
-    "iss": "https://auth.dataporten.no",
-    "jti": "f95ed523-b9b2-42e7-b193-a08143d9f342",
-    "aud": "5ac8753f-8296-41bf-b985-59d89769005e",
-    "sub": "76a7a061-3c55-430d-8ee0-6f82ec42501f",
-    "iat": 1635509702,
-    "exp": 1635513302,
-    "auth_time": 1635505713,
-    "nonce": "PLt3i3bT2~xTw7m",
-    "email": "jon.kare.hellan@uninett.no",
-    "name": "Jon Kåre Hellan",
-    "picture": "https://api.dataporten.no/userinfo/v1/user/media/p:c0050004-386e-4c58-9073-e37344bc8769",
-    "https://n.feide.no/claims/userid_sec": [
-        "feide:jk@uninett.no"
-    ],
-    "https://n.feide.no/claims/eduPersonPrincipalName": "jk@uninett.no",
-    "at_hash": "DiafctHGah2reptMDjEqUg"
+  "iss": "https://auth.dataporten.no",
+  "jti": "f95ed523-b9b2-42e7-b193-a08143d9f342",
+  "aud": "5ac8753f-8296-41bf-b985-59d89769005e",
+  "sub": "76a7a061-3c55-430d-8ee0-6f82ec42501f",
+  "iat": 1635509702,
+  "exp": 1635513302,
+  "auth_time": 1635505713,
+  "nonce": "PLt3i3bT2~xTw7m",
+  "email": "jon.kare.hellan@uninett.no",
+  "name": "Jon Kåre Hellan",
+  "picture": "https://api.dataporten.no/userinfo/v1/user/media/p:c0050004-386e-4c58-9073-e37344bc8769",
+  "https://n.feide.no/claims/userid_sec": ["feide:jk@uninett.no"],
+  "https://n.feide.no/claims/eduPersonPrincipalName": "jk@uninett.no",
+  "at_hash": "DiafctHGah2reptMDjEqUg"
 }
 ```
 
 Her ser vi et eksempel fra Feide sin [dokumentasjon](https://docs.feide.no/reference/tokens.html) som viser hva man kan hente ut av JWT token som vi har hentet ut. Vi har kun behov for to ting; brukernavn og fullt navn.
-
 
 ```python
 import jwt
@@ -209,10 +208,11 @@ def get_feide_user_info_from_jwt(jwt_token: str) -> tuple[str, str]:
 
     return (user_info["name"], feide_username)
 ```
+
 Ved å benytte oss av Python sin jwt dependency kan vi dekode vår token. Her ønsker vi å hente ut **name** for fullt navn, og iterere gjennom bruker sine **bruker id'er** og finne den som tilhører Feide.
 
-
 ### Validering av studie
+
 Nå som vi har informasjon om brukeren, må vi finne ut om brukeren faktisk går på et studie som tilhører TIHLDE. Vi ønsker ikke å gi tilgang til noen andre studier utenfor TIHLDE.
 
 ```python
@@ -241,6 +241,7 @@ def get_feide_user_groups(access_token: str) -> list[str]:
 
     return [group["id"] for group in groups]  # Eks: fc:fs:fs:prg:ntnu.no:ITBAITBEDR
 ```
+
 Vi sender en GET request for å hente gruppene ved deretter å filtrere gruppene:
 
 ```pyhton
@@ -282,9 +283,11 @@ def parse_feide_groups(groups: list[str]) -> list[str]:
 
     return slugs
 ```
+
 Hvis studenten ikke tilhører ett av våre studier kaster vi en feil og nekter adgang.
 
 ### Brukerinformasjon
+
 ```python
 password = generate_random_password()
 
@@ -311,8 +314,8 @@ def generate_random_password(length=12):
     return password
 ```
 
-
 ### Gi bruker tilgang
+
 Nå som brukeren er laget, må vi ha en måte å levere passordet til brukeren. Vi velger å sende passordet ved hjelp av mail:
 
 ```python
@@ -340,6 +343,7 @@ def make_TIHLDE_member(self, user, password):
 Først lager vi et medlemskap i TIHLDE for brukeren, slik at den har mulighet til å logge inn. Deretter sender vi en mail med brukernavn og passord. Vi ønsker ikke at bruker skal bruke det genererte passordet siden det står i klartekst i en mail, og dermed er en sikkerhetsrisiko. Dermed legger vi ved en link til nettsiden for å resette passordet til et passord brukeren selv velger.
 
 ### Studie og årskull
+
 Til slutt må vi legge den opprettede brukeren til sitt riktige studie og kull.
 
 ```python
@@ -376,6 +380,6 @@ def get_study_year(slug: str) -> str:
 
 I tillegg så trekker vi fra 3 år hvis studiet er Digital Transformasjon siden de i praksis starter i 4. klasse.
 
-
 ## Konklusjon
+
 Du har nå sett hvordan vi setter opp automatisk registrering av brukere ved hjelp av Feide. Dette er en funksjonalitet som fører til drastisk reduksjon av manuelt arbeid for HS og Index. I tillegg så er det positivt at brukere sin e-post blir satt til skole e-posten. Dette fører til at flere får med seg beskjeder siden de bruker skole e-posten sin aktivt.

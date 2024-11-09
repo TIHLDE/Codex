@@ -4,7 +4,7 @@ import { nb } from 'date-fns/locale';
 import { ClockIcon } from '@heroicons/react/24/outline';
 import { MinuteOrdering, PagedResponse, PaginationRequest } from '@/auth/types';
 import clsx from 'clsx';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/ui/Button';
 import { useState } from 'react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { Combobox } from '@headlessui/react';
@@ -43,7 +43,7 @@ export default function MinutesList({
   isLoading,
 }: MinutesListProps) {
   return (
-    <div className="flex max-h-[calc(100svh-2rem)] max-w-xl w-full flex-col overflow-y-scroll px-2">
+    <div className="flex max-h-[calc(100svh-2rem)] w-full max-w-xl flex-col overflow-y-scroll px-2">
       <div className="flex flex-col gap-3 py-5 sm:px-2 dark:bg-slate-900">
         <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
           <div className="ml-4 mt-2">
@@ -51,7 +51,7 @@ export default function MinutesList({
               href={'/'}
               className="flex flex-row items-center text-base font-semibold leading-6 text-gray-900 dark:text-gray-100"
             >
-              <ArrowLeftIcon className='mr-2 inline h-5 w-5' /> CODEX /
+              <ArrowLeftIcon className="mr-2 inline h-5 w-5" /> CODEX /
               Dokumenter
             </Link>
           </div>
@@ -112,7 +112,7 @@ export default function MinutesList({
                 key={minute.id}
                 className={clsx(
                   'relative flex cursor-pointer items-center space-x-4 rounded-md px-2 py-4' +
-                  ' hover:bg-slate-100 dark:hover:bg-slate-700',
+                    ' hover:bg-slate-100 dark:hover:bg-slate-700',
                   selectedPostId === minute.id
                     ? 'bg-slate-200 dark:bg-slate-800'
                     : '',
@@ -234,8 +234,8 @@ function SortingDropdown({ onChange, field }: SortingDropdownProps) {
     query === ''
       ? sortingOptions
       : sortingOptions.filter((person) => {
-        return person.name.toLowerCase().includes(query.toLowerCase());
-      });
+          return person.name.toLowerCase().includes(query.toLowerCase());
+        });
 
   return (
     <Combobox as="div" value={field} onChange={onChange}>

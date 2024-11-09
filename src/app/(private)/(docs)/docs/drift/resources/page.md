@@ -5,28 +5,33 @@ title: Ressurser
 Det vil komme ressurser for følgende:
 
 Git:
-* Code with mosh git kurs
 
+- Code with mosh git kurs
 
 Linux:
-* Intro til linux i form av YouTube
-* https://linuxjourney.com/
+
+- Intro til linux i form av YouTube
+- [Linux Journey](https://linuxjourney.com/)
 
 DevOps:
-* Cronjobs
+
+- Cronjobs
 
 Docker:
-* Dokumentasjon til hvordan man laster ned og starter opp Docker
+
+- Dokumentasjon til hvordan man laster ned og starter opp Docker
 
 GitHub actions:
-* Hvordan sette opp
+
+- Hvordan sette opp
 
 Databaser:
-* Hvordan sette opp
-* Administrere
-* Hvordan sette opp brukere
+
+- Hvordan sette opp
+- Administrere
+- Hvordan sette opp brukere
 
 Sikkerhet:
-* Brannmurer
-* Nettverk
-* 
+
+- Brannmurer
+- Nettverk
