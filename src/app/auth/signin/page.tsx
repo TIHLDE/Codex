@@ -6,7 +6,6 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
-import authOptions from '@/auth/auth';
 import { useEffect } from 'react';
 
 const validationSchema = yup.object({
@@ -29,7 +28,7 @@ export default function SigninPage() {
     if (session.data?.user?.tihldeUserToken) {
       router.replace('/');
     }
-  }, [session]);
+  }, [session, router]);
 
   const onSubmit = async (values: FormValues) => {
     const response = await signIn('credentials', {
