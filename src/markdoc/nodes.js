@@ -57,6 +57,7 @@ const nodes = {
     attributes: {
       language: {
         type: String,
+        default: '',
       },
     },
   },
