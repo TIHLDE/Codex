@@ -94,7 +94,7 @@ If you want to use public-key authenitcation, then you will need to add an addit
 
 Overall the custom_user.conf could look something like this:
 
-```vim
+```
 AllowUsers user1 user2 user3
 
 Match User user1,user2,

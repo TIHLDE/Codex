@@ -35,7 +35,7 @@ Dette vil redirecte brukeren til Feide sin egen innloggingsside som du mest sann
 
 Etter at bruker har logget inn med riktig Feide brukernavn og passord, blir brukeren sendt tilbake til vår redirect_url:
 
-```vim
+```
 HTTP/1.1 302 Found
 Location: https://tihlde.org/ny-bruker/feide?
 code=0f8cf5fa-dc3f-4c9d-a60c-b6016c4134fa&
