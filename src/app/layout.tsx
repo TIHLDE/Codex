@@ -1,5 +1,5 @@
 import { type Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
 import clsx from 'clsx';
 
@@ -19,6 +19,11 @@ const lexend = localFont({
   variable: '--font-lexend',
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains-mono',
+  subsets: ['latin'],
+});
+
 export const metadata: Metadata = {
   title: {
     template: '%s - Dokumentasjon',
@@ -35,7 +40,12 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={clsx('h-full antialiased', inter.variable, lexend.variable)}
+      className={clsx(
+        'h-full antialiased',
+        inter.variable,
+        lexend.variable,
+        jetbrainsMono.variable,
+      )}
       suppressHydrationWarning
     >
       <body className="flex min-h-full bg-white dark:bg-slate-900">
