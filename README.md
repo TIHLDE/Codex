@@ -102,7 +102,7 @@ NEXT_PUBLIC_ALLOWED_GROUP_SLUGS="index"
 
 ## Hvordan kjøre prosjektet?
 
-Du trenger bare å ha [Node.js](https://nodejs.org/en) installert for å kjøre prosjektet.
+Du trenger bare å ha [Node.js](https://nodejs.org/en) og [pnpm](https://pnpm.io/) installert for å kjøre prosjektet.
 
 Da kan du kjøre: `pnpm dev` for å kjøre prosjektet.
 
