@@ -50,6 +50,9 @@ postgres=#
 -- Lager en PostgreSQL bruker med navn `<name>` og passord `<password>`.
 CREATE USER <name> WITH PASSWORD '<password>';
 
+-- Gir brukeren lov til å lage databaser (denne trengs f.eks. dersom prosjektet bruker prisma)
+ALTER USER <name> CREATEDB;
+
 -- Lager en database med navn `<name>` og setter eieren til den nye brukeren.
 CREATE DATABASE <name> WITH OWNER <name>;
 
