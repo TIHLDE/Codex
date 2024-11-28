@@ -1,5 +1,6 @@
 import { Callout } from '@/components/documentation/Callout';
 import { QuickLink, QuickLinks } from '@/components/documentation/QuickLinks';
+import { Quiz } from '@/components/documentation/Quiz';
 
 const tags = {
   callout: {
@@ -41,6 +42,13 @@ const tags = {
       icon: { type: String },
       href: { type: String },
     },
+  },
+  quiz: {
+    attributes: {
+      questions: { type: Array },
+    },
+    selfClosing: true,
+    render: Quiz,
   },
 };
 
