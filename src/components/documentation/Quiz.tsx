@@ -18,15 +18,15 @@ export function Quiz({ questions }: { questions: Question[] }) {
 
   if (currentQuestionIdx >= questions.length) {
     return (
-      <div className="w-[500px] overflow-hidden rounded-lg bg-white shadow">
-        <div className="px-4 py-5 sm:p-6">
-          <p className="text-sm/6 font-semibold text-gray-900">
+      <div className="w-full overflow-hidden rounded-lg bg-white dark:bg-slate-800">
+        <div className="px-4 py-4">
+          <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 mt-0">
             Din score er {computeScore(questions, answers)} av{' '}
-            {questions.length}
+            {questions.length}!
           </p>
           <button
             type="button"
-            className="mt-2 rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            className="rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 duration-75"
             onClick={() => {
               setcurrentQuestion(0);
               setAnswers(Array(questions.length).fill(-1));
@@ -41,17 +41,21 @@ export function Quiz({ questions }: { questions: Question[] }) {
   }
 
   return (
-    <div className="w-[500px] overflow-hidden rounded-lg bg-white shadow">
-      <div className="px-4 py-5 sm:p-6">
+    <div className="w-full overflow-hidden rounded-lg bg-white shadow dark:bg-slate-800">
+      <div className="flex w-full flex-col px-4 py-5 sm:p-6">
         <ProgressBar total={questions.length} current={currentQuestionIdx} />
         <RadioGroup
           question={questions[currentQuestionIdx]}
           onChange={(answerIdx) =>
-            setAnswers((ans) => {
-              const newAnswers = [...ans];
-              newAnswers[currentQuestionIdx] = answerIdx;
-              return newAnswers;
-            })
+            {
+              if(!showCurrent)  {
+                setAnswers((ans) => {
+                  const newAnswers = [...ans];
+                  newAnswers[currentQuestionIdx] = answerIdx;
+                  return newAnswers;
+                })
+              }
+            }
           }
           showCurrent={showCurrent}
           selected={answers[currentQuestionIdx]}
@@ -60,7 +64,7 @@ export function Quiz({ questions }: { questions: Question[] }) {
           <div className="mt-4 flex w-full justify-end">
             <button
               type="button"
-              className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              className="rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 duration-75"
               onClick={() => {
                 if (showCurrent) {
                   setcurrentQuestion(currentQuestionIdx + 1);
@@ -92,25 +96,26 @@ function RadioGroup({
 }) {
   return (
     <fieldset className="mt-2">
-      <legend className="text-sm/6 font-semibold text-gray-900">
+      <legend className="text-md font-semibold text-gray-900 dark:text-gray-100">
         {question.question}
       </legend>
-      <div className="mt-4 divide-y divide-gray-200 border-b border-t border-gray-200">
+      <div className="mt-4 flex flex-col gap-2">
         {question.answers.map((q, idx) => (
           <div
             key={idx}
+            onClick={() => onChange(idx)}
             className={clsx(
-              'relative flex items-start rounded-md px-2 py-4',
-              showCurrent && question.answerIdx === idx ? 'bg-green-300' : '',
+              'relative flex items-start px-2 py-4 dark:hover:bg-slate-600 rounded-md cursor-pointer dark:bg-slate-700 dark:text-gray-100 bg-slate-100 hover:bg-slate-200',
+              showCurrent && question.answerIdx === idx ? '!bg-green-300 dark:bg-green-400 dark:text-green-950 dark:hover:bg-green-400' : '',
               showCurrent && question.answerIdx !== idx && selected === idx
-                ? 'bg-red-300'
+                ? '!bg-red-300 dark:bg-red-400 dark:text-red-950 dark:hover:bg-red-400'
                 : '',
             )}
           >
-            <div className="min-w-0 flex-1 text-sm/6">
+            <div className="min-w-0 flex-1 text-sm/6 cursor-pointer">
               <label
                 htmlFor={`side-${idx}`}
-                className="select-none font-medium text-gray-900"
+                className="select-none font-medium"
               >
                 {q}
               </label>
@@ -122,9 +127,10 @@ function RadioGroup({
                   name="plan"
                   type="radio"
                   className={clsx(
-                    'size-4 border-gray-300 text-indigo-600 focus:ring-indigo-600',
+                    'size-4 text-sky-600 focus:ring-sky-600',
                   )}
-                  onChange={() => onChange(idx)}
+                  value={idx}
+                  checked={selected === idx}
                 />
               </div>
             )}
@@ -135,30 +141,6 @@ function RadioGroup({
   );
 }
 
-function ProgressBar({ total, current }: { total: number; current: number }) {
-  const steps = useMemo(() => {
-    const steps = [];
-    for (let i = 0; i < total; i++) {
-      steps.push({
-        name: `Step ${i + 1}`,
-        status:
-          i === current ? 'current' : i < current ? 'complete' : 'incomplete',
-        href: '#',
-      });
-    }
-    return steps;
-  }, [total, current]);
-
-  return (
-    <nav aria-label="Progress" className="flex items-center justify-center">
-      <p className="text-sm font-medium text-black">
-        Spørsmål {steps.findIndex((step) => step.status === 'current') + 1} av{' '}
-        {steps.length}
-      </p>
-    </nav>
-  );
-}
-
 function computeScore(questions: Question[], answers: number[]): number {
   return questions.reduce((acc, question, idx) => {
     if (question.answerIdx === answers[idx]) {
@@ -166,4 +148,24 @@ function computeScore(questions: Question[], answers: number[]): number {
     }
     return acc;
   }, 0);
+}
+
+function ProgressBar({ total, current }: { total: number; current: number }) {
+  return (
+    <div className="flex items-center gap-4">
+      <span className='text-xl font-bold'>QUIZ</span>
+      <span className='w-52'>
+        Spørsmål {current + 1} av {total}
+      </span>
+      <div
+        className="flex h-1.5 w-full overflow-hidden rounded-full bg-gray-200"
+        role="progressbar"
+      >
+        <div
+          className="flex flex-col justify-center overflow-hidden whitespace-nowrap rounded-full bg-sky-600 text-center text-xs text-white transition duration-500"
+          style={{ width: `${((current + 1) / total) * 100}%` }}
+        ></div>
+      </div>
+    </div>
+  );
 }
