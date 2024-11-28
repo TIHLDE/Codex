@@ -85,25 +85,3 @@ title: Min dokumentasjonsside
 ```
 
 Det var alt du trengte for å starte, god progging!
-
-{% quiz questions=[
-  {
-    "question": "Hva står REST for?",
-    "answerIdx": 1,
-    "answers": [
-      "Restful state transport",
-      "Representational state transfer",
-      "Bruh moment",
-      "Restless Brotherman Testern"
-    ]
-  },
-  {
-    "question": "Hva står REST for?",
-    "answerIdx": 1,
-    "answers": [
-      "Restful state transport",
-      "Representational state transfer",
-      "Restless Brotherman Testern"
-    ]
-  },
-] /%}
