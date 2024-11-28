@@ -79,6 +79,39 @@ title: Min dokumentasjonsside
 ---
 ```
 
+## Quiz
+
+For å lage en quiz, bruk følgende komponent:
+```
+{% quiz questions=[
+  {
+    "question": "Hva står REST for?",
+    "answerIdx": 1,
+    "answers": [
+      "Restful state transport",
+      "Representational state transfer",
+      "Bruh moment"
+    ]
+  },
+  {
+    "question": "Hva står REST for?",
+    "answerIdx": 1,
+    "answers": [
+      "Restful state transport",
+      "Representational state transfer",
+      "Bruh moment"
+    ]
+  },
+] /%}
+```
+
+Merk at spørsmåls-lista må være gyldig !**JSON**! for at det skal funke! Dvs alle felter må wrappes i double quotes.
+Det anbefales å skrive spørsmålene f.eks. i vs code på følgende vis:
+
+1. Åpne en ny fane med `ctrl + T`
+2. Velg språk med `ctrl + K`, `M`
+3. Skriv "JSON" og trykk enter
+
 ## Dokumenter-siden
 
 Denne siden ("minutes" på engelsk) brukes for å legge til, endre og se interne dokumenter i INDEX/DRIFT. Siden disse dokumentene kan være sensitive, lagres all data i Lepton, og sjekker at du er med i INDEX/DRIFT for å få tilgang.
