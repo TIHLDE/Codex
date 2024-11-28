@@ -40,6 +40,7 @@ import glob from 'fast-glob';
 import * as path from 'path';
 import { createLoader } from 'simple-functional-loader';
 import * as url from 'url';
+import Os from 'os'
 
 const __filename = url.fileURLToPath(import.meta.url);
 
@@ -50,6 +51,10 @@ export default function withGitReflection(nextConfig = {}) {
         test: __filename,
         use: [
           createLoader(function () {
+            if(Os.platform() === "win32") {
+              return;
+            }
+
             let pagesDir = path.resolve('./src/app');
             this.addContextDependency(pagesDir);
 
