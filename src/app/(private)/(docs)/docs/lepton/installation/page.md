@@ -58,3 +58,6 @@ Git kommer som regel ferdig installert på Linux og MacOS, men om det av en elle
 - Linux (Debian): `sudo apt install python`
 - Linux (Fedora/CentOS): `sudo dnf install python`
 - Linux (Arch): Trenger du egentlig hjelp om du bruker Arch???
+
+## Make
+Make er et verktøy som gjør det lettere å kjøre kommandoer. Dette er spesielt nyttig når vi skal kjøre kommandoer som bygger prosjektet, kjører tester, og andre kommandoer som er nødvendige for å kjøre prosjektet. For å laste ned Make kan du følge [denne lenken](http://gnuwin32.sourceforge.net/packages/make.htm). Ja, siden ser shady ut, men det er helt trygt å laste ned. For macOS kan du laste ned make ved å følge [denne lenken](https://formulae.brew.sh/formula/make).

@@ -10,7 +10,7 @@ ORM står for Object-Relational Mapping og er metodikk for å kunne gjøre SQL s
 
 En ORM er konstruert for å prøve å standardisere spørringer, slik at du som utvikler til enhver tid vet hva du gjør og får som svar. Dette øker kodesikkerheten og reduserer risikoen for å tukle med data på en negativ måte. Derimot så er ulempen ved denne standardiseringen optimalisering og spesialtilfeller. Det er vanskelig å både ha et system som forenkler og standardiserer spørringer samtidig som at det skal kunne ta høyde for alle mulige scenarioer.
 
-Men i bunn og grunn er Django sin ORM optimal for oss i Index og skal brukes til enhver tid. Det er mulig å skrive rå SQL ved hjelp av en egen metode i ORM'en, men **DETTE SKAL ALDRI GJØRES!**
+Men i bunn og grunn er Django sin ORM optimal for oss i Index og skal brukes til enhver tid. Det er mulig å skrive rå SQL ved hjelp av en egen metode i ORM'en, men **DETTE SKAL ALDRI GJØRES!**. Hvis det er behov for å skrive rå SQL, så ta kontakt med den ansvarlige for Lepton og diskuter behovet.
 
 ## Første steg for å benytte seg av ORM
 
