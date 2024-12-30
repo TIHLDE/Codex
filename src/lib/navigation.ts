@@ -51,6 +51,10 @@ export const navigation: Navigation[] = [
             href: '/docs/lepton/models/fields',
           },
           {
+            title: 'Tilganskontroll',
+            href: '/docs/lepton/models/access',
+          },
+          {
             title: 'Admin panel',
             href: '/docs/lepton/models/admin',
           },
