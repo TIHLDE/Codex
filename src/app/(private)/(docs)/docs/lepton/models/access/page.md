@@ -1,8 +1,8 @@
 ---
-title: 'Hvordan bestemme brukerrettigheter'
+title: 'Tilgangskontroll'
 ---
 
-Når man konstruerer et API, er aksesskontroll noe som vil dukke opp etterhvert. Hvem skal få tilgang til hva? Skal alle få lov til å opprette arrangementer?
+Når man konstruerer et API, er tilgangskontroll noe som vil dukke opp etterhvert. Hvem skal få tilgang til hva? Skal alle få lov til å opprette arrangementer?
 
 I Lepton bruker vi et bibliotek som heter **django-dry-rest-permissions**. Dette gir oss muligheten til å definere et sett med rettigheter på modell nivå, og så vil vårt viewset automatisk returnere en **403 forbidden** respons hvis en som ikke har riktige rettigheter prøver å kalle på endepunktet.
 
@@ -121,6 +121,10 @@ Dette er mye å ta høyde for, og er lett å bli forvirret. Man er avhengig av �
 La oss nå ta for oss et eksempel med artikkelen. Vi starter med å se på default rettigheter:
 
 ```python
+from app.utils.models import BaseModel
+from app.common.permissions import BasePermissionModel
+
+
 class Article(BaseModel, BasePermissionModel):
     read_access = (Groups.TIHLDE, )
     write_access = (Groups.TIHLDE, )
@@ -131,6 +135,10 @@ class Article(BaseModel, BasePermissionModel):
 Som default ønsker vi at alle som er medlem av TIHLDE skal få lov til å opprette en artikkel og lese sine egne og andre sine artikler. Men hvis vi lar det stå som dette betyr det at hvem som helst kan redigere og slette dine artikler. Dermed må vi justere rettighetene. Vi starter med å se på globale rettigheter.
 
 ```python
+from app.utils.models import BaseModel
+from app.common.permissions import BasePermissionModel
+
+
 class Article(BaseModel, BasePermissionModel):
     ...
 
@@ -156,6 +164,14 @@ Her ser du at vi egt ikke har innført noe ny logikk. Siden vi arver **has_write
 Men det er på objektnivå at forskjellen skjer. Og slikt er det i de fleste tilfeller. At det er først når vi snakker om spesifikke objekter at vi ønsker å begrense hvem som skal gjøre hva.
 
 ```python
+from app.utils.models import BaseModel
+from app.common.permissions import (
+    BasePermissionModel,
+    is_admin_user,
+    is_promo_user
+)
+
+
 class Article(BaseModel, BasePermissionModel):
     ...
 
@@ -193,84 +209,93 @@ Når det kommer til oppdatering og sletting av en artikkel så ønsker vi kun å
 
 Hvis man legger inn mer kompleks logikk kan det være gunstig å legge til en kommentar om hva logikken prøver å sette som rettigheter for å gjøre det lettere for andre å forstå.
 
+### Hjelpemetoder for rettigheter
+
+I eksemplene over har vi benyttet oss av noen funskjoner som for eksemppl **is_admin_user**. I app.common.permissions har vi laget en del hjelpemetoder for å sjekke om en bruker tilhører en spesifikk gruppe. Dette er for å gjøre det lettere å lese koden og for å unngå å skrive samme kode flere ganger.
+
+#### check_has_access
+
+```python
+def check_has_access(groups_with_access, request):
+    set_user_id(request) # User middleware
+    user = request.user
+
+    if not user:
+        return False
+
+    try:
+        groups = map(str, groups_with_access)
+        return (
+            user
+            and user.memberships.filter(
+                group__slug__iregex=r"(" + "|".join(groups) + ")"
+            ).exists()
+        )
+    except Exception as e:
+        capture_exception(e)
+    return False
+```
+
+Denne metoden sjekker om en bruker tilhører en av de gruppene som er oppgitt i listen. Hvis brukeren tilhører en av gruppene vil metoden returnere True, ellers False. Denne metoden brukes i de fleste tilfeller for å sjekke om en bruker har tilgang til en ressurs.
+
+
+#### check_has_full_access
+
+```python
+def check_has_full_access(groups_with_access: list[str], request):
+    """Check if user has access to all groups"""
+    set_user_id(request) # USer middleware
+    user = request.user
+
+    if not user:
+        return False
+
+    try:
+        groups = map(str, groups_with_access)
+        return user and user.memberships.filter(
+            group__slug__iregex=r"(" + "|".join(groups) + ")"
+        ).count() == len(groups_with_access)
+    except Exception as e:
+        capture_exception(e)
+    return False
+```
+
+Denne metoden sjekker om en bruker tilhører alle gruppene som er oppgitt i listen. Hvis brukeren tilhører alle gruppene vil metoden returnere True, ellers False. Denne metoden brukes i de tilfeller der en bruker må tilhøre alle gruppene for å få tilgang til en ressurs.
+
+
+#### set_user_id
+
+```python
+def set_user_id(request):
+    # If the id and user of the request is already set, return
+    if (hasattr(request, "id") and request.id) and (
+        hasattr(request, "user") and request.user
+    ):
+        return
+
+    token = request.META.get("HTTP_X_CSRF_TOKEN")
+    request.id = None
+    request.user = None
+
+    if token is None:
+        return None
+
+    try:
+        user = Token.objects.get(key=token).user
+    except Token.DoesNotExist:
+        return
+
+    request.id = user.user_id
+    request.user = user
+```
+
+
+Denne metoden er det vi kaller et middleware. Denne metoden blir kalt før hver forespørsel som kommer inn til serveren. Denne metoden setter id og bruker på forespørselen. Dette gjør at vi kan hente ut brukeren i de ulike metodene som sjekker rettigheter. Denne metoden er nødvendig for at de andre metodene skal fungere.
+
+Denne metoden henter ut en unik token, som er en del av forespørselen som blir sendt av brukeren. Denne tokenen blir brukt til å hente ut brukeren som har sendt forespørselen. Hvis brukeren ikke har sendt med en token, eller tokenen ikke er gyldig, vil metoden returnere None.
+
+Koden her er litt misvisende, da det ser ut som om nøkkelen til token er **HTTP_X_CSRF_TOKEN**, men den er i virkeligheten **x-csrf-token**. Dette er en oversettelse av Django, og det er derfor viktig å vite at det er **x-csrf-token** som er nøkkelen til token, når man sender en forespørsel fra frontend.
+
 ## Hvordan vet endepunktene at de skal se etter disse rettighetene?
 
-Frem til nå har vi satt opp to gruppelister som attributter og noen egne metoder, men det er ingenting som tilsier at disse skal ha noe effekt. For at det programmet skal vite at det skal se etter disse metodene så må vi legge til en klasse i viewsettet.
-
-```python
-class BasicViewPermission(DRYPermissions):
-    def has_permission(self, request, view):
-        set_user_id(request)
-        return super().has_permission(request, view)
-
-    def has_object_permission(self, request, view, obj):
-        return super().has_object_permission(request, view, obj)
-
-# I viewsettet
-class ArticleViewSet(...):
-    permission_classes = [BasicViewPermission]
-```
-
-Ved å sette **permission_classes** til **BasicViewPermission** så arver vi fra DRYPermissions som har kode som sjekker opp mot metodene vi definerte i modellen vår.
-
-## Hvorfor så mange metoder?
-
-Basert på dette enkle eksempelet kan det virke som at vi skriver mye unødvendig kode om igjen som bare kaller på hverandre. Så hvorfor gjør vi dette?
-
-Det er to årsaker: muligheten for å liste opp rettigheter, og lesbarhet for andre utviklere.
-
-### Detaljert informasjon
-
-Per i dag er mange av modellene våre skrevet dårlig når det kommer til rettigheter. De er mangelfulle og forvirrende. Ved å først se på den første årsaken så har vi et endepunkt som følger:
-
-```python
-@action(detail=False, methods=["get"], url_path="me/permissions")
-def get_user_permissions(self, request, *args, **kwargs):
-    try:
-        serializer = UserPermissionsSerializer(
-            request.user, context={"request": request}
-        )
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    except Exception:
-        return Response(
-            {"detail": "Kunne ikke hente brukerens tillatelser"},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        )
-```
-
-Som bruker følgende serializer:
-
-```python
-class UserPermissionsSerializer(serializers.ModelSerializer):
-    permissions = DRYGlobalPermissionsField(
-        actions=[
-            "write",
-            "write_all",
-            "read",
-            "read_all",
-            "destroy",
-            "update",
-            "retrieve",
-        ]
-    )
-
-    class Meta:
-        model = User
-        fields = ("permissions",)
-```
-
-{% callout title="Obs! Ekstra rettigheter?" %}
-Her ser du at det er lagt til write_all og read_all. Det er fordi det er mulig å legge til egendefinerte rettigheter, og det brukes i noen få tilfeller i noen modeller. Mer dokumentasjon om dette vil komme senere.
-{% /callout %}
-
-Her ser vi at vi har et endepunkt vi kaller på i frontend for å sjekke hvilke rettigheter en bruker har og hva brukeren kan gjøre basert på de. Ut ifra vår serializer så bruker vi **DRYGlobalPermissionsField** som ser på våre globale rettigheter for å si ifra hvilke rettigheter bruker har for hver eneste modell vi bruker.
-
-Per nå ser vi kun på write og write_all i frontend, men det kan hende at vi senere trenger mer spesifikke detaljer, og dermed er det viktig at alle våre modeller følger riktig konvensjon. Per i dag er det mange modeller som må refaktoreres.
-
-Så det kan først virke som om det er unødvendig å skrive alle global rettighetene som kaller på samme metode, men for at frontend skal få mest mulig informasjon, så er det viktig at vi fyller ut alle metodene.
-
-### Lesbarhet
-
-Da har vi forklart hvorfor vi trenger de globale rettighetene, men hva med de på objektnivå? Vår **retrieve** rettighet på objektnivå kalte også på en annen metode og den virker det som om at vi ikke trenger for noe?
-
-Nei det er kanskje sant, men når det kommer andre utviklere og skal se på koden din som eksempel eller endre på noe, så er det utrolig mye mer oversiktlig for utvikleren at alle rettigheter er satt opp. Det gjør at man med en gang ser hvilke rettigheter modellen har, og ikke trenger å bli forvirret.
+Frem til nå har vi satt opp to gruppelister som attributter og noen egne metoder, men det er ingenting som tilsier at disse skal ha noe effekt. For at det programmet skal vite at det skal se etter disse metodene så må vi legge til en klasse i viewsettet. Dette kan du lese mer om under viewset dokumentasjonen.

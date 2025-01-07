@@ -9,6 +9,11 @@ I intro seksjonen til modeller har vi sett på hovedtrekkene til en modell og hv
 Når vi snakker om verdifelter, snakker vi om ulike typer som tall, strenger, tid og boolsk.
 
 ```python
+from django.db import models
+
+from app.util.models import BaseModel
+
+
 class MyModel(BaseModel):
     ...
 
@@ -24,7 +29,7 @@ class MyModel(BaseModel):
 Her har vi satt opp noen tilfeldige attributter som er verdier en rad i en tabell inneholder:
 
 - **CharField**: En vanlig streng, men som i best practice skal bli satt til en makslengde ved hjelp av _max_length_. Merk at hvis man setter argumentet **unique** til **True**, så er makslengden 255 bokstaver.
-- **TextField**: En vanlig streng, men av typen text, som vil si at den kan inneholde lange tekster. Brukes for nyhetsinnhold for eksempel.
+- **TextField**: En vanlig streng, men av typen text, som vil si at den kan inneholde lange tekster. Brukes for eksempel til innholdet i en bloggpost.
 - **DateTimeField**: Dette setter et **DateTime** objekt som representerer en dato og et tidspunkt.
 - **IntegerField**: Et heltall.
 - **BooleanField**: Sant eller usant. Må settes en **default**.

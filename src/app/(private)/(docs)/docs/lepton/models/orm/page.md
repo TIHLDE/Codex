@@ -4,13 +4,11 @@ title: 'Django ORM'
 
 ORM står for Object-Relational Mapping og er metodikk for å kunne gjøre SQL spørringer ved hjelp av objekter og funksjoner. Fordelen med dette er at det blir lettere for oss utviklere å utføre spørringer til databasen vår uten å gjøre feil, som i verste fall kan ødelegge dataen vår i databasen. Django har selv en egen ORM innebygget i rammeverket.
 
-**Obs!** Det anbefales å gjøre seg kjent med hvordan strukturen til Django og de ulike byggeklossene fungerer før man setter seg inn i denne seksjonen. Deler av Django sin ORM blir forklart gjennom de ulike seksjonene.
-
 ## Er ORM bedre enn rå SQL?
 
 En ORM er konstruert for å prøve å standardisere spørringer, slik at du som utvikler til enhver tid vet hva du gjør og får som svar. Dette øker kodesikkerheten og reduserer risikoen for å tukle med data på en negativ måte. Derimot så er ulempen ved denne standardiseringen optimalisering og spesialtilfeller. Det er vanskelig å både ha et system som forenkler og standardiserer spørringer samtidig som at det skal kunne ta høyde for alle mulige scenarioer.
 
-Men i bunn og grunn er Django sin ORM optimal for oss i Index og skal brukes til enhver tid. Det er mulig å skrive rå SQL ved hjelp av en egen metode i ORM'en, men **DETTE SKAL ALDRI GJØRES!**
+Men i bunn og grunn er Django sin ORM optimal for oss i Index og skal brukes til enhver tid. Det er mulig å skrive rå SQL ved hjelp av en egen metode i ORM'en, men **DETTE SKAL ALDRI GJØRES!**. Hvis det er behov for å skrive rå SQL, så ta kontakt med den ansvarlige for Lepton og diskuter behovet.
 
 ## Første steg for å benytte seg av ORM
 

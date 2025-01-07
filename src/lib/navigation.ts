@@ -51,6 +51,10 @@ export const navigation: Navigation[] = [
             href: '/docs/lepton/models/fields',
           },
           {
+            title: 'Tilganskontroll',
+            href: '/docs/lepton/models/access',
+          },
+          {
             title: 'Admin panel',
             href: '/docs/lepton/models/admin',
           },
@@ -81,6 +85,10 @@ export const navigation: Navigation[] = [
           {
             title: 'Oppsett av URL',
             href: '/docs/lepton/viewsets/url',
+          },
+          {
+            title: 'Tilganskontroll',
+            href: '/docs/lepton/viewsets/access',
           },
           {
             title: 'Viewsets, filtrering og søk',
@@ -136,11 +144,7 @@ export const navigation: Navigation[] = [
           {
             title: 'Hvordan håndtere filopplastning',
             href: '/docs/lepton/howto/fileUpload',
-          },
-          {
-            title: 'Hvordan håndtere rettigheter',
-            href: '/docs/lepton/howto/permissions',
-          },
+          }
         ],
       },
       {

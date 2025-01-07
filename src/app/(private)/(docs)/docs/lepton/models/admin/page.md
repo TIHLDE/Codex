@@ -10,11 +10,11 @@ Inne på dette panelet får du en liste med alle våre **registrerte modeller** 
 
 ## Registrering av modell
 
-For at en modell skal bli vist i panelet må modellen registreres i admin.py filen som er felles for alle modellene i appen den ligger i. I noen apper så ligger filen under en egen admin mappe.
+For at en modell skal bli vist i panelet må modellen registreres i admin.py filen som er felles for alle modellene i appen (mappen) den ligger i. I noen apper så ligger filen under en egen admin mappe, men det er best å ha en egen admin.py fil på root nivå i mappen.
 
 ```python
 from django.contrib import admin
-from app.myapp import models
+from app.myapp import models # Dette er en import av modellene i appen
 
 admin.site.register(models.News)
 ```
@@ -53,7 +53,7 @@ class RegistrationAdmin(admin.ModelAdmin):
         "event",
         "user",
     )
-    # Enables checks bypassing from the 'Action' dropdown in Registration overview
+    # Man kan også sette opp egne actions
     actions = [
         admin_delete_registration,
     ]

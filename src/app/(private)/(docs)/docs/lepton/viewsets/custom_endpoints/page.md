@@ -45,6 +45,9 @@ Her ser vi et eksempel på hvordan vi bruker det som i Python kalles for **_deco
 ## @action med parser
 
 ```python
+from rest_framework.parsers import FormParser, MultiPartParser
+
+
     @action(
         detail=True,
         methods=["post"],

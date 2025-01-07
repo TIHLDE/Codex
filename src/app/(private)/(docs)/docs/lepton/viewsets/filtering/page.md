@@ -43,6 +43,8 @@ from app.content.filters import MinuteFilter
 class MinuteViewSet(BaseViewSet):
     ...
 
+    # Viktig å legge til disse to attributtene
+    # Hvis ikke så vil ikke Django håndtere søk og filtrering
     filter_backends = [
         DjangoFilterBackend,
         filters.SearchFilter
@@ -151,4 +153,4 @@ Her ser vi et eksempel på hvordan man kan importere filters som inneholder fler
 
 ## Hvordan filtrering ikke skal gjøres
 
-Hvis man åpner Lepton kodebasen og navigerer seg til Event sitt ViewSet så vil man se mange linjer med kode som håndterer filtrering inni selve ViewSetet. Dette er et typisk eksempel på techdebt som burde rettes opp. Her er det snakk om hvordan mange linjer med kode og mye If-sjekker kan skrives på en mindre og mer elegant måte med en Filter klasse.
+Hvis man åpner Lepton kodebasen og navigerer seg til Event sitt ViewSet så vil man se mange linjer med kode som håndterer filtrering inni selve ViewSetet. Dette er et typisk eksempel på techdebt som burde rettes opp. Her er det snakk om hvordan mange linjer med kode og mye If-sjekker kan skrives med færre linger og mer elegant med en Filter klasse.
