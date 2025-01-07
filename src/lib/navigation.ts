@@ -87,6 +87,10 @@ export const navigation: Navigation[] = [
             href: '/docs/lepton/viewsets/url',
           },
           {
+            title: 'Tilganskontroll',
+            href: '/docs/lepton/viewsets/access',
+          },
+          {
             title: 'Viewsets, filtrering og søk',
             href: '/docs/lepton/viewsets/filtering',
           },
@@ -140,11 +144,7 @@ export const navigation: Navigation[] = [
           {
             title: 'Hvordan håndtere filopplastning',
             href: '/docs/lepton/howto/fileUpload',
-          },
-          {
-            title: 'Hvordan håndtere rettigheter',
-            href: '/docs/lepton/howto/permissions',
-          },
+          }
         ],
       },
       {

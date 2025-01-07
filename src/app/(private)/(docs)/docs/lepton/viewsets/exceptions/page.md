@@ -16,29 +16,22 @@ I et Viewset så legger vi til grunn at vi skal sette opp feilhåndtering som ta
 )
 def register_with_feide(self, request, *args, **kwargs):
     """Register user with Feide credentials"""
-    try:
-        serializer = FeideUserCreateSerializer(data=request.data)
+    serializer = FeideUserCreateSerializer(data=request.data)
 
-        if serializer.is_valid():
-            user = super().perform_create(serializer)
-            return Response(
-                {"detail": DefaultUserSerializer(user).data},
-                status=status.HTTP_201_CREATED,
-            )
-
+    if serializer.is_valid():
+        user = super().perform_create(serializer)
         return Response(
-            {"detail": serializer.errors},
-            status=status.HTTP_400_BAD_REQUEST
+            {"detail": DefaultUserSerializer(user).data},
+            status=status.HTTP_201_CREATED,
         )
 
-    except Exception:
-        return Response(
-            {"detail": "Det skjedde en feil på serveren"},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        )
+    return Response(
+        {"detail": serializer.errors},
+        status=status.HTTP_400_BAD_REQUEST
+    )
 ```
 
-Her ser vi hvordan vi gir en tilbakemelding til frontend om hva som har skjedd hvis det oppstår en feil vi ikke har tatt høyde for. Men inni vår **create** metode i vår serializer så er det mer logikk som kan feile underveis, og da er det greit å gi en mer detaljert beskjed til frontend om hva som har skjedd. I Python er det mulig å bruke nøkkelordet **exception** flere ganger etter hverandre for flere ulike typer.
+Her ser vi hvordan vi håndterer en POST request for å registrere seg med Feide. Men inni vår **create** metode i vår serializer så er det mer logikk som kan feile underveis, og da er det greit å gi en mer detaljert beskjed til frontend om hva som har skjedd. I Python er det mulig å bruke nøkkelordet **exception** flere ganger etter hverandre for flere ulike typer.
 
 ```python
 
@@ -65,7 +58,7 @@ Her ser man at dette fort kan bli mange exceptions etter hverandre, og det er le
 
 ## La Viewsetet håndtere feil for deg
 
-Heldigvis har vi en type klasse vi kan lage som vi kan la vårt Viewset arve, slik at vi ikke trenger å sette opp en lang liste med exceptions.
+Heldigvis har vi en egen klasse vi kan lage som vi kan la vårt Viewset arve, slik at vi ikke trenger å sette opp en lang liste med exceptions.
 
 ```python
 class APIErrorsMixin:
@@ -132,7 +125,7 @@ except Exception:
 Her ser vi et eksempel på et par der **FeideGetTokenError** er linket opp mot **APIFeideGetTokenException**. Dette betyr at inni vår logikk som henter ut en access token fra Feide, vil det bli kastet en **FeideGetTokenError**. Dermed blir API kallet til vårt endepunkt brutt som vanlig, bare at nå sendes det ikke en respons med statuskode 500 og en lite forstårlig melding, men heller statuskode 500 (det som passer best her), med en beskrivende forklaring til bruker og hva bruker burde gjøre.
 
 ```python
-class UserViewSet(..., APIFeideUserErrorsMixin):
+class UserViewSet(APIFeideUserErrorsMixin, BaseViewSet):
     ...
 ```
 
