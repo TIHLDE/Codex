@@ -34,7 +34,7 @@ Kjør
 debian@network: sudo nano usr/local/bin/forwardmysql
 ```
 
-Ta filen over og bytt ut \<PORT\> og \<IP-ADDRESS\> med opphav og destinasjon
+Bytt ut \<PORT\> og \<IP-ADDRESS\> med opphav og destinasjon
 
 
 Merk, dette gjelder for det som er satt opp per 27.03.2025
