@@ -1,7 +1,7 @@
 ---
 title: Nettverk
 ---
-## Hvordan benytte port forwarding på hostname i debian:
+## Hvordan benytte port forwarding i debian:
 
 ```
 #!/bin/bash
