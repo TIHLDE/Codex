@@ -262,6 +262,10 @@ export const navigation: Navigation[] = [
         ],
       },
       {
+        title: 'Network',
+        href: '/docs/drift/nettverk',
+      },
+      {
         title: 'Linux',
         href: '/docs/drift/linux',
         children: [
