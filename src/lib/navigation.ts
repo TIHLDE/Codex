@@ -135,6 +135,20 @@ export const navigation: Navigation[] = [
         ],
       },
       {
+        title: 'API nøkler',
+        href: '/docs/lepton/apikeys/intro',
+        children: [
+          {
+            title: 'Filopplastning',
+            href: '/docs/lepton/apikeys/file',
+          },
+          {
+            title: 'Epost',
+            href: '/docs/lepton/apikeys/email',
+          }
+        ]
+      },
+      {
         title: 'How-to',
         children: [
           {
