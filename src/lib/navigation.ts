@@ -259,6 +259,10 @@ export const navigation: Navigation[] = [
             title: 'Hvordan lage en PostgreSQL database for et prosjekt',
             href: '/docs/drift/databaser/create-postgresql-database',
           },
+          {
+            title: 'Drift sitt databaseoppsett',
+            href: '/docs/drift/databaser/databaser-i-drift',
+          },
         ],
       },
       {
