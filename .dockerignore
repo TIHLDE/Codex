@@ -1,0 +1,14 @@
+.git
+.github
+.next
+node_modules
+.env
+.env*
+.eslintrc.json
+.gitignore
+.nvmrc
+callout-example.png
+Dockerfile
+prettier.config.js
+README.md
+
