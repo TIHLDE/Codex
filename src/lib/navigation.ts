@@ -145,8 +145,8 @@ export const navigation: Navigation[] = [
           {
             title: 'Epost',
             href: '/docs/lepton/apikeys/email',
-          }
-        ]
+          },
+        ],
       },
       {
         title: 'How-to',
@@ -158,7 +158,7 @@ export const navigation: Navigation[] = [
           {
             title: 'Hvordan håndtere filopplastning',
             href: '/docs/lepton/howto/fileUpload',
-          }
+          },
         ],
       },
       {
@@ -270,8 +270,8 @@ export const navigation: Navigation[] = [
         title: 'Databaser',
         children: [
           {
-            title: 'Hvordan lage en PostgreSQL database for et prosjekt',
-            href: '/docs/drift/databaser/create-postgresql-database',
+            title: 'Hvordan lage en database',
+            href: '/docs/drift/databaser/create-database',
           },
           {
             title: 'Drift sitt databaseoppsett',
