@@ -282,6 +282,17 @@ export const navigation: Navigation[] = [
       {
         title: 'Network',
         href: '/docs/drift/nettverk',
+        children: [
+          {
+            title: 'Chinstrap',
+            children: [
+              {
+                title: 'Drifts proxy oppsett',
+                href: '/docs/drift/nettverk/chinstrap',
+              },
+            ],
+          },
+        ],
       },
       {
         title: 'Linux',
