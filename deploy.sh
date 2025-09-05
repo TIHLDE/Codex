@@ -2,12 +2,6 @@
 
 set -e
 
-echo "-> Pulling latest changes from remote"
-git fetch
-
-echo "-> Hard resetting on origin/main"
-git reset --hard origin/main
-
 echo "-> Loading env variables from .env file into shell"
 export $(grep -v '^#' .env | xargs)
 
