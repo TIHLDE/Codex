@@ -18,6 +18,9 @@ FROM deps AS builder
 
 ARG SKIP_ENV_VALIDATION=1
 
+# Set using `docker build --build-arg NEXT_PUBLIC_API_URL=<slugs> ...`
+ARG NEXT_PUBLIC_ALLOWED_GROUP_SLUGS
+
 RUN pnpm build
 
 RUN pnpm prune --prod
