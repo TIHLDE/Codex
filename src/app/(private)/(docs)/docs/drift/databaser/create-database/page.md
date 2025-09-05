@@ -129,7 +129,7 @@ Da er du ferdig! Du kan nå koble deg til databasen med følgende informasjon/en
 DATABASE_URL="mysql://<name>:<password>@fiordland:3306/<name>"
 
 DB_HOST=fiordland
-DB_PORT=5432
+DB_PORT=3306
 DB_USER=<navn>
 DB_NAME=<navn>
 DB_PASSWORD=<password>
