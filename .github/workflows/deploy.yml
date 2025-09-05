@@ -30,10 +30,8 @@ jobs:
           ssh -v -o StrictHostKeyChecking=no -J ${{ secrets.USER }}@${{ secrets.PROXY_HOST }} ${{ secrets.USER }}@${{ secrets.HOST }} << ENDSSH
           sudo -i
           cd ${{ secrets.WORKING_DIR }}
-          chmod 0600 .env
-          git fetch
-          git reset --hard origin/main
           echo "${{ secrets.ENV }}" > .env
-          make prod
+          chmod 0600 .env
+          ./deploy.sh
           ENDSSH
 
