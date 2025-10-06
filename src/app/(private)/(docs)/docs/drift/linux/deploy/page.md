@@ -1,3 +1,7 @@
+---
+title: Deploy Nettside på Adelie-serveren
+---
+
 # Deploy Nettside på Adelie-serveren
 
 Dokumentet viser hvordan man setter opp og deployer nettsider eller i dette eksempelet "Proton" på Adelie-serveren.
