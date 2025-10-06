@@ -42,7 +42,7 @@ jobs:
           sudo -i
           ./get-env.sh $VAULTWARDEN_ITEM_ID $WORKING_DIRECTORY/$ENV_RELATIVE_PATH
           chmod 0600 $WORKING_DIRECTORY/$ENV_RELATIVE_PATH
-          cd $WORKING_DIR
+          cd $WORKING_DIRECTORY
           git fetch
           git reset --hard origin/main
           ./deploy.sh
