@@ -302,6 +302,10 @@ export const navigation: Navigation[] = [
             title: 'Brukere i Linux',
             href: '/docs/drift/linux/users',
           },
+          {
+            title: 'Deploy',
+            href: '/docs/drift/linux/deploy',
+          }
         ],
       },
       {
