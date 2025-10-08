@@ -42,6 +42,7 @@ jobs:
           set -euo pipefail
           sudo bash -c '
             set -euo pipefail
+            cd
             ./get-env.sh "$VAULTWARDEN_MASTER_PASSWORD" "$VAULTWARDEN_ITEM_ID" "$WORKING_DIRECTORY/$ENV_RELATIVE_PATH"
             chmod 0600 "$WORKING_DIRECTORY/$ENV_RELATIVE_PATH"
             cd "$WORKING_DIRECTORY"
