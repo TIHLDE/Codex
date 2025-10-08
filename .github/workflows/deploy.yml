@@ -55,8 +55,11 @@ jobs:
             set -euo pipefail
 
             # Load environment variables from Vaultwarden
-            $HOME/get-env.sh "$VAULTWARDEN_MASTER_PASSWORD" "$VAULTWARDEN_ITEM_ID" "$WORKING_DIRECTORY/$ENV_RELATIVE_PATH"
-            chmod 0600 "$WORKING_DIRECTORY/$ENV_RELATIVE_PATH" # Change permissions to be readable only by the owner
+            cd
+            ./get-env.sh "$VAULTWARDEN_MASTER_PASSWORD" "$VAULTWARDEN_ITEM_ID" "$WORKING_DIRECTORY/$ENV_RELATIVE_PATH"
+
+            # Change permissions of .env to be readable only by the owner
+            chmod 0600 "$WORKING_DIRECTORY/$ENV_RELATIVE_PATH"
 
             # Navigate to the working directory, pull the latest code, and run the deployment script
             cd "$WORKING_DIRECTORY"
