@@ -41,7 +41,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no -J $USER@$PROXY_HOST $USER@$HOST << ENDSSH
           set -euo pipefail
           sudo -i
-          ./get-env.sh $VAULTWARDEN_MASTER_PASSWORD $VAULTWARDEN_ITEM_ID $WORKING_DIRECTORY/$ENV_RELATIVE_PATH
+          ./get-env.sh "$VAULTWARDEN_MASTER_PASSWORD" $VAULTWARDEN_ITEM_ID $WORKING_DIRECTORY/$ENV_RELATIVE_PATH
           chmod 0600 $WORKING_DIRECTORY/$ENV_RELATIVE_PATH
           cd $WORKING_DIRECTORY
           git fetch
