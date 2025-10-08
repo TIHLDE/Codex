@@ -38,7 +38,7 @@ jobs:
         run: |
           eval $(ssh-agent -s)
           ssh-add ~/.ssh/key
-          ssh -o StrictHostKeyChecking=no -J $USER@$PROXY_HOST $USER@$HOST << 'ENDSSH'
+          ssh -o StrictHostKeyChecking=no -J $USER@$PROXY_HOST $USER@$HOST << ENDSSH
           set -euo pipefail
           sudo bash -c '
             set -euo pipefail
