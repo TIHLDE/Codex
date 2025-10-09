@@ -39,7 +39,7 @@ export default function SigninPage() {
 
     if (response?.error) {
       formik.setErrors({
-        username: 'Feil brukernavn eller passord, eller ikke med i INDEX',
+        username: 'Feil brukernavn eller passord, eller ikke med i Drift/INDEX',
       });
     }
   };
