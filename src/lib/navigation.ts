@@ -245,6 +245,51 @@ export const navigation: Navigation[] = [
     title: 'Drift',
     children: [
       {
+        title: 'Azure',
+        children: [
+          {
+            title: '0. Azure læringsløp',
+            href: '/docs/azure/azure-laeringslop'
+          },
+          {
+            title: '1. IaC & Terraform basic',
+            href: '/docs/azure/iac-terraform-basic'
+          },
+          {
+            title: '2. Resources & RG',
+            href: '/docs/azure/resources-rg'
+          },
+          {
+            title: '3. Azure Containers',
+            href: '/docs/azure/azure-containers'
+          },
+          {
+            title: '4. Azure Cost Management',
+            href: '/docs/azure/azure-cost-management'
+          },
+          {
+            title: '5. Azure VNet',
+            href: '/docs/azure/azure-vnet'
+          },
+          {
+            title: '6. Azure DB',
+            href: '/docs/azure/azure-db'
+          },
+          {
+            title: '7. Azure Storage Account',
+            href: '/docs/azure/azure-storage-account'
+          },
+          {
+            title: '8. Terraform Intermediate',
+            href: '/docs/azure/terraform-intermediate'
+          },
+          {
+            title: '9. Azure Container Registry',
+            href: '/docs/azure/azure-container-registry'
+          },
+        ],
+      },
+      {
         title: 'OpenStack',
         children: [
           {
