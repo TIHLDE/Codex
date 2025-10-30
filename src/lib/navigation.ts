@@ -294,18 +294,18 @@ export const navigation: Navigation[] = [
         children: [
           {
             title: 'Oppsett',
-            href: '/docs/openstack/installation',
+            href: '/docs/drift/openstack/installation',
           },
           {
             title: 'Virtuelle maskiner',
             children: [
               {
                 title: 'Opprettelse med CLI',
-                href: '/docs/openstack/vm/cli',
+                href: '/docs/drift/openstack/vm/cli',
               },
               {
                 title: 'Opprettelse med Web',
-                href: '/docs/openstack/vm/web',
+                href: '/docs/drift/openstack/vm/web',
               },
             ],
           },
