@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
+import { env } from '@/lib/env';
 
 const validationSchema = yup.object({
   username: yup.string().required('Brukernavn må fylles ut'),
@@ -38,8 +39,12 @@ export default function SigninPage() {
     });
 
     if (response?.error) {
+      const groups = env.NEXT_PUBLIC_ALLOWED_GROUP_SLUGS.map(
+        (group) => group[0].toUpperCase() + group.slice(1),
+      ).join('/');
+
       formik.setErrors({
-        username: 'Feil brukernavn eller passord, eller ikke med i Drift/INDEX',
+        username: `Feil brukernavn eller passord, eller ikke med i ${groups}`,
       });
     }
   };
