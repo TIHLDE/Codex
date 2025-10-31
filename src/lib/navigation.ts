@@ -316,11 +316,11 @@ export const navigation: Navigation[] = [
         children: [
           {
             title: 'Hvordan lage en database',
-            href: '/docs/drift/databaser/create-database',
+            href: '/docs/drift/databaser/create_database',
           },
           {
             title: 'Drift sitt databaseoppsett',
-            href: '/docs/drift/databaser/databaser-i-drift',
+            href: '/docs/drift/databaser/databaser_i_drift',
           },
         ],
       },
@@ -329,7 +329,7 @@ export const navigation: Navigation[] = [
         children: [
           {
             title: 'Deploy prosjekt på Adelie',
-            href: '/docs/drift/how-to/deploy-adelie',
+            href: '/docs/drift/how_to/deploy_adelie',
           },
         ],
       },
