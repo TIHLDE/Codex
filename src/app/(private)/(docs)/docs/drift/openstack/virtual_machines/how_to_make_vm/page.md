@@ -1,5 +1,5 @@
 ---
-title: 'Oppretting av VM med WEB grensesnitt'
+title: 'Hvordan lage en ny VM'
 ---
 
 Første steg er å logge inn på NTNU sin [OpenStack plattform](https://stack.it.ntnu.no). Her må du logge inn med din NTNU bruker.
