@@ -294,18 +294,44 @@ export const navigation: Navigation[] = [
         children: [
           {
             title: 'Oppsett',
-            href: '/docs/openstack/installation',
+            href: '/docs/drift/openstack/installation',
           },
           {
-            title: 'Virtuelle maskiner',
+            title: 'Virtuelle Maskiner',
+            href: '/docs/drift/openstack/virtual_machines',
             children: [
               {
-                title: 'Opprettelse med CLI',
-                href: '/docs/openstack/vm/cli',
+                title: 'Hvordan lage en VM',
+                href: '/docs/drift/openstack/virtual_machines/how_to_make_vm',
               },
               {
-                title: 'Opprettelse med Web',
-                href: '/docs/openstack/vm/web',
+                title: 'Drifts VM-er',
+                children: [
+                  {
+                    title: 'Adelie (Webserver)',
+                    href: '/docs/drift/openstack/virtual_machines/instances/adelie',
+                  },
+                  {
+                    title: 'Royal (Vaultwarden)',
+                    href: '/docs/drift/openstack/virtual_machines/instances/royal',
+                  },
+                  {
+                    title: 'Fiordland (DB)',
+                    href: '/docs/drift/openstack/virtual_machines/instances/fiordland',
+                  },
+                  {
+                    title: 'King (Backend API)',
+                    href: '/docs/drift/openstack/virtual_machines/instances/king',
+                  },
+                  {
+                    title: 'Macaroni (Minecraft)',
+                    href: '/docs/drift/openstack/virtual_machines/instances/macaroni',
+                  },
+                  {
+                    title: 'Chinstrap (Proxy)',
+                    href: '/docs/drift/nettverk/proxy',
+                  },
+                ],
               },
             ],
           },
@@ -338,13 +364,8 @@ export const navigation: Navigation[] = [
         href: '/docs/drift/nettverk',
         children: [
           {
-            title: 'Chinstrap',
-            children: [
-              {
-                title: 'Drifts proxy oppsett',
-                href: '/docs/drift/nettverk/chinstrap',
-              },
-            ],
+            title: 'Drifts proxy oppsett',
+            href: '/docs/drift/nettverk/proxy',
           },
         ],
       },
