@@ -327,6 +327,10 @@ export const navigation: Navigation[] = [
                     title: 'Macaroni (Minecraft)',
                     href: '/docs/drift/openstack/virtual_machines/instances/macaroni',
                   },
+                  {
+                    title: 'Chinstrap (Proxy)',
+                    href: '/docs/drift/nettverk/proxy',
+                  },
                 ],
               },
             ],
@@ -360,13 +364,8 @@ export const navigation: Navigation[] = [
         href: '/docs/drift/nettverk',
         children: [
           {
-            title: 'Chinstrap',
-            children: [
-              {
-                title: 'Drifts proxy oppsett',
-                href: '/docs/drift/nettverk/chinstrap',
-              },
-            ],
+            title: 'Drifts proxy oppsett',
+            href: '/docs/drift/nettverk/proxy',
           },
         ],
       },
