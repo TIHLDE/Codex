@@ -249,43 +249,43 @@ export const navigation: Navigation[] = [
         children: [
           {
             title: '0. Azure læringsløp',
-            href: '/docs/drift/azure/azure-laeringslop'
+            href: '/docs/drift/azure/azure-laeringslop',
           },
           {
             title: '1. IaC & Terraform basic',
-            href: '/docs/drift/azure/iac-terraform-basic'
+            href: '/docs/drift/azure/iac-terraform-basic',
           },
           {
             title: '2. Resources & RG',
-            href: '/docs/drift/azure/resources-rg'
+            href: '/docs/drift/azure/resources-rg',
           },
           {
             title: '3. Azure Containers',
-            href: '/docs/drift/azure/azure-containers'
+            href: '/docs/drift/azure/azure-containers',
           },
           {
             title: '4. Azure Cost Management',
-            href: '/docs/drift/azure/azure-cost-management'
+            href: '/docs/drift/azure/azure-cost-management',
           },
           {
             title: '5. Azure VNet',
-            href: '/docs/drift/azure/azure-vnet'
+            href: '/docs/drift/azure/azure-vnet',
           },
           {
             title: '6. Azure DB',
-            href: '/docs/drift/azure/azure-db'
+            href: '/docs/drift/azure/azure-db',
           },
           {
             title: '7. Azure Storage Account',
-            href: '/docs/drift/azure/azure-storage-account'
+            href: '/docs/drift/azure/azure-storage-account',
           },
           {
             title: '8. Terraform Intermediate',
-            href: '/docs/drift/azure/terraform-intermediate'
+            href: '/docs/drift/azure/terraform-intermediate',
           },
           {
             title: '9. Azure Container Registry',
-            href: '/docs/drift/azure/azure-container-registry'
+            href: '/docs/drift/azure/azure-container-registry',
           },
         ],
       },
@@ -316,11 +316,20 @@ export const navigation: Navigation[] = [
         children: [
           {
             title: 'Hvordan lage en database',
-            href: '/docs/drift/databaser/create-database',
+            href: '/docs/drift/databaser/create_database',
           },
           {
             title: 'Drift sitt databaseoppsett',
-            href: '/docs/drift/databaser/databaser-i-drift',
+            href: '/docs/drift/databaser/databaser_i_drift',
+          },
+        ],
+      },
+      {
+        title: "How-to's",
+        children: [
+          {
+            title: 'Deploy prosjekt på Adelie',
+            href: '/docs/drift/how_to/deploy_adelie',
           },
         ],
       },
@@ -347,10 +356,6 @@ export const navigation: Navigation[] = [
             title: 'Brukere i Linux',
             href: '/docs/drift/linux/users',
           },
-          {
-            title: 'Deploy',
-            href: '/docs/drift/linux/deploy',
-          }
         ],
       },
       {
