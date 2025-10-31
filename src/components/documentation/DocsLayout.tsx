@@ -5,6 +5,7 @@ import { PrevNextLinks } from '@/components/documentation/PrevNextLinks';
 import { Prose } from '@/components/documentation/Prose';
 import { TableOfContents } from '@/components/documentation/TableOfContents';
 import { collectSections } from '@/lib/sections';
+import GitInfo from './GitInfo';
 
 export function DocsLayout({
   children,
@@ -21,6 +22,7 @@ export function DocsLayout({
     <>
       <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pl-8 lg:pr-0 xl:px-16">
         <article>
+          <GitInfo />
           <DocsHeader title={title} />
           <Prose>{children}</Prose>
         </article>
