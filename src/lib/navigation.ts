@@ -323,6 +323,10 @@ export const navigation: Navigation[] = [
                     title: 'King (Backend API)',
                     href: '/docs/drift/openstack/virtual_machines/instances/king',
                   },
+                  {
+                    title: 'Macaroni (Minecraft)',
+                    href: '/docs/drift/openstack/virtual_machines/instances/macaroni',
+                  },
                 ],
               },
             ],
