@@ -297,19 +297,33 @@ export const navigation: Navigation[] = [
             href: '/docs/drift/openstack/installation',
           },
           {
-            title: 'Opprettelse med Web',
-            href: '/docs/drift/openstack/vm/web',
-          },
-          {
-            title: 'Drifts VM-er',
+            title: 'Virtuelle Maskiner',
+            href: '/docs/drift/openstack/virtual_machines',
             children: [
               {
-                title: 'Adelie',
-                href: '/docs/drift/openstack/instances/adelie',
+                title: 'Hvordan lage en VM',
+                href: '/docs/drift/openstack/virtual_machines/how_to_make_vm',
               },
               {
-                title: 'Royal',
-                href: '/docs/drift/openstack/instances/royal',
+                title: 'Drifts VM-er',
+                children: [
+                  {
+                    title: 'Adelie (Webserver)',
+                    href: '/docs/drift/openstack/virtual_machines/instances/adelie',
+                  },
+                  {
+                    title: 'Royal (Vaultwarden)',
+                    href: '/docs/drift/openstack/virtual_machines/instances/royal',
+                  },
+                  {
+                    title: 'Fiordland (DB)',
+                    href: '/docs/drift/openstack/virtual_machines/instances/fiordland',
+                  },
+                  {
+                    title: 'King (Backend API)',
+                    href: '/docs/drift/openstack/virtual_machines/instances/king',
+                  },
+                ],
               },
             ],
           },

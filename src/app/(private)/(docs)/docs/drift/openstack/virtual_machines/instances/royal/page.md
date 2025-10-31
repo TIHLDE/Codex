@@ -55,9 +55,9 @@ Vaultwarden kjører i en Docker-container og er eksponert på port 3000:
 docker ps
 ```
 
-| Container ID | Image                     | Status               | Ports                  | Navn        |
-| ------------ | ------------------------- | -------------------- | ---------------------- | ----------- |
-| 710c791793ad | vaultwarden/server:latest | Up 4 weeks (healthy) | 127.0.0.1:3000->80/tcp | vaultwarden |
+| Container ID | Image                     | Status               | Ports                     | Navn        |
+| ------------ | ------------------------- | -------------------- | ------------------------- | ----------- |
+| 710c791793ad | vaultwarden/server:latest | Up 4 weeks (healthy) | 192.168.0.34:3000->80/tcp | vaultwarden |
 
 ### Data-lagring
 
@@ -73,7 +73,7 @@ Vaultwarden kan oppdateres trygt ved å kjøre:
 ./update-vaultwarden.sh
 ```
 
-Dette scriptet håndterer hele oppdateringsprosessen automatisk:
+Dette scriptet håndterer hele oppdateringsprosessen automatisk og ser noe slik ut:
 
 ```bash
 #!/usr/bin/bash
@@ -86,7 +86,7 @@ docker run --detach \
   --env DOMAIN="https://vault.tihlde.org" \
   --volume /vaultwarden_data/:/data/ \
   --restart unless-stopped \
-  --publish 127.0.0.1:3000:80 \
+  --publish 192.168.0.34:3000:80 \
   vaultwarden/server:latest
 ```
 
