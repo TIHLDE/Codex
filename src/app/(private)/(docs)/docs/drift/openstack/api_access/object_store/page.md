@@ -1,4 +1,4 @@
-_sist oppdatert: 2025-11-17 av Stian
+_sist oppdatert: 2025-11-18 av Stian
 
 # Object Store i Swift
 
@@ -8,8 +8,9 @@ _sist oppdatert: 2025-11-17 av Stian
 Blob storage, eller Binary Large OBject Store (ja, de likte nok bare navnet og fant på forkortelsen etterpå) er en type lagring som brukes til å lagre store mengder utstrukturert data. I TIHLDE brukes det primært til bilder, PDF-dokumenter og database-backups.
 
 ### Hva er S3 bucket?
-Amazon (og senere hele internett) sin standard for BLOB storage, står for Simple Storage Service. Hver bucket (container i Swift) har sitt eget unike navn. Azure opererer med en `https://<prosjektnavn>.blob.core.windows.net/<container>/<objektsreferanse>`
-variant for eksempel.
+Amazon (og senere hele internett) sin standard for BLOB storage og står for Simple Storage Service. Hver bucket (container i Swift) har sitt eget unike navn. Azure opererer med en `https://<prosjektnavn>.blob.core.windows.net/<container>/<objektsreferanse>`
+variant for eksempel. I swift hos NTNU ser det ut som følger: 
+`https://s3.region.stack.it.ntnu.no/swift/v1/<project_id>/<container>/<objektsreferanse>`.
 
 ## Object store direkte i Openstack
 
