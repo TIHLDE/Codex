@@ -1,4 +1,4 @@
-_sist oppdatert: 2025-11-18 av Stian
+_sist oppdatert: 2025-11-18 av Stian_
 
 # Object Store i Swift
 
@@ -94,9 +94,7 @@ Da legger man inn objektet man refererer til i containeren man viser til med obj
 ### TIHLDEs oppsett
 I TIHLDE må all data i blob storage være tilgjengelig og strukturert for en database. Dette er satt opp til å være S3 compliant og automatisert, index gjør det meste i sin backend og de trenger bare en bruker (Application credential) og link til backup bucketen sin.
 
-Greit å sette opp en dns-record her så rutingen kan gå smud `s3.tihlde.org/<container>/<objeksreferanse>` som viser til `drift.tihlde.org`
-
-for eksempel. Deretter kan man rute det dit det skal fra innsiden serverparken til ntnu.
+Greit å sette opp en dns-record her så rutingen kan gå smud `blob.tihlde.org/<container>/<objeksreferanse>` som viser til `drift.tihlde.org` for eksempel. Dette må gjøres om ting i object store skal være tilgjengelig utenfor NTNUs nettverk.
 
 ### Sikkerhetskopiering og backup
 
@@ -127,4 +125,4 @@ endpoint_type = public
 ```
 
 #### rclone automatiseringsscript
-fyll ut
+Må fylles ut når det er laget.
