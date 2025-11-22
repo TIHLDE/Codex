@@ -1,4 +1,4 @@
-_sist oppdatert: 2025-11-17 av Stian
+_sist oppdatert: 2025-11-17 av Stian_
 
 # Bruke Openstack via API
 
