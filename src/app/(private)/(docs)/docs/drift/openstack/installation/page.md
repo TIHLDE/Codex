@@ -11,7 +11,7 @@ Det varierer fra person til person hva man foretrekker å bruke. Men merk at hvi
 ### Enkel oversikt
 Her er en enkel oversikt over serverne som vi har i dag, hva de inneholder, og hvordan nettverkstrafikken går gjennom de:
 
-![OpenstackOverview](/public/images/OpenStackOverviewDark.png)
+<img src="images/OpenStackOverviewDark.png" alt="OpenstackOverview" />
 
 ## CLI
 
