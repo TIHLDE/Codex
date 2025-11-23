@@ -8,6 +8,11 @@ Det er to måter å bruke OpenStack. Den ene er ved å logge inn på OpenStack w
 
 Det varierer fra person til person hva man foretrekker å bruke. Men merk at hvis du skal koble en global ruter opp mot en VM så må du bruke CLI. Dette kommer av at vi ikke selv får lov til å opprette globale rutere, siden det er manko på globale IP-adresser. Siden NTNU oppretter de for oss, så klarer ikke OpenStack grensesnittet å forstå at man kan allokere en global ruter til en nyopprettet ruter.
 
+### Enkel oversikt
+Her er en enkel oversikt over serverne som vi har i dag, hva de inneholder, og hvordan nettverkstrafikken går gjennom de:
+
+![OpenstackOverview](/public/images/OpenStackOverviewDark.png)
+
 ## CLI
 
 ### Installering
