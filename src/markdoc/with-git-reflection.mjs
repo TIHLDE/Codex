@@ -84,8 +84,6 @@ export default function withGitReflection(nextConfig = {}) {
                 return map;
               }, {});
 
-              console.log(JSON.stringify(data));
-
               // When this file is imported within the application
               // the following module is loaded:
               return `
