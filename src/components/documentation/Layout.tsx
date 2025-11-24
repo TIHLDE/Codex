@@ -55,18 +55,6 @@ function Header() {
         <Search />
       </div>
       <div className="relative flex basis-0 justify-end gap-6 sm:gap-8 md:flex-grow">
-        <Link
-          href={'/events'}
-          className={'text-slate-800 hover:underline dark:text-slate-200'}
-        >
-          Arrangementer
-        </Link>
-        <Link
-          href={'/minutes'}
-          className={'text-slate-800 hover:underline dark:text-slate-200'}
-        >
-          Dokumenter
-        </Link>
         <ThemeSelector className="relative z-10" />
         <Link
           href="https://github.com/TIHLDE/Codex"
@@ -82,7 +70,7 @@ function Header() {
 
 export function Layout({ children }: { children: React.ReactNode }) {
   let pathname = usePathname();
-  let isHomePage = pathname === '/';
+  let isHomePage = pathname === '/' || pathname === '/docs';
 
   return (
     <div className="flex w-full flex-col">
