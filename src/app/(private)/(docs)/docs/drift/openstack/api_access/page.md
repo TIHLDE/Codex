@@ -4,7 +4,7 @@ _sist oppdatert: 2025-11-17 av Stian_
 
 Openstack er et veldig kraftig verktøy som fort kan bli underutnyttet hvis man ikke bruker det på den tiltenkte måten. Den tiltenkte måten er selvfølgelig med API tilgang, og API-adressene ligger inne på [stack.it.ntnu.no](https://stack.it.ntnu.no/horizon/project/api_access/).
 
-### Hvilke API endepunkter gjør hva?
+## Hvilke API endepunkter gjør hva?
 
 - Block Storage - Lagring av data som skal være rask og aksesserbar.
 - Cloudformation - idk, vi bruker det ikke
