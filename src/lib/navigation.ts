@@ -7,7 +7,7 @@ export interface Navigation {
 export const navigation: Navigation[] = [
   {
     title: 'Kom i gang',
-    href: '/',
+    href: '/docs',
   },
   {
     title: 'Nytt medlem?',
