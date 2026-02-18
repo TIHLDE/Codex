@@ -341,7 +341,6 @@ export const navigation: Navigation[] = [
             title: 'Oppsett',
             href: '/docs/drift/openstack/installation',
           },
-
           {
             title: 'Openstack API',
             href: '/docs/drift/openstack/api_access',
@@ -349,6 +348,10 @@ export const navigation: Navigation[] = [
             {
               title: 'Object store (blob storage)',
               href: '/docs/drift/openstack/api_access/object_store',
+            },
+            {
+              title: 'Application Credentials',
+              href: '/docs/drift/openstack/api_access/application_credentials',
             },
             ],
           },
