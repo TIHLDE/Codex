@@ -245,6 +245,23 @@ export const navigation: Navigation[] = [
     title: 'Drift',
     children: [
       {
+        title: 'Ai',
+        children: [
+          {
+            title: 'Clippy',
+            href: '/docs/drift/ai/clippy',
+          },
+          {
+            title: 'Infrastruktur',
+            href: '/docs/drift/ai/infrastruktur',
+          },
+          {
+            title: 'Oppsett',
+            href: '/docs/drift/ai/oppsett',
+          }
+        ]
+      },
+      {
         title: 'Azure',
         children: [
           {
