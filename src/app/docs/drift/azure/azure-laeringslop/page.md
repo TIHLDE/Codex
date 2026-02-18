@@ -13,7 +13,7 @@ Målet er å få en forståelse for hvordan man setter opp infrastruktur som kod
 - Azure Storage Account
 - Terraform Intermediate
 - Azure container registry
-# Intro Azure & Cloud Computing
+## Intro Azure & Cloud Computing
 
 Cloud computing betyr at man leier datakraft, lagring og tjenester fra en leverandør i stedet for å drifte alt selv. Microsoft Azure er en av de største plattformene, og tilbyr alt fra virtuelle maskiner (**IaaS**) til ferdige applikasjonstjenester som databaser og web hosting (**PaaS**) og programvareløsninger som Teams og Office 365 (**SaaS**).
 
@@ -26,7 +26,7 @@ Alle disse sertifiseringsløpene er imidlertid hovedsakelig teoretiske og går i
 
 Feltet er enormt, men i dette læringsløpet fokuserer vi på det mest relevante for å hoste webapplikasjoner i Azure – med en praktisk tilnærming som gir erfaring med verktøyene TIHLDE selv bruker.
 
-#### **Her kommer en oversikt over stegene i læringsløpet\!**
+**Her kommer en oversikt over stegene i læringsløpet\!**
 ### IaC & Terraform basic
 
 Her ser vi på hva Infrastructure as Code (IaC) er, og hvordan vi kan bruke Terraform til å administrere ressurser i Azure.
