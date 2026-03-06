@@ -112,7 +112,7 @@ cd $env:USERPROFILE\.ssh
 notepad config
 ```
 
-2. Legg til følgende konfigurasjon:
+1. Legg til følgende konfigurasjon:
 
 ```ssh-config
 # Proxy server - dette er inngangen til alle Drift sine servere

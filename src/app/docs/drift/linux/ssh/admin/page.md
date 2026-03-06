@@ -63,12 +63,6 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJqJqJqJqJqJqJqJqJqJqJqJqJqJqJqJqJqJqJqJqJqJ
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAbCdEfGhIjKlMnOpQrStUvWxYz1234567890AbCdEfG anna.hansen@student.ntnu.no
 ```
 
-{% callout type="note" title="Beste praksis" %}
-- Hold én public key per linje
-- Legg til en kommentar med navn (og eventuelt dato)
-- Dette gjør det enklere å fjerne tilgang senere
-{% /callout %}
-
 ### Steg 5: Sett riktige tillatelser (hvis det trengs)
 
 ```bash
@@ -79,6 +73,5 @@ chmod 600 ~/.ssh/authorized_keys
 
 1. Lagre filen (i nano: `Ctrl + X`, deretter `Y`, deretter `Enter`)
 2. Be det nye medlemmet teste tilkoblingen
-3. Hvis det ikke fungerer, sjekk feilsøking-seksjonen nedenfor
 
 Gjør deretter dette på alle andre servere.
