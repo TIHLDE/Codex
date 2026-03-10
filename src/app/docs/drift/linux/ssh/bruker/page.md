@@ -156,18 +156,6 @@ Drift bruker følgende servere (oppkalt etter pingviner 🐧):
 
 ## Koble til serverne
 
-### Første gangs tilkobling
-
-Når du kobler til en server for første gang, vil du få en melding om å verifisere fingeravtrykket:
-
-```
-The authenticity of host 'drift.tihlde.org (xxx.xxx.xxx.xxx)' can't be established.
-ED25519 key fingerprint is SHA256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.
-Are you sure you want to continue connecting (yes/no/[fingerprint])?
-```
-
-Skriv `yes` og trykk Enter.
-
 ### Koble til Chinstrap (proxy)
 
 ```bash
@@ -200,3 +188,16 @@ ssh king
 ```
 
 SSH vil automatisk hoppe via Chinstrap for å nå disse serverne.
+
+
+### Første gangs tilkobling
+
+Når du kobler til en server for første gang, vil du få en melding om å verifisere fingeravtrykket:
+
+```
+The authenticity of host 'drift.tihlde.org (xxx.xxx.xxx.xxx)' can't be established.
+ED25519 key fingerprint is SHA256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+```
+
+Skriv `yes` og trykk Enter.
