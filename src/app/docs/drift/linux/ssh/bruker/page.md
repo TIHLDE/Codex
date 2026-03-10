@@ -1,5 +1,5 @@
 ---
-title: SSH - Brukerguide
+title: SSH - Nykommer
 ---
 
 ## Oversikt
