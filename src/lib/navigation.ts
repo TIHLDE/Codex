@@ -405,6 +405,20 @@ export const navigation: Navigation[] = [
             title: 'Brukere i Linux',
             href: '/docs/drift/linux/users',
           },
+          {
+            title: 'SSH konfigurasjon',
+            href: '/docs/drift/linux/ssh',
+            children: [
+              {
+                title: 'Brukerguide',
+                href: '/docs/drift/linux/ssh/bruker',
+              },
+              {
+                title: 'Administratorguide',
+                href: '/docs/drift/linux/ssh/admin',
+              },
+            ],
+          },
         ],
       },
       {

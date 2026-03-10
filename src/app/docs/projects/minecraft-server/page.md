@@ -2,9 +2,7 @@
 title: Minecraft-server
 ---
 
-_skrevet 17.10.2024_
-
-Minecraft er noe alle har spilt og det er enda gøyere med venner. Ved å følge denne guiden kan du lære hvordan du kan sette opp en Minecraft-server med hjelp av OpenStack.
+TIHLDEs Minecraft-server kjører på en OpenStack VM med Docker. Denne guiden forklarer hvordan infrastrukturen er satt opp og hvordan du administrerer serveren.
 
 ## 1. Sett opp en server/instans for hosting
 
@@ -62,105 +60,305 @@ $ openstack server add floating ip <navnet-på-minecraft-server-instansen> <ip-a
 
 Du skal ikke få noe output om kommandoen fungerte.
 
-## 3 Sett opp selve Minecraft-serveren
+## 3 Minecraft-server oppsettet
 
-Da er det vanskeligste gjennomført! Vi skal nå gjøre siste steget som er å sette opp den faktiske minecraft serveren.
+TIHLDEs Minecraft-server kjører i en Docker-container med Fabric mod loader. Dette gjør det enkelt å administrere serveren og mods uten å måtte installere Java eller administrere dependencies manuelt.
 
-### 3.1 SSH inn på VM-instansen
+### 3.1 Oversikt over systemet
 
-For å kunne utføre kommandoer på VM-instansen må du SSH'e deg inn på serveren med følgende kommando:
+Serveren er satt opp med følgende komponenter:
 
-```bash
-ssh <image-navn>@<ip-adresse>
+- **Docker**: Serveren kjører i en Docker-container basert på `itzg/minecraft-server` imaget
+- **Versjon**: Minecraft 1.21.11
+- **Mod loader**: Fabric (versjon 0.18.4)
+- **RAM**: 8GB dedikert minne
+- **Portering**: Port 25565 (Minecraft) og 24454 UDP (Voice Chat)
+
+### 3.2 Filstruktur
+
+```
+macaroni-backup/
+├── docker-compose.yml          # Docker-konfigurasjon for serveren
+└── server/                     # Server-datamappe (mountet i containeren)
+    ├── server.properties       # Server-innstillinger (difficulty, gamemode, etc.)
+    ├── eula.txt               # Minecraft EULA aksept
+    ├── ops.json               # Operatører/admins
+    ├── whitelist.json         # Whitelist for spillere
+    ├── banned-players.json    # Bannede spillere
+    ├── banned-ips.json        # Bannede IP-addresser
+    ├── .rcon-cli.env         # RCON passord for remote administrasjon
+    ├── config/                # Konfigurasjonsfiler for mods
+    │   ├── DistantHorizons.toml
+    │   ├── lithium.properties
+    │   ├── GrimAC/           # Anti-cheat konfigurasjon
+    │   └── voicechat/        # Voice chat innstillinger
+    ├── mods/                  # Installerte Fabric mods
+    ├── world/                 # Spillverden (overworld)
+    ├── DIM-1/                 # Nether-dimensjonen
+    ├── DIM1/                  # End-dimensjonen
+    ├── logs/                  # Server-logger
+    └── crash-reports/         # Krasjrapporter
 ```
 
-Jeg lagde en VM med Debian så _image-navn_ blir for meg `debian`. Bruker du Ubuntu vil det naturligvis være `ubuntu`.
+#### 3.2.1 Viktige filer
 
-### 3.2 Installer Java
+**docker-compose.yml**
+Definerer hvordan serveren kjører. Inneholder konfigurasjon for:
+- Minecraft-versjon og mod loader
+- RAM-allokering (8GB)
+- Automatisk nedlasting av mods fra Modrinth
+- Port-mapping og restart-policy
 
-Først må vi passe på at vi installerer en moderne nok Java-version, noe du kan finne ut [her](https://minecraft.wiki/w/Tutorials/Setting_up_a_server#Java_version).
-Installasjonen for dette varierer litt ut i fra hvilken image du valgte da du laget VM-instansen, hvilken Java versjon du fant ut at du trenger.
+**server.properties**
+Hovedkonfigurasjonen for Minecraft-serveren:
+- `difficulty=hard` - Vanskelighetsgrad
+- `gamemode=survival` - Standard spillmodus
+- `max-players=1993` - Maksimalt antall spillere
+- `enable-rcon=true` - Aktiverer remote control
+- `motd=Velkommen til TIHLDEs Minecraft Server!` - Server-beskrivelse
 
-{% callout title="P.S." %}
-For de som bryr seg så krever Minecraft-serveren bare Java JRE så du må ikke ha JDK-en (men det går så klart fint det også):
+**Modrinth mods** (lastes ned automatisk):
+- `fabric-api` - Nødvendig API for Fabric mods
+- `lithium` - Ytelsesoptimalisering
+- `grimac` - Anti-cheat
+- `distanthorizons` - Distant rendering
+- `simple-voice-chat` - Stemme-chat i spillet
+- `sound-physics-remastered` - Realistisk lyd
+- `servux` - Server-side utilities
+
+### 3.3 SSH inn på VM-instansen
+
+For å administrere serveren må du først SSH inn på VM-en:
+
+```bash
+ssh macaroni
+```
+
+
+## 4 Administrere serveren
+
+### 4.1 Starte serveren
+
+Naviger til mappen med `docker-compose.yml` og kjør:
+
+```bash
+docker compose up -d
+```
+
+Flagget `-d` kjører containeren i bakgrunnen (detached mode).
+
+### 4.2 Stoppe serveren
+
+For å stoppe serveren pent (slik at verden lagres ordentlig):
+
+```bash
+docker compose stop
+```
+
+Dette stopper containeren uten å slette den. For å stoppe og fjerne containeren:
+
+```bash
+docker compose down
+```
+
+### 4.3 Se server-logger
+
+For å følge med på server-loggene i sanntid:
+
+```bash
+docker compose logs -f
+```
+
+Trykk `Ctrl+C` for å avslutte log-visningen (serveren vil fortsette å kjøre).
+
+### 4.4 Restart serveren
+
+For å restarte serveren (f.eks. etter konfigurasjonendringer):
+
+```bash
+docker compose restart
+```
+
+### 4.5 Kjøre kommandoer på serveren
+
+Det er to måter å kjøre Minecraft-kommandoer på:
+
+**Attach til containeren**
+```bash
+docker attach mc.tihlde.org
+```
+
+Nå er du koblet direkte til server-konsollen. Skriv kommandoer direkte (f.eks. `stop`, `whitelist add <navn>`, `op <navn>`).
+
+{% callout title="OBS!" %}
+For å detache fra konsollen uten å stoppe serveren: Trykk `Ctrl+P` deretter `Ctrl+Q`
 {% /callout %}
 
-Når dette ble skrevet (17.10.2024) så var siste Minecraft-server versjon 1.21.1 og dette krever minst Java 21. Desverre har Debian 12 repositoriene bare Java 17 så Java 21 må installeres på en litt annen metode for meg. Dersom du bruker Debian 13+ eller Ubuntu vil du mest sannsynlig kunne installere riktig Java versjon med:
+
+## 5 Administrere verdenen
+
+### 5.1 Manuell lagring
+
+Serveren lagrer automatisk med jevne mellomrom, men for å tvinge en lagring:
 
 ```bash
-$ sudo apt install default-jre
+# Via attach
+docker attach mc.tihlde.org
+save-all
+# Detach med Ctrl+P, Ctrl+Q
 ```
 
-Skulle du være på akkurat Debian 12 og trenger nøyaktig Java 21 som jeg gjorde så kan du benytte disse kommandoene for å installere riktig Java versjon:
+### 5.2 Ta backup av verdenen
+
+**Viktig**: Stopp serveren først for å sikre en konsistent backup!
 
 ```bash
-$ curl -O https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb
-$ sudo dpkg -i jdk-21_linux-x64_bin.deb
+# Stopp serveren
+docker compose stop
+
+# Tar backup av server-mappen
+cd macaroni-backup
+tar -czf backup-$(date +%Y%m%d-%H%M%S).tar.gz server/
+
+# Start serveren igjen
+docker compose up -d
 ```
 
-Hvis ikke dette fungerte så kan du finne masse gode guides ved å google _How to install Java \<versjon> on \<din-linux-distro>_.
+Backupen inneholder alt: verden, konfigurasjon, spillerdata, etc.
 
-Du kan teste om du har installert Java riktig ved å kjøre:
+### 5.3 Gjenopprette fra backup
 
 ```bash
-$ java --version
+# Stopp serveren
+docker compose stop
+
+# Slett eller flytt eksisterende server-mappe
+mv server server.old
+
+# Pakk ut backup
+tar -xzf backup-20260310-120000.tar.gz
+
+# Start serveren
+docker compose up -d
 ```
 
-Da skal du få ut noe som dette:
+### 5.4 Resette eller lage ny verden
+
+For å starte på nytt med en helt ny verden:
 
 ```bash
-$ java --version
-openjdk 21.0.4 2024-07-16
-OpenJDK Runtime Environment (build 21.0.4+7)
-OpenJDK 64-Bit Server VM (build 21.0.4+7, mixed mode, sharing)
+# Stopp serveren
+docker compose stop
+
+# Ta backup først (valgfritt men anbefalt)
+tar -czf old-world-backup-$(date +%Y%m%d).tar.gz server/world server/DIM-1 server/DIM1
+
+# Slett verdensmappene
+rm -rf server/world server/DIM-1 server/DIM1
+
+# Start serveren - ny verden genereres automatisk
+docker compose up -d
 ```
 
-Så lenge du ikke fikk noe `command not found` eller lignende, og versjonsnummeret er riktig så skal alt være greit.
+For å endre seed eller world-type, rediger `server/server.properties`:
+```properties
+level-seed=1234567890
+level-type=minecraft:normal
+```
 
-### 3.3 (optional, but recommended) Lag en isolert Unix-bruker for å kjøre serveren
+Deretter slett world-mappene og restart som beskrevet over.
 
-Dette steget er ikke noe du mååååå gjøre, men er sterkt anbefalt for sikkerhetsgrunner. Vi vil basically isolere Minecraft-server-instansen fra root brukeren på VM-instansen.
+### 5.5 Oppdatere Minecraft-versjonen
 
-Kjør disse kommandoene for å lage en ny Unix-bruker for Minecraft-serveren:
+Rediger `docker-compose.yml` og endre `VERSION`:
+
+```yaml
+environment:
+  VERSION: 1.21.12  # Ny versjon
+```
+
+Deretter:
+```bash
+docker compose down
+docker compose pull  # Laster ned nyeste server-image
+docker compose up -d
+```
+
+{% callout title="Advarsel!" %}
+Sjekk alltid at modene støtter den nye versjonen før du oppgraderer! Inkompatible mods kan krasje serveren.
+{% /callout %}
+
+## 6 Admin-oppgaver
+
+### 6.1 Legge til/fjerne spillere fra whitelist
 
 ```bash
-# Lager hjemmemappen til brukeren
-$ sudo mkdir /opt/minecraft
+# Legge til
+docker attach mc.tihlde.org
+whitelist on  # Aktiverer whitelist-modus om den ikke er på
+whitelist add <brukernavn>
 
-# Lager en unix-gruppe for brukeren
-$ sudo groupadd --system minecraft
-
-# Lager brukeren, setter den i minecraft-gruppen, og setter hjemmemappen til /opt/minecraft
-$ sudo useradd --system --home-dir /opt/minecraft -g minecraft --shell $(which bash) minecraft
-
-# Gir brukeren eierskap til alle filene i /opt/minecraft
-$ sudo chown -R minecraft:minecraft /opt/minecraft
-
-# Bytter til den nye brukeren
-$ sudo su minecraft
-
-# Hopper inn i /opt/minecraft
-$ cd
+# Fjerne
+whitelist remove <brukernavn>
 ```
 
-### 3.4 Last ned Minecraft-server filen
+Alternativt kan du redigere `server/whitelist.json` direkte.
 
-Gå til [denne nettsiden](https://www.minecraft.net/en-us/download/server) og høyreklikk _minecraft_server.x.xx.x.jar_ og kopier lenken. Kjør deretter denne kommandoen for å laster ned filen gjennom terminalen:
+### 6.2 Gi/fjerne OP (operator) rettigheter
 
 ```bash
-curl -o server.jar <lenka-du-kopierte>
+op <brukernavn> #Gi
+deop <brukernavn> #Fjerne
 ```
 
-## 4 Start Minecraft-serveren!!! :DDDD
+Eller rediger `server/ops.json`.
 
-Kjør kommandoen under for å starte serveren. Dersom du gjorde det ekstra steget med egen unix-bruker så må du passe på at du kjører serveren som `minecraft`-brukeren.
+### 6.3 Banne spillere
 
 ```bash
-$ java -Xmx4G -Xms4G -jar server.jar nogui
+ban <brukernavn> [grunn]
+ban-ip <ip-adresse> [grunn]
+
+# Fjerne ban
+pardon <brukernavn>
+pardon-ip <ip-adresse>
 ```
 
-Første gang du kjører serveren vil den "krasje" fordi du må sette `eula=true` i eula.txt filen som blir generert. Etter du har gjort det vil du kunne starte serveren igjen.
+### 6.4 Endre server-innstillinger
 
-Du skal nå kunne koble deg på serveren i Minecraft. IP-adressen du bruker er den samme som du fant tidligere (den du brukte i OpenStack-kommandoen). For å stoppe serveren skriver du bare `stop`.
+Rediger `server/server.properties` og restart serveren:
 
-Du kan endre hvor mange GB med RAM som skal være dedikert til Minecraft-serveren ved å endre `-Xmx4G` og `-Xms4G` til, for eksempel, `-Xmx6G` og `-Xms6G`, men pass på at VM-instansen har tilstrekkelig med RAM. Jeg vil anbefale å gi Minecraft-serveren minst 4GB.
+```bash
+nano server/server.properties
+docker compose restart
+```
+
+Viktige innstillinger:
+- `difficulty` - peaceful, easy, normal, hard
+- `gamemode` - survival, creative, adventure, spectator
+- `max-players` - Maks antall spillere
+- `pvp` - true/false
+- `spawn-protection` - Radius rundt spawn (blokker)
+
+### 6.5 Legge til eller fjerne mods
+
+Rediger `MODRINTH_PROJECTS` i `docker-compose.yml`:
+
+```yaml
+MODRINTH_PROJECTS: |
+  fabric-api
+  lithium
+  ny-mod-slug-fra-modrinth
+```
+
+Finn mod-slugs på [Modrinth](https://modrinth.com/mods?g=categories:%27fabric%27).
+
+Restart serveren for å laste ned nye mods:
+```bash
+docker compose down
+docker compose up -d
+```
+
+{% callout title="Tips!" %}
+Du kan også manuelt legge `.jar`-filer i `server/mods/`-mappen, men Modrinth-metoden er anbefalt for enklere oppdateringer.
+{% /callout %}
