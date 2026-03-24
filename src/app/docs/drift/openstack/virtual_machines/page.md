@@ -27,7 +27,7 @@ I stedet for å kjøre alle tjenestene våre på én VM, deler vi dem opp på fl
 
 - **Adelie** - hosting av småtjenester (Codex, Blitzed, Utlegg, Sporty, etc.)
 - **Royal** - hosting av Vaultwarden (passord-manager)
-- **Chinstrap** - proxy som ruter trafikk til riktige VM-er
+- **Chinstrap** - proxy som ruter trafikk til riktige VM-er/Docker containere
 
 Dette gir oss bedre oversikt, sikkerhet og stabilitet.
 

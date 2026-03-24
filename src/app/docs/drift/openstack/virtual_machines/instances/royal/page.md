@@ -8,48 +8,31 @@ _sist oppdatert: 2025-10-30 av Borgar_
 
 ## Systemdetaljer
 
-| Egenskap       | Verdi                    |
-| -------------- | ------------------------ |
-| VM-navn        | Royal                    |
-| IPv4-adresse   | 192.168.0.34             |
-| Domene         | https://vault.tihlde.org |
-| Operativsystem | Debian 13 (trixie)       |
-
-## SSH-konfigurasjon
-
-### Automatisk root-bytte
-
-Når du SSH-er inn på Royal blir du automatisk switchet fra **debian**-brukeren til **root**-brukeren, på samme måte som på Adelie.
-
-Dette skjer ved at **debian** sitt `.bash_profile`-script blir automatisk kjørt når du logger inn.
-
-{% callout title="Root-tilgang" type="warning" %}
-Du får automatisk root-tilgang ved innlogging. Vær ekstra forsiktig med kommandoer du kjører, spesielt siden Royal inneholder sensitiv data i Vaultwarden.
-{% /callout %}
+| Egenskap       | Verdi        |
+| -------------- | ------------ |
+| VM-navn        | Royal        |
+| IPv4-adresse   | 192.168.0.34 |
+| Operativsystem | Debian       |
 
 ## Nettverkskonfigurasjon
 
-Royal mottar all innkommende trafikk fra proxy-instansen **Chinstrap**. VM-en bruker **Nginx** for å route denne trafikken videre til Vaultwarden-containeren.
+Royal mottar all innkommende trafikk fra proxy-instansen **Chinstrap**. Når Chinstrap mottar en forespørsel for `vault.tihlde.org`, vil den rute denne forespørselen til Royal på port 3000, hvor Docker-containeren for Vaultwarden håndterer den.
 
 ### Tilgangskontroll
 
 {% callout title="Nettverkstilgang påkrevd" type="warning" %}
-Man må være koblet til enten _eduroam_ eller _NTNU sin VPN_ for å få tilgang til Vaultwarden på vault.tihlde.org. Denne tilgangskontrollen håndteres av Chinstrap sin Nginx-konfigurasjon.
+Man må være koblet til enten _eduroam_ eller _NTNU sin VPN_ for å få tilgang til Vaultwarden på vault.tihlde.org. Denne tilgangskontrollen håndteres av Chinstrap sin Nginx-konfigurasjon for vault.tihlde.org.
 {% /callout %}
 
 {% callout title="Les mer om nettverket" type="note" %}
 Se dokumentasjonen for "Nettverking" for å lese mer om hvordan Nginx og nettverkingen fungerer, inkludert tilgangsbegrensninger.
 {% /callout %}
 
-## TLS-sertifikater
-
-Royal bruker **acme.sh** for å håndtere TLS-sertifikater for domenene `vault.tihlde.org` og `*.vault.tihlde.org`. Sertifikatene fornyes automatisk gjennom Domeneshop sitt API, på samme måte som på Adelie.
-
 ## Vaultwarden
 
 ### Docker-konfigurasjon
 
-Vaultwarden kjører i en Docker-container og er eksponert på port 3000:
+Vaultwarden kjører i en Docker-container og er eksponert på port 3000 og bundet til sin lokale IP-adresse på 192.168.0.0/24 subnettet slik at den kan bli nådd fra Chinstrap:
 
 ```bash
 docker ps
@@ -78,16 +61,28 @@ Dette scriptet håndterer hele oppdateringsprosessen automatisk og ser noe slik 
 ```bash
 #!/usr/bin/bash
 
-docker rm -f vaultwarden || true
-docker image rm vaultwarden/server:latest || true
-docker pull vaultwarden/server:latest
-docker run --detach \
+echo "Deleting old container..."
+sudo docker rm -f vaultwarden 2> /dev/null
+
+echo "Deleting old Vaultwarden docker image..."
+sudo docker image rm vaultwarden/server:latest 2> /dev/null
+
+echo "Fetching new image..."
+sudo docker pull vaultwarden/server:latest
+
+echo "Running new docker container..."
+sudo docker run --detach \
   --name vaultwarden \
   --env DOMAIN="https://vault.tihlde.org" \
   --volume /vaultwarden_data/:/data/ \
   --restart unless-stopped \
   --publish 192.168.0.34:3000:80 \
+  --env ADMIN_TOKEN=waOaGuhJY8fn \
   vaultwarden/server:latest
+
+echo
+echo "DONE!"
+echo
 ```
 
 **Hva scriptet gjør:**

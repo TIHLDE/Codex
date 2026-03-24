@@ -1,5 +1,3 @@
-_sist oppdatert: 2025-10-30 av Borgar_
-
 # Fiordland
 
 ## Oversikt
@@ -8,21 +6,11 @@ Fiordland er en VM-instans på OpenStack som brukes til å hoste TIHLDEs databas
 
 ## Systemdetaljer
 
-| Egenskap       | Verdi              |
-| -------------- | ------------------ |
-| VM-navn        | Fiordland          |
-| IPv4-adresse   | 192.168.0.140      |
-| Operativsystem | Debian 13 (trixie) |
-
-## SSH-konfigurasjon
-
-### Automatisk root-bytte
-
-Når du SSH-er inn på Fiordland blir du automatisk switchet fra **debian**-brukeren til **root**-brukeren, på samme måte som på de andre VM-ene.
-
-{% callout title="Root-tilgang" type="warning" %}
-Du får automatisk root-tilgang ved innlogging. Vær ekstra forsiktig med kommandoer du kjører, spesielt siden Fiordland inneholder alle databasene våre. Feil her kan påvirke alle tjenester som er avhengige av databasen.
-{% /callout %}
+| Egenskap       | Verdi         |
+| -------------- | ------------- |
+| VM-navn        | Fiordland     |
+| IPv4-adresse   | 192.168.0.140 |
+| Operativsystem | Debian        |
 
 ## Database-tjenester
 

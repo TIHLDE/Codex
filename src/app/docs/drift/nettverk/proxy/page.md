@@ -4,7 +4,7 @@ _sist oppdatert: 2025-10-31 av Borgar_
 
 ## Oversikt
 
-**Chinstrap** er TIHLDEs proxy-server som fungerer som inngangsport for all trafikk til våre tjenester. Alle forespørsler fra internett går først til Chinstrap, som deretter ruter trafikken videre til riktig VM basert på domenenavn, protokoll og nettverkstilgang. Disse VM-ene vil dermed motta trafikken og rute den til riktig Docker-container med egen Nginx.
+**Chinstrap** er TIHLDEs proxy-server som fungerer som inngangsport for all trafikk til våre tjenester. Alle forespørsler fra internett går først til Chinstrap, som deretter ruter trafikken videre til riktig Docker container basert på domenenavn, protokoll og nettverkstilgang.
 
 ## Chinstrap systemdetaljer
 
@@ -13,32 +13,19 @@ _sist oppdatert: 2025-10-31 av Borgar_
 | VM-navn        | Chinstrap                |
 | IPv4 (intern)  | 192.168.0.36             |
 | IPv4 (ekstern) | 129.241.100.198          |
-| Operativsystem | Debian 13 (trixie)       |
+| Operativsystem | Debian                   |
 | Rolle          | Reverse proxy og gateway |
 
-Chinstrap er den eneste VM-en som har en offentlig IP-adresse (`129.241.100.198`) som er tilgjengelig fra internett. Alle andre VM-er har kun private IP-adresser og kan bare nås via Chinstrap.
+Chinstrap er en av få VM-er som har en offentlig IP-adresse (`129.241.100.198`) som er tilgjengelig fra internett. Nesten alle andre VM-er har kun private IP-adresser og kan bare nås via Chinstrap.
 
 ## Hvordan proxy-systemet fungerer
-
-```
-Internet → Chinstrap (129.241.100.198) → Riktig VM basert på domene/protokoll
-                                            ├─ *.tihlde.org           → Adelie (192.168.0.41)
-                                            ├─ vault.tihlde.org       → Royal (192.168.0.34)
-                                            ├─ photon.tihlde.org      → King (192.168.0.6)
-                                            ├─ mc.tihlde.org:25565    → Macaroni (192.168.0.84)
-                                            └─ drift.tihlde.org:5432  → Fiordland (192.168.0.140)
-```
 
 Chinstrap bruker **Nginx** som reverse proxy og TCP stream proxy. Dette gjør at:
 
 - Vi kan ha mange tjenester på forskjellige VM-er, men alle bruker samme offentlige IP
 - Vi kan enkelt legge til/fjerne tjenester uten å endre DNS
 - Vi kan implementere tilgangskontroll på ett sentralt sted
-- SSL/TLS håndteres på hver VM (ikke på Chinstrap)
-
-## HTTP-routing (port 80)
-
-HTTP-trafikk på port 80 routes basert på `Host`-headeren (domenenavnet) i forespørselen.
+- SSL/TLS håndteres sentralt
 
 ### Nginx-konfigurasjon
 
@@ -46,38 +33,66 @@ Nginx-konfigurasjonen er delt opp i filer i `/etc/nginx/sites-enabled/`:
 
 ```bash
 /etc/nginx/sites-enabled/
-├── adelie.conf    # Routing til Adelie (wildcard + phpmyadmin)
-├── king.conf      # Routing til King (photon.tihlde.org)
-├── royal.conf     # Routing til Royal (vault.tihlde.org)
-└── default        # Fallback-konfigurasjon
+├── blitzed.tihlde.org.conf    # Routing til Blitzed containeren på Adelie
+├── codex.tihlde.org.conf      # Routing til Codex containeren på Adelie
+├── photon.tihlde.org.conf     # Routing til Photon containeren på King
+├── ...
+└── default                    # Fallback-konfigurasjon når ingenting matcher
 ```
 
-### Royal (vault.tihlde.org)
+### Blitzed (blitzed.tihlde.org)
 
 ```nginx
 server {
-    listen 80;
-    server_name vault.tihlde.org;
+  listen 80;
+  server_name blitzed.tihlde.org;
+  return 301 https://$host$request_uri;
+}
 
-    location / {
-        # Only allow connections from 10.0.0.0/8 (eduroam and NTNU VPN)
-        allow 10.0.0.0/8;
-        deny all;
+server {
+  listen 443 ssl;
+  http2 on;
+  server_name blitzed.tihlde.org;
 
-        proxy_pass http://royal;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
+  ssl_certificate /etc/nginx/certificates/tihlde.org/fullchain.pem;
+  ssl_certificate_key /etc/nginx/certificates/tihlde.org/privkey.pem;
+
+  location / {
+    proxy_pass http://adelie:4000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_buffering off;
+    proxy_redirect off;
+  }
+}
+
+map $http_upgrade $connection_upgrade {
+  default upgrade;
+  ''      close;
 }
 ```
 
 **Forklaring:**
 
-- Lytter på port 80 for domenet **vault.tihlde.org**
-- Blokkerer all trafikk utenom `10.0.0.0/8` (eduroam og NTNU VPN)
-- Sender godkjent trafikk videre til Royal
+- Lytter på port 80 (HTTP) og 443 (HTTPS) for domenet **vault.tihlde.org**
+- Videresender HTTP-trafikk til HTTPS
+- SSL/TLS-sertifikater er konfigurert for `tihlde.org`
+- Trafikk rutes til Adelie på port 4000 hvor Blitzed containeren kjører
+
+{% callout title="IP filtrering for eduroam" type="note" %}
+Noen tjenester som Vaultwarden på Royal bruer IP-filtrering for å begrense tilgangen til eduroam og NTNU VPN. Dette gjøres i Nginx-konfigurasjonen ved å sjekke klientens IP-adresse:
+
+```nginx
+allow 10.0.0.0/8; # eduroam and NTNU VPN
+deny all;         # Block all other IPs
+```
+
+{% /callout %}
 
 ### King (photon.tihlde.org)
 
