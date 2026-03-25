@@ -1,5 +1,3 @@
-_sist oppdatert: 2025-10-30 av Borgar_
-
 # Royal
 
 ## Oversikt
@@ -54,35 +52,6 @@ Vaultwarden kan oppdateres trygt ved å kjøre:
 
 ```bash
 ./update-vaultwarden.sh
-```
-
-Dette scriptet håndterer hele oppdateringsprosessen automatisk og ser noe slik ut:
-
-```bash
-#!/usr/bin/bash
-
-echo "Deleting old container..."
-sudo docker rm -f vaultwarden 2> /dev/null
-
-echo "Deleting old Vaultwarden docker image..."
-sudo docker image rm vaultwarden/server:latest 2> /dev/null
-
-echo "Fetching new image..."
-sudo docker pull vaultwarden/server:latest
-
-echo "Running new docker container..."
-sudo docker run --detach \
-  --name vaultwarden \
-  --env DOMAIN="https://vault.tihlde.org" \
-  --volume /vaultwarden_data/:/data/ \
-  --restart unless-stopped \
-  --publish 192.168.0.34:3000:80 \
-  --env ADMIN_TOKEN=waOaGuhJY8fn \
-  vaultwarden/server:latest
-
-echo
-echo "DONE!"
-echo
 ```
 
 **Hva scriptet gjør:**

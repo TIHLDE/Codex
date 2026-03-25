@@ -26,7 +26,7 @@ CONTAINER ID   IMAGE                              COMMAND                  CREAT
 ...
 ```
 
-Her ser vi at tjenesten **Photon** kjører i en Docker-container, og er tilgjengelig fra 192.168.0.0/24 på port 4000. Når Chinstrap mottar en forespørsel for photon.tihlde.org, vil den rute denne forespørselen til King på port 4000, hvor Docker-containeren for Photon håndterer den.
+Her ser vi at tjenesten **Photon** kjører i en Docker-container, og er tilgjengelig fra subnettet 192.168.0.0/24 på port 4000. Når Chinstrap mottar en forespørsel for photon.tihlde.org, vil den rute denne forespørselen til King på port 4000, hvor Docker-containeren for Photon mottar den.
 
 ## Cronjobs
 

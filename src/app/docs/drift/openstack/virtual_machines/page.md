@@ -1,5 +1,3 @@
-_sist oppdatert: 2025-10-30 av Borgar_
-
 # Virtuell Maskin? More like virtuell heroin
 
 ---
@@ -71,7 +69,7 @@ TIHLDE har fått tildelt digitale ressurser (CPU, RAM, disk) fra NTNU via OpenSt
 
 ## Oversikt over våre VM-er
 
-Her er en omtrentlig oppdatert oversikt over våre aktive VM-er og deres formål:
+Her er en omtrentlig oppdatert oversikt over våre aktive VM-er og deres formål, men informasjonen hær kan være utdatert:
 
 | VM-navn   | Formål                                                               | IPv4-adresse                 |
 | --------- | -------------------------------------------------------------------- | ---------------------------- |

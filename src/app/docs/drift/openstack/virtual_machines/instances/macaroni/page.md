@@ -14,11 +14,11 @@ Macaroni er en VM-instans på OpenStack som brukes til å hoste **TIHLDEs Minecr
 
 ## Velkomstmelding
 
-Når du SSH-er inn på Macaroni blir du møtt med en hjelpetekst som viser de mest brukte kommandoene.
+Når du SSH-er inn på Macaroni blir du møtt med en hjelpetekst som viser de mest brukte kommandoene og hvordan man bruker dem.
 
 ## Nettverkskonfigurasjon
 
-Nettverkstrafikk som kommer til _mc.tihlde.org_ på port **48960** til proxy VM-en **Chinstrap** blir streamet videre til Macaroni. Dette gjør at spillere kan koble til Minecraft-serveren med **mc.tihlde.org**.
+Nettverkstrafikk som kommer til _mc.tihlde.org_ på port **48960** til proxy VM-en **Chinstrap** blir streamet videre til Macaroni på port **25565**. Dette gjør at spillere kan koble til Minecraft-serveren med **mc.tihlde.org**.
 
 {% callout title="Les mer om nettverket" type="note" %}
 Porten er endret fra standard Minecraft-port (25565) for å unngå at serveren blir lettere oppdaget av bots og skannere på internett. Chinstrap håndterer port forwarding og routing til Macaroni. Les deg opp på SRV records for å forstå hvordan bytting av minecraft port fungerer.
@@ -26,12 +26,12 @@ Porten er endret fra standard Minecraft-port (25565) for å unngå at serveren b
 
 ### Serverfiler
 
-Alle filer for Minecraft-serveren ligger i `/opt/minecraft/server/`:
+Alle filer for Minecraft-serveren ligger i `/home/debian/server/`:
 
 - `*.jar` - Minecraft server JAR-fil
 - `server.properties` - Serverkonfigurasjon
 - `world/` - Spillverdenen
-- `plugins/`/`mods` - Server-plugins (hvis Spigot/Paper)
+- `plugins/` / `mods` - Server-plugins (hvis Spigot/Paper)
 - `ops.json` - Liste over operatører (admins)
 - `whitelist.json` - Hviteliste (hvis aktivert)
 
