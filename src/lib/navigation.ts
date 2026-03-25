@@ -366,6 +366,10 @@ export const navigation: Navigation[] = [
         ],
       },
       {
+        title: 'Kiosk-skjerm',
+        href: '/docs/drift/kiosk'
+      },
+      {
         title: 'Databaser',
         children: [
           {
