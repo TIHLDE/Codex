@@ -1,5 +1,3 @@
-_sist oppdatert: 2025-10-30 av Borgar_
-
 # Virtuell Maskin? More like virtuell heroin
 
 ---
@@ -27,7 +25,7 @@ I stedet for å kjøre alle tjenestene våre på én VM, deler vi dem opp på fl
 
 - **Adelie** - hosting av småtjenester (Codex, Blitzed, Utlegg, Sporty, etc.)
 - **Royal** - hosting av Vaultwarden (passord-manager)
-- **Chinstrap** - proxy som ruter trafikk til riktige VM-er
+- **Chinstrap** - proxy som ruter trafikk til riktige VM-er/Docker containere
 
 Dette gir oss bedre oversikt, sikkerhet og stabilitet.
 
@@ -71,7 +69,7 @@ TIHLDE har fått tildelt digitale ressurser (CPU, RAM, disk) fra NTNU via OpenSt
 
 ## Oversikt over våre VM-er
 
-Her er en omtrentlig oppdatert oversikt over våre aktive VM-er og deres formål:
+Her er en omtrentlig oppdatert oversikt over våre aktive VM-er og deres formål, men informasjonen hær kan være utdatert:
 
 | VM-navn   | Formål                                                               | IPv4-adresse                 |
 | --------- | -------------------------------------------------------------------- | ---------------------------- |
