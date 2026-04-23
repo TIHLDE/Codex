@@ -51,15 +51,8 @@ Vaultwarden sin data ligger i `/vaultwarden_data/`. Denne mappen inneholder alle
 Vaultwarden kan oppdateres trygt ved å kjøre:
 
 ```bash
-./update-vaultwarden.sh
+docker compose up -d
 ```
-
-**Hva scriptet gjør:**
-
-1. Stopper og fjerner eksisterende Vaultwarden-container
-2. Fjerner gammelt Docker-image
-3. Laster ned nyeste versjon av Vaultwarden
-4. Starter en ny container med oppdatert image
 
 {% callout title="Trygg oppdatering" type="note" %}
 Data-mappen (`/vaultwarden_data/`) blir montert inn i den nye containeren, så ingen data går tapt ved oppdatering.

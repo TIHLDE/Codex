@@ -25,7 +25,7 @@ CONTAINER ID  IMAGE                           COMMAND                   CREATED 
 ...
 ```
 
-Her ser vi at tjenesten **Blitzed** kjører i en Docker-container, og er tilgjengelig på subnettet 192.168.0.0/24 på port 4000. Når Chinstrap mottar en forespørsel for blitzed.tihlde.org, vil den rute denne forespørselen til Adelie (192.168.0.41) på port 4000, hvor Docker-containeren for Blitzed mottar den.
+Her ser vi at tjenesten **Blitzed** kjører i en Docker-container, og er tilgjengelig fra subnettet 192.168.0.0/24 på port 4000. Når Chinstrap mottar en forespørsel for blitzed.tihlde.org, vil den rute denne forespørselen til Adelie (192.168.0.41) på port 4000, hvor Docker-containeren for Blitzed mottar den.
 
 ## Cronjobs
 
