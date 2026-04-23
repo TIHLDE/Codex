@@ -95,7 +95,7 @@ deny all;         # Block all other IPs
 
 ## Forwarding av alt som ikke er HTTP/HTTPS
 
-Noen tjenester bruker ikke HTTP/HTTPS, som for eksempel Minecraft-serveren og databasene. For disse tjenestene bruker vi Nginx sin **stream**-modul for å proxy TCP- og UDP-trafikk direkte til riktig VM og port.
+Noen tjenester bruker ikke HTTP/HTTPS, som for eksempel Minecraft-serveren og databasene. For disse tjenestene bruker vi Nginx sin **stream**-modul i **`/etc/nginx/nginx.conf`** for å proxy TCP- og UDP-trafikk direkte til riktig VM og port.
 
 ### Eksempel
 

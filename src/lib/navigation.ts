@@ -258,8 +258,8 @@ export const navigation: Navigation[] = [
           {
             title: 'Oppsett',
             href: '/docs/drift/ai/oppsett',
-          }
-        ]
+          },
+        ],
       },
       {
         title: 'Azure',
@@ -318,10 +318,10 @@ export const navigation: Navigation[] = [
             title: 'Openstack API',
             href: '/docs/drift/openstack/api_access',
             children: [
-            {
-              title: 'Object store (blob storage)',
-              href: '/docs/drift/openstack/api_access/object_store',
-            },
+              {
+                title: 'Object store (blob storage)',
+                href: '/docs/drift/openstack/api_access/object_store',
+              },
             ],
           },
           {
@@ -367,7 +367,7 @@ export const navigation: Navigation[] = [
       },
       {
         title: 'Kiosk-skjerm',
-        href: '/docs/drift/kiosk'
+        href: '/docs/drift/kiosk',
       },
       {
         title: 'Databaser',
@@ -393,7 +393,6 @@ export const navigation: Navigation[] = [
       },
       {
         title: 'Network',
-        href: '/docs/drift/nettverk',
         children: [
           {
             title: 'Drifts proxy oppsett',
