@@ -1,4 +1,4 @@
-name: 'CI - Trigger build -> push -> deploy'
+name: 'build -> push -> deploy'
 on:
   push:
     branches: [main]
