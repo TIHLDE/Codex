@@ -48,7 +48,7 @@ Vaultwarden sin data ligger i `/vaultwarden_data/`. Denne mappen inneholder alle
 
 ### Oppdatering
 
-Vaultwarden kan oppdateres trygt ved å kjøre:
+Vaultwarden kan oppdateres og restartes trygt ved å kjøre:
 
 ```bash
 docker compose up -d
@@ -60,6 +60,6 @@ Data-mappen (`/vaultwarden_data/`) blir montert inn i den nye containeren, så i
 
 ## Bruk av Vaultwarden
 
-Vaultwarden brukes aktivt av andre VM-instanser og tjenester for å hente sensitiv konfigurasjon. For eksempel bruker Adelie `get-env.sh`-scriptet (med Bitwarden CLI) for å hente miljøvariabler fra Vaultwarden under deployment.
+Vaultwarden brukes aktivt av andre VM-instanser og tjenester for å hente sensitiv konfigurasjon som miljøvariables.
 
 Tilgang til Vaultwarden er tilgjengelig via nettleseren på **https://vault.tihlde.org** (husk at du må være på **eduroam** eller **NTNU VPN**).

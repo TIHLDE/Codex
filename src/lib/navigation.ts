@@ -245,7 +245,7 @@ export const navigation: Navigation[] = [
     title: 'Drift',
     children: [
       {
-        title: 'Ai',
+        title: 'AI',
         children: [
           {
             title: 'Clippy',
@@ -325,41 +325,32 @@ export const navigation: Navigation[] = [
             ],
           },
           {
-            title: 'Virtuelle Maskiner',
+            title: 'Drifts VM-er',
             href: '/docs/drift/openstack/virtual_machines',
             children: [
               {
-                title: 'Hvordan lage en VM',
-                href: '/docs/drift/openstack/virtual_machines/how_to_make_vm',
+                title: 'Adelie (Webserver)',
+                href: '/docs/drift/openstack/virtual_machines/instances/adelie',
               },
               {
-                title: 'Drifts VM-er',
-                children: [
-                  {
-                    title: 'Adelie (Webserver)',
-                    href: '/docs/drift/openstack/virtual_machines/instances/adelie',
-                  },
-                  {
-                    title: 'Royal (Vaultwarden)',
-                    href: '/docs/drift/openstack/virtual_machines/instances/royal',
-                  },
-                  {
-                    title: 'Fiordland (DB)',
-                    href: '/docs/drift/openstack/virtual_machines/instances/fiordland',
-                  },
-                  {
-                    title: 'King (Backend API)',
-                    href: '/docs/drift/openstack/virtual_machines/instances/king',
-                  },
-                  {
-                    title: 'Macaroni (Minecraft)',
-                    href: '/docs/drift/openstack/virtual_machines/instances/macaroni',
-                  },
-                  {
-                    title: 'Chinstrap (Proxy)',
-                    href: '/docs/drift/nettverk/proxy',
-                  },
-                ],
+                title: 'Royal (Vaultwarden)',
+                href: '/docs/drift/openstack/virtual_machines/instances/royal',
+              },
+              {
+                title: 'Fiordland (DB)',
+                href: '/docs/drift/openstack/virtual_machines/instances/fiordland',
+              },
+              {
+                title: 'King (Backend API)',
+                href: '/docs/drift/openstack/virtual_machines/instances/king',
+              },
+              {
+                title: 'Macaroni (Minecraft)',
+                href: '/docs/drift/openstack/virtual_machines/instances/macaroni',
+              },
+              {
+                title: 'Chinstrap (Proxy)',
+                href: '/docs/drift/openstack/virtual_machines/instances/chinstrap',
               },
             ],
           },
@@ -388,15 +379,6 @@ export const navigation: Navigation[] = [
           {
             title: 'Deploy prosjekt på Adelie',
             href: '/docs/drift/how_to/deploy_adelie',
-          },
-        ],
-      },
-      {
-        title: 'Network',
-        children: [
-          {
-            title: 'Drifts proxy oppsett',
-            href: '/docs/drift/nettverk/proxy',
           },
         ],
       },
