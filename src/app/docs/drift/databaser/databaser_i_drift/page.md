@@ -16,13 +16,13 @@ PostgreSQL er installert med standard konfigurasjon, bortsett fra små, men vikt
 
 ### Tilgangskontroll (pg_hba.conf)
 
-PostgreSQL sin tilgangskontroll er konfigurert i `/etc/postgresql/17/main/pg_hba.conf`:
+PostgreSQL sin tilgangskontroll er konfigurert i `/etc/postgresql/<versjonsnummer>/main/pg_hba.conf`:
 
 ```conf
 # TYPE  DATABASE        USER            ADDRESS             METHOD
 local   all             all                                 trust
 host    all             postgres        0.0.0.0/0           reject
-host    all             all             192.168.0.36        scram-sha-256
+host    all             all             192.168.0.0/24		scram-sha-256
 ```
 
 Dette er et sett med regler for hvordan autentisering fra forskjellige tilkoblinger skal fungere. **Første regel (rad) som matcher er den som brukes**, så rekkefølgen er betydelig.
@@ -34,14 +34,8 @@ Dette er et sett med regler for hvordan autentisering fra forskjellige tilkoblin
 | TYPE     | Type tilkobling. `local` = lokal tilkobling fra VM-en selv, `host` = ekstern TCP/IP tilkobling                             |
 | DATABASE | Hvilken database regelen gjelder for. `all` = alle databaser                                                               |
 | USER     | Hvilke brukere regelen gjelder for. `all` = alle brukere, `postgres` = kun superuser                                       |
-| ADDRESS  | Adressen til tilkoblingskilden. `0.0.0.0/0` = alle adresser, `192.168.0.36` = spesifikk IP                                 |
+| ADDRESS  | Adressen til tilkoblingskilden. `0.0.0.0/0` = alle adresser, `192.168.0.0` = alle på OpenStack nettet vårt
 | METHOD   | Autentiseringsmetode. `trust` = ingen passord, `reject` = avvis tilkobling, `scram-sha-256` = krev passord (kryptert hash) |
-
-#### Forklaring av reglene
-
-1. **Lokal tilgang uten passord:** Alle lokale tilkoblinger fra VM-en selv får tilgang uten passord
-2. **Blokkering av postgres-bruker:** Postgres superuser kan ikke koble til eksternt (sikkerhet)
-3. **Tilgang fra Chinstrap:** Alle brukere fra IP `192.168.0.36` (Chinstrap proxy) kan koble til med passord
 
 {% callout title="Hvorfor blokkere postgres-bruker?" type="note" %}
 Postgres-brukeren er superuser og har full tilgang til alt. Ved å blokkere ekstern tilgang for denne brukeren reduserer vi risikoen for at noen får full kontroll over databasen hvis et passord skulle lekke.
@@ -49,7 +43,7 @@ Postgres-brukeren er superuser og har full tilgang til alt. Ved å blokkere ekst
 
 ### Nettverkskonfigurasjon (postgresql.conf)
 
-PostgreSQL sin nettverkskonfigurasjon er konfigurert i `/etc/postgresql/17/main/postgresql.conf`:
+PostgreSQL sin nettverkskonfigurasjon er konfigurert i `/etc/postgresql/<versjonsnummer>/main/postgresql.conf`:
 
 ```conf
 #listen_addresses = 'localhost'  # Standard verdi (kommentert ut)
@@ -63,14 +57,6 @@ Her spesifiserer vi på hvilke adresser PostgreSQL skal lytte på for innkommend
 
 {% callout title="Hvorfor lytte på alle adresser?" type="note" %}
 PostgreSQL støtter dessverre ikke CIDR-notasjon for å spesifisere flere adresser i `listen_addresses`. Derfor bruker vi `*` for å lytte på alle adresser, og bruker heller `pg_hba.conf` for å kontrollere hvilke adresser som faktisk får tilgang.
-{% /callout %}
-
-## MariaDB (MySQL)
-
-MariaDB kjører også på Fiordland og brukes av tjenester som krever MySQL-kompatibel database, som TIHLDEs gamle backend Lepton.
-
-{% callout title="Dokumentasjon mangler" type="warning" %}
-Detaljert konfigurasjon for MariaDB er ikke dokumentert ennå. Hvis du jobber med MariaDB-oppsettet, vennligst oppdater denne dokumentasjonen.
 {% /callout %}
 
 ## Backup
