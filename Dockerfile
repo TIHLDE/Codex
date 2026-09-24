@@ -7,7 +7,7 @@ FROM base AS deps
 
 WORKDIR /build
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 RUN npm i -g pnpm
 
