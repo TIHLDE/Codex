@@ -352,6 +352,15 @@ export const navigation: Navigation[] = [
           },
         ],
       },
+      {
+        title: 'Monitorering',
+        children: [
+          {
+            title: 'Loki – logging og retention',
+            href: '/docs/drift/monitorering/loki',
+          },
+        ],
+      },
     ],
   },
   {
