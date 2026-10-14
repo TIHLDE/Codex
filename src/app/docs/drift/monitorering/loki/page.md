@@ -53,7 +53,7 @@ Kontroller at Loki er tilgjengelig:
 curl http://192.168.0.19:3100/ready
 ```
 
-Kontroller retention-status:
+Kontroller at metrikken for retention-forsøk er eksponert (`status` skiller mellom vellykkede og mislykkede forsøk):
 
 ```bash
 curl -s http://192.168.0.19:3100/metrics \
@@ -62,8 +62,7 @@ curl -s http://192.168.0.19:3100/metrics \
 
 Ved kontroll 14.10.2026 ble det bekreftet at:
 
-- Retention kjører uten feil.
+- Metrikken for retention-forsøk var eksponert.
 - Logger eldre enn 90 dager ikke lenger var søkbare i undersøkte perioder.
-- Compactor hadde gjennomført over 12 000 vellykkede chunk-slettinger.
 
 **Viktig:** Ikke slett loggfiler manuelt fra Docker-volumet. La Compactor håndtere oppryddingen.
