@@ -353,6 +353,10 @@ export const navigation: Navigation[] = [
         ],
       },
       {
+        title: 'Bildeplattform',
+        href: '/docs/drift/bildeplattform',
+      },
+      {
         title: 'Monitorering',
         children: [
           {
